@@ -59,8 +59,13 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a class="brand-link">
+                
                 <img src="Image/panasonic-logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">PAPVN</span>
+                <span class="brand-text font-weight-light">
+                    <p style="font-size:20px; font-weight:600; margin:0px">
+                        PAPVN
+                    </p>
+                </span>
             </a>
 
             <!-- Sidebar -->
@@ -70,112 +75,112 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                        
 
-       
+
+
 
                         <li class="nav-item">
-                            <a  class="nav-link">
-                               <%-- <ion-icon name="color-fill"></ion-icon>--%>
+                            <a class="nav-link">
+                                <%-- <ion-icon name="color-fill"></ion-icon>--%>
                                 <%--<i class="nav-icon fas fa-tree"></i>--%>
                                 <i class="nav-icon fas fa-circle"></i>
-                                <p>
+                                <p style="font-size:15px;font-weight:600">
                                     Aiging
-                <i class="right fas fa-angle-left"></i>
+                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
+                                <li class="nav-item ml-2">
                                     <a class="nav-link" href="/Aging.aspx">
                                         <%--<ion-icon name="trending-up-outline"></ion-icon>--%>
-                                       <i class="far fa-circle nav-icon"></i>
-                                        
+                                        <i class="far fa-circle nav-icon"></i>
+
                                         <p>Final Check</p>
                                     </a>
                                 </li>
-                                
-                                <li class="nav-item">
+
+                                <li class="nav-item ml-2">
                                     <a class="nav-link" href="#">
                                         <%--<ion-icon name="trending-up-outline"></ion-icon>--%>
-                                       <i class="far fa-circle nav-icon"></i>
-                                        
+                                        <i class="far fa-circle nav-icon"></i>
+
                                         <p>VP</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item ml-2">
                                     <a class="nav-link" href="#">
-                                       <%-- <ion-icon name="arrow-undo-circle-outline"></ion-icon>--%>
-                                         <i class="far fa-circle nav-icon"></i>
+                                        <%-- <ion-icon name="arrow-undo-circle-outline"></ion-icon>--%>
+                                        <i class="far fa-circle nav-icon"></i>
                                         <p>GAS</p>
                                     </a>
                                 </li>
-                                 <li class="nav-item">
+                                <li class="nav-item ml-2">
                                     <a class="nav-link" href="#">
-                                       <%-- <ion-icon name="arrow-undo-circle-outline"></ion-icon>--%>
-                                         <i class="far fa-circle nav-icon"></i>
+                                        <%-- <ion-icon name="arrow-undo-circle-outline"></ion-icon>--%>
+                                        <i class="far fa-circle nav-icon"></i>
                                         <p>WI1(With)</p>
                                     </a>
                                 </li>
-                                 <li class="nav-item">
+                                <li class="nav-item ml-2">
                                     <a class="nav-link" href="#">
-                                       <%-- <ion-icon name="arrow-undo-circle-outline"></ion-icon>--%>
-                                         <i class="far fa-circle nav-icon"></i>
+                                        <%-- <ion-icon name="arrow-undo-circle-outline"></ion-icon>--%>
+                                        <i class="far fa-circle nav-icon"></i>
                                         <p>WI1(Start)</p>
                                     </a>
                                 </li>
-                                 <li class="nav-item">
+                                <li class="nav-item ml-2">
                                     <a class="nav-link" href="#">
-                                       <%-- <ion-icon name="arrow-undo-circle-outline"></ion-icon>--%>
-                                         <i class="far fa-circle nav-icon"></i>
+                                        <%-- <ion-icon name="arrow-undo-circle-outline"></ion-icon>--%>
+                                        <i class="far fa-circle nav-icon"></i>
                                         <p>IP</p>
                                     </a>
                                 </li>
-                                 <li class="nav-item">
+                                <li class="nav-item ml-2">
                                     <a class="nav-link" href="#">
-                                       <%-- <ion-icon name="arrow-undo-circle-outline"></ion-icon>--%>
-                                         <i class="far fa-circle nav-icon"></i>
+                                        <%-- <ion-icon name="arrow-undo-circle-outline"></ion-icon>--%>
+                                        <i class="far fa-circle nav-icon"></i>
                                         <p>DF</p>
                                     </a>
                                 </li>
-                                 <li class="nav-item">
+                                <li class="nav-item ml-2">
                                     <a class="nav-link" href="#">
-                                       <%-- <ion-icon name="arrow-undo-circle-outline"></ion-icon>--%>
-                                         <i class="far fa-circle nav-icon"></i>
+                                        <%-- <ion-icon name="arrow-undo-circle-outline"></ion-icon>--%>
+                                        <i class="far fa-circle nav-icon"></i>
                                         <p>TEMP</p>
                                     </a>
                                 </li>
-                                 <li class="nav-item">
+                                <li class="nav-item ml-2">
                                     <a class="nav-link" href="#">
-                                       <%-- <ion-icon name="arrow-undo-circle-outline"></ion-icon>--%>
-                                         <i class="far fa-circle nav-icon"></i>
+                                        <%-- <ion-icon name="arrow-undo-circle-outline"></ion-icon>--%>
+                                        <i class="far fa-circle nav-icon"></i>
                                         <p>IOT</p>
                                     </a>
                                 </li>
-                                 <li class="nav-item">
+                                <li class="nav-item ml-2">
                                     <a class="nav-link" href="#">
-                                       <%-- <ion-icon name="arrow-undo-circle-outline"></ion-icon>--%>
-                                         <i class="far fa-circle nav-icon"></i>
+                                        <%-- <ion-icon name="arrow-undo-circle-outline"></ion-icon>--%>
+                                        <i class="far fa-circle nav-icon"></i>
                                         <p>WI2</p>
                                     </a>
                                 </li>
-                                 <li class="nav-item">
+                                <li class="nav-item ml-2">
                                     <a class="nav-link" href="#">
-                                       <%-- <ion-icon name="arrow-undo-circle-outline"></ion-icon>--%>
-                                         <i class="far fa-circle nav-icon"></i>
+                                        <%-- <ion-icon name="arrow-undo-circle-outline"></ion-icon>--%>
+                                        <i class="far fa-circle nav-icon"></i>
                                         <p>PAN</p>
                                     </a>
                                 </li>
-                                 <li class="nav-item">
+                                <li class="nav-item ml-2">
                                     <a class="nav-link" href="#">
-                                       <%-- <ion-icon name="arrow-undo-circle-outline"></ion-icon>--%>
-                                         <i class="far fa-circle nav-icon"></i>
+                                        <%-- <ion-icon name="arrow-undo-circle-outline"></ion-icon>--%>
+                                        <i class="far fa-circle nav-icon"></i>
                                         <p>Cam Back</p>
                                     </a>
                                 </li>
-                                 <li class="nav-item">
+                                <li class="nav-item ml-2">
                                     <a class="nav-link" href="#">
-                                       <%-- <ion-icon name="arrow-undo-circle-outline"></ion-icon>--%>
-                                         <i class="far fa-circle nav-icon"></i>
+                                        <%-- <ion-icon name="arrow-undo-circle-outline"></ion-icon>--%>
+                                        <i class="far fa-circle nav-icon"></i>
                                         <p>Cam Front</p>
                                     </a>
                                 </li>

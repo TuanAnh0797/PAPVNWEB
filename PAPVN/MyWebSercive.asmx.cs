@@ -21,14 +21,19 @@ namespace PAPVN
     {
 
         [WebMethod]
-        public string DataForLineChart()
+        public string DataForLineChart(string DateTimeFrom, string DateTimeTo)
         {
-            DataTable dt = DBConnect.StoreFillDS("getdatachart", CommandType.StoredProcedure);
+            //DataTable dt = DBConnect.StoreFillDS("getdatachart", CommandType.StoredProcedure);
 
+            //var data = new
+            //{
+            //    labels = dt.AsEnumerable().Select(row => row.Field<string>("NameValue")).ToArray(),
+            //    values = dt.AsEnumerable().Select(row => row.Field<int>("DataValue")).ToArray(),
+            //};
             var data = new
             {
-                labels = dt.AsEnumerable().Select(row => row.Field<string>("NameValue")).ToArray(),
-                values = dt.AsEnumerable().Select(row => row.Field<int>("DataValue")).ToArray(),
+                datefrom = DateTimeFrom,
+                dateto = DateTimeTo
             };
 
             return Newtonsoft.Json.JsonConvert.SerializeObject(data);
