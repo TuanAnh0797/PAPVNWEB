@@ -61,10 +61,10 @@
             <a class="brand-link">
                 
                 <img src="Image/panasonic-logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">
-                    <p style="font-size:20px; font-weight:600; margin:0px">
+                <span style="font-size:20px; font-weight:600; margin:0px" class="brand-text font-weight-light">
+                     
                         PAPVN
-                    </p>
+                    
                 </span>
             </a>
 
@@ -91,12 +91,31 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item ml-2">
-                                    <a class="nav-link" href="/Aging.aspx">
+                                    <a class="nav-link" href="/AgingRealTime.aspx">
                                         <%--<ion-icon name="trending-up-outline"></ion-icon>--%>
                                         <i class="far fa-circle nav-icon"></i>
 
                                         <p>Final Check</p>
+                                          <i class="right fas fa-angle-left"></i>
                                     </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item ml-2">
+                                             <a class="nav-link" href="/AgingRealTime.aspx">
+                                        <%--<ion-icon name="trending-up-outline"></ion-icon>--%>
+                                         <ion-icon name="bar-chart-outline"></ion-icon>
+
+                                        <p>Real Time</p>
+                                    </a>
+                                        </li>
+                                         <li class="nav-item ml-2">
+                                             <a class="nav-link" href="/AgingHistory.aspx">
+                                        <%--<ion-icon name="trending-up-outline"></ion-icon>--%>
+                                        <ion-icon name="arrow-undo-circle-outline"></ion-icon>
+
+                                        <p>History</p>
+                                    </a>
+                                        </li>
+                                    </ul>
                                 </li>
 
                                 <li class="nav-item ml-2">

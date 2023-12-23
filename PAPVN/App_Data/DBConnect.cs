@@ -5,65 +5,86 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace PAPVN
 {
     public class DBConnect
     {
-        public static string connection_string = "Data Source=DESKTOP-NP52VJJ\\SQLEXPRESS;Initial Catalog=test1;User ID=sa;Password=123456;";
+        public static string connection_string = "Server=192.168.3.178;Port=3306;Database=dataplc;User=TA;Password=123456;AllowLoadLocalInfile=true;";
 
 
         //public static string connection_string = "Data Source=DESKTOP-CEVMTEM\\SQLEXPRESS;Initial Catalog=DataQCCheck;Integrated Security=True";
 
-        public static DataTable StoreFillDS(string query_object, CommandType type, params object[] obj)
+        public static DataTable StoreFillDT(string query_object, CommandType type, params object[] obj)
         {
-            using (SqlConnection conn = new SqlConnection(connection_string))
+            using (MySqlConnection conn = new MySqlConnection(connection_string))
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand(query_object, conn);
+                MySqlCommand cmd = new MySqlCommand(query_object, conn);
                 cmd.CommandType = type;
-                SqlCommandBuilder.DeriveParameters(cmd);
+                MySqlCommandBuilder.DeriveParameters(cmd);
                 for (int i = 1; i <= obj.Length; i++)
                 {
-                    cmd.Parameters[i].Value = obj[i - 1];
+                    cmd.Parameters[i - 1].Value = obj[i - 1];
                 }
-                SqlDataAdapter dap = new SqlDataAdapter(cmd);
-                DataSet ds = new DataSet();
-                dap.Fill(ds);
+                MySqlDataAdapter dap = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                dap.Fill(dt);
                 conn.Close();
-                return ds.Tables[0];
+                return dt;
+            }
+        }
+        public static DataSet StoreFillDS(string query_object, CommandType type, params object[] obj)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connection_string))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(query_object, conn);
+                cmd.CommandType = type;
+                MySqlCommandBuilder.DeriveParameters(cmd);
+                for (int i = 1; i <= obj.Length; i++)
+                {
+                    cmd.Parameters[i - 1].Value = obj[i - 1];
+                }
+                MySqlDataAdapter dap = new MySqlDataAdapter(cmd);
+                DataSet dt = new DataSet();
+                dap.Fill(dt);
+                conn.Close();
+                return dt;
             }
         }
         public static object getscalra(string query_object, CommandType type, params object[] obj)
         {
-            using (SqlConnection conn = new SqlConnection(connection_string))
+            using (MySqlConnection conn = new MySqlConnection(connection_string))
             {
                 Object data;
                 conn.Open();
-                SqlCommand cmd = new SqlCommand(query_object, conn);
+                MySqlCommand cmd = new MySqlCommand(query_object, conn);
                 cmd.CommandType = type;
-                SqlCommandBuilder.DeriveParameters(cmd);
+                MySqlCommandBuilder.DeriveParameters(cmd);
                 for (int i = 1; i <= obj.Length; i++)
                 {
-                    cmd.Parameters[i].Value = obj[i - 1];
+                    cmd.Parameters[i - 1].Value = obj[i - 1];
                 }
                 data = cmd.ExecuteScalar();
                 conn.Close();
                 return data;
             }
         }
-        public static object excutenonquery(string query_object, CommandType type, params object[] obj)
+        public static int exnonquery(string query_object, CommandType type, params object[] obj)
         {
-            using (SqlConnection conn = new SqlConnection(connection_string))
+            using (MySqlConnection conn = new MySqlConnection(connection_string))
             {
-                Object data;
+                int data;
                 conn.Open();
-                SqlCommand cmd = new SqlCommand(query_object, conn);
+                MySqlCommand cmd = new MySqlCommand(query_object, conn);
                 cmd.CommandType = type;
-                SqlCommandBuilder.DeriveParameters(cmd);
+                MySqlCommandBuilder.DeriveParameters(cmd);
                 for (int i = 1; i <= obj.Length; i++)
                 {
-                    cmd.Parameters[i].Value = obj[i - 1];
+                    cmd.Parameters[i - 1].Value = obj[i - 1];
                 }
                 data = cmd.ExecuteNonQuery();
                 conn.Close();
