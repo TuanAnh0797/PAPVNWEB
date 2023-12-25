@@ -30,10 +30,54 @@ namespace PAPVN
             //    labels = dt.AsEnumerable().Select(row => row.Field<string>("NameValue")).ToArray(),
             //    values = dt.AsEnumerable().Select(row => row.Field<int>("DataValue")).ToArray(),
             //};
+            DataTable dt = DBConnect.StoreFillDT("LoadDataForChartHistory", CommandType.StoredProcedure,DateTimeFrom,DateTimeTo);
             var data = new
             {
-                datefrom = DateTimeFrom,
-                dateto = DateTimeTo
+                Datapiechart = new[] { int.Parse(dt.Rows[0]["TotalOK"].ToString()), int.Parse(dt.Rows[0]["TotalNG"].ToString()) },
+                dataok = new[] {
+                    int.Parse(dt.Rows[0]["VPOK"].ToString()),
+                    int.Parse(dt.Rows[0]["GASOILOK"].ToString()),
+                    int.Parse(dt.Rows[0]["WI1WITHOK"].ToString()),
+                     int.Parse(dt.Rows[0]["WI1STARTOK"].ToString()),
+                     int.Parse(dt.Rows[0]["IPOK"].ToString()),
+                    int.Parse(dt.Rows[0]["DFOK"].ToString()),
+                     int.Parse(dt.Rows[0]["TEMPOK"].ToString()),
+                     int.Parse(dt.Rows[0]["IOTOK"].ToString()),
+                     int.Parse(dt.Rows[0]["WI2OK"].ToString()),
+                     int.Parse(dt.Rows[0]["PANOK"].ToString()),
+                     int.Parse(dt.Rows[0]["CAMBACKOK"].ToString()),
+                     int.Parse(dt.Rows[0]["CAMFRONTOK"].ToString())
+                },
+                datang = new[] {
+                    int.Parse(dt.Rows[0]["VPNG"].ToString()),
+                    int.Parse(dt.Rows[0]["GASOILNG"].ToString()),
+                    int.Parse(dt.Rows[0]["WI1WITHNG"].ToString()),
+                     int.Parse(dt.Rows[0]["WI1STARTNG"].ToString()),
+                     int.Parse(dt.Rows[0]["IPNG"].ToString()),
+                    int.Parse(dt.Rows[0]["DFNG"].ToString()),
+                     int.Parse(dt.Rows[0]["TEMPNG"].ToString()),
+                     int.Parse(dt.Rows[0]["IOTNG"].ToString()),
+                     int.Parse(dt.Rows[0]["WI2NG"].ToString()),
+                     int.Parse(dt.Rows[0]["PANNG"].ToString()),
+                     int.Parse(dt.Rows[0]["CAMBACKNG"].ToString()),
+                     int.Parse(dt.Rows[0]["CAMFRONTNG"].ToString())
+
+                },
+                datapending = new[] {
+                   int.Parse(dt.Rows[0]["VPPENDING"].ToString()),
+                    int.Parse(dt.Rows[0]["GASOILPENDING"].ToString()),
+                    int.Parse(dt.Rows[0]["WI1WITHPENDING"].ToString()),
+                     int.Parse(dt.Rows[0]["WI1STARTPENDING"].ToString()),
+                     int.Parse(dt.Rows[0]["IPPENDING"].ToString()),
+                    int.Parse(dt.Rows[0]["DFPENDING"].ToString()),
+                     int.Parse(dt.Rows[0]["TEMPPENDING"].ToString()),
+                     int.Parse(dt.Rows[0]["IOTPENDING"].ToString()),
+                     int.Parse(dt.Rows[0]["WI2PENDING"].ToString()),
+                     int.Parse(dt.Rows[0]["PANPENDING"].ToString()),
+                     int.Parse(dt.Rows[0]["CAMBACKPENDING"].ToString()),
+                     int.Parse(dt.Rows[0]["CAMFRONTPENDING"].ToString())
+                },
+
             };
 
             return Newtonsoft.Json.JsonConvert.SerializeObject(data);
@@ -44,49 +88,49 @@ namespace PAPVN
             DataTable dt = DBConnect.StoreFillDT("LoadDataForChart", CommandType.StoredProcedure, 2);
             var data = new
             {
-                Datapiechart = new[] { (int)dt.Rows[0]["TotalOK"], (int)dt.Rows[0]["TotalNG"] },
+                Datapiechart = new[] { int.Parse(dt.Rows[0]["TotalOK"].ToString()), int.Parse(dt.Rows[0]["TotalNG"].ToString()) },
                 dataok = new[] {
-                    (int)dt.Rows[0]["VPOK"],
-                    (int)dt.Rows[0]["GASOILOK"],
-                    (int)dt.Rows[0]["WI1WITHOK"],
-                    (int)dt.Rows[0]["WI1STARTOK"],
-                    (int)dt.Rows[0]["IPOK"],
-                    (int)dt.Rows[0]["DFOK"],
-                    (int)dt.Rows[0]["TEMPOK"],
-                    (int)dt.Rows[0]["IOTOK"],
-                    (int)dt.Rows[0]["WI2OK"],
-                    (int)dt.Rows[0]["PANOK"],
-                    (int)dt.Rows[0]["CAMBACKOK"],
-                    (int)dt.Rows[0]["CAMFRONTOK"] 
+                    int.Parse(dt.Rows[0]["VPOK"].ToString()),
+                    int.Parse(dt.Rows[0]["GASOILOK"].ToString()),
+                    int.Parse(dt.Rows[0]["WI1WITHOK"].ToString()),
+                     int.Parse(dt.Rows[0]["WI1STARTOK"].ToString()),
+                     int.Parse(dt.Rows[0]["IPOK"].ToString()),
+                    int.Parse(dt.Rows[0]["DFOK"].ToString()),
+                     int.Parse(dt.Rows[0]["TEMPOK"].ToString()),
+                     int.Parse(dt.Rows[0]["IOTOK"].ToString()),
+                     int.Parse(dt.Rows[0]["WI2OK"].ToString()),
+                     int.Parse(dt.Rows[0]["PANOK"].ToString()),
+                     int.Parse(dt.Rows[0]["CAMBACKOK"].ToString()),
+                     int.Parse(dt.Rows[0]["CAMFRONTOK"].ToString())
                 },
                 datang = new[] {
-                    (int)dt.Rows[0]["VPNG"],
-                    (int)dt.Rows[0]["GASOILNG"],
-                    (int)dt.Rows[0]["WI1WITHNG"],
-                    (int)dt.Rows[0]["WI1STARTNG"],
-                    (int)dt.Rows[0]["IPNG"],
-                    (int)dt.Rows[0]["DFNG"],
-                    (int)dt.Rows[0]["TEMPNG"],
-                    (int)dt.Rows[0]["IOTNG"],
-                    (int)dt.Rows[0]["WI2NG"],
-                    (int)dt.Rows[0]["PANNG"],
-                    (int)dt.Rows[0]["CAMBACKNG"],
-                    (int)dt.Rows[0]["CAMFRONTNG"]
+                    int.Parse(dt.Rows[0]["VPNG"].ToString()),
+                    int.Parse(dt.Rows[0]["GASOILNG"].ToString()),
+                    int.Parse(dt.Rows[0]["WI1WITHNG"].ToString()),
+                     int.Parse(dt.Rows[0]["WI1STARTNG"].ToString()),
+                     int.Parse(dt.Rows[0]["IPNG"].ToString()),
+                    int.Parse(dt.Rows[0]["DFNG"].ToString()),
+                     int.Parse(dt.Rows[0]["TEMPNG"].ToString()),
+                     int.Parse(dt.Rows[0]["IOTNG"].ToString()),
+                     int.Parse(dt.Rows[0]["WI2NG"].ToString()),
+                     int.Parse(dt.Rows[0]["PANNG"].ToString()),
+                     int.Parse(dt.Rows[0]["CAMBACKNG"].ToString()),
+                     int.Parse(dt.Rows[0]["CAMFRONTNG"].ToString())
 
                 },
                 datapending = new[] {
-                    (int)dt.Rows[0]["VPPENDING"],
-                    (int)dt.Rows[0]["GASOILPENDING"],
-                    (int)dt.Rows[0]["WI1WITHPENDING"],
-                    (int)dt.Rows[0]["WI1STARTPENDING"],
-                    (int)dt.Rows[0]["IPPENDING"],
-                    (int)dt.Rows[0]["DFPENDING"],
-                    (int)dt.Rows[0]["TEMPPENDING"],
-                    (int)dt.Rows[0]["IOTPENDING"],
-                    (int)dt.Rows[0]["WI2PENDING"],
-                    (int)dt.Rows[0]["PANPENDING"],
-                    (int)dt.Rows[0]["CAMBACKPENDING"],
-                    (int)dt.Rows[0]["CAMFRONTPENDING"]
+                   int.Parse(dt.Rows[0]["VPPENDING"].ToString()),
+                    int.Parse(dt.Rows[0]["GASOILPENDING"].ToString()),
+                    int.Parse(dt.Rows[0]["WI1WITHPENDING"].ToString()),
+                     int.Parse(dt.Rows[0]["WI1STARTPENDING"].ToString()),
+                     int.Parse(dt.Rows[0]["IPPENDING"].ToString()),
+                    int.Parse(dt.Rows[0]["DFPENDING"].ToString()),
+                     int.Parse(dt.Rows[0]["TEMPPENDING"].ToString()),
+                     int.Parse(dt.Rows[0]["IOTPENDING"].ToString()),
+                     int.Parse(dt.Rows[0]["WI2PENDING"].ToString()),
+                     int.Parse(dt.Rows[0]["PANPENDING"].ToString()),
+                     int.Parse(dt.Rows[0]["CAMBACKPENDING"].ToString()),
+                     int.Parse(dt.Rows[0]["CAMFRONTPENDING"].ToString())
                 },
 
             };

@@ -58,9 +58,6 @@
                     </div>
                         </div>
                     </div>
-
-
-                    
                 </div>
             </div>
             <div class="col mr-2" style="margin: 10px 0px 0px 0px">
@@ -121,74 +118,181 @@
         </div>
     </div>
     <script>
-
-        /*var areaChartCanvas = $('#areaChart').get(0).getContext('2d')*/
-
-        //var areaChartCanvas = $('#lineChart').get(0)
-        //var ctx = areaChartCanvas.getContext('2d')
-        //var areaChartCanvas1 = $('#lineChart1').get(0)
-        //var ctx1 = areaChartCanvas1.getContext('2d')
-
-        //var areaChartCanvas2 = $('#lineChart2').get(0)
-        //var ctx2 = areaChartCanvas2.getContext('2d')
-
-        var chartData = {
-            labels: [],
-            datasets: [{
-                label: 'Data',
-                data: [],
-                borderColor: 'blue',
-                borderWidth: 1,
-                fill: false,
-                pointRadius: 1
-            }],
-
-        };
-        var areaChartOptions = {
+        //Pie chart
+        var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+        var pieOptions = {
             maintainAspectRatio: false,
             responsive: true,
-            plugins: {
-                legend: {
-                    display: false
+        }
+        var donutData = {
+            labels: [
+                'OK',
+                'NG'
+
+            ],
+            datasets: [
+                {
+                    data: [],
+                    backgroundColor: ['#008000', '#FF0000'],
                 }
-            },
+            ]
+        }
+        var charpie = new Chart(pieChartCanvas, {
+            type: 'pie',
+            data: donutData,
+            options: pieOptions
+        })
+        //Barchar Pending
+        var barChartCanvas = $('#barChartpending').get(0).getContext('2d')
+        var datachartPending = {
+            labels: ['VP', 'GAS', 'WI1(W)', 'WI1(S)', 'IP', 'DF', 'TEMP', 'IOT', 'WI2', 'PAN', 'CAM B', 'CAM F'],
+            datasets: [
+                {
+                    label: 'PENDING',
+                    backgroundColor: '#FFD700',
+                    borderColor: 'rgba(60,141,188,0.8)',
+                    pointRadius: false,
+                    pointColor: '#3b8bba',
+                    pointStrokeColor: 'rgba(00,80,00,1)',
+                    pointHighlightFill: '#fff',
+                    pointHighlightStroke: 'rgba(60,141,188,1)',
+                    data: []
+                },
+
+            ]
+
+        }
+        var barChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            datasetFill: false
+        }
+        var barchartpending = new Chart(barChartCanvas, {
+            type: 'bar',
+            data: datachartPending,
+            options: barChartOptions
+        })
+        // Barchart NG
+        var barChartCanvas = $('#barChartng').get(0).getContext('2d')
+        var datachartNG = {
+            labels: ['VP', 'GAS', 'WI1(W)', 'WI1(S)', 'IP', 'DF', 'TEMP', 'IOT', 'WI2', 'PAN', 'CAM B', 'CAM F'],
+            datasets: [
+                {
+                    label: 'NG',
+                    backgroundColor: '#FF0000',
+                    borderColor: 'rgba(60,141,188,0.8)',
+                    pointRadius: false,
+                    pointColor: '#3b8bba',
+                    pointStrokeColor: 'rgba(00,80,00,1)',
+                    pointHighlightFill: '#fff',
+                    pointHighlightStroke: 'rgba(60,141,188,1)',
+                    data: []
+                },
+
+            ]
+
+        }
+        var barChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            datasetFill: false
+        }
+
+        var barcharng = new Chart(barChartCanvas, {
+            type: 'bar',
+            data: datachartNG,
+            options: barChartOptions
+        })
+        // Stackbarchar OK NG PEnding
+
+        var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
+        var dattachartOKNGPending = {
+            labels: ['VP', 'GAS', 'WI1(W)', 'WI1(S)', 'IP', 'DF', 'TEMP', 'IOT', 'WI2', 'PAN', 'CAM B', 'CAM F'],
+            datasets: [
+                {
+                    label: 'OK',
+                    backgroundColor: '#008000',
+                    borderColor: 'rgba(60,141,188,0.8)',
+                    pointRadius: false,
+                    pointColor: '#3b8bba',
+                    pointStrokeColor: 'rgba(00,80,00,1)',
+                    pointHighlightFill: '#fff',
+                    pointHighlightStroke: 'rgba(60,141,188,1)',
+                    data: []
+                },
+                {
+                    label: 'NG',
+                    backgroundColor: '#FF0000',
+                    borderColor: 'rgba(210, 214, 222, 1)',
+                    pointRadius: false,
+                    pointColor: 'rgba(210, 214, 222, 1)',
+                    pointStrokeColor: '#c1c7d1',
+                    pointHighlightFill: '#fff',
+                    pointHighlightStroke: 'rgba(220,220,220,1)',
+                    data: []
+                },
+                {
+                    label: 'PENDING',
+                    backgroundColor: '#FFD700',
+                    borderColor: 'rgba(210, 214, 222, 1)',
+                    pointRadius: false,
+                    pointColor: 'rgba(210, 214, 222, 1)',
+                    pointStrokeColor: '#c1c7d1',
+                    pointHighlightFill: '#fff',
+                    pointHighlightStroke: 'rgba(220,220,220,1)',
+                    data: []
+                },
+            ]
+        }
+        var stackedBarChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
             scales: {
                 xAxes: [{
-                    gridLines: {
-                        display: false,
-                    }
+                    stacked: true,
                 }],
                 yAxes: [{
-                    display: true,
-                    ticks: {
-                        beginAtZero: true,
-                        max: 1000
-                    }
+                    stacked: true
                 }]
             }
-        };
-        //var chart = new Chart(ctx, {
-        //    type: 'line',
-        //    data: chartData,
-        //    options: areaChartOptions
+        }
 
-        //});
-        //var chart1 = new Chart(ctx1, {
-        //    type: 'line',
-        //    data: chartData,
-        //    options: areaChartOptions
-
-        //});
-
-        //var chart2 = new Chart(ctx2, {
-        //    type: 'line',
-        //    data: chartData,
-        //    options: areaChartOptions
-
-        //});
-
-
+        var stackchart = new Chart(stackedBarChartCanvas, {
+            type: 'bar',
+            data: dattachartOKNGPending,
+            options: stackedBarChartOptions
+        })
+        $(document).ready(function () {
+            LoadDataForChart();
+        });
         function LoadDataForChart() {
+            var datetimefrom = $('#datefrom').val();
+            var datetimeto = $('#dateto').val();
+            $.ajax({
+                type: 'POST',
+                url: '/MyWebSercive.asmx/DataForLineChartRealTime',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (response) {
+                    var data = JSON.parse(response.d);
+                    donutData.datasets[0].data = data.Datapiechart;
+                    datachartPending.datasets[0].data = data.datapending;
+                    datachartNG.datasets[0].data = data.datang;
+                    dattachartOKNGPending.datasets[0].data = data.dataok;
+                    dattachartOKNGPending.datasets[1].data = data.datang;
+                    dattachartOKNGPending.datasets[2].data = data.datapending;
+                    charpie.update();
+                    barchartpending.update();
+                    barcharng.update();
+                    stackchart.update();
+                    //alert('ok');
+                },
+                error: function (xhr, status, error) {
+                    alert(error)
+                }
+            });
+        }
+        function LoadDataForChartHistory() {
             var datetimefrom = $('#datefrom').val();
             var datetimeto = $('#dateto').val();
             $.ajax({
@@ -199,294 +303,24 @@
                 data: JSON.stringify({ DateTimeFrom: datetimefrom, DateTimeTo: datetimeto }),
                 success: function (response) {
                     var data = JSON.parse(response.d);
-                    //chartData.labels = data.labels;
-                    //chartData.datasets[0].data = data.values;
-                    //chart.update();
-                    //chart1.update();
-                    //chart2.update();
-                    alert(data.datefrom + data.dateto);
+                    donutData.datasets[0].data = data.Datapiechart;
+                    datachartPending.datasets[0].data = data.datapending;
+                    datachartNG.datasets[0].data = data.datang;
+                    dattachartOKNGPending.datasets[0].data = data.dataok;
+                    dattachartOKNGPending.datasets[1].data = data.datang;
+                    dattachartOKNGPending.datasets[2].data = data.datapending;
+                    charpie.update();
+                    barchartpending.update();
+                    barcharng.update();
+                    stackchart.update();
                 },
                 error: function (xhr, status, error) {
                     alert(error)
                 }
             });
         }
-        document.getElementById('btn_loaddata').onclick = LoadDataForChart;
+        document.getElementById('btn_loaddata').onclick = LoadDataForChartHistory;
         //setInterval(LoadDataForChart, 1000);
-
-        $(function () {
-          <%--  var lineChartCanvas = $('#lineChart').get(0).getContext('2d');
-
-            var lineChartData = <%=mydata%>;
-            var areaChartOptions = {
-                maintainAspectRatio: false,
-                responsive: true,
-                legend: {
-                    display: false
-                },
-                scales: {
-                    xAxes: [{
-                        gridLines: {
-                            display: false,
-                        },
-                        type: 'category',
-                        position: 'bottom',
-                        ticks: {
-                            display: false 
-                        }
-                    }],
-                    yAxes: [{
-                        display: true,
-                        ticks: {
-                            beginAtZero: true,
-                            max: 1000
-                        }
-                    }]
-                },
-                plugins: {
-                    zoom: {
-                        zoom: {
-                            enabled: true, // Kích hoạt plugin zoom
-                            mode: 'xy', // Zoom theo trục x
-                        }
-                    }
-                }
-            };
-
-            new Chart(lineChartCanvas, {
-                type: 'line',
-                data: lineChartData,
-                options: areaChartOptions
-            });
-
-            var donutData = [
-                {
-                    label: 'OK',
-                    data: 90,
-                    color: 'Green'
-                },
-                {
-                    label: 'NG',
-                    data: 10,
-                    color: 'Red'
-                }
-
-            ]
-            $.plot('#donut-chart', donutData, {
-                series: {
-                    pie: {
-                        show: true,
-                        radius: 1,
-                        innerRadius: 0.5,
-                        label: {
-                            show: true,
-                            radius: 3 / 4,
-                            formatter: labelFormatter,
-                            threshold: 0.1
-                        }
-
-                    }
-                },
-                legend: {
-                    show: false
-                }
-            })--%>
-            /*
-             * END DONUT CHART
-             */
-
-
-            var datachartPending = {
-                labels: ['VP', 'GAS', 'WI1(W)', 'WI1(S)', 'IP', 'DF', 'TEMP', 'IOT', 'WI2', 'PAN', 'CAM B', 'CAM F'],
-                datasets: [
-                    {
-                        label: 'PENDING',
-                        backgroundColor: '#FFD700',
-                        borderColor: 'rgba(60,141,188,0.8)',
-                        pointRadius: false,
-                        pointColor: '#3b8bba',
-                        pointStrokeColor: 'rgba(00,80,00,1)',
-                        pointHighlightFill: '#fff',
-                        pointHighlightStroke: 'rgba(60,141,188,1)',
-                        data: [2, 1, 0, 4, 8, 30, 23,5,6,0,6,0]
-                    },
-                    
-                ]
-
-            }
-            var datachartNG = {
-                labels: ['VP', 'GAS', 'WI1(W)', 'WI1(S)', 'IP', 'DF', 'TEMP', 'IOT', 'WI2', 'PAN', 'CAM B', 'CAM F'],
-                datasets: [
-                    {
-                        label: 'NG',
-                        backgroundColor: '#FF0000',
-                        borderColor: 'rgba(60,141,188,0.8)',
-                        pointRadius: false,
-                        pointColor: '#3b8bba',
-                        pointStrokeColor: 'rgba(00,80,00,1)',
-                        pointHighlightFill: '#fff',
-                        pointHighlightStroke: 'rgba(60,141,188,1)',
-                        data: [2, 1, 0, 4, 8, 30, 23, 5, 6, 0, 6, 0]
-                    },
-
-                ]
-
-            }
-
-
-            var dattachartOKNGPending = {
-                labels: ['VP', 'GAS', 'WI1(W)', 'WI1(S)', 'IP', 'DF', 'TEMP', 'IOT', 'WI2', 'PAN', 'CAM B', 'CAM F'],
-                datasets: [
-                    {
-                        label: 'OK',
-                        backgroundColor: '#008000',
-                        borderColor: 'rgba(60,141,188,0.8)',
-                        pointRadius: false,
-                        pointColor: '#3b8bba',
-                        pointStrokeColor: 'rgba(00,80,00,1)',
-                        pointHighlightFill: '#fff',
-                        pointHighlightStroke: 'rgba(60,141,188,1)',
-                        data: [2, 1, 0, 4, 8, 30, 23, 5, 6, 0, 6, 0]
-                    },
-                    {
-                        label: 'NG',
-                        backgroundColor: '#FF0000',
-                        borderColor: 'rgba(210, 214, 222, 1)',
-                        pointRadius: false,
-                        pointColor: 'rgba(210, 214, 222, 1)',
-                        pointStrokeColor: '#c1c7d1',
-                        pointHighlightFill: '#fff',
-                        pointHighlightStroke: 'rgba(220,220,220,1)',
-                        data: [2, 1, 0, 4, 8, 30, 23, 5, 6, 0, 6, 0]
-                    },
-                    {
-                        label: 'PENDING',
-                        backgroundColor: '#FFD700',
-                        borderColor: 'rgba(210, 214, 222, 1)',
-                        pointRadius: false,
-                        pointColor: 'rgba(210, 214, 222, 1)',
-                        pointStrokeColor: '#c1c7d1',
-                        pointHighlightFill: '#fff',
-                        pointHighlightStroke: 'rgba(220,220,220,1)',
-                        data: [2, 1, 0, 4, 8, 30, 23, 5, 6, 0, 6, 0]
-                    },
-                ]
-            }
-
-            //var areaChartOptions = {
-            //    maintainAspectRatio: false,
-            //    responsive: true,
-            //    legend: {
-            //        display: false
-            //    },
-            //    scales: {
-            //        xAxes: [{
-            //            gridLines: {
-            //                display: false,
-            //            }
-            //        }],
-            //        yAxes: [{
-            //            gridLines: {
-            //                display: false,
-            //            }
-            //        }]
-            //    }
-            //}
-            var barChartCanvas = $('#barChartpending').get(0).getContext('2d')
-            //var barChartData = $.extend(true, {}, areaChartData)
-            //var temp0 = areaChartData.datasets[0]
-            //var temp1 = areaChartData.datasets[1]
-            //barChartData.datasets[0] = temp1
-            //barChartData.datasets[1] = temp0
-
-            var barChartOptions = {
-                responsive: true,
-                maintainAspectRatio: false,
-                datasetFill: false
-            }
-
-            new Chart(barChartCanvas, {
-                type: 'bar',
-                data: datachartPending,
-                options: barChartOptions
-            })
-            var barChartCanvas = $('#barChartng').get(0).getContext('2d')
-            //var barChartData = $.extend(true, {}, areaChartData)
-            //var temp0 = areaChartData.datasets[0]
-            //var temp1 = areaChartData.datasets[1]
-            //barChartData.datasets[0] = temp1
-            //barChartData.datasets[1] = temp0
-
-            var barChartOptions = {
-                responsive: true,
-                maintainAspectRatio: false,
-                datasetFill: false
-            }
-
-            new Chart(barChartCanvas, {
-                type: 'bar',
-                data: datachartNG,
-                options: barChartOptions
-            })
-
-
-            var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
-           /* var stackedBarChartData = $.extend(true, {}, areaChartData)*/
-
-            var stackedBarChartOptions = {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    xAxes: [{
-                        stacked: true,
-                    }],
-                    yAxes: [{
-                        stacked: true
-                    }]
-                }
-            }
-
-            new Chart(stackedBarChartCanvas, {
-                type: 'bar',
-                data: dattachartOKNGPending,
-                options: stackedBarChartOptions
-            })
-            var donutData = {
-                labels: [
-                    'OK',
-                    'NG'
-
-                ],
-                datasets: [
-                    {
-                        data: [700, 100],
-                        backgroundColor: ['#008000', '#FF0000'],
-                    }
-                ]
-            }
-            var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
-            var pieData = donutData;
-            var pieOptions = {
-                maintainAspectRatio: false,
-                responsive: true,
-            }
-            //Create pie or douhnut chart
-            // You can switch between pie and douhnut using the method below.
-            new Chart(pieChartCanvas, {
-                type: 'pie',
-                data: pieData,
-                options: pieOptions
-            })
-
-
-        })
-        function labelFormatter(label, series) {
-            return '<div style="font-size:13px; text-align:center; padding:2px;; color: #fff; font-weight: 600;">'
-                + label
-                + '<br>'
-                + Math.round(series.percent) + '%</div>'
-        }
-
     </script>
 </asp:Content>
 
