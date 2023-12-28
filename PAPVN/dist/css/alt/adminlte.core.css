@@ -14195,7 +14195,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
   content: "\00a0";
 }
 
-@media (min-width: 992px) {
+@media (min-width: 992) {
   .sidebar-mini .nav-sidebar,
   .sidebar-mini .nav-sidebar > .nav-header,
   .sidebar-mini .nav-sidebar .nav-link {

@@ -228,6 +228,7 @@
     <Content Include="Global.asax" />
     <Content Include="Image\panasonic-logo.jpg" />
     <Content Include="Image\panasonic-logo.png" />
+    <Content Include="Mycss\iconio.css" />
     <Content Include="Mycss\myicon.css" />
     <Content Include="MyIcon\ionicons\accessibility-outline.svg" />
     <Content Include="MyIcon\ionicons\accessibility-sharp.svg" />
@@ -3627,6 +3628,7 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
+    <Content Include="UploadPlan.aspx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
     <Content Include="Site.Mobile.Master" />
@@ -3670,6 +3672,13 @@
     </Compile>
     <Compile Include="AgingRealTime.aspx.designer.cs">
       <DependentUpon>AgingRealTime.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UploadPlan.aspx.cs">
+      <DependentUpon>UploadPlan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UploadPlan.aspx.designer.cs">
+      <DependentUpon>UploadPlan.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
