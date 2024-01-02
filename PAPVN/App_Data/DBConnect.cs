@@ -12,8 +12,9 @@ namespace PAPVN
 {
     public class DBConnect
     {
-        public static string connection_string = "Server=192.168.3.178;Port=3306;Database=dataplc;User=TA;Password=123456;AllowLoadLocalInfile=true;";
+       // public static string connection_string = "Server=192.168.3.178;Port=3306;Database=dataplc;User=TA;Password=123456;AllowLoadLocalInfile=true;";
 
+        public static string connection_string = "Server=127.0.0.1;Port=3306;Database=dataplc;User=TA;Password=123456;AllowLoadLocalInfile=true;";
 
         //public static string connection_string = "Data Source=DESKTOP-CEVMTEM\\SQLEXPRESS;Initial Catalog=DataQCCheck;Integrated Security=True";
 

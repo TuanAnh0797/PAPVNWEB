@@ -1,0 +1,20 @@
+CREATE TABLE `dataplan` (
+  `Model` varchar(30) NOT NULL,
+  `Quantity` int DEFAULT NULL,
+  `QuantityPerSec` float DEFAULT NULL,
+  `TotalTime` double DEFAULT NULL,
+  `TimeStart` datetime DEFAULT NULL,
+  `TimeEnd` datetime DEFAULT NULL,
+  PRIMARY KEY (`Model`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `ClearAllPlan`()
+BEGIN
+	DELETE FROM `dataplc`.`dataplan`;
+END
+
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `LoadDataPlan`()
+BEGIN
+	SELECT * FROM dataplc.dataplan;
+END

@@ -7,12 +7,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %> - My ASP.NET Application</title>
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <script src="../../plugins/chart.js/Chart.min.js"></script>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="../../Mycss/iconio.css">
     <!-- Tempusdominus Bootstrap 4 -->
     <link rel="stylesheet" href="../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <!-- iCheck -->
@@ -36,6 +36,10 @@
     <link rel="stylesheet" href="../../plugins/bs-stepper/css/bs-stepper.min.css">
     <!-- dropzonejs -->
     <link rel="stylesheet" href="../../plugins/dropzone/min/dropzone.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -58,12 +62,10 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a class="brand-link">
-                
+            <a class="brand-link" style="padding:15px 0px 10px 0px">
+
                 <img src="Image/panasonic-logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span style="font-size:20px; font-weight:600; margin:0px" class="brand-text font-weight-light">
-                     
-                        PAPVN
+                <span style="font-size: 20px; font-weight: 600; margin: 0px 0px 0px 0px" class="brand-text">Panasonic Appliance
                     
                 </span>
             </a>
@@ -77,26 +79,55 @@
                with font-awesome or any other icon font library -->
 
 
-                         <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link" href="/UploadPlan.aspx">
-                                <i style="margin:0px 0px 0px 5px" class="fas fa-calendar-day"></i>
-                                <p style="font-size:15px;font-weight:600">
-                                    Upload Plan
+                                <i style="margin: 0px 0px 0px 5px" class="fas fa-calendar-day"></i>
+                                <p style="font-size: 15px; font-weight: 600">
+                                    Management Plan
+                                     <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item ml-2">
+                                    <a class="nav-link" href="/UploadPlan.aspx">
+
+                                        <i style="margin: 0px 0px 0px 5px" class="fas fa-upload"></i>
+
+                                        <p>Upload Plan</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item ml-2">
+                                    <a class="nav-link" href="/PlanGAS.aspx">
+                                        <i class="fas fa-chart-bar nav-icon"></i>
+                                        <p>Real Time URT</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item ml-2">
+                                    <a class="nav-link" href="/PlanGAS.aspx">
+                                        <i class="fas fa-chart-bar nav-icon"></i>
+                                        <p>Real Time GAS</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item ml-2">
+                                    <a class="nav-link" href="/PlanGAS.aspx">
+                                        <i class="fas fa-chart-bar nav-icon"></i>
+                                        <p>Real Time PAN</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i style="margin: 0px 0px 0px 5px" class="fas fa-fill"></i>
+                                <p style="font-size: 15px; font-weight: 600">
+                                    URT
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">
-                                <i style="margin:0px 0px 0px 5px" class="fas fa-fill"></i>
-                                <p style="font-size:15px;font-weight:600">
-                                    URT
-                                </p>
-                            </a>
-                        </li>
-                         <li class="nav-item">
-                            <a class="nav-link" href="#">
                                 <i class="fa-brands fa-instalod"></i>
-                                <p style="font-size:15px;font-weight:600">
+                                <p style="font-size: 15px; font-weight: 600">
                                     Main Line
                                 </p>
                             </a>
@@ -107,7 +138,7 @@
                                 <%-- <ion-icon name="color-fill"></ion-icon>--%>
                                 <%--<i class="nav-icon fas fa-tree"></i>--%>
                                 <i class="nav-icon fas fa-wave-square"></i>
-                                <p style="font-size:15px;font-weight:600">
+                                <p style="font-size: 15px; font-weight: 600">
                                     Aiging
                                      <i class="right fas fa-angle-left"></i>
                                 </p>
@@ -119,24 +150,24 @@
                                         <i class="fas fa-flag-checkered nav-icon"></i>
 
                                         <p>Final Check</p>
-                                          <i class="right fas fa-angle-left"></i>
+                                        <i class="right fas fa-angle-left"></i>
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item ml-2">
-                                             <a class="nav-link" href="/AgingRealTime.aspx">
-                                      
-                                         <i class="fas fa-chart-bar nav-icon"></i>
-                                                 
-                                        <p>Real Time</p>
-                                    </a>
+                                            <a class="nav-link" href="/AgingRealTime.aspx">
+
+                                                <i class="fas fa-chart-bar nav-icon"></i>
+
+                                                <p>Real Time</p>
+                                            </a>
                                         </li>
-                                         <li class="nav-item ml-2">
-                                             <a class="nav-link" href="/AgingHistory.aspx">
-                                          <i class="fas fa-clock nav-icon"></i>
-                                       
-                                               
-                                        <p>History</p>
-                                    </a>
+                                        <li class="nav-item ml-2">
+                                            <a class="nav-link" href="/AgingHistory.aspx">
+                                                <i class="fas fa-clock nav-icon"></i>
+
+
+                                                <p>History</p>
+                                            </a>
                                         </li>
                                     </ul>
                                 </li>
@@ -218,7 +249,7 @@
                                 </li>
                             </ul>
                         </li>
-                       
+
 
 
                     </ul>
@@ -277,7 +308,19 @@
     <!-- dropzonejs -->
     <script src="../../plugins/dropzone/min/dropzone.min.js"></script>
     <script src="../../plugins/flot/plugins/jquery.flot.pie.js"></script>
-    <script src="https://unpkg.com/ionicons@latest/dist/ionicons.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="../../plugins/jszip/jszip.min.js"></script>
+    <script src="../../plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="../../plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <script>
         $(function () {
             //Initialize Select2 Elements
@@ -308,8 +351,16 @@
                 format: 'YYYY-MM-DD HH:mm:ss',
                 icons: { time: 'far fa-clock' }
             });
+            $('#reservationdatetimefromplan').datetimepicker({
+                format: 'YYYY-MM-DD HH:mm',
+                icons: { time: 'far fa-clock' }
+            });
             $('#reservationdatetimeto').datetimepicker({
                 format: 'YYYY-MM-DD HH:mm:ss',
+                icons: { time: 'far fa-clock' }
+            });
+            $('#reservationdatetimetoplan').datetimepicker({
+                format: 'YYYY-MM-DD HH:mm',
                 icons: { time: 'far fa-clock' }
             });
 
@@ -358,6 +409,12 @@
             $('.my-colorpicker2').on('colorpickerChange', function (event) {
                 $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
             })
+            // Datatable
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": true, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "print"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
         })
 
     </script>
