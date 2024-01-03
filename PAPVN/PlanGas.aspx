@@ -33,7 +33,7 @@
                 <div class="chart col-sm-8" style="padding: 5px;">
                     <div style="background-color: white; padding: 5px; margin: 0px 5px 0px 0px">
                         <div style="display: flex; align-items: center; justify-content: center">
-                            <h2 style="font-weight: 600">Biểu đồ tổng sản lượng nạp Gas</h2>
+                            <h2 style="font-weight: 600">Biểu đồ tổng sản lượng nạp GAS</h2>
                         </div>
                         <div class="chart-container">
                             <canvas id="linechart" style="min-height: 400px;"></canvas>
@@ -45,8 +45,74 @@
         </div>
     </div>
     <script>
-
+       
         $(document).ready(function () {
+            //Pie chart
+            var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+            var donutData = {
+                labels: [
+                    'OK',
+                    'NG'
+
+                ],
+                datasets: [
+                    {
+                        data: [],
+                        backgroundColor: ['#008000', '#FF0000'],
+                    }
+                ]
+            }
+            var pieOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+                //events: false,
+                //events: false,
+                animation: {
+                    duration: 500,
+                    easing: "easeOutQuart",
+                    onComplete: function () {
+                        var ctx = this.chart.ctx;
+                        ctx.font = "500 18px Arial";
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+
+                        donutData.datasets.forEach(function (dataset) {
+
+                            for (var i = 0; i < dataset.data.length; i++) {
+                                var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
+                                    total = dataset._meta[Object.keys(dataset._meta)[0]].total,
+                                    mid_radius = model.innerRadius + (model.outerRadius - model.innerRadius) / 2,
+                                    start_angle = model.startAngle,
+                                    end_angle = model.endAngle,
+                                    mid_angle = start_angle + (end_angle - start_angle) / 2;
+
+                                var x = mid_radius * Math.cos(mid_angle);
+                                var y = mid_radius * Math.sin(mid_angle);
+
+                                ctx.fillStyle = '#fff';
+                                if (i == 3) { // Darker text color for lighter background
+                                    ctx.fillStyle = '#444';
+                                }
+
+                                var val = dataset.data[i];
+                                var percent = " (" + String(Math.round(val / total * 100)) + "%)";
+
+                                if (val != 0) {
+                                    ctx.fillText(dataset.data[i] + percent, model.x + x, model.y + y);
+                                    // Display percent in another line, line break doesn't work for fillText
+                                    //ctx.fillText(percent, model.x + x+5, model.y + y+20);
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+
+            var charpie = new Chart(pieChartCanvas, {
+                type: 'pie',
+                data: donutData,
+                options: pieOptions
+            })
             //Line Chart
 
           
@@ -137,6 +203,29 @@
                         position: 'bottom',
                     },
                 },
+                animation: {
+                    duration: 1,
+                    onComplete: function () {
+                        var chartInstance = this.chart,
+                            ctx = chartInstance.ctx;
+                        ctx.font = "500 18px Arial";
+                        ctx.fillStyle = '#000000';
+
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+
+                        this.data.datasets.forEach(function (dataset, i) {
+                            var meta = chartInstance.controller.getDatasetMeta(i);
+                            meta.data.forEach(function (bar, index) {
+                                var data = dataset.data[index];
+                               
+                                    ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                                
+                                
+                            });
+                        });
+                    }
+                }
 
             };
             var lineChartCanvas = $('#linechart').get(0).getContext('2d')
@@ -146,69 +235,7 @@
                 options: LineChartOption
             })
            
-            //Pie chart
-         
-            var donutData = {
-                labels: [
-                    'OK',
-                    'NG'
-
-                ],
-                datasets: [
-                    {
-                        data: [98, 2],
-                        backgroundColor: ['#008000', '#FF0000'],
-                    }
-                ]
-            }
-            var pieOptions = {
-                maintainAspectRatio: false,
-                responsive: true,
-                events: false,
-                animation: {
-                    duration: 500,
-                    easing: "easeOutQuart",
-                    onComplete: function () {
-                        var ctx = this.chart.ctx;
-                        ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
-                        ctx.textAlign = 'center';
-                        ctx.textBaseline = 'bottom';
-
-                        this.donutData.datasets.forEach(function (dataset) {
-
-                            for (var i = 0; i < dataset.data.length; i++) {
-                                var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
-                                    total = dataset._meta[Object.keys(dataset._meta)[0]].total,
-                                    mid_radius = model.innerRadius + (model.outerRadius - model.innerRadius) / 2,
-                                    start_angle = model.startAngle,
-                                    end_angle = model.endAngle,
-                                    mid_angle = start_angle + (end_angle - start_angle) / 2;
-
-                                var x = mid_radius * Math.cos(mid_angle);
-                                var y = mid_radius * Math.sin(mid_angle);
-
-                                ctx.fillStyle = '#fff';
-                                if (i == 3) { // Darker text color for lighter background
-                                    ctx.fillStyle = '#444';
-                                }
-                                var percent = String(Math.round(dataset.data[i] / total * 100)) + "%";
-                                //Don't Display If Legend is hide or value is 0
-                                if (dataset.data[i] != 0 && dataset._meta[0].data[i].hidden != true) {
-                                    ctx.fillText(dataset.data[i], model.x + x, model.y + y);
-                                    // Display percent in another line, line break doesn't work for fillText
-                                    ctx.fillText(percent, model.x + x, model.y + y + 15);
-                                }
-                            }
-                        });
-                    }
-                }
-            }
-            var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
-            var charpie = new Chart(pieChartCanvas, {
-                type: 'pie',
-                data: donutData,
-                options: pieOptions
-            })
+           
 
             //
             var dataPlan = Array.from({ length: 24 }, () => Math.floor(Math.random() * (800 - 500 + 1)) + 500);
@@ -315,41 +342,59 @@
                 data: databarchart,
                 options: barChartOptions
             })
+            LoadDataForPieChart();
+            setInterval(LoadDataForPieChart, 2000);
+            // Load Data OK NG
+            function LoadDataForPieChart() {
+                $.ajax({
+                    type: 'POST',
+                    url: '/MyWebSercive.asmx/DataForPieChart',
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (response) {
+                        var data = JSON.parse(response.d);
+                        donutData.datasets[0].data = data.Datapiechart;
+                        charpie.update();
+                    },
+                    error: function (xhr, status, error) {
+                        alert(error)
+                    }
+                });
+            }
+             // Load Data Plan by Model
+            //function LoadDataForPieChart() {
+            //    $.ajax({
+            //        type: 'POST',
+            //        url: '/MyWebSercive.asmx/DataForPieChart',
+            //        contentType: 'application/json; charset=utf-8',
+            //        dataType: 'json',
+            //        success: function (response) {
+            //            var data = JSON.parse(response.d);
+            //            donutData.datasets[0].data = data.Datapiechart;
+            //            charpie.update();
+            //        },
+            //        error: function (xhr, status, error) {
+            //            alert(error)
+            //        }
+            //    });
+            //}
+            // Load Data Plan by Total
+            //function LoadDataForPieChart() {
+            //    $.ajax({
+            //        type: 'POST',
+            //        url: '/MyWebSercive.asmx/DataForPieChart',
+            //        contentType: 'application/json; charset=utf-8',
+            //        dataType: 'json',
+            //        success: function (response) {
+            //            var data = JSON.parse(response.d);
+            //            donutData.datasets[0].data = data.Datapiechart;
+            //            charpie.update();
+            //        },
+            //        error: function (xhr, status, error) {
+            //            alert(error)
+            //        }
+            //    });
+            //}
         });
-
-
-       //$(document).ready(function () {
-       //    LoadDataForChart();
-       //});
-       //function LoadDataForChart() {
-       //    var datetimefrom = $('#datefrom').val();
-       //    var datetimeto = $('#dateto').val();
-       //    $.ajax({
-       //        type: 'POST',
-       //        url: '/MyWebSercive.asmx/DataForLineChartRealTime',
-       //        contentType: 'application/json; charset=utf-8',
-       //        dataType: 'json',
-       //        success: function (response) {
-       //            var data = JSON.parse(response.d);
-       //            donutData.datasets[0].data = data.Datapiechart;
-       //            datachartPending.datasets[0].data = data.datapending;
-       //            datachartNG.datasets[0].data = data.datang;
-       //            dattachartOKNGPending.datasets[0].data = data.dataok;
-       //            dattachartOKNGPending.datasets[1].data = data.datang;
-       //            dattachartOKNGPending.datasets[2].data = data.datapending;
-       //            charpie.update();
-       //            barchartpending.update();
-       //            barcharng.update();
-       //            stackchart.update();
-       //            //alert('ok');
-       //        },
-       //        error: function (xhr, status, error) {
-       //            alert(error)
-       //        }
-       //    });
-       //}
-       //setInterval(LoadDataForChart, 30000);
-
-
     </script>
 </asp:Content>

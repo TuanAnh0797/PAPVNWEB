@@ -30,7 +30,7 @@ namespace PAPVN
             //    labels = dt.AsEnumerable().Select(row => row.Field<string>("NameValue")).ToArray(),
             //    values = dt.AsEnumerable().Select(row => row.Field<int>("DataValue")).ToArray(),
             //};
-            DataTable dt = DBConnect.StoreFillDT("LoadDataForChartHistory", CommandType.StoredProcedure,DateTimeFrom,DateTimeTo);
+            DataTable dt = DBConnect.StoreFillDT("LoadDataForChartHistory", CommandType.StoredProcedure, DateTimeFrom, DateTimeTo);
 
             if (dt.Rows[0]["VPOK"].ToString() != "")
             {
@@ -88,7 +88,7 @@ namespace PAPVN
             {
                 var data = new
                 {
-                    Datapiechart = new[] { 0, 0},
+                    Datapiechart = new[] { 0, 0 },
                     dataok = new[] {
                         0,
                         0,
@@ -142,7 +142,7 @@ namespace PAPVN
         public string DataForLineChartRealTime()
         {
             DataTable dt = DBConnect.StoreFillDT("LoadDataForChart", CommandType.StoredProcedure, 2);
-           
+
             if (dt.Rows[0]["VPOK"].ToString() != "")
             {
                 var data = new
@@ -199,7 +199,7 @@ namespace PAPVN
             {
                 var data = new
                 {
-                    Datapiechart = new[] { 0, 0},
+                    Datapiechart = new[] { 0, 0 },
                     dataok = new[] {
                         0,
                         0,
@@ -248,9 +248,53 @@ namespace PAPVN
                 };
                 return Newtonsoft.Json.JsonConvert.SerializeObject(data);
             }
-           
 
+
+
+        }
+        [WebMethod]
+        public string DataForQuantitybyHour()
+        {
+            DataTable dt = DBConnect.StoreFillDT("LoadDataQuantityByHour", CommandType.StoredProcedure, 2);
+
+            if (dt.Rows[0]["VPOK"].ToString() != "")
+            {
+                var data = new
+                {
+                       values = dt.AsEnumerable().Select(row => row.Field<int>("DataValue")).ToArray(),
+                };
+                return Newtonsoft.Json.JsonConvert.SerializeObject(data);
+            }
+            else
+            {
+                var data = new
+                {
+
+                };
+                return Newtonsoft.Json.JsonConvert.SerializeObject(data);
+            }
+
+
+
+        }
+        [WebMethod]
+        public string DataForPieChart()
+        {
+            //DataTable dt = DBConnect.StoreFillDT("LoadDataQuantityByHour", CommandType.StoredProcedure, 2);
+                Random random1 = new Random();
+                 Random random2 = new Random();
+                  int ok = random1.Next(20,100);
+            int ng = random2.Next(10, 30);
+
+            var data = new
+                {
+                    Datapiechart = new[] { ok, ng }
+                };
+                return Newtonsoft.Json.JsonConvert.SerializeObject(data);
           
+
+
+
         }
     }
 }
