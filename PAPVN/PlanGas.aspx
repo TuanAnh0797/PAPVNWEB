@@ -44,62 +44,110 @@
             </div>
         </div>
     </div>
-
     <script>
 
         $(document).ready(function () {
             //Line Chart
-            var pieChartCanvas = $('#linechart').get(0).getContext('2d')
+
+          
             var DataLineChart = {
-                labels: ['1', '2', '3', '4', '5','6','7','8','9','10','11','12'],
+                labels: ['06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '00:00', '01:00', '02:00', '03:00', '04:00', '05:00'],
                 datasets: [
                     {
+                        type: 'line',
+                        yAxisID: 'y-axis-1',
                         label: 'Plan',
                         borderColor: 'rgb(75, 192, 192)',
-                        data: [10,20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
+                        data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240],
                         fill: false,
                     },
-                     {
+                    {
+                        type: 'line',
+                        yAxisID: 'y-axis-1',
                         label: 'Actual',
-                         borderColor: '#b38600',
-                        data: [6, 21, 30, 35, 45, 51, 65, 82, 94, 102, 115, 120],
+                        borderColor: '#b38600',
+                        data: [6, 21, 30, 35, 45, 51, 65, 82, 94, 102, 115, 120, 130, 136, 157, 160, 162, 180, 191, 198, 210, 224, 235, 240],
                         fill: false,
-                    }
+                    },
+                    {
+                        type: 'bar',
+                        label: 'Diff',
+                        backgroundColor: function (context) {
+                            var value = context.dataset.data[context.dataIndex];
+                            return value < 0 ? 'red' : 'green';
+                        },
+                        yAxisID: 'y-axis-2',
+                        order: 1,
+                        data: [-10, 10, 2, 3, 5, 4, 0, 1, 3, 4, 8, -2, 4, 0, -10, 10, 2, 3, 5, 4, 0, 1, 3, 4, 8, -2, 4, 0],
+                    },
                 ]
             };
+            var maxDataValuebarchartdiff = Math.max(...DataLineChart.datasets[2].data);
+            var maxYAxisValuebarchartdiff = maxDataValuebarchartdiff + 10;
+
             var LineChartOption =
             {
                 responsive: true,
                 maintainAspectRatio: false,
                 scales: {
-                    x: {
-                        type: 'category',
+                    xAxes: [{
+                        ticks: {
+                            fontSize: 15
+                        },
+                        //gridLines: {
+                        //    display: false
+                        //},
 
-                    },
-                    y: {
+                    }],
+                    yAxes: [{
                         beginAtZero: true,
-                    }
+                        id: 'y-axis-1', // ID của trục y thứ nhất
+                        type: 'linear',
+                        position: 'left', // Vị trí của trục y thứ nhất
+                        ticks: {
+                            fontSize: 15,
+                            beginAtZero: true,
+                          
+                        },
+                        //gridLines: {
+                        //    display: false
+                        //},
+                    },
+                    {
+                       
+                        id: 'y-axis-2', // ID của trục y thứ hai
+                        type: 'linear',
+                        position: 'right', // Vị trí của trục y thứ hai
+                        ticks: {
+                            fontSize: 15,
+                            beginAtZero: true,
+                            max: maxYAxisValuebarchartdiff,
+                            min: -maxYAxisValuebarchartdiff,
+                           
+                        },
+                        //gridLines: {
+                        //    display: false
+                        //},
+                      
+                    }]
                 },
                 plugins: {
                     legend: {
                         display: true,
                         position: 'bottom',
                     },
-                }
+                },
 
             };
-            var charpie = new Chart(pieChartCanvas, {
+            var lineChartCanvas = $('#linechart').get(0).getContext('2d')
+            var linechart = new Chart(lineChartCanvas, {
                 type: 'line',
                 data: DataLineChart,
                 options: LineChartOption
             })
-
+           
             //Pie chart
-            var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
-            var pieOptions = {
-                maintainAspectRatio: false,
-                responsive: true,
-            }
+         
             var donutData = {
                 labels: [
                     'OK',
@@ -113,6 +161,49 @@
                     }
                 ]
             }
+            var pieOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+                events: false,
+                animation: {
+                    duration: 500,
+                    easing: "easeOutQuart",
+                    onComplete: function () {
+                        var ctx = this.chart.ctx;
+                        ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+
+                        this.donutData.datasets.forEach(function (dataset) {
+
+                            for (var i = 0; i < dataset.data.length; i++) {
+                                var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
+                                    total = dataset._meta[Object.keys(dataset._meta)[0]].total,
+                                    mid_radius = model.innerRadius + (model.outerRadius - model.innerRadius) / 2,
+                                    start_angle = model.startAngle,
+                                    end_angle = model.endAngle,
+                                    mid_angle = start_angle + (end_angle - start_angle) / 2;
+
+                                var x = mid_radius * Math.cos(mid_angle);
+                                var y = mid_radius * Math.sin(mid_angle);
+
+                                ctx.fillStyle = '#fff';
+                                if (i == 3) { // Darker text color for lighter background
+                                    ctx.fillStyle = '#444';
+                                }
+                                var percent = String(Math.round(dataset.data[i] / total * 100)) + "%";
+                                //Don't Display If Legend is hide or value is 0
+                                if (dataset.data[i] != 0 && dataset._meta[0].data[i].hidden != true) {
+                                    ctx.fillText(dataset.data[i], model.x + x, model.y + y);
+                                    // Display percent in another line, line break doesn't work for fillText
+                                    ctx.fillText(percent, model.x + x, model.y + y + 15);
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+            var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
             var charpie = new Chart(pieChartCanvas, {
                 type: 'pie',
                 data: donutData,
@@ -120,8 +211,47 @@
             })
 
             //
+            var dataPlan = Array.from({ length: 24 }, () => Math.floor(Math.random() * (800 - 500 + 1)) + 500);
+            var dataPlanHour = Array.from({ length: 24 }, () => Math.floor(Math.random() * (500 - 300 + 1)) + 300);
+            var dataPlanActual = Array.from({ length: 24 }, () => Math.floor(Math.random() * (300 - 100 + 1)) + 100);
 
+            var databarchart = {
+                labels: ['NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567'],
+                datasets: [
+                    {
+                        type: 'bar',
+                        label: 'Plan',
+                        backgroundColor: '#248f24',
+                        order: 2,
+                        data: dataPlan,
+                    },
+                    {
+                        type: 'bar',
+                        label: 'Plan/Time',
+                        backgroundColor: '#ffff4d',
+                        categoryPercentage: 0.5,
+                        order: 1,
+                        data: dataPlanHour,
+                    },
 
+                    {
+                        type: 'bar',
+                        label: 'Actual',
+                        backgroundColor: '#668cff',
+                        borderColor: '#000000',
+                        pointRadius: false,
+                        order: 0,
+                        categoryPercentage: 0.25,
+                        data: dataPlanActual,
+
+                    },
+
+                ]
+
+            }
+
+            var maxDataValuebarchartquantity = Math.max(...databarchart.datasets.map(dataset => Math.max(...dataset.data)));
+            var maxYAxisValuebarchartquantity = maxDataValuebarchartquantity + 30;
 
             var barChartOptions = {
                 responsive: true,
@@ -140,11 +270,13 @@
                     }],
                     yAxes: [{
                         ticks: {
-                            fontSize: 20,
+                            fontSize: 15,
                             beginAtZero: true,
-                            max: 900
+                            max: maxYAxisValuebarchartquantity
                         },
-
+                        //gridLines: {
+                        //    display: false
+                        //},
 
                     }],
 
@@ -161,8 +293,8 @@
                     onComplete: function () {
                         var chartInstance = this.chart,
                             ctx = chartInstance.ctx;
-                        ctx.font = "500 18px Arial"; // Đặt kích thước chữ là 20px và font là Arial
-                        ctx.fillStyle = '#000000'; // Đặt màu chữ là đen
+                        ctx.font = "500 18px Arial";
+                        ctx.fillStyle = '#000000';
 
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'bottom';
@@ -178,76 +310,9 @@
                 }
             }
             var barChartCanvas = $('#barchart').get(0).getContext('2d')
-            var dataPlan = Array.from({ length: 24 }, () => Math.floor(Math.random() * (800 - 500 + 1)) + 500);
-            var dataPlanHour = Array.from({ length: 24 }, () => Math.floor(Math.random() * (500 - 300 + 1)) + 300);
-            var dataPlanActual = Array.from({ length: 24 }, () => Math.floor(Math.random() * (300 - 100 + 1)) + 100);
-            var datachartNG = {
-                labels: ['NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567'],
-                datasets: [
-                    {
-                        type: 'bar',
-                        label: 'Plan',
-                        backgroundColor: '#248f24',
-                        borderColor: '#000000',
-                        pointRadius: false,
-                        //pointColor: '#3b8bba',
-                        //pointStrokeColor: 'rgba(00,80,00,1)',
-                        //pointHighlightFill: '#fff',
-                        //pointHighlightStroke: 'rgba(60,141,188,1)',
-                        order: 2,
-                        //stack: 'Stack 2',
-                        data: dataPlan,
-
-
-                    },
-
-
-                    {
-                        type: 'bar',
-                        label: 'Plan/Time',
-                        //'rgb(75, 192, 192)',
-                        backgroundColor: '#ffff4d',
-                        borderColor: '#000000',
-                        pointRadius: false,
-                        //pointColor: '#3b8bba',
-                        //pointStrokeColor: 'rgba(00,80,00,1)',
-                        //pointHighlightFill: '#fff',
-                        //pointHighlightStroke: 'rgba(60,141,188,1)',
-                        categoryPercentage: 0.5,
-                        order: 1,
-                        //stack: 'Stack 2',
-
-                        data: dataPlanHour,
-
-
-                    },
-
-                    {
-                        type: 'bar',
-                        label: 'Actual',
-                        backgroundColor: '#668cff',
-                        borderColor: '#000000',
-                        pointRadius: false,
-                        //pointColor: '#3b8bba',
-                        //pointStrokeColor: 'rgba(00,80,00,1)',
-                        //pointHighlightFill: '#fff',
-                        //pointHighlightStroke: 'rgba(60,141,188,1)',
-                        order: 0,
-
-                        categoryPercentage: 0.25,
-                        //: 'Stack 1',
-                        data: dataPlanActual,
-
-                    },
-
-                ]
-
-            }
-
-
             var barcharng = new Chart(barChartCanvas, {
                 type: 'bar',
-                data: datachartNG,
+                data: databarchart,
                 options: barChartOptions
             })
         });
