@@ -1,7 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PlanGas.aspx.cs" Inherits="PAPVN.RealTimePlan" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PlanGAS.aspx.cs" Inherits="PAPVN.RealTimePlan" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
     <%--     <div class="content-header" style="padding: 5px;">
         <h1 style="margin:0px 0px 0px 20px; font-weight:150">Management Plan/Real Time</h1>
     </div>--%>
@@ -40,20 +38,118 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
     <script>
-       
         $(document).ready(function () {
+            //Bar chart
+            var barChartCanvas = $('#barchart').get(0).getContext('2d')
+            var databarchart = {
+                labels: [],
+                datasets: [
+                    {
+                        type: 'bar',
+                        label: 'Plan',
+                        backgroundColor: '#248f24',
+                        order: 2,
+                        //data: dataPlan,
+                        data: []
+                    },
+                    {
+                        type: 'bar',
+                        label: 'Plan/Time',
+                        backgroundColor: '#ffff4d',
+                        categoryPercentage: 0.6,
+                        order: 1,
+                        //data: dataPlanHour,
+                        data: []
+                    },
+                    {
+                        type: 'bar',
+                        label: 'Actual',
+                        backgroundColor: '#668cff',
+                        order: 0,
+                        categoryPercentage: 0.35,
+                        // data: dataPlanActual,
+                        data: []
+                    },
+                ]
+            }
+            var barChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                datasetFill: false,
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            fontSize: 20
+                        },
+                        gridLines: {
+                            display: false
+                        },
+                        stacked: true,
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            fontSize: 15,
+                            beginAtZero: true,
+                        },
+                    }],
+                },
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        fontSize: 15,
+                    },
+                    //onClick: function (e, legendItem) {
+                    //    var index = legendItem.index;
+                    //    var chart = this.chart;
+                    //    this.data.datasets.forEach(function (dataset) {
+                    //        var meta = chart.getDatasetMeta(dataset.label);
+                    //        var currentState = !meta.hidden;
+
+                    //        // Ẩn hoặc hiện dữ liệu của dataset khi click vào legend
+                    //        meta.hidden = currentState;
+
+                    //        // Cập nhật biểu đồ
+                    //        chart.update();
+                    //    });
+                    //}
+                },
+                animation: {
+                    duration: 1,
+                    onComplete: function () {
+                        var chartInstance = this.chart,
+                            ctx = chartInstance.ctx;
+                        ctx.font = "500 18px Arial";
+                        ctx.fillStyle = '#000000';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+                        this.data.datasets.forEach(function (dataset, i) {
+                            var meta = chartInstance.controller.getDatasetMeta(i);
+                            meta.data.forEach(function (bar, index) {
+                               
+                                    var data = dataset.data[index];
+                                    ctx.fillText(data, bar._model.x, bar._model.y);
+                              
+                               
+                            });
+                        });
+                    }
+                }
+            }
+          
+            var barchartplan = new Chart(barChartCanvas, {
+                type: 'bar',
+                data: databarchart,
+                options: barChartOptions
+            })
             //Pie chart
-            var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
             var donutData = {
                 labels: [
                     'OK',
                     'NG'
-
                 ],
                 datasets: [
                     {
@@ -74,9 +170,7 @@
                         ctx.font = "500 18px Arial";
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'bottom';
-
                         donutData.datasets.forEach(function (dataset) {
-
                             for (var i = 0; i < dataset.data.length; i++) {
                                 var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
                                     total = dataset._meta[Object.keys(dataset._meta)[0]].total,
@@ -84,18 +178,14 @@
                                     start_angle = model.startAngle,
                                     end_angle = model.endAngle,
                                     mid_angle = start_angle + (end_angle - start_angle) / 2;
-
                                 var x = mid_radius * Math.cos(mid_angle);
                                 var y = mid_radius * Math.sin(mid_angle);
-
                                 ctx.fillStyle = '#fff';
                                 if (i == 3) { // Darker text color for lighter background
                                     ctx.fillStyle = '#444';
                                 }
-
                                 var val = dataset.data[i];
                                 var percent = " (" + String(Math.round(val / total * 100)) + "%)";
-
                                 if (val != 0) {
                                     ctx.fillText(dataset.data[i] + percent, model.x + x, model.y + y);
                                 }
@@ -104,6 +194,7 @@
                     }
                 }
             }
+            var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
             var charpie = new Chart(pieChartCanvas, {
                 type: 'pie',
                 data: donutData,
@@ -118,7 +209,6 @@
                         yAxisID: 'y-axis-1',
                         label: 'Plan',
                         borderColor: 'rgb(75, 192, 192)',
-                        //data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240],
                         data:[],
                         fill: false,
                     },
@@ -127,7 +217,6 @@
                         yAxisID: 'y-axis-1',
                         label: 'Actual',
                         borderColor: '#b38600',
-                        //data: [6, 21, 30, 35, 45, 51, 65, 82, 94, 102, 115, 120, 130, 136, 157, 160, 162, 180, 191, 198, 210, 224, 235, 240],
                         data:[],
                         fill: false,
                     },
@@ -140,14 +229,10 @@
                         },
                         yAxisID: 'y-axis-2',
                         order: 1,
-                        //data: [-10, 10, 2, 3, 5, 4, 0, 1, 3, 4, 8, -2, 4, 0, -10, 10, 2, 3, 5, 4, 0, 1, 3, 4, 8, -2, 4, 0],
                         data:[]
                     },
                 ]
             };
-            //
-            var maxDataValuebarchartdiff = Math.max(...DataLineChart.datasets[2].data);
-            var maxYAxisValuebarchartdiff = maxDataValuebarchartdiff + 10;
             var LineChartOption =
             {
                 responsive: true,
@@ -166,28 +251,23 @@
                         ticks: {
                             fontSize: 15,
                             beginAtZero: true,
-                          
                         },
                     },
                     {
-                       
                         id: 'y-axis-2', // ID của trục y thứ hai
                         type: 'linear',
                         position: 'right', // Vị trí của trục y thứ hai
                         ticks: {
                             fontSize: 15,
                             beginAtZero: true,
-                            max: maxYAxisValuebarchartdiff,
-                            min: -maxYAxisValuebarchartdiff,
-                           
+                            //max: maxYAxisValuebarchartdiff,
+                            //min: -maxYAxisValuebarchartdiff,
                         },
                         gridLines: {
                             display: false
                         },
-                      
                     }]
                 },
-                
                 animation: {
                     duration: 1,
                     onComplete: function () {
@@ -195,33 +275,24 @@
                             ctx = chartInstance.ctx;
                         ctx.font = "500 18px Arial";
                         ctx.fillStyle = '#000000';
-
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'bottom';
-
                         this.data.datasets.forEach(function (dataset, i) {
-
                             if (i == 2) {
                                 var meta = chartInstance.controller.getDatasetMeta(i);
                                 meta.data.forEach(function (bar, index) {
                                     var data = dataset.data[index];
-
                                     if (data >= 0) {
                                         ctx.fillText(data, bar._model.x, bar._model.y - 5);
                                     }
                                     else {
                                         ctx.fillText(data, bar._model.x, bar._model.y + 20);
                                     }
-                                   
-
-
                                 });
                             }
-                           
                         });
                     }
                 }
-
             };
             var lineChartCanvas = $('#linechart').get(0).getContext('2d')
             var linechart = new Chart(lineChartCanvas, {
@@ -229,130 +300,12 @@
                 data: DataLineChart,
                 options: LineChartOption
             })
-           
-           
-
-            //Bar chart
-            //var dataPlan = Array.from({ length: 24 }, () => Math.floor(Math.random() * (800 - 500 + 1)) + 500);
-            //var dataPlanHour = Array.from({ length: 24 }, () => Math.floor(Math.random() * (500 - 300 + 1)) + 300);
-            //var dataPlanActual = Array.from({ length: 24 }, () => Math.floor(Math.random() * (300 - 100 + 1)) + 100);
-
-            var databarchart = {
-                //labels: ['NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567'],
-                labels:[],
-                datasets: [
-                    {
-                        type: 'bar',
-                        label: 'Plan',
-                        backgroundColor: '#248f24',
-                        order: 2,
-                        //data: dataPlan,
-                        data:[]
-                    },
-                    {
-                        type: 'bar',
-                        label: 'Plan/Time',
-                        backgroundColor: '#ffff4d',
-                        categoryPercentage: 0.6,
-                        order: 1,
-                        //data: dataPlanHour,
-                        data: []
-                    },
-
-                    {
-                        type: 'bar',
-                        label: 'Actual',
-                        backgroundColor: '#668cff',
-                       
-                        order: 0,
-                        categoryPercentage: 0.35,
-                       // data: dataPlanActual,
-                        data: []
-
-                    },
-
-                ]
-
-            }
-
-            var maxDataValuebarchartquantity = Math.max(...databarchart.datasets.map(dataset => Math.max(...dataset.data)));
-            var maxYAxisValuebarchartquantity = maxDataValuebarchartquantity + 30;
-
-            var barChartOptions = {
-                responsive: true,
-                maintainAspectRatio: false,
-                datasetFill: false,
-                scales: {
-                    xAxes: [{
-                        ticks: {
-                            fontSize: 20
-                        },
-                        gridLines: {
-                            display: false
-                        },
-                        stacked: true,
-
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            fontSize: 15,
-                            beginAtZero: true,
-                            max: maxYAxisValuebarchartquantity
-                        },
-                        //gridLines: {
-                        //    display: false
-                        //},
-
-                    }],
-
-                },
-                legend: {
-                    position: 'bottom',
-                    labels: {
-                        fontSize: 15,
-                    },
-
-                },
-                animation: {
-                    duration: 1,
-                    onComplete: function () {
-                        var chartInstance = this.chart,
-                            ctx = chartInstance.ctx;
-                        ctx.font = "500 18px Arial";
-                        ctx.fillStyle = '#000000';
-
-                        ctx.textAlign = 'center';
-                        ctx.textBaseline = 'bottom';
-
-                        this.data.datasets.forEach(function (dataset, i) {
-                            var meta = chartInstance.controller.getDatasetMeta(i);
-                           
-                            meta.data.forEach(function (bar, index) {
-                               
-                                var data = dataset.data[index];
-                               
-                                    ctx.fillText(data, bar._model.x, bar._model.y);
-                              
-                               
-                                   
-                              
-                               
-                            });
-                        });
-                    }
-                }
-            }
-            var barChartCanvas = $('#barchart').get(0).getContext('2d')
-            var barchartplan = new Chart(barChartCanvas, {
-                type: 'bar',
-                data: databarchart,
-                options: barChartOptions
-            })
-
             LoadDataForPieChart();
             LoadDataForBarchart();
-            setInterval(LoadDataForPieChart, 2000);
-
+            LoadDataForLineChart();
+            setInterval(LoadDataForPieChart, 5000);
+            setInterval(LoadDataForBarchart, 5000);
+            setInterval(LoadDataForLineChart, 5000);
             // Load Data OK NG
             function LoadDataForPieChart() {
                 $.ajax({
@@ -383,6 +336,8 @@
                         databarchart.datasets[1].data = data.dataplanpertime;
                         databarchart.datasets[2].data = data.dataactual;
                         databarchart.labels = data.labels;
+                        barChartOptions.scales.yAxes[0].ticks.max = Math.max(...data.dataplan) + 30;
+                        barchartplan.options = barChartOptions;
                         barchartplan.update();
                     },
                     error: function (xhr, status, error) {
@@ -394,13 +349,19 @@
             function LoadDataForLineChart() {
                 $.ajax({
                     type: 'POST',
-                    url: '/MyWebSercive.asmx/DataForPieChart',
+                    url: '/MyWebSercive.asmx/DataForLineChart',
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     success: function (response) {
                         var data = JSON.parse(response.d);
-                        donutData.datasets[0].data = data.Datapiechart;
-                        charpie.update();
+                        DataLineChart.datasets[0].data = data.dataplan;
+                        DataLineChart.datasets[1].data = data.dataactual;
+                        DataLineChart.datasets[2].data = data.datadiff;
+                        var maxvl = Math.max(...data.datadiff) + 10;
+                        LineChartOption.scales.yAxes[1].ticks.max = maxvl;
+                        LineChartOption.scales.yAxes[1].ticks.min = -maxvl;
+                        linechart.options = LineChartOption;
+                        linechart.update();
                     },
                     error: function (xhr, status, error) {
                         alert(error)

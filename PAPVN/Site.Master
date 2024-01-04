@@ -102,7 +102,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item ml-2">
-                                    <a class="nav-link" href="/PlanGAS.aspx">
+                                    <a class="nav-link" href="/PlanURT.aspx">
                                         <i class="fas fa-chart-bar nav-icon"></i>
                                         <p>Real Time URT</p>
                                     </a>
@@ -114,7 +114,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item ml-2">
-                                    <a class="nav-link" href="/PlanGAS.aspx">
+                                    <a class="nav-link" href="/PlanPAN.aspx">
                                         <i class="fas fa-chart-bar nav-icon"></i>
                                         <p>Real Time PAN</p>
                                     </a>

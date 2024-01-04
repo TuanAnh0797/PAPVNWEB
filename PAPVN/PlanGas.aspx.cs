@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace PAPVN
 {
-    public partial class RealTimePlan : System.Web.UI.Page
+    public partial class PlanGAS : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

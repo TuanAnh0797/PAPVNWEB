@@ -5,7 +5,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Script.Services;
 using System.Web.Services;
-
 namespace PAPVN
 {
     /// <summary>
@@ -19,19 +18,16 @@ namespace PAPVN
     [ScriptService()]
     public class MyWebSercive : System.Web.Services.WebService
     {
-
         [WebMethod]
         public string DataForLineChart(string DateTimeFrom, string DateTimeTo)
         {
             //DataTable dt = DBConnect.StoreFillDS("getdatachart", CommandType.StoredProcedure);
-
             //var data = new
             //{
             //    labels = dt.AsEnumerable().Select(row => row.Field<string>("NameValue")).ToArray(),
             //    values = dt.AsEnumerable().Select(row => row.Field<int>("DataValue")).ToArray(),
             //};
             DataTable dt = DBConnect.StoreFillDT("LoadDataForChartHistory", CommandType.StoredProcedure, DateTimeFrom, DateTimeTo);
-
             if (dt.Rows[0]["VPOK"].ToString() != "")
             {
                 var data = new
@@ -64,7 +60,6 @@ namespace PAPVN
                      int.Parse(dt.Rows[0]["PANNG"].ToString()),
                      int.Parse(dt.Rows[0]["CAMBACKNG"].ToString()),
                      int.Parse(dt.Rows[0]["CAMFRONTNG"].ToString())
-
                 },
                     datapending = new[] {
                    int.Parse(dt.Rows[0]["VPPENDING"].ToString()),
@@ -80,7 +75,6 @@ namespace PAPVN
                      int.Parse(dt.Rows[0]["CAMBACKPENDING"].ToString()),
                      int.Parse(dt.Rows[0]["CAMFRONTPENDING"].ToString())
                 },
-
                 };
                 return Newtonsoft.Json.JsonConvert.SerializeObject(data);
             }
@@ -102,7 +96,6 @@ namespace PAPVN
                         0,
                         0,
                         0
-
                 },
                     datang = new[] {
                     0,
@@ -117,7 +110,6 @@ namespace PAPVN
                         0,
                         0,
                         0
-
                 },
                     datapending = new[] {
                    0,
@@ -133,7 +125,6 @@ namespace PAPVN
                         0,
                         0
                 },
-
                 };
                 return Newtonsoft.Json.JsonConvert.SerializeObject(data);
             }
@@ -142,7 +133,6 @@ namespace PAPVN
         public string DataForLineChartRealTime()
         {
             DataTable dt = DBConnect.StoreFillDT("LoadDataForChart", CommandType.StoredProcedure, 2);
-
             if (dt.Rows[0]["VPOK"].ToString() != "")
             {
                 var data = new
@@ -175,7 +165,6 @@ namespace PAPVN
                      int.Parse(dt.Rows[0]["PANNG"].ToString()),
                      int.Parse(dt.Rows[0]["CAMBACKNG"].ToString()),
                      int.Parse(dt.Rows[0]["CAMFRONTNG"].ToString())
-
                 },
                     datapending = new[] {
                    int.Parse(dt.Rows[0]["VPPENDING"].ToString()),
@@ -191,7 +180,6 @@ namespace PAPVN
                      int.Parse(dt.Rows[0]["CAMBACKPENDING"].ToString()),
                      int.Parse(dt.Rows[0]["CAMFRONTPENDING"].ToString())
                 },
-
                 };
                 return Newtonsoft.Json.JsonConvert.SerializeObject(data);
             }
@@ -213,7 +201,6 @@ namespace PAPVN
                         0,
                         0,
                         0
-
                 },
                     datang = new[] {
                     0,
@@ -228,7 +215,6 @@ namespace PAPVN
                         0,
                         0,
                         0
-
                 },
                     datapending = new[] {
                    0,
@@ -244,19 +230,14 @@ namespace PAPVN
                         0,
                         0
                 },
-
                 };
                 return Newtonsoft.Json.JsonConvert.SerializeObject(data);
             }
-
-
-
         }
         [WebMethod]
         public string DataForQuantitybyHour()
         {
             DataTable dt = DBConnect.StoreFillDT("LoadDataQuantityByHour", CommandType.StoredProcedure, 2);
-
             if (dt.Rows[0]["VPOK"].ToString() != "")
             {
                 var data = new
@@ -269,13 +250,9 @@ namespace PAPVN
             {
                 var data = new
                 {
-
                 };
                 return Newtonsoft.Json.JsonConvert.SerializeObject(data);
             }
-
-
-
         }
         [WebMethod]
         public string DataForPieChart()
@@ -293,16 +270,58 @@ namespace PAPVN
         [WebMethod]
         public string DataForBarChart()
         {
-            //databarchart.datasets[0].data = data.dataplan;
-            //databarchart.datasets[1].data = data.dataplanpertime;
-            //databarchart.datasets[2].data = data.dataactual;
-            Random random1 = new Random();
-            Random random2 = new Random();
-            int ok = random1.Next(20, 100);
-            int ng = random2.Next(10, 30);
+            Random random = new Random();
+
+            int[] dataplan = new int[30];
+            int[] dataplanpertime = new int[30];
+            int[] dataactual = new int[30];
+            string[] labels = new string[30];
+
+            for (int i = 0; i < 30; i++)
+            {
+                dataplan[i] = random.Next(200, 400);
+                dataplanpertime[i] = random.Next(100, 200);
+                dataactual[i] = random.Next(50, 150);
+                labels[i] = "Model" + (i+1).ToString();
+
+            }
+
             var data = new
             {
-                Datapiechart = new[] { ok, ng }
+                dataplan,
+                dataplanpertime,
+                dataactual,
+                labels,
+            };
+            return Newtonsoft.Json.JsonConvert.SerializeObject(data);
+        }
+        [WebMethod]
+        public string DataForLineChart()
+        {
+            //DataLineChart.datasets[0].data = data.dataplan;
+            //DataLineChart.datasets[1].data = data.dataactual;
+            //DataLineChart.datasets[2].data = data.diff;
+            Random random = new Random();
+            int[] dataplan = new int[24];
+            int[] dataactual = new int[24];
+            int[] datadiff = new int[24];
+            for (int i = 0; i < 24; i++)
+            {
+                dataplan[i] = random.Next(50, 200);
+                dataactual[i] = random.Next(50, 200);
+                datadiff[i] = dataplan[i] - dataactual[i];
+            }
+
+
+            var data = new
+            {
+                //dataplan = dataplan,
+                //dataactual = dataactual,
+                //datadiff = datadiff
+                dataplan,
+                 dataactual,
+                datadiff
+
             };
             return Newtonsoft.Json.JsonConvert.SerializeObject(data);
         }
