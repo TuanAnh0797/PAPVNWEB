@@ -4,7 +4,7 @@
     <div class="m-2">
           <asp:FileUpload   ID="FileUpload1" runat="server" Font-Size="20px" />
             <div class="row" style="margin: 0px 0px 0px 0px; background-color: #fffefe; border-radius: 8px;">
-            <div class="col">
+<%--            <div class="col">
                 <div class="form-group" style="margin: 10px 0px 10px 0px">
                     <div class="d-flex flex-row">
                         <div>
@@ -20,8 +20,8 @@
                          </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
+            </div>--%>
+           <%-- <div class="col">
                 <div class="form-group" style="margin: 10px 0px 10px 0px">
 
                     <div class="d-flex flex-row">
@@ -38,7 +38,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>--%>
         </div>
 
         <asp:Button type ="button" Text="Upload Plan" OnClick="Importdata_Click"  runat="server" name="btn_Import" style="font-size:20px; font-weight:600" class="btn btn-outline-primary btn-block mt-1">
@@ -57,14 +57,17 @@
         <div class="card-body">
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
-                    <tr>
+                    <tr style="font-size:20px">
                         <th>Model</th>
-                        <th>Plan</th>
+                        <th>Plan All Day</th>
+                        <th>Plan 1</th>
+                        <th>Plan 2</th>
+                        <th>Plan 3</th>
                         <th>Start Time</th>
                         <th>End Time</th>
                     </tr>
                 </thead>
-                <tbody id="dt_plan" runat="server">
+                <tbody style="font-size:25px" id="dt_plan" runat="server">
 
                 </tbody>
                   

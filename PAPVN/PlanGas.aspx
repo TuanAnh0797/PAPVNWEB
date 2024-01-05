@@ -65,8 +65,7 @@
             var pieOptions = {
                 maintainAspectRatio: false,
                 responsive: true,
-                //events: false,
-                //events: false,
+                events: false,
                 animation: {
                     duration: 500,
                     easing: "easeOutQuart",
@@ -99,23 +98,18 @@
 
                                 if (val != 0) {
                                     ctx.fillText(dataset.data[i] + percent, model.x + x, model.y + y);
-                                    // Display percent in another line, line break doesn't work for fillText
-                                    //ctx.fillText(percent, model.x + x+5, model.y + y+20);
                                 }
                             }
                         });
                     }
                 }
             }
-
             var charpie = new Chart(pieChartCanvas, {
                 type: 'pie',
                 data: donutData,
                 options: pieOptions
             })
             //Line Chart
-
-          
             var DataLineChart = {
                 labels: ['06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '00:00', '01:00', '02:00', '03:00', '04:00', '05:00'],
                 datasets: [
@@ -124,7 +118,8 @@
                         yAxisID: 'y-axis-1',
                         label: 'Plan',
                         borderColor: 'rgb(75, 192, 192)',
-                        data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240],
+                        //data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240],
+                        data:[],
                         fill: false,
                     },
                     {
@@ -132,7 +127,8 @@
                         yAxisID: 'y-axis-1',
                         label: 'Actual',
                         borderColor: '#b38600',
-                        data: [6, 21, 30, 35, 45, 51, 65, 82, 94, 102, 115, 120, 130, 136, 157, 160, 162, 180, 191, 198, 210, 224, 235, 240],
+                        //data: [6, 21, 30, 35, 45, 51, 65, 82, 94, 102, 115, 120, 130, 136, 157, 160, 162, 180, 191, 198, 210, 224, 235, 240],
+                        data:[],
                         fill: false,
                     },
                     {
@@ -144,13 +140,14 @@
                         },
                         yAxisID: 'y-axis-2',
                         order: 1,
-                        data: [-10, 10, 2, 3, 5, 4, 0, 1, 3, 4, 8, -2, 4, 0, -10, 10, 2, 3, 5, 4, 0, 1, 3, 4, 8, -2, 4, 0],
+                        //data: [-10, 10, 2, 3, 5, 4, 0, 1, 3, 4, 8, -2, 4, 0, -10, 10, 2, 3, 5, 4, 0, 1, 3, 4, 8, -2, 4, 0],
+                        data:[]
                     },
                 ]
             };
+            //
             var maxDataValuebarchartdiff = Math.max(...DataLineChart.datasets[2].data);
             var maxYAxisValuebarchartdiff = maxDataValuebarchartdiff + 10;
-
             var LineChartOption =
             {
                 responsive: true,
@@ -160,10 +157,6 @@
                         ticks: {
                             fontSize: 15
                         },
-                        //gridLines: {
-                        //    display: false
-                        //},
-
                     }],
                     yAxes: [{
                         beginAtZero: true,
@@ -175,9 +168,6 @@
                             beginAtZero: true,
                           
                         },
-                        //gridLines: {
-                        //    display: false
-                        //},
                     },
                     {
                        
@@ -191,18 +181,13 @@
                             min: -maxYAxisValuebarchartdiff,
                            
                         },
-                        //gridLines: {
-                        //    display: false
-                        //},
+                        gridLines: {
+                            display: false
+                        },
                       
                     }]
                 },
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'bottom',
-                    },
-                },
+                
                 animation: {
                     duration: 1,
                     onComplete: function () {
@@ -215,14 +200,24 @@
                         ctx.textBaseline = 'bottom';
 
                         this.data.datasets.forEach(function (dataset, i) {
-                            var meta = chartInstance.controller.getDatasetMeta(i);
-                            meta.data.forEach(function (bar, index) {
-                                var data = dataset.data[index];
-                               
-                                    ctx.fillText(data, bar._model.x, bar._model.y - 5);
-                                
-                                
-                            });
+
+                            if (i == 2) {
+                                var meta = chartInstance.controller.getDatasetMeta(i);
+                                meta.data.forEach(function (bar, index) {
+                                    var data = dataset.data[index];
+
+                                    if (data >= 0) {
+                                        ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                                    }
+                                    else {
+                                        ctx.fillText(data, bar._model.x, bar._model.y + 20);
+                                    }
+                                   
+
+
+                                });
+                            }
+                           
                         });
                     }
                 }
@@ -237,39 +232,42 @@
            
            
 
-            //
-            var dataPlan = Array.from({ length: 24 }, () => Math.floor(Math.random() * (800 - 500 + 1)) + 500);
-            var dataPlanHour = Array.from({ length: 24 }, () => Math.floor(Math.random() * (500 - 300 + 1)) + 300);
-            var dataPlanActual = Array.from({ length: 24 }, () => Math.floor(Math.random() * (300 - 100 + 1)) + 100);
+            //Bar chart
+            //var dataPlan = Array.from({ length: 24 }, () => Math.floor(Math.random() * (800 - 500 + 1)) + 500);
+            //var dataPlanHour = Array.from({ length: 24 }, () => Math.floor(Math.random() * (500 - 300 + 1)) + 300);
+            //var dataPlanActual = Array.from({ length: 24 }, () => Math.floor(Math.random() * (300 - 100 + 1)) + 100);
 
             var databarchart = {
-                labels: ['NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567'],
+                //labels: ['NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567', 'NR-DZ1234567'],
+                labels:[],
                 datasets: [
                     {
                         type: 'bar',
                         label: 'Plan',
                         backgroundColor: '#248f24',
                         order: 2,
-                        data: dataPlan,
+                        //data: dataPlan,
+                        data:[]
                     },
                     {
                         type: 'bar',
                         label: 'Plan/Time',
                         backgroundColor: '#ffff4d',
-                        categoryPercentage: 0.5,
+                        categoryPercentage: 0.6,
                         order: 1,
-                        data: dataPlanHour,
+                        //data: dataPlanHour,
+                        data: []
                     },
 
                     {
                         type: 'bar',
                         label: 'Actual',
                         backgroundColor: '#668cff',
-                        borderColor: '#000000',
-                        pointRadius: false,
+                       
                         order: 0,
-                        categoryPercentage: 0.25,
-                        data: dataPlanActual,
+                        categoryPercentage: 0.35,
+                       // data: dataPlanActual,
+                        data: []
 
                     },
 
@@ -328,22 +326,33 @@
 
                         this.data.datasets.forEach(function (dataset, i) {
                             var meta = chartInstance.controller.getDatasetMeta(i);
+                           
                             meta.data.forEach(function (bar, index) {
+                               
                                 var data = dataset.data[index];
-                                ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                               
+                                    ctx.fillText(data, bar._model.x, bar._model.y);
+                              
+                               
+                                   
+                              
+                               
                             });
                         });
                     }
                 }
             }
             var barChartCanvas = $('#barchart').get(0).getContext('2d')
-            var barcharng = new Chart(barChartCanvas, {
+            var barchartplan = new Chart(barChartCanvas, {
                 type: 'bar',
                 data: databarchart,
                 options: barChartOptions
             })
+
             LoadDataForPieChart();
+            LoadDataForBarchart();
             setInterval(LoadDataForPieChart, 2000);
+
             // Load Data OK NG
             function LoadDataForPieChart() {
                 $.ajax({
@@ -362,39 +371,42 @@
                 });
             }
              // Load Data Plan by Model
-            //function LoadDataForPieChart() {
-            //    $.ajax({
-            //        type: 'POST',
-            //        url: '/MyWebSercive.asmx/DataForPieChart',
-            //        contentType: 'application/json; charset=utf-8',
-            //        dataType: 'json',
-            //        success: function (response) {
-            //            var data = JSON.parse(response.d);
-            //            donutData.datasets[0].data = data.Datapiechart;
-            //            charpie.update();
-            //        },
-            //        error: function (xhr, status, error) {
-            //            alert(error)
-            //        }
-            //    });
-            //}
+            function LoadDataForBarchart() {
+                $.ajax({
+                    type: 'POST',
+                    url: '/MyWebSercive.asmx/DataForBarChart',
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (response) {
+                        var data = JSON.parse(response.d);
+                        databarchart.datasets[0].data = data.dataplan;
+                        databarchart.datasets[1].data = data.dataplanpertime;
+                        databarchart.datasets[2].data = data.dataactual;
+                        databarchart.labels = data.labels;
+                        barchartplan.update();
+                    },
+                    error: function (xhr, status, error) {
+                        alert(error)
+                    }
+                });
+            }
             // Load Data Plan by Total
-            //function LoadDataForPieChart() {
-            //    $.ajax({
-            //        type: 'POST',
-            //        url: '/MyWebSercive.asmx/DataForPieChart',
-            //        contentType: 'application/json; charset=utf-8',
-            //        dataType: 'json',
-            //        success: function (response) {
-            //            var data = JSON.parse(response.d);
-            //            donutData.datasets[0].data = data.Datapiechart;
-            //            charpie.update();
-            //        },
-            //        error: function (xhr, status, error) {
-            //            alert(error)
-            //        }
-            //    });
-            //}
+            function LoadDataForLineChart() {
+                $.ajax({
+                    type: 'POST',
+                    url: '/MyWebSercive.asmx/DataForPieChart',
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (response) {
+                        var data = JSON.parse(response.d);
+                        donutData.datasets[0].data = data.Datapiechart;
+                        charpie.update();
+                    },
+                    error: function (xhr, status, error) {
+                        alert(error)
+                    }
+                });
+            }
         });
     </script>
 </asp:Content>

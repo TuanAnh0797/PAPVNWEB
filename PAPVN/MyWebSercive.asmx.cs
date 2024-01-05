@@ -261,7 +261,7 @@ namespace PAPVN
             {
                 var data = new
                 {
-                       values = dt.AsEnumerable().Select(row => row.Field<int>("DataValue")).ToArray(),
+                    values = dt.AsEnumerable().Select(row => row.Field<int>("DataValue")).ToArray(),
                 };
                 return Newtonsoft.Json.JsonConvert.SerializeObject(data);
             }
@@ -280,21 +280,31 @@ namespace PAPVN
         [WebMethod]
         public string DataForPieChart()
         {
-            //DataTable dt = DBConnect.StoreFillDT("LoadDataQuantityByHour", CommandType.StoredProcedure, 2);
-                Random random1 = new Random();
-                 Random random2 = new Random();
-                  int ok = random1.Next(20,100);
+            Random random1 = new Random();
+            Random random2 = new Random();
+            int ok = random1.Next(20, 100);
             int ng = random2.Next(10, 30);
-
             var data = new
-                {
-                    Datapiechart = new[] { ok, ng }
-                };
-                return Newtonsoft.Json.JsonConvert.SerializeObject(data);
-          
-
-
-
+            {
+                Datapiechart = new[] { ok, ng }
+            };
+            return Newtonsoft.Json.JsonConvert.SerializeObject(data);
+        }
+        [WebMethod]
+        public string DataForBarChart()
+        {
+            //databarchart.datasets[0].data = data.dataplan;
+            //databarchart.datasets[1].data = data.dataplanpertime;
+            //databarchart.datasets[2].data = data.dataactual;
+            Random random1 = new Random();
+            Random random2 = new Random();
+            int ok = random1.Next(20, 100);
+            int ng = random2.Next(10, 30);
+            var data = new
+            {
+                Datapiechart = new[] { ok, ng }
+            };
+            return Newtonsoft.Json.JsonConvert.SerializeObject(data);
         }
     }
 }
