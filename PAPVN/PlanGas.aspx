@@ -202,7 +202,8 @@
             })
             //Line Chart
             var DataLineChart = {
-                labels: ['06:00', '06:05', '07:00', '08:00', '08:10', '09:00', '10:00', '10:30', '11:00', '12:00', '12:10', '13:00', '14:00', '14:05', '15:00', '16:00', '16:10', '17:00', '18:00', '18:30', '19:00', '20:00', '20:10', '21:00', '22:00', '22:10', '23:00', '00:00', '00:10', '01:00', '02:00', '02:45', '03:00', '04:00', '04:10', '05:00'],
+                //labels: ['06:00', '06:05', '07:00', '08:00', '08:10', '09:00', '10:00', '10:30', '11:00', '12:00', '12:10', '13:00', '14:00', '14:05', '15:00', '16:00', '16:10', '17:00', '18:00', '18:30', '19:00', '20:00', '20:10', '21:00', '22:00', '22:10', '23:00', '00:00', '00:10', '01:00', '02:00', '02:45', '03:00', '04:00', '04:10', '05:00'],
+                labels: [],
                 datasets: [
                     {
                         type: 'line',
@@ -365,6 +366,7 @@
                         DataLineChart.datasets[0].data = data.dataplan;
                         DataLineChart.datasets[1].data = data.dataactual;
                         DataLineChart.datasets[2].data = data.datadiff;
+                        DataLineChart.labels = data.labels;
                         var maxvl = Math.max(...data.datadiff) + 10;
                         LineChartOption.scales.yAxes[1].ticks.max = maxvl;
                         LineChartOption.scales.yAxes[1].ticks.min = -maxvl;
