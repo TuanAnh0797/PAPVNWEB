@@ -90,7 +90,7 @@ namespace PAPVN
             double timesec = subtime.TotalSeconds;
             int indexcolumn = (DateTime.Now.Day - 1) * 5 + 18;
             var datarow = from row in dt.AsEnumerable()
-                          where row.Table.Rows.IndexOf(row) > 10 && row[indexcolumn].ToString() != "" && !row[indexcolumn].ToString().Contains("-") && row[indexcolumn].ToString() != "0" && Int32.TryParse(row[indexcolumn].ToString(), out int rs) && row[0].ToString().Contains("NR-")
+                          where row.Table.Rows.IndexOf(row) > 10 && row[indexcolumn].ToString() != "" && !row[indexcolumn].ToString().Contains("-") && row[indexcolumn].ToString() != "0" && Int32.TryParse(row[indexcolumn].ToString(), out int rs) && row[0].ToString().Contains("NR-") && row[11].ToString().Contains("Plan")
                           select new
                           {
                               Model = row[0].ToString(),
@@ -127,16 +127,16 @@ namespace PAPVN
             using (MySqlConnector.MySqlConnection connection = new MySqlConnector.MySqlConnection(DBConnect.connection_string))
             {
                 connection.Open();
-                try
-                {
+                //try
+                //{
                     var bulkCopy = new MySqlBulkCopy(connection);
                     bulkCopy.DestinationTableName = "dataplan";
                     var result = bulkCopy.WriteToServer(data);
-                }
-                catch (Exception)
-                {
+                //}
+                //catch (Exception)
+                //{
 
-                }
+                //}
                
                 connection.Close();
             }

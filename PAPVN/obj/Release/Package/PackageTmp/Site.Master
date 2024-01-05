@@ -7,6 +7,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %> - My ASP.NET Application</title>
+              
+
     <script src="../../plugins/jquery/jquery.min.js"></script>
     <script src="../../plugins/chart.js/Chart.min.js"></script>
     <!-- Google Font: Source Sans Pro -->
@@ -62,10 +64,10 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a class="brand-link">
+            <a class="brand-link" style="padding:15px 0px 10px 0px">
 
                 <img src="Image/panasonic-logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span style="font-size: 20px; font-weight: 600; margin: 0px" class="brand-text font-weight-light">PAPVN
+                <span style="font-size: 20px; font-weight: 600; margin: 0px 0px 0px 0px" class="brand-text">Panasonic Appliance
                     
                 </span>
             </a>
@@ -351,8 +353,16 @@
                 format: 'YYYY-MM-DD HH:mm:ss',
                 icons: { time: 'far fa-clock' }
             });
+            $('#reservationdatetimefromplan').datetimepicker({
+                format: 'YYYY-MM-DD HH:mm',
+                icons: { time: 'far fa-clock' }
+            });
             $('#reservationdatetimeto').datetimepicker({
                 format: 'YYYY-MM-DD HH:mm:ss',
+                icons: { time: 'far fa-clock' }
+            });
+            $('#reservationdatetimetoplan').datetimepicker({
+                format: 'YYYY-MM-DD HH:mm',
                 icons: { time: 'far fa-clock' }
             });
 

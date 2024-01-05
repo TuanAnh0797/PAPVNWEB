@@ -31,10 +31,13 @@ namespace PAPVN
             //    values = dt.AsEnumerable().Select(row => row.Field<int>("DataValue")).ToArray(),
             //};
             DataTable dt = DBConnect.StoreFillDT("LoadDataForChartHistory", CommandType.StoredProcedure,DateTimeFrom,DateTimeTo);
-            var data = new
+
+            if (dt.Rows[0]["VPOK"].ToString() != "")
             {
-                Datapiechart = new[] { int.Parse(dt.Rows[0]["TotalOK"].ToString()), int.Parse(dt.Rows[0]["TotalNG"].ToString()) },
-                dataok = new[] {
+                var data = new
+                {
+                    Datapiechart = new[] { int.Parse(dt.Rows[0]["TotalOK"].ToString()), int.Parse(dt.Rows[0]["TotalNG"].ToString()) },
+                    dataok = new[] {
                     int.Parse(dt.Rows[0]["VPOK"].ToString()),
                     int.Parse(dt.Rows[0]["GASOILOK"].ToString()),
                     int.Parse(dt.Rows[0]["WI1WITHOK"].ToString()),
@@ -48,7 +51,7 @@ namespace PAPVN
                      int.Parse(dt.Rows[0]["CAMBACKOK"].ToString()),
                      int.Parse(dt.Rows[0]["CAMFRONTOK"].ToString())
                 },
-                datang = new[] {
+                    datang = new[] {
                     int.Parse(dt.Rows[0]["VPNG"].ToString()),
                     int.Parse(dt.Rows[0]["GASOILNG"].ToString()),
                     int.Parse(dt.Rows[0]["WI1WITHNG"].ToString()),
@@ -63,7 +66,7 @@ namespace PAPVN
                      int.Parse(dt.Rows[0]["CAMFRONTNG"].ToString())
 
                 },
-                datapending = new[] {
+                    datapending = new[] {
                    int.Parse(dt.Rows[0]["VPPENDING"].ToString()),
                     int.Parse(dt.Rows[0]["GASOILPENDING"].ToString()),
                     int.Parse(dt.Rows[0]["WI1WITHPENDING"].ToString()),
@@ -78,18 +81,74 @@ namespace PAPVN
                      int.Parse(dt.Rows[0]["CAMFRONTPENDING"].ToString())
                 },
 
-            };
+                };
+                return Newtonsoft.Json.JsonConvert.SerializeObject(data);
+            }
+            else
+            {
+                var data = new
+                {
+                    Datapiechart = new[] { 0, 0},
+                    dataok = new[] {
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(data);
+                },
+                    datang = new[] {
+                    0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+
+                },
+                    datapending = new[] {
+                   0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                },
+
+                };
+                return Newtonsoft.Json.JsonConvert.SerializeObject(data);
+            }
         }
         [WebMethod]
         public string DataForLineChartRealTime()
         {
             DataTable dt = DBConnect.StoreFillDT("LoadDataForChart", CommandType.StoredProcedure, 2);
-            var data = new
+           
+            if (dt.Rows[0]["VPOK"].ToString() != "")
             {
-                Datapiechart = new[] { int.Parse(dt.Rows[0]["TotalOK"].ToString()), int.Parse(dt.Rows[0]["TotalNG"].ToString()) },
-                dataok = new[] {
+                var data = new
+                {
+                    Datapiechart = new[] { int.Parse(dt.Rows[0]["TotalOK"].ToString()), int.Parse(dt.Rows[0]["TotalNG"].ToString()) },
+                    dataok = new[] {
                     int.Parse(dt.Rows[0]["VPOK"].ToString()),
                     int.Parse(dt.Rows[0]["GASOILOK"].ToString()),
                     int.Parse(dt.Rows[0]["WI1WITHOK"].ToString()),
@@ -103,7 +162,7 @@ namespace PAPVN
                      int.Parse(dt.Rows[0]["CAMBACKOK"].ToString()),
                      int.Parse(dt.Rows[0]["CAMFRONTOK"].ToString())
                 },
-                datang = new[] {
+                    datang = new[] {
                     int.Parse(dt.Rows[0]["VPNG"].ToString()),
                     int.Parse(dt.Rows[0]["GASOILNG"].ToString()),
                     int.Parse(dt.Rows[0]["WI1WITHNG"].ToString()),
@@ -118,7 +177,7 @@ namespace PAPVN
                      int.Parse(dt.Rows[0]["CAMFRONTNG"].ToString())
 
                 },
-                datapending = new[] {
+                    datapending = new[] {
                    int.Parse(dt.Rows[0]["VPPENDING"].ToString()),
                     int.Parse(dt.Rows[0]["GASOILPENDING"].ToString()),
                     int.Parse(dt.Rows[0]["WI1WITHPENDING"].ToString()),
@@ -133,9 +192,65 @@ namespace PAPVN
                      int.Parse(dt.Rows[0]["CAMFRONTPENDING"].ToString())
                 },
 
-            };
+                };
+                return Newtonsoft.Json.JsonConvert.SerializeObject(data);
+            }
+            else
+            {
+                var data = new
+                {
+                    Datapiechart = new[] { 0, 0},
+                    dataok = new[] {
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(data);
+                },
+                    datang = new[] {
+                    0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+
+                },
+                    datapending = new[] {
+                   0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                },
+
+                };
+                return Newtonsoft.Json.JsonConvert.SerializeObject(data);
+            }
+           
+
+          
         }
     }
 }

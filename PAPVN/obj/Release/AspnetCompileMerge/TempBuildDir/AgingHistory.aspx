@@ -36,7 +36,7 @@
                         </div>
                          </div>
                         
-                        
+                       
                     </div>
 
 
@@ -74,7 +74,7 @@
                             <h4 style="font-weight: 600">Biểu đồ tỉ lệ OK/NG</h4>
                         </div>
                         <div class="chart-container">
-                            <canvas id="pieChart" style="min-height: 350px; height: 100%"></canvas>
+                            <canvas id="pieChart" style="min-height: 480px; height: 100%"></canvas>
                         </div>
                     </div>
 
@@ -85,7 +85,7 @@
                             <h4 style="font-weight: 600">Biểu đồ số lượng tủ OK/NG/PENDING</h4>
                         </div>
                         <div class="chart-container">
-                            <canvas id="stackedBarChart" style="min-height: 350px; height: 100%"></canvas>
+                            <canvas id="stackedBarChart" style="min-height: 480px; height: 100%"></canvas>
                         </div>
                     </div>
 
@@ -96,7 +96,7 @@
                             <h4 style="font-weight: 600">Biểu đồ số lượng tủ Pending từng công đoạn</h4>
                         </div>
                         <div class="chart-container">
-                            <canvas id="barChartpending" style="min-height: 350px;"></canvas>
+                            <canvas id="barChartpending" style="min-height: 480px;"></canvas>
 
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                             <h4 style="font-weight: 600">Biểu đồ số lượng tủ NG từng công đoạn</h4>
                         </div>
                         <div class="chart-container">
-                            <canvas id="barChartng" style="min-height: 350px;"></canvas>
+                            <canvas id="barChartng" style="min-height: 480px;"></canvas>
                         </div>
                     </div>
 
@@ -118,12 +118,8 @@
         </div>
     </div>
     <script>
+        
         //Pie chart
-        var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
-        var pieOptions = {
-            maintainAspectRatio: false,
-            responsive: true,
-        }
         var donutData = {
             labels: [
                 'OK',
@@ -137,6 +133,13 @@
                 }
             ]
         }
+        var pieOptions = {
+            maintainAspectRatio: false,
+            responsive: true,
+           
+        }
+        
+        var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
         var charpie = new Chart(pieChartCanvas, {
             type: 'pie',
             data: donutData,
@@ -165,7 +168,25 @@
         var barChartOptions = {
             responsive: true,
             maintainAspectRatio: false,
-            datasetFill: false
+            datasetFill: false,
+            animation: {
+                   duration: 1,
+                   onComplete: function () {
+                       var chartInstance = this.chart,
+                           ctx = chartInstance.ctx;
+                       ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                       ctx.textAlign = 'center';
+                       ctx.textBaseline = 'bottom';
+
+                       this.data.datasets.forEach(function (dataset, i) {
+                           var meta = chartInstance.controller.getDatasetMeta(i);
+                           meta.data.forEach(function (bar, index) {
+                               var data = dataset.data[index];
+                               ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                           });
+                       });
+                   }
+               },
         }
         var barchartpending = new Chart(barChartCanvas, {
             type: 'bar',
@@ -195,7 +216,25 @@
         var barChartOptions = {
             responsive: true,
             maintainAspectRatio: false,
-            datasetFill: false
+            datasetFill: false,
+            animation: {
+                duration: 1,
+                onComplete: function () {
+                    var chartInstance = this.chart,
+                        ctx = chartInstance.ctx;
+                    ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'bottom';
+
+                    this.data.datasets.forEach(function (dataset, i) {
+                        var meta = chartInstance.controller.getDatasetMeta(i);
+                        meta.data.forEach(function (bar, index) {
+                            var data = dataset.data[index];
+                            ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                        });
+                    });
+                }
+            },
         }
 
         var barcharng = new Chart(barChartCanvas, {
@@ -254,15 +293,18 @@
                 yAxes: [{
                     stacked: true
                 }]
-            }
+            },
+           
+           
         }
 
         var stackchart = new Chart(stackedBarChartCanvas, {
             type: 'bar',
             data: dattachartOKNGPending,
-            options: stackedBarChartOptions
+            options: stackedBarChartOptions,
         })
         $(document).ready(function () {
+           
             LoadDataForChart();
         });
         function LoadDataForChart() {

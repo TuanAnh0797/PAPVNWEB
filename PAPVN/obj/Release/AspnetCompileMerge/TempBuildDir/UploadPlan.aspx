@@ -1,11 +1,50 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="UploadPlan.aspx.cs" Inherits="PAPVN.UploadPlan" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="text-right m-2">
-        <button style="font-size:20px; font-weight:600" class="btn btn-outline-primary btn-block">
-               <i class="fas fa-upload"></i>
-            Upload Plan
-        </button>
+    <div class="m-2">
+          <asp:FileUpload   ID="FileUpload1" runat="server" Font-Size="20px" />
+            <div class="row" style="margin: 0px 0px 0px 0px; background-color: #fffefe; border-radius: 8px;">
+            <div class="col">
+                <div class="form-group" style="margin: 10px 0px 10px 0px">
+                    <div class="d-flex flex-row">
+                        <div>
+                            <p style="margin:5px 3px 0px 0px; font-size:20px; font-weight:600"> Thời gian bắt đầu sản xuất:</p>
+                        </div>
+                         <div class="flex-fill">
+                             <div class=" input-group date" id="reservationdatetimefromplan" data-target-input="nearest">
+                            <input runat="server" id="datefrom" style="font-size: 20px; font-weight: 400" placeholder="Select Date Time From" type="text" class="form-control datetimepicker-input" data-target="#reservationdatetimefrom">
+                            <div class="input-group-append" data-target="#reservationdatetimefromplan" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group" style="margin: 10px 0px 10px 0px">
+
+                    <div class="d-flex flex-row">
+                        <div>
+                            <p style="margin:5px 3px 0px 0px; font-size:20px; font-weight:600"> Thời gian kết thúc sản xuất:</p>
+                        </div>
+                        <div class="flex-fill">
+                            <div class="input-group date" id="reservationdatetimetoplan" data-target-input="nearest">
+                        <input runat="server" id="dateto" style="font-size: 20px; font-weight: 400" placeholder="Select Date Time To" type="text" class="form-control datetimepicker-input" data-target="#reservationdatetimeto">
+                        <div class="input-group-append" data-target="#reservationdatetimetoplan" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <asp:Button type ="button" Text="Upload Plan" OnClick="Importdata_Click"  runat="server" name="btn_Import" style="font-size:20px; font-weight:600" class="btn btn-outline-primary btn-block mt-1">
+        
+        </asp:Button>
+       
     </div>
     <div class="card">
         <div class="card-header">
@@ -21,121 +60,20 @@
                     <tr>
                         <th>Model</th>
                         <th>Plan</th>
-                        <th>Actual</th>
                         <th>Start Time</th>
                         <th>End Time</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>NR-DZ123456789</td>
-                        <td>100 </td>
-                        <td>60</td>
-                        <td>02:00</td>
-                        <td>06:00</td>
-                    </tr>
-                     <tr>
-                        <td>NR-DZ123456789</td>
-                        <td>100 </td>
-                        <td>60</td>
-                        <td>02:00</td>
-                        <td>06:00</td>
-                    </tr>
-                     <tr>
-                        <td>NR-DZ123456789</td>
-                        <td>100 </td>
-                        <td>60</td>
-                        <td>02:00</td>
-                        <td>06:00</td>
-                    </tr>
-                     <tr>
-                        <td>NR-DZ123456789</td>
-                        <td>100 </td>
-                        <td>60</td>
-                        <td>02:00</td>
-                        <td>06:00</td>
-                    </tr>
-                     <tr>
-                        <td>NR-DZ123456789</td>
-                        <td>100 </td>
-                        <td>60</td>
-                        <td>02:00</td>
-                        <td>06:00</td>
-                    </tr>
-                      <tr>
-                        <td>NR-DZ123456789</td>
-                        <td>100 </td>
-                        <td>60</td>
-                        <td>02:00</td>
-                        <td>06:00</td>
-                    </tr>
-                     <tr>
-                        <td>NR-DZ123456789</td>
-                        <td>100 </td>
-                        <td>60</td>
-                        <td>02:00</td>
-                        <td>06:00</td>
-                    </tr>
-                     <tr>
-                        <td>NR-DZ123456789</td>
-                        <td>100 </td>
-                        <td>60</td>
-                        <td>02:00</td>
-                        <td>06:00</td>
-                    </tr>
-                     <tr>
-                        <td>NR-DZ123456789</td>
-                        <td>100 </td>
-                        <td>60</td>
-                        <td>02:00</td>
-                        <td>06:00</td>
-                    </tr>
-                     <tr>
-                        <td>NR-DZ123456789</td>
-                        <td>100 </td>
-                        <td>60</td>
-                        <td>02:00</td>
-                        <td>06:00</td>
-                    </tr>
-                      <tr>
-                        <td>NR-DZ123456789</td>
-                        <td>100 </td>
-                        <td>60</td>
-                        <td>02:00</td>
-                        <td>06:00</td>
-                    </tr>
-                     <tr>
-                        <td>NR-DZ123456789</td>
-                        <td>100 </td>
-                        <td>60</td>
-                        <td>02:00</td>
-                        <td>06:00</td>
-                    </tr>
-                     <tr>
-                        <td>NR-DZ123456789</td>
-                        <td>100 </td>
-                        <td>60</td>
-                        <td>02:00</td>
-                        <td>06:00</td>
-                    </tr>
-                     <tr>
-                        <td>NR-DZ123456789</td>
-                        <td>100 </td>
-                        <td>60</td>
-                        <td>02:00</td>
-                        <td>06:00</td>
-                    </tr>
-                     <tr>
-                        <td>NR-DZ123456789</td>
-                        <td>100 </td>
-                        <td>60</td>
-                        <td>02:00</td>
-                        <td>06:00</td>
-                    </tr>
+                <tbody id="dt_plan" runat="server">
+
+                </tbody>
+                  
 
             </table>
         </div>
         <!-- /.card-body -->
     </div>
-
+    <script>
+       
+    </script>
 </asp:Content>

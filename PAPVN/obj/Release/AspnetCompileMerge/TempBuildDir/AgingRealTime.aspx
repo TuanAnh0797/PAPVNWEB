@@ -14,7 +14,7 @@
                             <h4 style="font-weight: 600">Biểu đồ tỉ lệ OK/NG</h4>
                         </div>
                         <div class="chart-container">
-                            <canvas id="pieChart" style="min-height: 350px; height: 100%"></canvas>
+                            <canvas id="pieChart" style="min-height: 480px; height: 100%"></canvas>
                         </div>
                     </div>
 
@@ -25,7 +25,7 @@
                             <h4 style="font-weight: 600">Biểu đồ số lượng tủ OK/NG/PENDING</h4>
                         </div>
                         <div class="chart-container">
-                            <canvas id="stackedBarChart" style="min-height: 350px; height: 100%"></canvas>
+                            <canvas id="stackedBarChart" style="min-height: 480px; height: 100%"></canvas>
                         </div>
                     </div>
 
@@ -36,7 +36,7 @@
                             <h4 style="font-weight: 600">Biểu đồ số lượng tủ Pending từng công đoạn</h4>
                         </div>
                         <div class="chart-container">
-                            <canvas id="barChartpending" style="min-height: 350px;"></canvas>
+                            <canvas id="barChartpending" style="min-height: 480px;"></canvas>
 
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                             <h4 style="font-weight: 600">Biểu đồ số lượng tủ NG từng công đoạn</h4>
                         </div>
                         <div class="chart-container">
-                            <canvas id="barChartng" style="min-height: 350px;"></canvas>
+                            <canvas id="barChartng" style="min-height: 480px;"></canvas>
                         </div>
                     </div>
 
