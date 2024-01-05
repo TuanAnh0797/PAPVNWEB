@@ -298,18 +298,35 @@ namespace PAPVN
         [WebMethod]
         public string DataForLineChart()
         {
-            //DataLineChart.datasets[0].data = data.dataplan;
-            //DataLineChart.datasets[1].data = data.dataactual;
-            //DataLineChart.datasets[2].data = data.diff;
+           
             Random random = new Random();
-            int[] dataplan = new int[24];
-            int[] dataactual = new int[24];
-            int[] datadiff = new int[24];
-            for (int i = 0; i < 24; i++)
+            int[] dataplan = new int[36];
+            int[] dataactual = new int[36];
+            int[] datadiff = new int[36];
+            for (int i = 0; i < 36; i++)
             {
-                dataplan[i] = random.Next(50, 200);
-                dataactual[i] = random.Next(50, 200);
-                datadiff[i] = dataplan[i] - dataactual[i];
+               
+                if (i == 0)
+                {
+                    dataplan[i] = 0;
+                    datadiff[i] = 0;
+                    dataactual[i] = 0;
+                }
+                else if (i%3 == 1)
+                {
+                    dataplan[i] = dataplan[i - 1];
+                    datadiff[i] = datadiff[i - 1];
+                    dataactual[i] = dataactual[i - 1];
+                }
+                else
+                {
+                    dataactual[i] = random.Next(50, 200);
+                    dataplan[i] = random.Next(50, 200);
+                    datadiff[i] = dataactual[i] - dataplan[i];
+                }
+               
+              
+               
             }
 
 

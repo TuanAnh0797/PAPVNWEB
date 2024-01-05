@@ -202,7 +202,7 @@
             })
             //Line Chart
             var DataLineChart = {
-                labels: ['06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '00:00', '01:00', '02:00', '03:00', '04:00', '05:00'],
+                labels: ['06:00', '06:05', '07:00', '08:00', '08:10', '09:00', '10:00', '10:30', '11:00', '12:00', '12:10', '13:00', '14:00', '14:05', '15:00', '16:00', '16:10', '17:00', '18:00', '18:30', '19:00', '20:00', '20:10', '21:00', '22:00', '22:10', '23:00', '00:00', '00:10', '01:00', '02:00', '02:45', '03:00', '04:00', '04:10', '05:00'],
                 datasets: [
                     {
                         type: 'line',
@@ -211,6 +211,7 @@
                         borderColor: 'rgb(75, 192, 192)',
                         data:[],
                         fill: false,
+                        tension: 0, // làm line đỡ mượt
                     },
                     {
                         type: 'line',
@@ -219,6 +220,7 @@
                         borderColor: '#b38600',
                         data:[],
                         fill: false,
+                        tension: 0, // làm line đỡ mượt
                     },
                     {
                         type: 'bar',
@@ -238,11 +240,17 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 scales: {
-                    xAxes: [{
+                    //xAxes: [{
+                       
+                    //    type: 'linear',
+                    //}],
+                    x: {
                         ticks: {
                             fontSize: 15
                         },
-                    }],
+                        type: 'linear', // Sử dụng linear scale cho trục x
+                        position: 'bottom',
+                    },
                     yAxes: [{
                         beginAtZero: true,
                         id: 'y-axis-1', // ID của trục y thứ nhất
@@ -305,7 +313,7 @@
             LoadDataForLineChart();
             setInterval(LoadDataForPieChart, 5000);
             setInterval(LoadDataForBarchart, 5000);
-            setInterval(LoadDataForLineChart, 5000);
+            setInterval(LoadDataForLineChart, 3000);
             // Load Data OK NG
             function LoadDataForPieChart() {
                 $.ajax({
