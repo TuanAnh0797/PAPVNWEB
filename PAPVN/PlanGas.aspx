@@ -18,8 +18,8 @@
             </div>
         </div>
         <div class="container-fluid">
-             <div class="row">
-               <%-- <div class="chart col-sm-4" style="padding: 5px;">
+            <div class="row">
+                <%-- <div class="chart col-sm-4" style="padding: 5px;">
                     <div style="background-color: white; padding: 5px; margin: 0px 0px 0px 5px">
                         <div style="display: flex; align-items: center; justify-content: center">
                             <h2 style="font-weight: 600">Biểu đồ tỉ lệ OK/NG nạp GAS</h2>
@@ -30,37 +30,55 @@
                     </div>
                 </div>--%>
                 <div class="chart  col-sm-6" style="padding: 5px;">
-                <div style="background-color: white; padding: 5px">
-                    <div style="display: flex; align-items: center; justify-content: center">
-                        <h1 style="font-weight: 600">Biểu đồ sản lượng nạp GAS Model đặc biệt</h1>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="barchartSpecial" style="min-height: 400px;"></canvas>
+                    <div style="background-color: white; padding: 5px">
+                        <div style="display: flex; align-items: center; justify-content: center">
+                            <h1 style="font-weight: 600">Biểu đồ sản lượng nạp GAS Model đặc biệt</h1>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="barchartmonitor" style="min-height: 438px;"></canvas>
+                        </div>
                     </div>
                 </div>
-            </div>
-                 <div class="chart col-sm-6" style="padding: 5px;">
-                <div style="background-color: white; padding: 5px; margin: 0px 0px 0px 0px">
+                <div class="chart col-sm-6" style="padding: 5px;">
+                    <div style="background-color: white; padding: 5px; margin: 0px 0px 0px 0px">
                         <div style="display: flex; align-items: center; justify-content: center">
                             <h1 style="font-weight: 600">Biểu đồ sản lượng nạp GAS theo thời gian</h1>
                         </div>
-                        <div style="display: flex; justify-content: flex-end;">
-                            <select   runat="server" id="modelplan" class="form-control select2" style="width: 200px">
-                                <option>--All Model--</option>
-                            </select>
+                        <div class="row ml-3">
+
+                            <div class=" col-sm-2">
+                                <h2 style="color:blue; font-weight:bold">Plan: <span id="dataplan"></span></h2>
+                            </div>
+                            <div class=" col-sm-2">
+                                <h2 style="color:#cc9900; font-weight:bold">Target: <span id="datatarget"></span></h2>
+                            </div>
+                            <div class=" col-sm-2">
+                                <h2 style="color:green; font-weight:bold">Actual: <span id="dataactual"></span></h2>
+                            </div>
+
+
+                            <div class=" col-sm-6" style="display: flex; justify-content: flex-end;">
+                                <select runat="server" id="modelplan" class="form-control select2" style="width: 200px">
+                                    <option>--All Model--</option>
+                                </select>
+
+                            </div>
+
+
 
                         </div>
 
-                    <div class="chart-container">
-                        <canvas id="linechart" style="min-height: 400px;"></canvas>
+
+                        <div class="chart-container">
+                            <canvas id="linechart" style="min-height: 400px;"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
-            </div>
-           
-           
 
-           
+
+
+
         </div>
     </div>
     <script>
@@ -73,27 +91,25 @@
                     {
                         type: 'bar',
                         label: 'Plan',
-                        backgroundColor: '#248f24',
+                        backgroundColor: '#1a53ff',
+
                         order: 2,
-                        //data: dataPlan,
                         data: []
                     },
                     {
                         type: 'bar',
                         label: 'Plan/Time',
-                        backgroundColor: '#ffff4d',
+                        backgroundColor: '#cc9900',
                         categoryPercentage: 0.6,
                         order: 1,
-                        //data: dataPlanHour,
                         data: []
                     },
                     {
                         type: 'bar',
                         label: 'Actual',
-                        backgroundColor: '#668cff',
+                        //backgroundColor: '#248f24',
                         order: 0,
                         categoryPercentage: 0.35,
-                        // data: dataPlanActual,
                         data: []
                     },
                 ]
@@ -124,42 +140,28 @@
                     labels: {
                         fontSize: 15,
                     },
-                    //onClick: function (e, legendItem) {
-                    //    var index = legendItem.index;
-                    //    var chart = this.chart;
-                    //    this.data.datasets.forEach(function (dataset) {
-                    //        var meta = chart.getDatasetMeta(dataset.label);
-                    //        var currentState = !meta.hidden;
-
-                    //        // Ẩn hoặc hiện dữ liệu của dataset khi click vào legend
-                    //        meta.hidden = currentState;
-
-                    //        // Cập nhật biểu đồ
-                    //        chart.update();
-                    //    });
-                    //}
                 },
-                //animation: {
-                //    duration: 1,
-                //    onComplete: function () {
-                //        var chartInstance = this.chart,
-                //            ctx = chartInstance.ctx;
-                //        ctx.font = "500 18px Arial";
-                //        ctx.fillStyle = '#000000';
-                //        ctx.textAlign = 'center';
-                //        ctx.textBaseline = 'bottom';
-                //        this.data.datasets.forEach(function (dataset, i) {
-                //            var meta = chartInstance.controller.getDatasetMeta(i);
-                //            meta.data.forEach(function (bar, index) {
+                animation: {
+                    duration: 1,
+                    onComplete: function () {
+                        var chartInstance = this.chart,
+                            ctx = chartInstance.ctx;
+                        ctx.font = "500 18px Arial";
+                        ctx.fillStyle = '#000000';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+                        this.data.datasets.forEach(function (dataset, i) {
+                            var meta = chartInstance.controller.getDatasetMeta(i);
+                            meta.data.forEach(function (bar, index) {
 
-                //                    var data = dataset.data[index];
-                //                    ctx.fillText(data, bar._model.x, bar._model.y);
+                                var data = dataset.data[index];
+                                ctx.fillText(data, bar._model.x, bar._model.y);
 
 
-                //            });
-                //        });
-                //    }
-                //}
+                            });
+                        });
+                    }
+                }
             }
 
             var barchartplan = new Chart(barChartCanvas, {
@@ -167,6 +169,97 @@
                 data: databarchart,
                 options: barChartOptions
             })
+            //Bar chart monitor
+            var barChartCanvasmonitor = $('#barchartmonitor').get(0).getContext('2d')
+            var databarchartmonitor = {
+                labels: [],
+                datasets: [
+                    {
+                        type: 'bar',
+                        label: 'Plan',
+                        backgroundColor: '#1a53ff',
+                        order: 2,
+                        //data: dataPlan,
+                        data: []
+                    },
+                    {
+                        type: 'bar',
+                        label: 'Plan/Time',
+                        backgroundColor: '#cc9900',
+                        categoryPercentage: 0.6,
+                        order: 1,
+                        //data: dataPlanHour,
+                        data: []
+                    },
+                    {
+                        type: 'bar',
+                        label: 'Actual',
+
+                        //backgroundColor: '#248f24',
+                        order: 0,
+                        categoryPercentage: 0.35,
+
+                        data: []
+                    },
+                ]
+            }
+            var barChartOptionsmonitor = {
+                responsive: true,
+                maintainAspectRatio: false,
+                datasetFill: false,
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            fontSize: 20
+                        },
+                        gridLines: {
+                            display: false
+                        },
+                        stacked: true,
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            fontSize: 15,
+                            beginAtZero: true,
+                        },
+                    }],
+                },
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        fontSize: 15,
+                    },
+                },
+                animation: {
+                    duration: 1,
+                    onComplete: function () {
+                        var chartInstance = this.chart,
+                            ctx = chartInstance.ctx;
+                        ctx.font = "500 18px Arial";
+                        ctx.fillStyle = '#000000';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+                        this.data.datasets.forEach(function (dataset, i) {
+                            var meta = chartInstance.controller.getDatasetMeta(i);
+                            meta.data.forEach(function (bar, index) {
+
+                                var data = dataset.data[index];
+                                ctx.fillText(data, bar._model.x, bar._model.y);
+
+
+                            });
+                        });
+                    }
+                }
+            }
+
+            var barchartplanmonitor = new Chart(barChartCanvasmonitor, {
+                type: 'bar',
+                data: databarchartmonitor,
+                options: barChartOptionsmonitor
+            })
+
+
             ////Pie chart
             //var donutData = {
             //    labels: [
@@ -314,10 +407,10 @@
                                 meta.data.forEach(function (bar, index) {
                                     var data = dataset.data[index];
                                     if (data >= 0) {
-                                      
-                                            ctx.fillText(data, bar._model.x, bar._model.y - 5);
-                                        
-                                       
+
+                                        ctx.fillText(data, bar._model.x, bar._model.y - 5);
+
+
                                     }
                                     else {
                                         ctx.fillText(data, bar._model.x, bar._model.y + 20);
@@ -334,14 +427,6 @@
                 data: DataLineChart,
                 options: LineChartOption
             })
-            // setTimeout(LoadDataForPieChart, 2000);
-            //setTimeout(LoadDataForBarchart, 3000);
-            //setTimeout(LoadDataForLineChart, 4000);
-
-
-            // setInterval(LoadDataForPieChart, 5000);
-             //setInterval(LoadDataForBarchart, 5000);
-             //setInterval(LoadDataForLineChart, 2000);
             // Load Data OK NG
             //function LoadDataForPieChart() {
             //    $.ajax({
@@ -359,6 +444,8 @@
             //        }
             //    });
             //}
+
+
             // Load Data Plan by Model
             function LoadDataForBarchart() {
                 $.ajax({
@@ -374,6 +461,21 @@
                         databarchart.labels = data.labels;
                         barChartOptions.scales.yAxes[0].ticks.max = Math.max(...data.dataplan) + 30;
                         barchartplan.options = barChartOptions;
+
+                        var data1 = databarchart.datasets[2].data;
+                        var data2 = databarchart.datasets[1].data;
+                        var bgr = [];
+                        data1.forEach(function (value1, index) {
+                            var value2 = data2[index];
+                            if (value1 < value2) {
+                                bgr.push('red')
+                            }
+                            else {
+                                bgr.push('green')
+                            }
+                        });
+                        databarchart.datasets[2].backgroundColor = bgr;
+
                         barchartplan.update();
                     },
                     error: function (xhr, status, error) {
@@ -381,6 +483,43 @@
                     }
                 });
             }
+            // Load Data Plan by Model Monitor
+            function LoadDataForBarchartMonitor() {
+                $.ajax({
+                    type: 'POST',
+                    url: '/MyWebSercive.asmx/DataForBarChartMonitor',
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (response) {
+                        var data = JSON.parse(response.d);
+                        databarchartmonitor.datasets[0].data = data.dataplan;
+                        databarchartmonitor.datasets[1].data = data.dataplanpertime;
+                        databarchartmonitor.datasets[2].data = data.dataactual;
+                        databarchartmonitor.labels = data.labels;
+                        barChartOptionsmonitor.scales.yAxes[0].ticks.max = Math.max(...data.dataplan) + 30;
+                        barchartplanmonitor.options = barChartOptionsmonitor;
+
+                        var data1 = databarchartmonitor.datasets[2].data;
+                        var data2 = databarchartmonitor.datasets[1].data;
+                        var bgr = [];
+                        data1.forEach(function (value1, index) {
+                            var value2 = data2[index];
+                            if (value1 < value2) {
+                                bgr.push('red')
+                            }
+                            else {
+                                bgr.push('green')
+                            }
+                        });
+                        databarchartmonitor.datasets[2].backgroundColor = bgr;
+                        barchartplanmonitor.update();
+                    },
+                    error: function (xhr, status, error) {
+                        alert(error)
+                    }
+                });
+            }
+
             // Load Data Plan by Total
             function LoadDataForLineChart() {
                 var selectedModel = document.getElementById('<%= modelplan.ClientID %>').value;
@@ -389,7 +528,7 @@
                     url: '/MyWebSercive.asmx/DataForLineChart',
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
-                    data: JSON.stringify({ ModelName: selectedModel}),
+                    data: JSON.stringify({ ModelName: selectedModel }),
                     success: function (response) {
                         var data = JSON.parse(response.d);
                         DataLineChart.datasets[0].data = data.dataplan;
@@ -397,10 +536,20 @@
                         DataLineChart.datasets[2].data = data.datadiff;
                         //DataLineChart.labels = data.labels;
                         const absoluteValues = data.datadiff.map(value => Math.abs(value));
-                        const maxAbsoluteValue = Math.max(...absoluteValues)+100;
+                        const maxAbsoluteValue = Math.max(...absoluteValues) + 100;
                         LineChartOption.scales.yAxes[1].ticks.max = maxAbsoluteValue;
                         LineChartOption.scales.yAxes[1].ticks.min = -maxAbsoluteValue;
                         linechart.options = LineChartOption;
+
+                        var plan = data.TotalPlan;
+                        var target = DataLineChart.datasets[0].data[DataLineChart.datasets[0].data.length - 1];
+                        var actual = DataLineChart.datasets[1].data[DataLineChart.datasets[1].data.length - 1];
+
+
+                        $('#dataplan').html(`${plan}`);
+                        $('#datatarget').html(`${target}`);
+                        $('#dataactual').html(`${actual}`);
+
                         linechart.update();
                     },
                     error: function (xhr, status, error) {
@@ -408,13 +557,25 @@
                     }
                 });
             }
+
+
+
             $('#<%= modelplan.ClientID %>').on('change', function () {
                 LoadDataForLineChart();
             });
+
+
+            setTimeout(LoadDataForBarchart, 1000);
+            setTimeout(LoadDataForLineChart, 3000);
+            setTimeout(LoadDataForBarchartMonitor, 2000);
+
+            setInterval(LoadDataForLineChart, 2000);
+            setInterval(LoadDataForBarchart, 2000);
+            setInterval(LoadDataForBarchartMonitor, 2000);
         });
 
-        
 
-      
+
+
     </script>
 </asp:Content>

@@ -85,7 +85,7 @@
         <div class="card-body">
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
-                    <tr style="font-size: 20px">
+                    <tr style="font-size: 16px">
                         <th>Model</th>
                         <th>Plan All Day</th>
                         <th>Plan shift 1</th>
@@ -97,7 +97,7 @@
                         <th>Modify Plan</th>
                     </tr>
                 </thead>
-                <tbody style="font-size: 25px" id="dt_plan" runat="server">
+                <tbody style="font-size: 16px" id="dt_plan" runat="server">
                 </tbody>
             </table>
         </div>
@@ -126,7 +126,7 @@
             </div>
             <div class="flex-fill">
                 <div class=" input-group date" id="reservationdatetimetoplan" data-target-input="nearest">
-                    <input id="dateto" style="font-size: 20px; font-weight: 400" placeholder="Select Date Time From" type="text" class="form-control datetimepicker-input" data-target="#reservationdatetimetoplan">
+                    <input id="dateto" style="font-size: 20px; font-weight: 400" placeholder="Select Date Time To" type="text" class="form-control datetimepicker-input" data-target="#reservationdatetimetoplan">
                     <div class="input-group-append" data-target="#reservationdatetimetoplan" data-toggle="datetimepicker">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
@@ -167,20 +167,27 @@
                 var datetimefrom = $("#datefrom").val();
                 var datetimeto = $("#dateto").val();
                 var NameModel = $('#ModelSelect').html();
-                $.ajax({
-                    type: 'POST',
-                    url: '/MyWebSercive.asmx/UpdateDateTimePlan',
-                    contentType: 'application/json; charset=utf-8',
-                    dataType: 'json',
-                    data: JSON.stringify({ ModelName: NameModel, TimeFrom: datetimefrom, TimeTo: datetimeto }),
-                    success: function (response) {
-                        location.reload();
-                    },
-                    error: function (xhr, status, error) {
-                        alert(error)
-                        location.reload();
-                    }
-                });
+
+                if (datetimefrom.length < 10 || datetimeto.length < 10) {
+                    alert('Hãy nhập thời gian bắt đầu và kết thúc')
+                }
+                else {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/MyWebSercive.asmx/UpdateDateTimePlan',
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        data: JSON.stringify({ ModelName: NameModel, TimeFrom: datetimefrom, TimeTo: datetimeto }),
+                        success: function (response) {
+                            location.reload();
+                        },
+                        error: function (xhr, status, error) {
+                            alert(error)
+                            location.reload();
+                        }
+                    });
+                }
+               
                 isUpdateDateTimePlan = 0;
             }
            
@@ -204,6 +211,8 @@
                 var htmlelm = elm.innerHTML;
                 var datarow = elm.parentNode.parentNode;
                 var NameModel = ` ${datarow.cells[0].textContent}`;
+
+                
 
                 $.ajax({
                     type: 'POST',

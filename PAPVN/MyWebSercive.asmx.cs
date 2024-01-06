@@ -22,6 +22,8 @@ namespace PAPVN
     [ScriptService()]
     public class MyWebSercive : System.Web.Services.WebService
     {
+
+        
         [WebMethod]
         public string DataForLineChart(string DateTimeFrom, string DateTimeTo)
         {
@@ -323,6 +325,65 @@ namespace PAPVN
             }
         }
         [WebMethod]
+        public string DataForBarChartMonitor()
+        {
+            DBConnect dBConnect = new DBConnect();
+            DataTable dt = dBConnect.StoreFillDT("LoadDataForBarChartPlanGasMonitor", CommandType.StoredProcedure);
+            if (dt.Rows.Count > 0)
+            {
+                int[] dataplan = new int[dt.Rows.Count];
+                int[] dataplanpertime = new int[dt.Rows.Count];
+                int[] dataactual = new int[dt.Rows.Count];
+                string[] labels = new string[dt.Rows.Count];
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    labels[i] = dt.Rows[i]["Model"].ToString();
+                    dataplan[i] = Int32.Parse(dt.Rows[i]["QuantityDay"].ToString());
+                    dataactual[i] = Int32.Parse(dt.Rows[i]["QuantityActual"].ToString());
+                    DateTime TimeStart = DateTime.Parse(dt.Rows[i]["TimeStart"].ToString());
+                    DateTime TimeEnd = DateTime.Parse(dt.Rows[i]["TimeEnd"].ToString());
+                    TimeSpan subtimenow = DateTime.Now - TimeStart;
+                    TimeSpan subtimemaster = TimeEnd - TimeStart;
+                    if (subtimenow.TotalSeconds <= 0)
+                    {
+                        dataplanpertime[i] = 0;
+                    }
+                    else if (subtimemaster <= subtimenow)
+                    {
+                        dataplanpertime[i] = dataplan[i];
+                    }
+                    else
+                    {
+                        double totalsec = subtimenow.TotalSeconds;
+                        for (DateTime currentHour = TimeStart; currentHour < DateTime.Now; currentHour = currentHour.AddHours(1))
+                        {
+                            totalsec = totalsec - Config.TimeRest[currentHour.Hour] * 60;
+                        }
+                        dataplanpertime[i] = (int)Math.Round(totalsec * float.Parse(dt.Rows[i]["QuantityPerSec"].ToString()));
+                    }
+                }
+                var data = new
+                {
+                    dataplan,
+                    dataplanpertime,
+                    dataactual,
+                    labels,
+                };
+                return Newtonsoft.Json.JsonConvert.SerializeObject(data);
+            }
+            else
+            {
+                var data = new
+                {
+                    dataplan = new[] { 0 },
+                    dataplanpertime = new[] { 0 },
+                    dataactual = new[] { 0 },
+                    labels = new[] { "" },
+                };
+                return Newtonsoft.Json.JsonConvert.SerializeObject(data);
+            }
+        }
+        [WebMethod]
         public string DataForLineChart(string ModelName)
         {
             #region demo
@@ -359,16 +420,24 @@ namespace PAPVN
             //};
             //return Newtonsoft.Json.JsonConvert.SerializeObject(data);
             #endregion
+            DBConnect dBConnect = new DBConnect();
+            int TotalPlan = 0;
             string parammysql;
             if (ModelName.Contains("All Model"))
             {
                 parammysql = "all";
+               
             }
             else
             {
                 parammysql = ModelName.Trim();
             }
-            DBConnect dBConnect = new DBConnect();
+            DataTable dt = dBConnect.StoreFillDT("LoadQuantityPlan", CommandType.StoredProcedure, parammysql);
+            if (dt.Rows[0]["QuantityDay"].ToString() != "")
+            {
+                TotalPlan = Int32.Parse(dt.Rows[0]["QuantityDay"].ToString());
+            }
+
             DataSet ds = dBConnect.StoreFillDS("LoadDataForLineChartPlanGas", CommandType.StoredProcedure, parammysql);
             int hournow = int.Parse(DateTime.Now.ToString("HH"));
             Dictionary<int, int> listdataplan = new Dictionary<int, int>();
@@ -645,15 +714,16 @@ namespace PAPVN
                 dataplan,
                 dataactual,
                 datadiff,
+                TotalPlan,
             };
             return Newtonsoft.Json.JsonConvert.SerializeObject(data);
         }
         [WebMethod]
         public string MonitorSpecial(string ModelName)
         {
-
+            string _model = ModelName.Trim();
             DBConnect dBConnect = new DBConnect();
-            int dt = dBConnect.exnonquery("MonitorSpecial", CommandType.StoredProcedure, ModelName);
+            int dt = dBConnect.exnonquery("MonitorSpecial", CommandType.StoredProcedure, _model);
             if (dt > 0)
             {
                 var data = new
@@ -682,7 +752,7 @@ namespace PAPVN
 
             if (dt.Rows.Count > 0)
             {
-                if (DateTime.Parse(TimeFrom) < DateTime.Parse(dt.Rows[0]["TimeStart"].ToString()) || DateTime.Parse(TimeTo) > DateTime.Parse(dt.Rows[0]["TimeEnd"].ToString()))
+                if (DateTime.Parse(TimeFrom.Trim() + ":00") < DateTime.Parse(dt.Rows[0]["TimeStart"].ToString()) || DateTime.Parse(TimeTo.Trim() + ":00") > DateTime.Parse(dt.Rows[0]["TimeEnd"].ToString()))
                 {
                     return "0";
                 }
@@ -690,7 +760,7 @@ namespace PAPVN
                 {
                     TimeSpan subtime = DateTime.Parse(TimeTo) - DateTime.Parse(TimeFrom);
                     double secwork = subtime.TotalSeconds;
-                    for (DateTime currentHour = DateTime.Parse(TimeFrom); currentHour < DateTime.Parse(TimeTo); currentHour = currentHour.AddHours(1))
+                    for (DateTime currentHour = DateTime.Parse(TimeFrom.Trim()+":00"); currentHour < DateTime.Parse(TimeTo.Trim() + ":00"); currentHour = currentHour.AddHours(1))
                     {
                         if (currentHour.Minute > Config.TimeRest[currentHour.Hour])
                         {
@@ -703,7 +773,7 @@ namespace PAPVN
 
                     }
 
-                    dBConnect.exnonquery("UpdateDateTimePlan", CommandType.StoredProcedure, ModelName.Trim(), TimeFrom.Trim(), TimeTo.Trim(), secwork);
+                    dBConnect.exnonquery("UpdateDateTimePlan", CommandType.StoredProcedure, ModelName.Trim(), TimeFrom.Trim() + ":00", TimeTo.Trim() + ":00", secwork);
                     return "1";
                 }
                 

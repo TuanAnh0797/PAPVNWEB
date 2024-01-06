@@ -20,7 +20,7 @@ namespace PAPVN
         {
             if (!IsPostBack)
             {
-                //loaddataplan();
+                loaddataplan();
                 
             }
             //else
@@ -214,17 +214,39 @@ namespace PAPVN
             DataTable dt = dBConnect.StoreFillDT("LoadDataPlan", CommandType.StoredProcedure);
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                HTML += $"<tr> " +
-                     $"<td> {dt.Rows[i]["Model"]} </td>" +
-                     $"<td> {dt.Rows[i]["QuantityDay"]} </td>" +
-                      $"<td> {dt.Rows[i]["Quantity1"]} </td>" +
-                       $"<td> {dt.Rows[i]["Quantity2"]} </td>" +
-                        $"<td> {dt.Rows[i]["Quantity3"]} </td>" +
-                     $"<td> {dt.Rows[i]["TimeStart"]} </td>" +
-                      $"<td> {dt.Rows[i]["TimeEnd"]} </td>" +
-                       $"<td> <button style=\"width:150px\" type=\"button\" Class=\"btn-success\" onclick=\"MonitorSpecial(this)\"> <i class=\"fas fa-plus\"></i> Add </button> </td>" +
-                       $"<td> <button style=\"width:150px\" type=\"button\" onclick=\"showPopup(this)\"><i class=\"fas fa-edit\"></i>Edit</button> </td>" +
-                     $"</tr>";
+                if (dt.Rows[i]["Model"].ToString() != "Total")
+                {
+                    if (Int32.Parse(dt.Rows[i]["MonitorSpecial"].ToString()) == 0)
+                    {
+                        HTML += $"<tr> " +
+                        $"<td> {dt.Rows[i]["Model"]} </td>" +
+                        $"<td> {dt.Rows[i]["QuantityDay"]} </td>" +
+                         $"<td> {dt.Rows[i]["Quantity1"]} </td>" +
+                          $"<td> {dt.Rows[i]["Quantity2"]} </td>" +
+                           $"<td> {dt.Rows[i]["Quantity3"]} </td>" +
+                        $"<td> {dt.Rows[i]["TimeStart"]} </td>" +
+                         $"<td> {dt.Rows[i]["TimeEnd"]} </td>" +
+                          $"<td> <button style=\"width:120px\" type=\"button\" Class=\"btn-success\" onclick=\"MonitorSpecial(this)\"> <i class=\"fas fa-plus\"></i> Add </button> </td>" +
+                          $"<td> <button style=\"width:120px\" type=\"button\" onclick=\"showPopup(this)\"><i class=\"fas fa-edit\"></i>Edit</button> </td>" +
+                        $"</tr>";
+                    }
+                    else
+                    {
+                        HTML += $"<tr> " +
+                       $"<td> {dt.Rows[i]["Model"]} </td>" +
+                       $"<td> {dt.Rows[i]["QuantityDay"]} </td>" +
+                        $"<td> {dt.Rows[i]["Quantity1"]} </td>" +
+                         $"<td> {dt.Rows[i]["Quantity2"]} </td>" +
+                          $"<td> {dt.Rows[i]["Quantity3"]} </td>" +
+                       $"<td> {dt.Rows[i]["TimeStart"]} </td>" +
+                        $"<td> {dt.Rows[i]["TimeEnd"]} </td>" +
+                         $"<td> <button style=\"width:120px\" type=\"button\" Class=\"btn-danger\" onclick=\"MonitorSpecial(this)\"> <i class=\"fas fa-trash\"></i> Remove</button> </td>" +
+                         $"<td> <button style=\"width:120px\" type=\"button\" onclick=\"showPopup(this)\"><i class=\"fas fa-edit\"></i>Edit</button> </td>" +
+                       $"</tr>";
+                    }
+                }
+               
+               
             }
             dt_plan.InnerHtml = HTML;
 
