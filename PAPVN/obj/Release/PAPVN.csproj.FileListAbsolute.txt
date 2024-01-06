@@ -210,3 +210,7 @@ C:\Users\Admin\Desktop\PAPVNWEB\PAPVN\obj\Release\PAPVN.csproj.CoreCompileInputs
 C:\Users\Admin\Desktop\PAPVNWEB\PAPVN\obj\Release\PAPVN.csproj.CopyComplete
 C:\Users\Admin\Desktop\PAPVNWEB\PAPVN\obj\Release\PAPVN.dll
 C:\Users\Admin\Desktop\PAPVNWEB\PAPVN\obj\Release\PAPVN.pdb
+C:\Users\PC\Desktop\PAPVNWEB\PAPVN\bin\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\PC\Desktop\PAPVNWEB\PAPVN\bin\MySqlConnector.dll
+C:\Users\PC\Desktop\PAPVNWEB\PAPVN\bin\Microsoft.Extensions.Logging.Abstractions.xml
+C:\Users\PC\Desktop\PAPVNWEB\PAPVN\bin\MySqlConnector.xml

@@ -296,37 +296,47 @@ namespace PAPVN
                     else
                     {
                         double totalsec = subtimenow.TotalSeconds;
-                        for (DateTime currentHour = TimeStart; currentHour <= datetimenow; currentHour = currentHour.AddMinutes(5))
+                        if (datetimenow.Hour > 5)
                         {
-                            totalsec = totalsec - Config.TimeRest[currentHour.Hour] * 60;
-                            if (datetimenow > currentHour && currentHour.Minute == Config.TimeRest[currentHour.Hour])
+                            for (DateTime currentHour = TimeStart; currentHour.Hour <= datetimenow.Hour; currentHour.AddHours(1))
                             {
-                                if (currentHour == TimeEnd && currentHour.Hour == 6)
-                                {
-                                }
-                                else
+                                if (currentHour.Hour < datetimenow.Hour)
                                 {
                                     totalsec = totalsec - Config.TimeRest[currentHour.Hour] * 60;
                                 }
-                            }
-                            else
-                            {
-                                if (currentHour == datetimenow)
+                                else
                                 {
-                                    if (currentHour.Minute >= Config.TimeRest[currentHour.Hour])
+                                    if (datetimenow.Minute <= Config.TimeRest[currentHour.Hour])
                                     {
-                                        if (currentHour == TimeEnd && currentHour.Hour == 6)
-                                        {
-                                        }
-                                        else
-                                        {
-                                            totalsec = totalsec - Config.TimeRest[currentHour.Hour] * 60;
-                                        }
+                                        totalsec = totalsec - Config.TimeRest[currentHour.Hour] * 60;
                                     }
                                     else
                                     {
-                                        if (currentHour == TimeEnd && currentHour.Hour == 6)
+                                        totalsec = totalsec - currentHour.Minute * 60;
+                                    }
+                                }
+                               
+                            }
+                        }
+                        else
+                        {
+                            for (DateTime currentHour = TimeStart; currentHour.Hour <= datetimenow.Hour; currentHour = currentHour.AddHours(1))
+                            {
+                                if (currentHour.Hour > 5)
+                                {
+                                    totalsec = totalsec - Config.TimeRest[currentHour.Hour] * 60;
+                                }
+                                else
+                                {
+                                    if (currentHour.Hour < datetimenow.Hour)
+                                    {
+                                        totalsec = totalsec - Config.TimeRest[currentHour.Hour] * 60;
+                                    }
+                                    else
+                                    {
+                                        if (datetimenow.Minute <= Config.TimeRest[currentHour.Hour])
                                         {
+                                            totalsec = totalsec - Config.TimeRest[currentHour.Hour] * 60;
                                         }
                                         else
                                         {
@@ -334,6 +344,7 @@ namespace PAPVN
                                         }
                                     }
                                 }
+
                             }
                         }
                         dataplanpertime[i] = (int)Math.Round(totalsec * float.Parse(dt.Rows[i]["QuantityPerSec"].ToString()));
@@ -392,37 +403,47 @@ namespace PAPVN
                     else
                     {
                         double totalsec = subtimenow.TotalSeconds;
-                        for (DateTime currentHour = TimeStart; currentHour <= datetimenow; currentHour = currentHour.AddMinutes(5))
+                        if (datetimenow.Hour > 5)
                         {
-                            totalsec = totalsec - Config.TimeRest[currentHour.Hour] * 60;
-                            if (datetimenow > currentHour && currentHour.Minute == Config.TimeRest[currentHour.Hour])
+                            for (DateTime currentHour = TimeStart; currentHour.Hour <= datetimenow.Hour; currentHour.AddHours(1))
                             {
-                                if (currentHour == TimeEnd && currentHour.Hour == 6)
-                                {
-                                }
-                                else
+                                if (currentHour.Hour < datetimenow.Hour)
                                 {
                                     totalsec = totalsec - Config.TimeRest[currentHour.Hour] * 60;
                                 }
-                            }
-                            else
-                            {
-                                if (currentHour == datetimenow)
+                                else
                                 {
-                                    if (currentHour.Minute >= Config.TimeRest[currentHour.Hour])
+                                    if (datetimenow.Minute <= Config.TimeRest[currentHour.Hour])
                                     {
-                                        if (currentHour == TimeEnd && currentHour.Hour == 6)
-                                        {
-                                        }
-                                        else
-                                        {
-                                            totalsec = totalsec - Config.TimeRest[currentHour.Hour] * 60;
-                                        }
+                                        totalsec = totalsec - Config.TimeRest[currentHour.Hour] * 60;
                                     }
                                     else
                                     {
-                                        if (currentHour == TimeEnd && currentHour.Hour == 6)
+                                        totalsec = totalsec - currentHour.Minute * 60;
+                                    }
+                                }
+
+                            }
+                        }
+                        else
+                        {
+                            for (DateTime currentHour = TimeStart; currentHour.Hour <= datetimenow.Hour; currentHour = currentHour.AddHours(1))
+                            {
+                                if (currentHour.Hour > 5)
+                                {
+                                    totalsec = totalsec - Config.TimeRest[currentHour.Hour] * 60;
+                                }
+                                else
+                                {
+                                    if (currentHour.Hour < datetimenow.Hour)
+                                    {
+                                        totalsec = totalsec - Config.TimeRest[currentHour.Hour] * 60;
+                                    }
+                                    else
+                                    {
+                                        if (datetimenow.Minute <= Config.TimeRest[currentHour.Hour])
                                         {
+                                            totalsec = totalsec - Config.TimeRest[currentHour.Hour] * 60;
                                         }
                                         else
                                         {
@@ -430,6 +451,7 @@ namespace PAPVN
                                         }
                                     }
                                 }
+
                             }
                         }
                         dataplanpertime[i] = (int)Math.Round(totalsec * float.Parse(dt.Rows[i]["QuantityPerSec"].ToString()));
@@ -787,40 +809,77 @@ namespace PAPVN
                 float quantityPerSec = float.Parse(ds.Tables[1].Rows[0]["QuantityPerSec"].ToString());
                 int index = 1;
                 DateTime EndDateTime = DateTime.Now;
-                for (DateTime currentHour = TimeStart.AddMinutes(5); currentHour <= EndDateTime; currentHour = currentHour.AddMinutes(5))
+                for (DateTime currentHour = TimeStart.AddMinutes(5); currentHour <= TimeEnd; currentHour = currentHour.AddMinutes(5))
                 {
-                    if (TimeEnd >= currentHour)
-                    {
+                    //if (TimeEnd >= currentHour)
+                    //{
                         int TotalTimeNow = index * 300;
-                        for (DateTime currentHour1 = TimeStart; currentHour1 <= currentHour; currentHour1 = currentHour1.AddHours(1))
+                    for (DateTime currentHour1 = TimeStart; currentHour1 <= currentHour; currentHour1 = currentHour1.AddHours(1))
+                    {
+                        if (currentHour == TimeEnd)
                         {
-                            if (DateTime.Now.Hour == currentHour1.Hour && DateTime.Now.Minute < Config.TimeRest[currentHour.Hour])
+                            if (currentHour1.Hour != 6)
                             {
-                                if (currentHour == TimeEnd && currentHour1.Hour == 6)
+                                TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
+                            }
+                            
+                        }
+                        else
+                        {
+                            if (currentHour.Hour > 5)
+                            {
+                                if (currentHour.Hour > currentHour1.Hour)
                                 {
+                                    TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
+                                }
+                                else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute < Config.TimeRest[currentHour1.Hour])
+                                {
+                                    TotalTimeNow = TotalTimeNow - currentHour.Minute * 60;
+                                }
+                                else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute >= Config.TimeRest[currentHour1.Hour])
+                                {
+                                    TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
                                 }
                                 else
                                 {
-                                    TotalTimeNow = TotalTimeNow - DateTime.Now.Minute * 60;
+                                    break;
                                 }
                             }
                             else
                             {
-                                if (currentHour == TimeEnd && currentHour1.Hour == 6)
-                                {
-                                }
-                                else
+                                if (currentHour1.Hour > 5)
                                 {
                                     TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
                                 }
+                                else
+                                {
+                                    if (currentHour.Hour > currentHour1.Hour)
+                                    {
+                                        TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
+                                    }
+                                    else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute < Config.TimeRest[currentHour1.Hour])
+                                    {
+                                        TotalTimeNow = TotalTimeNow - currentHour.Minute * 60;
+                                    }
+                                    else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute >= Config.TimeRest[currentHour1.Hour])
+                                    {
+                                        TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
+                                    }
+                                    else
+                                    {
+                                        break;
+                                    }
+                                }
                             }
                         }
+                        
+                    }
                         listdataplan.Add(currentHour.ToString("yyyy-MM-dd HH:mm:ss"), (int)Math.Round(TotalTimeNow * quantityPerSec));
-                    }
-                    else
-                    {
-                        break;
-                    }
+                    //}
+                    //else
+                    //{
+                    //    break;
+                    //}
                     index++;
                 }
                 string dateindex;
@@ -913,7 +972,7 @@ namespace PAPVN
                 {
                     TimeSpan subtime = DateTime.Parse(TimeTo) - DateTime.Parse(TimeFrom);
                     double secwork = subtime.TotalSeconds;
-                    for (DateTime currentHour = DateTime.Parse(TimeFrom.Trim() + ":00"); currentHour <= DateTime.Parse(TimeTo.Trim() + ":00"); currentHour = currentHour.AddMinutes(5))
+                    for (DateTime currentHour = DateTime.Parse(TimeFrom.Trim() + ":00"); currentHour <= DateTime.Parse(TimeTo.Trim() + ":00"); currentHour.AddMinutes(5))
                     {
                             if (DateTime.Parse(TimeTo.Trim() + ":00") > currentHour && currentHour.Minute == Config.TimeRest[currentHour.Hour])
                             {

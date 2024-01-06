@@ -251,7 +251,9 @@
                         borderColor: 'rgb(75, 192, 192)',
                         data: [],
                         fill: false,
-                        tension: 0, // làm line đỡ mượt
+                        //tension: 0, // làm line đỡ mượt
+                        borderWidth: 1,
+                        pointRadius: 1, //
                     },
                     {
                         type: 'line',
@@ -260,7 +262,9 @@
                         borderColor: '#b38600',
                         data: [],
                         fill: false,
-                        tension: 0, // làm line đỡ mượt
+                        //tension: 0, // làm line đỡ mượt
+                        borderWidth: 1,
+                        pointRadius: 1, //
                     },
                     {
                         type: 'bar',
@@ -321,31 +325,31 @@
                         fontSize: 15,
                     },
                 },
-                animation: {
-                    duration: 1,
-                    onComplete: function () {
-                        var chartInstance = this.chart,
-                            ctx = chartInstance.ctx;
-                        ctx.font = "500 18px Arial";
-                        ctx.fillStyle = '#000000';
-                        ctx.textAlign = 'center';
-                        ctx.textBaseline = 'bottom';
-                        this.data.datasets.forEach(function (dataset, i) {
-                            if (i == 2) {
-                                var meta = chartInstance.controller.getDatasetMeta(i);
-                                meta.data.forEach(function (bar, index) {
-                                    var data = dataset.data[index];
-                                    if (data >= 0) {
-                                        ctx.fillText(data, bar._model.x, bar._model.y - 5);
-                                    }
-                                    else {
-                                        ctx.fillText(data, bar._model.x, bar._model.y + 20);
-                                    }
-                                });
-                            }
-                        });
-                    }
-                }
+                //animation: {
+                //    duration: 1,
+                //    onComplete: function () {
+                //        var chartInstance = this.chart,
+                //            ctx = chartInstance.ctx;
+                //        ctx.font = "500 18px Arial";
+                //        ctx.fillStyle = '#000000';
+                //        ctx.textAlign = 'center';
+                //        ctx.textBaseline = 'bottom';
+                //        this.data.datasets.forEach(function (dataset, i) {
+                //            if (i == 2) {
+                //                var meta = chartInstance.controller.getDatasetMeta(i);
+                //                meta.data.forEach(function (bar, index) {
+                //                    var data = dataset.data[index];
+                //                    if (data >= 0) {
+                //                        ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                //                    }
+                //                    else {
+                //                        ctx.fillText(data, bar._model.x, bar._model.y + 20);
+                //                    }
+                //                });
+                //            }
+                //        });
+                //    }
+                //}
             };
             var lineChartCanvas = $('#linechart').get(0).getContext('2d')
             var linechart = new Chart(lineChartCanvas, {
@@ -472,9 +476,17 @@
             $('#<%= modelplan.ClientID %>').on('change', function () {
                 LoadDataForLineChart();
             });
-            setTimeout(LoadDataForBarchart, 1000);
-            setTimeout(LoadDataForLineChart, 3000);
-            setTimeout(LoadDataForBarchartMonitor, 2000);
+
+            function CallAll() {
+                LoadDataForBarchart();
+                LoadDataForBarchartMonitor();
+                LoadDataForLineChart();
+            }
+
+
+            setTimeout(CallAll, 1000);
+            //setTimeout(LoadDataForLineChart, 3000);
+            //setTimeout(LoadDataForBarchartMonitor, 4000);
             //setInterval(LoadDataForLineChart, 2000);
             //setInterval(LoadDataForBarchart, 2000);
             //setInterval(LoadDataForBarchartMonitor, 2000);
