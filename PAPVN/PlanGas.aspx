@@ -566,9 +566,9 @@
             });
 
 
-            //setTimeout(LoadDataForBarchart, 1000);
-            //setTimeout(LoadDataForLineChart, 3000);
-            //setTimeout(LoadDataForBarchartMonitor, 2000);
+            setTimeout(LoadDataForBarchart, 1000);
+            setTimeout(LoadDataForLineChart, 3000);
+            setTimeout(LoadDataForBarchartMonitor, 2000);
 
             //setInterval(LoadDataForLineChart, 2000);
             //setInterval(LoadDataForBarchart, 2000);

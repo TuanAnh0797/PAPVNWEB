@@ -303,18 +303,18 @@ WHERE RT.ReferenceTime BETWEEN CAST(@StartDate AS TIME) AND CAST(@EndDate AS TIM
 GROUP BY RT.ReferenceTime
 ORDER BY RT.ReferenceTime;
 
---DECLARE @StartDate DATETIME = '2024-01-08 06:00:00';
---DECLARE @EndDate DATETIME = '2024-01-09 06:00:00';
---SELECT 
---	 --MIN(Format(DATEADD(MINUTE, DATEDIFF(MINUTE, 0, Create_date) / 5 * 5, 0),'yyyy-MM-dd HH:mm:ss')) AS StartTime,
---    MAX(Format(DATEADD(MINUTE, DATEDIFF(MINUTE, 0, Create_date) / 5 * 5 + 5, 0),'yyyy-MM-dd HH:mm:ss')) AS EndTime,
---    COUNT(*) AS NumberOfRows
---FROM [dbo].[tblKitting_Trans_PartCard_Temp]
---WHERE Create_date BETWEEN @StartDate AND @EndDate
---GROUP BY 
---    DATEADD(MINUTE, DATEDIFF(MINUTE, 0, Create_date) / 5 * 5, 0);
+DECLARE @StartDate DATETIME = '2024-01-08 06:00:00';
+DECLARE @EndDate DATETIME = '2024-01-09 06:00:00';
+SELECT 
+	
+   MAX(Format(DATEADD(MINUTE, DATEDIFF(MINUTE, 0, Create_date) / 5 * 5 + 5, 0),'yyyy-MM-dd HH:mm:ss')) AS EndTime,
+   COUNT(*) AS NumberOfRows
+FROM [dbo].[tblKitting_Trans_PartCard_Temp]
+WHERE Create_date BETWEEN @StartDate AND @EndDate
+GROUP BY 
+DATEADD(MINUTE, DATEDIFF(MINUTE, 0, Create_date) / 5 * 5, 0);
 
-
+ --MIN(Format(DATEADD(MINUTE, DATEDIFF(MINUTE, 0, Create_date) / 5 * 5, 0),'yyyy-MM-dd HH:mm:ss')) AS StartTime,
 --select * from [dbo].[tblKitting_Trans_PartCard_Temp] where Create_date BETWEEN '2024-01-08 08:00:00' and '2024-01-08 08:15:00';
 
 
@@ -337,3 +337,72 @@ LEFT JOIN [dbo].[tblKitting_Trans_PartCard_Temp] KT ON FORMAT(KT.Create_date, 'y
 WHERE RT.ReferenceTime BETWEEN CAST(@StartDate AS datetime) AND CAST(@EndDate AS datetime)
 GROUP BY RT.ReferenceTime
 ORDER BY RT.ReferenceTime;
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `LoadDataForLineChartPlanGasByTime`(IN _ModelName nvarchar(30))
+BEGIN
+    DECLARE _hournow int;
+    Set _hournow = hour(now());
+    if (_ModelName = 'all') then
+      IF(_hournow > 5) then
+        SET @StartDate = CONCAT(CURRENT_DATE, ' 06:00:00');
+		SET @EndDate = CONCAT(DATE_ADD(CURRENT_DATE, INTERVAL 1 DAY), ' 06:00:00');
+		SELECT
+		FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+		COUNT(DISTINCT CodeBack) AS mycount
+		FROM gas
+		WHERE TimePLC BETWEEN @StartDate AND @EndDate
+		GROUP BY TimeDataActual;
+         select  TimeStart, TimeEnd,QuantityDay,QuantityPerSec,TotalTime from dataplan where Model = 'Total' and Date(dataplan.TimeUpdate ) = Date(now()) limit 1;
+
+      else
+		SET @StartDate = CONCAT(DATE_SUB(CURRENT_DATE, INTERVAL 1 DAY), ' 06:00:00');
+		SET @EndDate = CONCAT(CURRENT_DATE, ' 06:00:00');
+		SELECT
+		FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+		COUNT(DISTINCT CodeBack) AS mycount
+		FROM gas
+		WHERE TimePLC BETWEEN @StartDate AND @EndDate
+		GROUP BY TimeDataActual;
+            select  TimeStart, TimeEnd,QuantityDay,QuantityPerSec,TotalTime from dataplan where Model = 'Total' and  Date(dataplan.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY) limit 1;
+
+        END IF;
+   else
+     IF(_hournow > 5) then
+        SET @StartDate = CONCAT(CURRENT_DATE, ' 06:00:00');
+		SET @EndDate = CONCAT(DATE_ADD(CURRENT_DATE, INTERVAL 1 DAY), ' 06:00:00');
+		SELECT
+		FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+		COUNT(DISTINCT CodeBack) AS mycount
+		FROM gas
+		WHERE CodeModel = _ModelName and TimePLC BETWEEN @StartDate AND @EndDate
+		GROUP BY TimeDataActual;
+         select  TimeStart, TimeEnd,QuantityDay,QuantityPerSec,TotalTime from dataplan where Model = _ModelName and Date(dataplan.TimeUpdate ) = Date(now()) limit 1;
+
+      else
+		SET @StartDate = CONCAT(DATE_SUB(CURRENT_DATE, INTERVAL 1 DAY), ' 06:00:00');
+		SET @EndDate = CONCAT(CURRENT_DATE, ' 06:00:00');
+		SELECT
+		FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+		COUNT(DISTINCT CodeBack) AS mycount
+		FROM gas
+		WHERE CodeModel = _ModelName and TimePLC BETWEEN @StartDate AND @EndDate
+		GROUP BY TimeDataActual;
+            select  TimeStart, TimeEnd,QuantityDay,QuantityPerSec,TotalTime from dataplan where Model = _ModelName and  Date(dataplan.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY) limit 1;
+
+        END IF;
+  END IF;
+    
+    
+END

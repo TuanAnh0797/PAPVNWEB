@@ -706,7 +706,7 @@ namespace PAPVN
                 TotalPlan = Int32.Parse(dt.Rows[0]["QuantityDay"].ToString());
             }
 
-            DataSet ds = dBConnect.StoreFillDS("LoadDataForLineChartPlanGas", CommandType.StoredProcedure, parammysql);
+            DataSet ds = dBConnect.StoreFillDS("LoadDataForLineChartPlanGasByTime", CommandType.StoredProcedure, parammysql);
             Dictionary<string, int> listdataplan = new Dictionary<string, int>();
             List<int> listdataactual = new List<int>();
             List<int> listdatadatadiff = new List<int>();
@@ -717,26 +717,41 @@ namespace PAPVN
                 DateTime TimeEnd = DateTime.Parse(ds.Tables[1].Rows[0]["TimeEnd"].ToString());
                 float quantityPerSec = float.Parse(ds.Tables[1].Rows[0]["QuantityPerSec"].ToString());
                 int index = 1;
-                for (DateTime currentHour = TimeStart.AddMinutes(5); currentHour <= DateTime.Now; currentHour = currentHour.AddMinutes(5))
+                for (DateTime currentHour = TimeStart.AddMinutes(5); currentHour <= TimeEnd; currentHour = currentHour.AddMinutes(5))
                 {
                     if (TimeEnd >= currentHour)
                     {
                         int TotalTimeNow = index * 300;
                         for (DateTime currentHour1 = TimeStart; currentHour1 <= currentHour; currentHour1 = currentHour1.AddHours(1))
                         {
-                            if (currentHour.Minute > Config.TimeRest[currentHour.Hour])
+                           
+                            if (DateTime.Now.Hour == currentHour1.Hour && DateTime.Now.Minute < Config.TimeRest[currentHour.Hour])
                             {
-                                TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
+                                if (currentHour == TimeEnd && currentHour1.Hour == 6)
+                                {
+                                    
+                                }
+                                else
+                                {
+                                    TotalTimeNow = TotalTimeNow - DateTime.Now.Minute * 60;
+                                }
+                               
                             }
                             else
                             {
-                                TotalTimeNow = TotalTimeNow - currentHour.Minute * 60;
-                            }
-                            if (TotalTimeNow < 0)
-                            {
-                                TotalTimeNow = 0;
+
+                                if (currentHour == TimeEnd && currentHour1.Hour == 6)
+                                {
+
+                                }
+                                else
+                                {
+                                    TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
+                                }
+                                
                             }
                         }
+                       
                         listdataplan.Add(currentHour.ToString("yyyy-MM-dd HH:mm:ss"), (int)Math.Round(TotalTimeNow * quantityPerSec));
                     }
                     else
@@ -745,8 +760,17 @@ namespace PAPVN
                     }
                     index++;
                 }
+                string dateindex;
+                if (DateTime.Now.Hour > 5)
+                {
+                    dateindex = DateTime.Now.ToString("yyyy-MM-dd");
+                }
+                else
+                {
+                    dateindex = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd");
+                }
 
-                for (DateTime currentHour = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd") + " 06:00:00"); currentHour <= DateTime.Now; currentHour = currentHour.AddMinutes(5))
+                for (DateTime currentHour = DateTime.Parse(dateindex + " 06:00:00"); currentHour <= DateTime.Now; currentHour = currentHour.AddMinutes(5))
                 {
                     if (listdataplan.Keys.Contains(currentHour.ToString("yyyy-MM-dd HH:mm:ss")))
                     {
@@ -754,9 +778,10 @@ namespace PAPVN
                         int sumquantityactual = 0;
 
                         int indextime = 0;
-                        while (DateTime.Parse(ds.Tables[0].Rows[indextime]["DateTimeActual"].ToString()) < DateTime.Parse(currentHour.ToString("yyyy-MM-dd HH:mm:ss")))
+                        while (DateTime.Parse(ds.Tables[0].Rows[indextime]["TimeDataActual"].ToString()) < DateTime.Parse(currentHour.ToString("yyyy-MM-dd HH:mm:ss")))
                         {
-                            sumquantityactual += Int32.Parse(ds.Tables[0].Rows[indextime]["Quantity"].ToString());
+
+                            sumquantityactual += Int32.Parse(ds.Tables[0].Rows[indextime]["mycount"].ToString());
                             indextime++;
                         }
                         listdataactual.Add(sumquantityactual);
@@ -767,9 +792,9 @@ namespace PAPVN
                         listdataplanactual.Add(0);
                         int sumquantityactual = 0;
                         int indextime = 0;
-                        while (DateTime.Parse(ds.Tables[0].Rows[indextime]["DateTimeActual"].ToString()) <= DateTime.Parse(currentHour.ToString("yyyy-MM-dd HH:mm:ss")))
+                        while (DateTime.Parse(ds.Tables[0].Rows[indextime]["TimeDataActual"].ToString()) <= DateTime.Parse(currentHour.ToString("yyyy-MM-dd HH:mm:ss")))
                         {
-                            sumquantityactual += Int32.Parse(ds.Tables[0].Rows[indextime]["Quantity"].ToString());
+                            sumquantityactual += Int32.Parse(ds.Tables[0].Rows[indextime]["mycount"].ToString());
                             indextime++;
                         }
                         listdataactual.Add(sumquantityactual);
