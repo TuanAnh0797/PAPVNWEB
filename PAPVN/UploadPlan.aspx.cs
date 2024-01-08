@@ -20,7 +20,8 @@ namespace PAPVN
         {
             if (!IsPostBack)
             {
-                loaddataplan();
+                //loaddataplan();
+                
             }
             //else
             //{
@@ -221,10 +222,13 @@ namespace PAPVN
                         $"<td> {dt.Rows[i]["Quantity3"]} </td>" +
                      $"<td> {dt.Rows[i]["TimeStart"]} </td>" +
                       $"<td> {dt.Rows[i]["TimeEnd"]} </td>" +
-                       $"<td> <button type=\"button\" onclick=\"showPopup()\"> <i class=\"fas fa-edit\"></i> Edit</button> </td>" +
+                       $"<td> <button style=\"width:150px\" type=\"button\" Class=\"btn-success\" onclick=\"MonitorSpecial(this)\"> <i class=\"fas fa-plus\"></i> Add </button> </td>" +
+                       $"<td> <button style=\"width:150px\" type=\"button\" onclick=\"showPopup(this)\"><i class=\"fas fa-edit\"></i>Edit</button> </td>" +
                      $"</tr>";
             }
             dt_plan.InnerHtml = HTML;
+
+            
         }
     }
 }

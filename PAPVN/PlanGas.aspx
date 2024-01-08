@@ -18,8 +18,8 @@
             </div>
         </div>
         <div class="container-fluid">
-            <%-- <div class="row">
-                <div class="chart col-sm-4" style="padding: 5px;">
+             <div class="row">
+               <%-- <div class="chart col-sm-4" style="padding: 5px;">
                     <div style="background-color: white; padding: 5px; margin: 0px 0px 0px 5px">
                         <div style="display: flex; align-items: center; justify-content: center">
                             <h2 style="font-weight: 600">Biểu đồ tỉ lệ OK/NG nạp GAS</h2>
@@ -28,19 +28,18 @@
                             <canvas id="pieChart" style="min-height: 400px;"></canvas>
                         </div>
                     </div>
-                </div>
-                <div class="chart col-sm-8" style="padding: 5px;">
-                    <div style="background-color: white; padding: 5px; margin: 0px 5px 0px 0px">
-                        <div style="display: flex; align-items: center; justify-content: center">
-                            <h2 style="font-weight: 600">Biểu đồ tổng sản lượng nạp GAS</h2>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="linechart" style="min-height: 400px;"></canvas>
-                        </div>
+                </div>--%>
+                <div class="chart  col-sm-6" style="padding: 5px;">
+                <div style="background-color: white; padding: 5px">
+                    <div style="display: flex; align-items: center; justify-content: center">
+                        <h1 style="font-weight: 600">Biểu đồ sản lượng nạp GAS Model đặc biệt</h1>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="barchartSpecial" style="min-height: 400px;"></canvas>
                     </div>
                 </div>
-            </div>--%>
-            <div class="chart" style="padding: 5px;">
+            </div>
+                 <div class="chart col-sm-6" style="padding: 5px;">
                 <div style="background-color: white; padding: 5px; margin: 0px 0px 0px 0px">
                         <div style="display: flex; align-items: center; justify-content: center">
                             <h1 style="font-weight: 600">Biểu đồ sản lượng nạp GAS theo thời gian</h1>
@@ -57,6 +56,8 @@
                     </div>
                 </div>
             </div>
+            </div>
+           
            
 
            
@@ -334,8 +335,8 @@
                 options: LineChartOption
             })
             // setTimeout(LoadDataForPieChart, 2000);
-            setTimeout(LoadDataForBarchart, 3000);
-            setTimeout(LoadDataForLineChart, 4000);
+            //setTimeout(LoadDataForBarchart, 3000);
+            //setTimeout(LoadDataForLineChart, 4000);
 
 
             // setInterval(LoadDataForPieChart, 5000);

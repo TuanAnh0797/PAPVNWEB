@@ -270,11 +270,11 @@ namespace PAPVN
             DataTable dt = dBConnect.StoreFillDT("LoadDataForBarChartPlanGas", CommandType.StoredProcedure);
             if (dt.Rows.Count > 1)
             {
-                int[] dataplan = new int[dt.Rows.Count-1];
-                int[] dataplanpertime = new int[dt.Rows.Count-1];
+                int[] dataplan = new int[dt.Rows.Count - 1];
+                int[] dataplanpertime = new int[dt.Rows.Count - 1];
                 int[] dataactual = new int[dt.Rows.Count - 1];
                 string[] labels = new string[dt.Rows.Count - 1];
-                for (int i = 0; i < dt.Rows.Count-1; i++)
+                for (int i = 0; i < dt.Rows.Count - 1; i++)
                 {
                     labels[i] = dt.Rows[i]["Model"].ToString();
                     dataplan[i] = Int32.Parse(dt.Rows[i]["QuantityDay"].ToString());
@@ -287,7 +287,7 @@ namespace PAPVN
                     {
                         dataplanpertime[i] = 0;
                     }
-                    else if(subtimemaster <= subtimenow)
+                    else if (subtimemaster <= subtimenow)
                     {
                         dataplanpertime[i] = dataplan[i];
                     }
@@ -298,7 +298,7 @@ namespace PAPVN
                         {
                             totalsec = totalsec - Config.TimeRest[currentHour.Hour] * 60;
                         }
-                        dataplanpertime[i] = (int)Math.Round(totalsec*float.Parse(dt.Rows[i]["QuantityPerSec"].ToString()));
+                        dataplanpertime[i] = (int)Math.Round(totalsec * float.Parse(dt.Rows[i]["QuantityPerSec"].ToString()));
                     }
                 }
                 var data = new
@@ -371,7 +371,7 @@ namespace PAPVN
             DBConnect dBConnect = new DBConnect();
             DataSet ds = dBConnect.StoreFillDS("LoadDataForLineChartPlanGas", CommandType.StoredProcedure, parammysql);
             int hournow = int.Parse(DateTime.Now.ToString("HH"));
-            Dictionary<int,int> listdataplan = new Dictionary<int,int>();
+            Dictionary<int, int> listdataplan = new Dictionary<int, int>();
             List<int> listdataactual = new List<int>();
             List<int> listdatadatadiff = new List<int>();
             List<int> listdataplanactual = new List<int>();
@@ -382,12 +382,10 @@ namespace PAPVN
                 float quantityPerSec = float.Parse(ds.Tables[1].Rows[0]["QuantityPerSec"].ToString());
                 int TotalTime = Int32.Parse(ds.Tables[1].Rows[0]["TotalTime"].ToString());
                 TimeSpan subtimenow = DateTime.Now - TimeStart;
-
                 double totalsec = subtimenow.TotalSeconds;
                 int hourstart = Int32.Parse(TimeStart.ToString("HH"));
                 int hoursend = Int32.Parse(TimeEnd.ToString("HH"));
                 int index = 1;
-
                 for (DateTime currentHour = TimeStart; currentHour < TimeEnd; currentHour = currentHour.AddHours(1))
                 {
                     int TotalTimeNow = index * 3600;
@@ -398,25 +396,21 @@ namespace PAPVN
                     listdataplan.Add(currentHour.Hour, (int)Math.Round(TotalTimeNow * quantityPerSec));
                     index++;
                 }
-
                 if (DateTime.Now.Hour > 5)
                 {
                     for (DateTime currentHour = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd") + " 06:00:00"); currentHour < DateTime.Now; currentHour = currentHour.AddHours(1))
                     {
                         if (listdataplan.Keys.Contains(currentHour.Hour))
                         {
-
                             int prhour;
-
                             if (currentHour.Hour != 0)
                             {
-                                prhour = currentHour.Hour -1;
+                                prhour = currentHour.Hour - 1;
                             }
                             else
                             {
                                 prhour = 23;
                             }
-
                             for (int i = 0; i < Config.QuantityPoint[currentHour.Hour]; i++)
                             {
                                 if (currentHour.Hour == 6)
@@ -435,35 +429,29 @@ namespace PAPVN
                                     }
                                     listdataactual.Add(sumquantityactual);
                                     listdatadatadiff.Add(sumquantityactual);
-
                                 }
                                 else if (i < Config.QuantityPoint[currentHour.Hour] - 1)
                                 {
-                                    listdataplanactual.Add(listdataplanactual[listdataplanactual.Count-1]);
+                                    listdataplanactual.Add(listdataplanactual[listdataplanactual.Count - 1]);
                                     listdataactual.Add(listdataactual[listdataactual.Count - 1]);
                                     listdatadatadiff.Add(listdatadatadiff[listdatadatadiff.Count - 1]);
                                 }
                                 else
                                 {
                                     listdataplanactual.Add(listdataplan[prhour]);
-                                   
                                     int sumquantityactual = 0;
                                     for (int j = 6; j <= prhour; j++)
                                     {
                                         sumquantityactual += Int32.Parse(ds.Tables[0].Rows[j]["Quantity"].ToString());
                                     }
                                     listdataactual.Add(sumquantityactual);
-                                   
                                     listdatadatadiff.Add(sumquantityactual - listdataplan[prhour]);
                                 }
-
                             }
-
                         }
                         else
                         {
                             int prhour;
-
                             if (currentHour.Hour != 0)
                             {
                                 prhour = currentHour.Hour - 1;
@@ -474,7 +462,6 @@ namespace PAPVN
                             }
                             for (int i = 0; i < Config.QuantityPoint[currentHour.Hour]; i++)
                             {
-
                                 if (i < Config.QuantityPoint[currentHour.Hour] - 1)
                                 {
                                     listdataplanactual.Add(0);
@@ -492,9 +479,6 @@ namespace PAPVN
                                     listdataactual.Add(sumquantityactual);
                                     listdatadatadiff.Add(sumquantityactual);
                                 }
-
-                               
-
                             }
                         }
                     }
@@ -505,9 +489,7 @@ namespace PAPVN
                     {
                         if (listdataplan.Keys.Contains(currentHour.Hour))
                         {
-
                             int prhour;
-
                             if (currentHour.Hour != 0)
                             {
                                 prhour = currentHour.Hour - 1;
@@ -516,7 +498,6 @@ namespace PAPVN
                             {
                                 prhour = 23;
                             }
-
                             for (int i = 0; i < Config.QuantityPoint[currentHour.Hour]; i++)
                             {
                                 if (currentHour.Hour == 6)
@@ -528,9 +509,6 @@ namespace PAPVN
                                 else if (currentHour.Hour == hourstart)
                                 {
                                     listdataplanactual.Add(0);
-
-                                   
-
                                     if (currentHour.Hour > 5)
                                     {
                                         int sumquantityactual = 0;
@@ -548,7 +526,7 @@ namespace PAPVN
                                         {
                                             sumquantityactual += Int32.Parse(ds.Tables[0].Rows[j]["Quantity"].ToString());
                                         }
-                                        if (prhour <=5)
+                                        if (prhour <= 5)
                                         {
                                             for (int k = 0; k <= prhour; k++)
                                             {
@@ -558,10 +536,6 @@ namespace PAPVN
                                         listdataactual.Add(sumquantityactual);
                                         listdatadatadiff.Add(sumquantityactual);
                                     }
-
-
-
-
                                 }
                                 else if (i < Config.QuantityPoint[currentHour.Hour] - 1)
                                 {
@@ -572,9 +546,6 @@ namespace PAPVN
                                 else
                                 {
                                     listdataplanactual.Add(listdataplan[prhour]);
-
-
-
                                     if (currentHour.Hour > 5)
                                     {
                                         int sumquantityactual = 0;
@@ -599,21 +570,15 @@ namespace PAPVN
                                                 sumquantityactual += Int32.Parse(ds.Tables[0].Rows[k]["Quantity"].ToString());
                                             }
                                         }
-                                       
                                         listdataactual.Add(sumquantityactual);
                                         listdatadatadiff.Add(sumquantityactual - listdataplan[prhour]);
                                     }
-
-                                   
                                 }
-
                             }
-
                         }
                         else
                         {
                             int prhour;
-
                             if (currentHour.Hour != 0)
                             {
                                 prhour = currentHour.Hour - 1;
@@ -650,30 +615,25 @@ namespace PAPVN
                                         {
                                             sumquantityactual += Int32.Parse(ds.Tables[0].Rows[j]["Quantity"].ToString());
                                         }
-                                        if (prhour <=5)
+                                        if (prhour <= 5)
                                         {
                                             for (int k = 0; k <= prhour; k++)
                                             {
                                                 sumquantityactual += Int32.Parse(ds.Tables[0].Rows[k]["Quantity"].ToString());
                                             }
                                         }
-                                        
                                         listdataactual.Add(sumquantityactual);
                                         listdatadatadiff.Add(sumquantityactual);
                                     }
                                 }
-                               
-
                             }
                         }
                     }
                 }
             }
-
             int[] dataplan = new int[listdataplanactual.Count];
             int[] dataactual = new int[listdataplanactual.Count];
             int[] datadiff = new int[listdataplanactual.Count];
-
             for (int i = 0; i < listdataplanactual.Count; i++)
             {
                 dataplan[i] = listdataplanactual[i];
@@ -685,9 +645,71 @@ namespace PAPVN
                 dataplan,
                 dataactual,
                 datadiff,
-               
             };
             return Newtonsoft.Json.JsonConvert.SerializeObject(data);
+        }
+        [WebMethod]
+        public string MonitorSpecial(string ModelName)
+        {
+
+            DBConnect dBConnect = new DBConnect();
+            int dt = dBConnect.exnonquery("MonitorSpecial", CommandType.StoredProcedure, ModelName);
+            if (dt > 0)
+            {
+                var data = new
+                {
+                    rs = '1'
+                };
+                return Newtonsoft.Json.JsonConvert.SerializeObject(data);
+            }
+            else
+            {
+                var data = new
+                {
+                    rs = '0'
+                };
+                return Newtonsoft.Json.JsonConvert.SerializeObject(data);
+            }
+
+        }
+        [WebMethod]
+        public string UpdateDateTimePlan(string ModelName, string TimeFrom, string TimeTo)
+        {
+
+            DBConnect dBConnect = new DBConnect();
+
+            DataTable dt = dBConnect.StoreFillDT("GetStartTimeAndEndTimePlan",CommandType.StoredProcedure);
+
+            if (dt.Rows.Count > 0)
+            {
+                if (DateTime.Parse(TimeFrom) < DateTime.Parse(dt.Rows[0]["TimeStart"].ToString()) || DateTime.Parse(TimeTo) > DateTime.Parse(dt.Rows[0]["TimeEnd"].ToString()))
+                {
+                    return "0";
+                }
+                else
+                {
+                    TimeSpan subtime = DateTime.Parse(TimeTo) - DateTime.Parse(TimeFrom);
+                    double secwork = subtime.TotalSeconds;
+                    for (DateTime currentHour = DateTime.Parse(TimeFrom); currentHour < DateTime.Parse(TimeTo); currentHour = currentHour.AddHours(1))
+                    {
+                        if (currentHour.Minute > Config.TimeRest[currentHour.Hour])
+                        {
+                            secwork = secwork - Config.TimeRest[currentHour.Hour] * 60;
+                        }
+                        else
+                        {
+                            secwork = secwork - currentHour.Minute * 60;
+                        }
+
+                    }
+
+                    dBConnect.exnonquery("UpdateDateTimePlan", CommandType.StoredProcedure, ModelName.Trim(), TimeFrom.Trim(), TimeTo.Trim(), secwork);
+                    return "1";
+                }
+                
+            }
+            return "0";
+
         }
     }
 }
