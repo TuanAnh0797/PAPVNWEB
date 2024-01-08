@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PlanGAS.aspx.cs" Inherits="PAPVN.RealTimePlan" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PlanGAS.aspx.cs" Inherits="PAPVN.PlanGAS" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <%--     <div class="content-header" style="padding: 5px;">
         <h1 style="margin:0px 0px 0px 20px; font-weight:150">Management Plan/Real Time</h1>
@@ -17,14 +18,14 @@
             </div>
         </div>
         <div class="container-fluid">
-            <div class="row">
+            <%-- <div class="row">
                 <div class="chart col-sm-4" style="padding: 5px;">
                     <div style="background-color: white; padding: 5px; margin: 0px 0px 0px 5px">
                         <div style="display: flex; align-items: center; justify-content: center">
                             <h2 style="font-weight: 600">Biểu đồ tỉ lệ OK/NG nạp GAS</h2>
                         </div>
                         <div class="chart-container">
-                            <canvas id="pieChart" style="min-height: 400px; height: 100%"></canvas>
+                            <canvas id="pieChart" style="min-height: 400px;"></canvas>
                         </div>
                     </div>
                 </div>
@@ -38,7 +39,27 @@
                         </div>
                     </div>
                 </div>
+            </div>--%>
+            <div class="chart" style="padding: 5px;">
+                <div style="background-color: white; padding: 5px; margin: 0px 0px 0px 0px">
+                        <div style="display: flex; align-items: center; justify-content: center">
+                            <h1 style="font-weight: 600">Biểu đồ sản lượng nạp GAS theo thời gian</h1>
+                        </div>
+                        <div style="display: flex; justify-content: flex-end;">
+                            <select   runat="server" id="modelplan" class="form-control select2" style="width: 200px">
+                                <option>--All Model--</option>
+                            </select>
+
+                        </div>
+
+                    <div class="chart-container">
+                        <canvas id="linechart" style="min-height: 400px;"></canvas>
+                    </div>
+                </div>
             </div>
+           
+
+           
         </div>
     </div>
     <script>
@@ -117,100 +138,100 @@
                     //    });
                     //}
                 },
-                animation: {
-                    duration: 1,
-                    onComplete: function () {
-                        var chartInstance = this.chart,
-                            ctx = chartInstance.ctx;
-                        ctx.font = "500 18px Arial";
-                        ctx.fillStyle = '#000000';
-                        ctx.textAlign = 'center';
-                        ctx.textBaseline = 'bottom';
-                        this.data.datasets.forEach(function (dataset, i) {
-                            var meta = chartInstance.controller.getDatasetMeta(i);
-                            meta.data.forEach(function (bar, index) {
-                               
-                                    var data = dataset.data[index];
-                                    ctx.fillText(data, bar._model.x, bar._model.y);
-                              
-                               
-                            });
-                        });
-                    }
-                }
+                //animation: {
+                //    duration: 1,
+                //    onComplete: function () {
+                //        var chartInstance = this.chart,
+                //            ctx = chartInstance.ctx;
+                //        ctx.font = "500 18px Arial";
+                //        ctx.fillStyle = '#000000';
+                //        ctx.textAlign = 'center';
+                //        ctx.textBaseline = 'bottom';
+                //        this.data.datasets.forEach(function (dataset, i) {
+                //            var meta = chartInstance.controller.getDatasetMeta(i);
+                //            meta.data.forEach(function (bar, index) {
+
+                //                    var data = dataset.data[index];
+                //                    ctx.fillText(data, bar._model.x, bar._model.y);
+
+
+                //            });
+                //        });
+                //    }
+                //}
             }
-          
+
             var barchartplan = new Chart(barChartCanvas, {
                 type: 'bar',
                 data: databarchart,
                 options: barChartOptions
             })
-            //Pie chart
-            var donutData = {
-                labels: [
-                    'OK',
-                    'NG'
-                ],
-                datasets: [
-                    {
-                        data: [],
-                        backgroundColor: ['#008000', '#FF0000'],
-                    }
-                ]
-            }
-            var pieOptions = {
-                maintainAspectRatio: false,
-                responsive: true,
-                events: false,
-                animation: {
-                    duration: 500,
-                    easing: "easeOutQuart",
-                    onComplete: function () {
-                        var ctx = this.chart.ctx;
-                        ctx.font = "500 18px Arial";
-                        ctx.textAlign = 'center';
-                        ctx.textBaseline = 'bottom';
-                        donutData.datasets.forEach(function (dataset) {
-                            for (var i = 0; i < dataset.data.length; i++) {
-                                var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
-                                    total = dataset._meta[Object.keys(dataset._meta)[0]].total,
-                                    mid_radius = model.innerRadius + (model.outerRadius - model.innerRadius) / 2,
-                                    start_angle = model.startAngle,
-                                    end_angle = model.endAngle,
-                                    mid_angle = start_angle + (end_angle - start_angle) / 2;
-                                var x = mid_radius * Math.cos(mid_angle);
-                                var y = mid_radius * Math.sin(mid_angle);
-                                ctx.fillStyle = '#fff';
-                                if (i == 3) { // Darker text color for lighter background
-                                    ctx.fillStyle = '#444';
-                                }
-                                var val = dataset.data[i];
-                                var percent = " (" + String(Math.round(val / total * 100)) + "%)";
-                                if (val != 0) {
-                                    ctx.fillText(dataset.data[i] + percent, model.x + x, model.y + y);
-                                }
-                            }
-                        });
-                    }
-                }
-            }
-            var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
-            var charpie = new Chart(pieChartCanvas, {
-                type: 'pie',
-                data: donutData,
-                options: pieOptions
-            })
+            ////Pie chart
+            //var donutData = {
+            //    labels: [
+            //        'OK',
+            //        'NG'
+            //    ],
+            //    datasets: [
+            //        {
+            //            data: [],
+            //            backgroundColor: ['#008000', '#FF0000'],
+            //        }
+            //    ]
+            //}
+            //var pieOptions = {
+            //    maintainAspectRatio: false,
+            //    responsive: true,
+            //    events: false,
+            //    animation: {
+            //        duration: 500,
+            //        easing: "easeOutQuart",
+            //        onComplete: function () {
+            //            var ctx = this.chart.ctx;
+            //            ctx.font = "500 18px Arial";
+            //            ctx.textAlign = 'center';
+            //            ctx.textBaseline = 'bottom';
+            //            donutData.datasets.forEach(function (dataset) {
+            //                for (var i = 0; i < dataset.data.length; i++) {
+            //                    var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
+            //                        total = dataset._meta[Object.keys(dataset._meta)[0]].total,
+            //                        mid_radius = model.innerRadius + (model.outerRadius - model.innerRadius) / 2,
+            //                        start_angle = model.startAngle,
+            //                        end_angle = model.endAngle,
+            //                        mid_angle = start_angle + (end_angle - start_angle) / 2;
+            //                    var x = mid_radius * Math.cos(mid_angle);
+            //                    var y = mid_radius * Math.sin(mid_angle);
+            //                    ctx.fillStyle = '#fff';
+            //                    if (i == 3) { // Darker text color for lighter background
+            //                        ctx.fillStyle = '#444';
+            //                    }
+            //                    var val = dataset.data[i];
+            //                    var percent = " (" + String(Math.round(val / total * 100)) + "%)";
+            //                    if (val != 0) {
+            //                        ctx.fillText(dataset.data[i] + percent, model.x + x, model.y + y);
+            //                    }
+            //                }
+            //            });
+            //        }
+            //    }
+            //}
+            //var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+            //var charpie = new Chart(pieChartCanvas, {
+            //    type: 'pie',
+            //    data: donutData,
+            //    options: pieOptions
+            //})
             //Line Chart
             var DataLineChart = {
-                //labels: ['06:00', '06:05', '07:00', '08:00', '08:10', '09:00', '10:00', '10:30', '11:00', '12:00', '12:10', '13:00', '14:00', '14:05', '15:00', '16:00', '16:10', '17:00', '18:00', '18:30', '19:00', '20:00', '20:10', '21:00', '22:00', '22:10', '23:00', '00:00', '00:10', '01:00', '02:00', '02:45', '03:00', '04:00', '04:10', '05:00'],
-                labels: [],
+                labels: ['06:00', '06:05', '07:00', '08:00', '08:10', '09:00', '10:00', '10:30', '11:00', '12:00', '12:10', '13:00', '14:00', '14:05', '15:00', '16:00', '16:10', '17:00', '18:00', '18:30', '19:00', '20:00', '20:10', '21:00', '22:00', '22:10', '23:00', '00:00', '00:10', '01:00', '02:00', '02:45', '03:00', '04:00', '04:10', '05:00', '06:00'],
+                //labels: [],
                 datasets: [
                     {
                         type: 'line',
                         yAxisID: 'y-axis-1',
                         label: 'Plan',
                         borderColor: 'rgb(75, 192, 192)',
-                        data:[],
+                        data: [],
                         fill: false,
                         tension: 0, // làm line đỡ mượt
                     },
@@ -219,7 +240,7 @@
                         yAxisID: 'y-axis-1',
                         label: 'Actual',
                         borderColor: '#b38600',
-                        data:[],
+                        data: [],
                         fill: false,
                         tension: 0, // làm line đỡ mượt
                     },
@@ -232,7 +253,7 @@
                         },
                         yAxisID: 'y-axis-2',
                         order: 1,
-                        data:[]
+                        data: []
                     },
                 ]
             };
@@ -242,7 +263,7 @@
                 maintainAspectRatio: false,
                 scales: {
                     //xAxes: [{
-                       
+
                     //    type: 'linear',
                     //}],
                     x: {
@@ -292,7 +313,10 @@
                                 meta.data.forEach(function (bar, index) {
                                     var data = dataset.data[index];
                                     if (data >= 0) {
-                                        ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                                      
+                                            ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                                        
+                                       
                                     }
                                     else {
                                         ctx.fillText(data, bar._model.x, bar._model.y + 20);
@@ -309,30 +333,32 @@
                 data: DataLineChart,
                 options: LineChartOption
             })
-            LoadDataForPieChart();
-            LoadDataForBarchart();
-            LoadDataForLineChart();
-            setInterval(LoadDataForPieChart, 5000);
-            setInterval(LoadDataForBarchart, 5000);
-            setInterval(LoadDataForLineChart, 3000);
+            // setTimeout(LoadDataForPieChart, 2000);
+            setTimeout(LoadDataForBarchart, 3000);
+            setTimeout(LoadDataForLineChart, 4000);
+
+
+            // setInterval(LoadDataForPieChart, 5000);
+             //setInterval(LoadDataForBarchart, 5000);
+             //setInterval(LoadDataForLineChart, 2000);
             // Load Data OK NG
-            function LoadDataForPieChart() {
-                $.ajax({
-                    type: 'POST',
-                    url: '/MyWebSercive.asmx/DataForPieChart',
-                    contentType: 'application/json; charset=utf-8',
-                    dataType: 'json',
-                    success: function (response) {
-                        var data = JSON.parse(response.d);
-                        donutData.datasets[0].data = data.Datapiechart;
-                        charpie.update();
-                    },
-                    error: function (xhr, status, error) {
-                        alert(error)
-                    }
-                });
-            }
-             // Load Data Plan by Model
+            //function LoadDataForPieChart() {
+            //    $.ajax({
+            //        type: 'POST',
+            //        url: '/MyWebSercive.asmx/DataForPieChart',
+            //        contentType: 'application/json; charset=utf-8',
+            //        dataType: 'json',
+            //        success: function (response) {
+            //            var data = JSON.parse(response.d);
+            //            donutData.datasets[0].data = data.Datapiechart;
+            //            charpie.update();
+            //        },
+            //        error: function (xhr, status, error) {
+            //            alert(error)
+            //        }
+            //    });
+            //}
+            // Load Data Plan by Model
             function LoadDataForBarchart() {
                 $.ajax({
                     type: 'POST',
@@ -356,20 +382,23 @@
             }
             // Load Data Plan by Total
             function LoadDataForLineChart() {
+                var selectedModel = document.getElementById('<%= modelplan.ClientID %>').value;
                 $.ajax({
                     type: 'POST',
                     url: '/MyWebSercive.asmx/DataForLineChart',
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
+                    data: JSON.stringify({ ModelName: selectedModel}),
                     success: function (response) {
                         var data = JSON.parse(response.d);
                         DataLineChart.datasets[0].data = data.dataplan;
                         DataLineChart.datasets[1].data = data.dataactual;
                         DataLineChart.datasets[2].data = data.datadiff;
-                        DataLineChart.labels = data.labels;
-                        var maxvl = Math.max(...data.datadiff) + 10;
-                        LineChartOption.scales.yAxes[1].ticks.max = maxvl;
-                        LineChartOption.scales.yAxes[1].ticks.min = -maxvl;
+                        //DataLineChart.labels = data.labels;
+                        const absoluteValues = data.datadiff.map(value => Math.abs(value));
+                        const maxAbsoluteValue = Math.max(...absoluteValues)+100;
+                        LineChartOption.scales.yAxes[1].ticks.max = maxAbsoluteValue;
+                        LineChartOption.scales.yAxes[1].ticks.min = -maxAbsoluteValue;
                         linechart.options = LineChartOption;
                         linechart.update();
                     },
@@ -378,6 +407,13 @@
                     }
                 });
             }
+            $('#<%= modelplan.ClientID %>').on('change', function () {
+                LoadDataForLineChart();
+            });
         });
+
+        
+
+      
     </script>
 </asp:Content>

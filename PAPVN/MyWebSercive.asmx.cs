@@ -1,8 +1,11 @@
 ﻿using Google.Protobuf.WellKnownTypes;
+using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Script.Services;
 using System.Web.Services;
@@ -28,7 +31,8 @@ namespace PAPVN
             //    labels = dt.AsEnumerable().Select(row => row.Field<string>("NameValue")).ToArray(),
             //    values = dt.AsEnumerable().Select(row => row.Field<int>("DataValue")).ToArray(),
             //};
-            DataTable dt = DBConnect.StoreFillDT("LoadDataForChartHistory", CommandType.StoredProcedure, DateTimeFrom, DateTimeTo);
+            DBConnect dBConnect = new DBConnect();
+            DataTable dt = dBConnect.StoreFillDT("LoadDataForChartHistory", CommandType.StoredProcedure, DateTimeFrom, DateTimeTo);
             if (dt.Rows[0]["VPOK"].ToString() != "")
             {
                 var data = new
@@ -133,7 +137,8 @@ namespace PAPVN
         [WebMethod]
         public string DataForLineChartRealTime()
         {
-            DataTable dt = DBConnect.StoreFillDT("LoadDataForChart", CommandType.StoredProcedure, 2);
+            DBConnect dBConnect = new DBConnect();
+            DataTable dt = dBConnect.StoreFillDT("LoadDataForChart", CommandType.StoredProcedure, 2);
             if (dt.Rows[0]["VPOK"].ToString() != "")
             {
                 var data = new
@@ -235,193 +240,67 @@ namespace PAPVN
                 return Newtonsoft.Json.JsonConvert.SerializeObject(data);
             }
         }
-        [WebMethod]
-        public string DataForPieChart()
-        {
-            #region demo
-            //Random random1 = new Random();
-            //Random random2 = new Random();
-            //int ok = random1.Next(20, 100);
-            //int ng = random2.Next(10, 30);
-            //var data = new
-            //{
-            //    Datapiechart = new[] { ok, ng }
-            //};
-            //return Newtonsoft.Json.JsonConvert.SerializeObject(data);
-            #endregion
-            DataTable dt = DBConnect.StoreFillDT("LoadDataOkNgForChartGas", CommandType.StoredProcedure);
-            if (dt.Rows[0][0].ToString() == "")
-            {
-                var data = new
-                {
-                    Datapiechart = new[] { (int)dt.Rows[0]["DataOK"], (int)dt.Rows[0]["DataNG"] }
-                };
-                return Newtonsoft.Json.JsonConvert.SerializeObject(data);
-            }
-            else
-            {
-                var data = new
-                {
-                    Datapiechart = new[] {0,0}
-                };
-                return Newtonsoft.Json.JsonConvert.SerializeObject(data);
-            }
-        }
+        //[WebMethod]
+        //public string DataForPieChart()
+        //{
+        //    DBConnect dBConnect = new DBConnect();
+        //    DataTable dt = dBConnect.StoreFillDS("LoadDataForPieChartPlan", CommandType.StoredProcedure).Tables[0];
+        //    if (dt.Rows[0][0].ToString() != "")
+        //    {
+        //        var data = new
+        //        {
+        //            Datapiechart = new[] { (int)dt.Rows[0]["DataOK"], (int)dt.Rows[0]["DataNG"] }
+        //            // Datapiechart = new[] { 3, 0 }
+        //        };
+        //        return Newtonsoft.Json.JsonConvert.SerializeObject(data);
+        //    }
+        //    else
+        //    {
+        //        var data = new
+        //        {
+        //            Datapiechart = new[] { 0, 0 }
+        //        };
+        //        return Newtonsoft.Json.JsonConvert.SerializeObject(data);
+        //    }
+        //}
         [WebMethod]
         public string DataForBarChart()
         {
-            #region demo
-            //Random random = new Random();
-            //int[] dataplan = new int[30];
-            //int[] dataplanpertime = new int[30];
-            //int[] dataactual = new int[30];
-            //string[] labels = new string[30];
-            //for (int i = 0; i < 30; i++)
-            //{
-            //    dataplan[i] = random.Next(200, 400);
-            //    dataplanpertime[i] = random.Next(100, 200);
-            //    dataactual[i] = random.Next(50, 150);
-            //    labels[i] = "Model" + (i+1).ToString();
-            //}
-            //var data = new
-            //{
-            //    dataplan,
-            //    dataplanpertime,
-            //    dataactual,
-            //    labels,
-            //};
-            //return Newtonsoft.Json.JsonConvert.SerializeObject(data);
-            #endregion
-            DataSet ds = DBConnect.StoreFillDS("LoadDataBarchartPlanGas", CommandType.StoredProcedure);
-            if (ds.Tables[0].Rows.Count > 1)
+            DBConnect dBConnect = new DBConnect();
+            DataTable dt = dBConnect.StoreFillDT("LoadDataForBarChartPlanGas", CommandType.StoredProcedure);
+            if (dt.Rows.Count > 1)
             {
-                int[] dataplan;
-                int[] dataplanpertime;
-                int[] dataactual;
-                string[] labels;
-                DateTime DateStart = DateTime.Parse(ds.Tables[1].Rows[0]["DateStart"].ToString());
-                DateTime DateEnd = DateTime.Parse(ds.Tables[1].Rows[0]["DateEnd"].ToString());
-                TimeSpan subtimemaster = DateEnd - DateStart;
-                int TypeDate = (int)Math.Round(float.Parse(ds.Tables[0].Rows[0]["TypeData"].ToString()));
-                TimeSpan subtimenow = DateTime.Now - DateStart;
-                double totalsec = subtimenow.TotalSeconds;
-                int hournow = Int32.Parse(DateTime.Now.ToString("HH"));
-                if (subtimemaster <= subtimenow) 
+                int[] dataplan = new int[dt.Rows.Count-1];
+                int[] dataplanpertime = new int[dt.Rows.Count-1];
+                int[] dataactual = new int[dt.Rows.Count - 1];
+                string[] labels = new string[dt.Rows.Count - 1];
+                for (int i = 0; i < dt.Rows.Count-1; i++)
                 {
-                    totalsec = subtimemaster.TotalSeconds;
-                }
-                else
-                {
-                    if (TypeDate == 13 || TypeDate == 12 || TypeDate == 1)
+                    labels[i] = dt.Rows[i]["Model"].ToString();
+                    dataplan[i] = Int32.Parse(dt.Rows[i]["QuantityDay"].ToString());
+                    dataactual[i] = Int32.Parse(dt.Rows[i]["QuantityActual"].ToString());
+                    DateTime TimeStart = DateTime.Parse(dt.Rows[i]["TimeStart"].ToString());
+                    DateTime TimeEnd = DateTime.Parse(dt.Rows[i]["TimeEnd"].ToString());
+                    TimeSpan subtimenow = DateTime.Now - TimeStart;
+                    TimeSpan subtimemaster = TimeEnd - TimeStart;
+                    if (subtimenow.TotalSeconds <= 0)
                     {
-                        if (hournow >= 6 && hournow < 8)
-                        {
-                            totalsec = totalsec - Config.RestTime6hour * 60;
-                        }
-                        else if (hournow >= 8 && hournow < 10)
-                        {
-                            totalsec = totalsec - (Config.RestTime6hour + Config.RestTime8hour) * 60;
-                        }
-                        else if (hournow >= 10 && hournow < 12)
-                        {
-                            totalsec = totalsec - (Config.RestTime6hour + Config.RestTime8hour + Config.RestTime10hour) * 60;
-                        }
-                        else if (hournow >= 12 && hournow < 14)
-                        {
-                            totalsec = totalsec - (Config.RestTime6hour + Config.RestTime8hour + Config.RestTime10hour + Config.RestTime12hour) * 60;
-                        }
-                        else if (hournow >= 14 && hournow < 16)
-                        {
-                            totalsec = totalsec - (Config.RestTime6hour + Config.RestTime8hour + Config.RestTime10hour + Config.RestTime12hour + Config.RestTime14hour) * 60;
-                        }
-                        else if (hournow >= 16 && hournow < 18)
-                        {
-                            totalsec = totalsec - (Config.RestTime6hour + Config.RestTime8hour + Config.RestTime10hour + Config.RestTime12hour + Config.RestTime14hour + Config.RestTime16hour) * 60;
-                        }
-                        else if (hournow >= 18 && hournow < 20)
-                        {
-                            totalsec = totalsec - (Config.RestTime6hour + Config.RestTime8hour + Config.RestTime10hour + Config.RestTime12hour + Config.RestTime14hour + Config.RestTime16hour + Config.RestTime18hour) * 60;
-                        }
-                        else if (hournow >= 20 && hournow < 22)
-                        {
-                            totalsec = totalsec - (Config.RestTime6hour + Config.RestTime8hour + Config.RestTime10hour + Config.RestTime12hour + Config.RestTime14hour + Config.RestTime16hour + Config.RestTime18hour + Config.RestTime20hour) * 60;
-                        }
-                        else if (hournow >= 22)
-                        {
-                            totalsec = totalsec - (Config.RestTime6hour + Config.RestTime8hour + Config.RestTime10hour + Config.RestTime12hour + Config.RestTime14hour + Config.RestTime16hour + Config.RestTime18hour + Config.RestTime20hour + Config.RestTime22hour) * 60;
-                        }
-                        else if (hournow >= 00 && hournow < 2)
-                        {
-                            totalsec = totalsec - (Config.RestTime6hour + Config.RestTime8hour + Config.RestTime10hour + Config.RestTime12hour + Config.RestTime14hour + Config.RestTime16hour + Config.RestTime18hour + Config.RestTime20hour + Config.RestTime22hour + Config.RestTime00hour) * 60;
-                        }
-                        else if (hournow >= 2 && hournow < 4)
-                        {
-                            totalsec = totalsec - (Config.RestTime6hour + Config.RestTime8hour + Config.RestTime10hour + Config.RestTime12hour + Config.RestTime14hour + Config.RestTime16hour + Config.RestTime18hour + Config.RestTime20hour + Config.RestTime22hour + Config.RestTime00hour + Config.RestTime02hour) * 60;
-                        }
-                        else
-                        {
-                            totalsec = totalsec - Config.RestTime1 - Config.RestTime2 - Config.RestTime3;
-                        }
+                        dataplanpertime[i] = 0;
                     }
-                    else if (TypeDate == 23 || TypeDate == 2)
+                    else if(subtimemaster <= subtimenow)
                     {
-                        if (hournow >= 14 && hournow < 16)
-                        {
-                            totalsec = totalsec - (Config.RestTime14hour) * 60;
-                        }
-                        else if (hournow >= 16 && hournow < 18)
-                        {
-                            totalsec = totalsec - (Config.RestTime14hour + Config.RestTime16hour) * 60;
-                        }
-                        else if (hournow >= 18 && hournow < 20)
-                        {
-                            totalsec = totalsec - (Config.RestTime14hour + Config.RestTime16hour + Config.RestTime18hour) * 60;
-                        }
-                        else if (hournow >= 20 && hournow < 22)
-                        {
-                            totalsec = totalsec - (Config.RestTime14hour + Config.RestTime16hour + Config.RestTime18hour + Config.RestTime20hour) * 60;
-                        }
-                        else if (hournow >= 22)
-                        {
-                            totalsec = totalsec - (Config.RestTime14hour + Config.RestTime16hour + Config.RestTime18hour + Config.RestTime20hour + Config.RestTime22hour) * 60;
-                        }
-                        else if (hournow >= 00 && hournow < 2)
-                        {
-                            totalsec = totalsec - (Config.RestTime14hour + Config.RestTime16hour + Config.RestTime18hour + Config.RestTime20hour + Config.RestTime22hour + Config.RestTime00hour) * 60;
-                        }
-                        else if (hournow >= 2 && hournow < 4)
-                        {
-                            totalsec = totalsec - (Config.RestTime14hour + Config.RestTime16hour + Config.RestTime18hour + Config.RestTime20hour + Config.RestTime22hour + Config.RestTime00hour + Config.RestTime02hour) * 60;
-                        }
-                        else
-                        {
-                            totalsec = totalsec - Config.RestTime2 - Config.RestTime3;
-                        }
+                        dataplanpertime[i] = dataplan[i];
                     }
                     else
                     {
-                        if (hournow >= 22)
+                        double totalsec = subtimenow.TotalSeconds;
+                        for (DateTime currentHour = TimeStart; currentHour < DateTime.Now; currentHour = currentHour.AddHours(1))
                         {
-                            totalsec = totalsec - (Config.RestTime22hour) * 60;
+                            totalsec = totalsec - Config.TimeRest[currentHour.Hour] * 60;
                         }
-                        else if (hournow >= 00 && hournow < 2)
-                        {
-                            totalsec = totalsec - (Config.RestTime22hour + Config.RestTime00hour) * 60;
-                        }
-                        else if (hournow >= 2 && hournow < 4)
-                        {
-                            totalsec = totalsec - (Config.RestTime22hour + Config.RestTime00hour + Config.RestTime02hour) * 60;
-                        }
-                        else
-                        {
-                            totalsec = totalsec - Config.RestTime3;
-                        }
+                        dataplanpertime[i] = (int)Math.Round(totalsec*float.Parse(dt.Rows[i]["QuantityPerSec"].ToString()));
                     }
                 }
-                labels = ds.Tables[0].AsEnumerable().Select(row => row.Field<string>("Model")).ToArray();
-                dataplan = ds.Tables[0].AsEnumerable().Select(row => (int)Math.Round(float.Parse(row["QuantityPlan"].ToString()))).ToArray();
-                dataplanpertime = ds.Tables[0].AsEnumerable().Select(row => (int)Math.Round(float.Parse(row["QuantityPlanPerTime"].ToString()) * totalsec)).ToArray();
-                dataactual = ds.Tables[0].AsEnumerable().Select(row => (int)Math.Round(float.Parse(row["QuantityActual"].ToString()))).ToArray();
                 var data = new
                 {
                     dataplan,
@@ -435,8 +314,8 @@ namespace PAPVN
             {
                 var data = new
                 {
-                    dataplan = new[] {0}, 
-                    dataplanpertime = new[] {0},
+                    dataplan = new[] { 0 },
+                    dataplanpertime = new[] { 0 },
                     dataactual = new[] { 0 },
                     labels = new[] { "" },
                 };
@@ -444,7 +323,7 @@ namespace PAPVN
             }
         }
         [WebMethod]
-        public string DataForLineChart()
+        public string DataForLineChart(string ModelName)
         {
             #region demo
             //Random random = new Random();
@@ -480,162 +359,335 @@ namespace PAPVN
             //};
             //return Newtonsoft.Json.JsonConvert.SerializeObject(data);
             #endregion
-            DataSet ds = DBConnect.StoreFillDS("LoadDataBarchartPlanGas", CommandType.StoredProcedure);
-            if (ds.Tables[0].Rows.Count > 1)
+            string parammysql;
+            if (ModelName.Contains("All Model"))
             {
-                int[] dataplan;
-                int[] dataactual;
-                int[] datadiff;
-                string[] labels;
-                DateTime DateStart = DateTime.Parse(ds.Tables[1].Rows[0]["DateStart"].ToString());
-                DateTime DateEnd = DateTime.Parse(ds.Tables[1].Rows[0]["DateEnd"].ToString());
-                TimeSpan subtimemaster = DateEnd - DateStart;
-                int TypeDate = (int)Math.Round(float.Parse(ds.Tables[0].Rows[0]["TypeData"].ToString()));
-                TimeSpan subtimenow = DateTime.Now - DateStart;
-                double totalsec = subtimenow.TotalSeconds;
-                int hournow = Int32.Parse(DateTime.Now.ToString("HH"));
-                if (subtimemaster <= subtimenow)
-                {
-                    totalsec = subtimemaster.TotalSeconds;
-                }
-                else
-                {
-                    if (TypeDate == 13 || TypeDate == 12 || TypeDate == 1)
-                    {
-                        if (hournow >= 6 && hournow < 8)
-                        {
-                            totalsec = totalsec - Config.RestTime6hour * 60;
-                        }
-                        else if (hournow >= 8 && hournow < 10)
-                        {
-                            totalsec = totalsec - (Config.RestTime6hour + Config.RestTime8hour) * 60;
-                        }
-                        else if (hournow >= 10 && hournow < 12)
-                        {
-                            totalsec = totalsec - (Config.RestTime6hour + Config.RestTime8hour + Config.RestTime10hour) * 60;
-                        }
-                        else if (hournow >= 12 && hournow < 14)
-                        {
-                            totalsec = totalsec - (Config.RestTime6hour + Config.RestTime8hour + Config.RestTime10hour + Config.RestTime12hour) * 60;
-                        }
-                        else if (hournow >= 14 && hournow < 16)
-                        {
-                            totalsec = totalsec - (Config.RestTime6hour + Config.RestTime8hour + Config.RestTime10hour + Config.RestTime12hour + Config.RestTime14hour) * 60;
-                        }
-                        else if (hournow >= 16 && hournow < 18)
-                        {
-                            totalsec = totalsec - (Config.RestTime6hour + Config.RestTime8hour + Config.RestTime10hour + Config.RestTime12hour + Config.RestTime14hour + Config.RestTime16hour) * 60;
-                        }
-                        else if (hournow >= 18 && hournow < 20)
-                        {
-                            totalsec = totalsec - (Config.RestTime6hour + Config.RestTime8hour + Config.RestTime10hour + Config.RestTime12hour + Config.RestTime14hour + Config.RestTime16hour + Config.RestTime18hour) * 60;
-                        }
-                        else if (hournow >= 20 && hournow < 22)
-                        {
-                            totalsec = totalsec - (Config.RestTime6hour + Config.RestTime8hour + Config.RestTime10hour + Config.RestTime12hour + Config.RestTime14hour + Config.RestTime16hour + Config.RestTime18hour + Config.RestTime20hour) * 60;
-                        }
-                        else if (hournow >= 22)
-                        {
-                            totalsec = totalsec - (Config.RestTime6hour + Config.RestTime8hour + Config.RestTime10hour + Config.RestTime12hour + Config.RestTime14hour + Config.RestTime16hour + Config.RestTime18hour + Config.RestTime20hour + Config.RestTime22hour) * 60;
-                        }
-                        else if (hournow >= 00 && hournow < 2)
-                        {
-                            totalsec = totalsec - (Config.RestTime6hour + Config.RestTime8hour + Config.RestTime10hour + Config.RestTime12hour + Config.RestTime14hour + Config.RestTime16hour + Config.RestTime18hour + Config.RestTime20hour + Config.RestTime22hour + Config.RestTime00hour) * 60;
-                        }
-                        else if (hournow >= 2 && hournow < 4)
-                        {
-                            totalsec = totalsec - (Config.RestTime6hour + Config.RestTime8hour + Config.RestTime10hour + Config.RestTime12hour + Config.RestTime14hour + Config.RestTime16hour + Config.RestTime18hour + Config.RestTime20hour + Config.RestTime22hour + Config.RestTime00hour + Config.RestTime02hour) * 60;
-                        }
-                        else
-                        {
-                            totalsec = totalsec - Config.RestTime1 - Config.RestTime2 - Config.RestTime3;
-                        }
-                    }
-                    else if (TypeDate == 23 || TypeDate == 2)
-                    {
-                        if (hournow >= 14 && hournow < 16)
-                        {
-                            totalsec = totalsec - (Config.RestTime14hour) * 60;
-                        }
-                        else if (hournow >= 16 && hournow < 18)
-                        {
-                            totalsec = totalsec - (Config.RestTime14hour + Config.RestTime16hour) * 60;
-                        }
-                        else if (hournow >= 18 && hournow < 20)
-                        {
-                            totalsec = totalsec - (Config.RestTime14hour + Config.RestTime16hour + Config.RestTime18hour) * 60;
-                        }
-                        else if (hournow >= 20 && hournow < 22)
-                        {
-                            totalsec = totalsec - (Config.RestTime14hour + Config.RestTime16hour + Config.RestTime18hour + Config.RestTime20hour) * 60;
-                        }
-                        else if (hournow >= 22)
-                        {
-                            totalsec = totalsec - (Config.RestTime14hour + Config.RestTime16hour + Config.RestTime18hour + Config.RestTime20hour + Config.RestTime22hour) * 60;
-                        }
-                        else if (hournow >= 00 && hournow < 2)
-                        {
-                            totalsec = totalsec - (Config.RestTime14hour + Config.RestTime16hour + Config.RestTime18hour + Config.RestTime20hour + Config.RestTime22hour + Config.RestTime00hour) * 60;
-                        }
-                        else if (hournow >= 2 && hournow < 4)
-                        {
-                            totalsec = totalsec - (Config.RestTime14hour + Config.RestTime16hour + Config.RestTime18hour + Config.RestTime20hour + Config.RestTime22hour + Config.RestTime00hour + Config.RestTime02hour) * 60;
-                        }
-                        else
-                        {
-                            totalsec = totalsec - Config.RestTime2 - Config.RestTime3;
-                        }
-                    }
-                    else
-                    {
-                        if (hournow >= 22)
-                        {
-                            totalsec = totalsec - (Config.RestTime22hour) * 60;
-                        }
-                        else if (hournow >= 00 && hournow < 2)
-                        {
-                            totalsec = totalsec - (Config.RestTime22hour + Config.RestTime00hour) * 60;
-                        }
-                        else if (hournow >= 2 && hournow < 4)
-                        {
-                            totalsec = totalsec - (Config.RestTime22hour + Config.RestTime00hour + Config.RestTime02hour) * 60;
-                        }
-                        else
-                        {
-                            totalsec = totalsec - Config.RestTime3;
-                        }
-                    }
-                }
-                //int[] dataplan;
-                //int[] dataactual;
-                //int[] datadiff;
-                //string[] labels;
-
-
-                labels = ds.Tables[0].AsEnumerable().Select(row => row.Field<string>("Model")).ToArray();
-                dataplan = ds.Tables[0].AsEnumerable().Select(row => (int)Math.Round(float.Parse(row["QuantityPlan"].ToString()))).ToArray();
-                datadiff = ds.Tables[0].AsEnumerable().Select(row => (int)Math.Round(float.Parse(row["QuantityPlanPerTime"].ToString()) * totalsec)).ToArray();
-                dataactual = ds.Tables[0].AsEnumerable().Select(row => (int)Math.Round(float.Parse(row["QuantityActual"].ToString()))).ToArray();
-                var data = new
-                {
-                    dataplan,
-                    dataactual,
-                    datadiff,
-                    labels,
-                };
-                return Newtonsoft.Json.JsonConvert.SerializeObject(data);
+                parammysql = "all";
             }
             else
             {
-                var data = new
-                {
-                    dataplan = new[] { 0 },
-                    dataactual = new[] { 0 },
-                    datadiff = new[] { 0 },
-                    labels = new[] { "" },
-                };
-                return Newtonsoft.Json.JsonConvert.SerializeObject(data);
+                parammysql = ModelName.Trim();
             }
+            DBConnect dBConnect = new DBConnect();
+            DataSet ds = dBConnect.StoreFillDS("LoadDataForLineChartPlanGas", CommandType.StoredProcedure, parammysql);
+            int hournow = int.Parse(DateTime.Now.ToString("HH"));
+            Dictionary<int,int> listdataplan = new Dictionary<int,int>();
+            List<int> listdataactual = new List<int>();
+            List<int> listdatadatadiff = new List<int>();
+            List<int> listdataplanactual = new List<int>();
+            if (ds.Tables[1].Rows.Count > 0)
+            {
+                DateTime TimeStart = DateTime.Parse(ds.Tables[1].Rows[0]["TimeStart"].ToString());
+                DateTime TimeEnd = DateTime.Parse(ds.Tables[1].Rows[0]["TimeEnd"].ToString());
+                float quantityPerSec = float.Parse(ds.Tables[1].Rows[0]["QuantityPerSec"].ToString());
+                int TotalTime = Int32.Parse(ds.Tables[1].Rows[0]["TotalTime"].ToString());
+                TimeSpan subtimenow = DateTime.Now - TimeStart;
+
+                double totalsec = subtimenow.TotalSeconds;
+                int hourstart = Int32.Parse(TimeStart.ToString("HH"));
+                int hoursend = Int32.Parse(TimeEnd.ToString("HH"));
+                int index = 1;
+
+                for (DateTime currentHour = TimeStart; currentHour < TimeEnd; currentHour = currentHour.AddHours(1))
+                {
+                    int TotalTimeNow = index * 3600;
+                    for (DateTime currentHour1 = TimeStart; currentHour1 <= currentHour; currentHour1 = currentHour1.AddHours(1))
+                    {
+                        TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
+                    }
+                    listdataplan.Add(currentHour.Hour, (int)Math.Round(TotalTimeNow * quantityPerSec));
+                    index++;
+                }
+
+                if (DateTime.Now.Hour > 5)
+                {
+                    for (DateTime currentHour = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd") + " 06:00:00"); currentHour < DateTime.Now; currentHour = currentHour.AddHours(1))
+                    {
+                        if (listdataplan.Keys.Contains(currentHour.Hour))
+                        {
+
+                            int prhour;
+
+                            if (currentHour.Hour != 0)
+                            {
+                                prhour = currentHour.Hour -1;
+                            }
+                            else
+                            {
+                                prhour = 23;
+                            }
+
+                            for (int i = 0; i < Config.QuantityPoint[currentHour.Hour]; i++)
+                            {
+                                if (currentHour.Hour == 6)
+                                {
+                                    listdataplanactual.Add(0);
+                                    listdataactual.Add(0);
+                                    listdatadatadiff.Add(0);
+                                }
+                                else if (currentHour.Hour == hourstart)
+                                {
+                                    listdataplanactual.Add(0);
+                                    int sumquantityactual = 0;
+                                    for (int j = 6; j <= prhour; j++)
+                                    {
+                                        sumquantityactual += Int32.Parse(ds.Tables[0].Rows[j]["Quantity"].ToString());
+                                    }
+                                    listdataactual.Add(sumquantityactual);
+                                    listdatadatadiff.Add(sumquantityactual);
+
+                                }
+                                else if (i < Config.QuantityPoint[currentHour.Hour] - 1)
+                                {
+                                    listdataplanactual.Add(listdataplanactual[listdataplanactual.Count-1]);
+                                    listdataactual.Add(listdataactual[listdataactual.Count - 1]);
+                                    listdatadatadiff.Add(listdatadatadiff[listdatadatadiff.Count - 1]);
+                                }
+                                else
+                                {
+                                    listdataplanactual.Add(listdataplan[prhour]);
+                                   
+                                    int sumquantityactual = 0;
+                                    for (int j = 6; j <= prhour; j++)
+                                    {
+                                        sumquantityactual += Int32.Parse(ds.Tables[0].Rows[j]["Quantity"].ToString());
+                                    }
+                                    listdataactual.Add(sumquantityactual);
+                                   
+                                    listdatadatadiff.Add(sumquantityactual - listdataplan[prhour]);
+                                }
+
+                            }
+
+                        }
+                        else
+                        {
+                            int prhour;
+
+                            if (currentHour.Hour != 0)
+                            {
+                                prhour = currentHour.Hour - 1;
+                            }
+                            else
+                            {
+                                prhour = 23;
+                            }
+                            for (int i = 0; i < Config.QuantityPoint[currentHour.Hour]; i++)
+                            {
+
+                                if (i < Config.QuantityPoint[currentHour.Hour] - 1)
+                                {
+                                    listdataplanactual.Add(0);
+                                    listdataactual.Add(listdataactual[listdataactual.Count - 1]);
+                                    listdatadatadiff.Add(listdatadatadiff[listdatadatadiff.Count - 1]);
+                                }
+                                else
+                                {
+                                    listdataplanactual.Add(0);
+                                    int sumquantityactual = 0;
+                                    for (int j = 6; j <= prhour; j++)
+                                    {
+                                        sumquantityactual += Int32.Parse(ds.Tables[0].Rows[j]["Quantity"].ToString());
+                                    }
+                                    listdataactual.Add(sumquantityactual);
+                                    listdatadatadiff.Add(sumquantityactual);
+                                }
+
+                               
+
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    for (DateTime currentHour = DateTime.Parse(DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd") + " 06:00:00"); currentHour < DateTime.Now; currentHour = currentHour.AddHours(1))
+                    {
+                        if (listdataplan.Keys.Contains(currentHour.Hour))
+                        {
+
+                            int prhour;
+
+                            if (currentHour.Hour != 0)
+                            {
+                                prhour = currentHour.Hour - 1;
+                            }
+                            else
+                            {
+                                prhour = 23;
+                            }
+
+                            for (int i = 0; i < Config.QuantityPoint[currentHour.Hour]; i++)
+                            {
+                                if (currentHour.Hour == 6)
+                                {
+                                    listdataplanactual.Add(0);
+                                    listdataactual.Add(0);
+                                    listdatadatadiff.Add(0);
+                                }
+                                else if (currentHour.Hour == hourstart)
+                                {
+                                    listdataplanactual.Add(0);
+
+                                   
+
+                                    if (currentHour.Hour > 5)
+                                    {
+                                        int sumquantityactual = 0;
+                                        for (int j = 6; j <= prhour; j++)
+                                        {
+                                            sumquantityactual += Int32.Parse(ds.Tables[0].Rows[j]["Quantity"].ToString());
+                                        }
+                                        listdataactual.Add(sumquantityactual);
+                                        listdatadatadiff.Add(sumquantityactual);
+                                    }
+                                    else
+                                    {
+                                        int sumquantityactual = 0;
+                                        for (int j = 6; j <= 23; j++)
+                                        {
+                                            sumquantityactual += Int32.Parse(ds.Tables[0].Rows[j]["Quantity"].ToString());
+                                        }
+                                        if (prhour <=5)
+                                        {
+                                            for (int k = 0; k <= prhour; k++)
+                                            {
+                                                sumquantityactual += Int32.Parse(ds.Tables[0].Rows[k]["Quantity"].ToString());
+                                            }
+                                        }
+                                        listdataactual.Add(sumquantityactual);
+                                        listdatadatadiff.Add(sumquantityactual);
+                                    }
+
+
+
+
+                                }
+                                else if (i < Config.QuantityPoint[currentHour.Hour] - 1)
+                                {
+                                    listdataplanactual.Add(listdataplanactual[listdataplanactual.Count - 1]);
+                                    listdataactual.Add(listdataactual[listdataactual.Count - 1]);
+                                    listdatadatadiff.Add(listdatadatadiff[listdatadatadiff.Count - 1]);
+                                }
+                                else
+                                {
+                                    listdataplanactual.Add(listdataplan[prhour]);
+
+
+
+                                    if (currentHour.Hour > 5)
+                                    {
+                                        int sumquantityactual = 0;
+                                        for (int j = 6; j <= prhour; j++)
+                                        {
+                                            sumquantityactual += Int32.Parse(ds.Tables[0].Rows[j]["Quantity"].ToString());
+                                        }
+                                        listdataactual.Add(sumquantityactual);
+                                        listdatadatadiff.Add(sumquantityactual - listdataplan[prhour]);
+                                    }
+                                    else
+                                    {
+                                        int sumquantityactual = 0;
+                                        for (int j = 6; j <= 23; j++)
+                                        {
+                                            sumquantityactual += Int32.Parse(ds.Tables[0].Rows[j]["Quantity"].ToString());
+                                        }
+                                        if (prhour <= 5)
+                                        {
+                                            for (int k = 0; k <= prhour; k++)
+                                            {
+                                                sumquantityactual += Int32.Parse(ds.Tables[0].Rows[k]["Quantity"].ToString());
+                                            }
+                                        }
+                                       
+                                        listdataactual.Add(sumquantityactual);
+                                        listdatadatadiff.Add(sumquantityactual - listdataplan[prhour]);
+                                    }
+
+                                   
+                                }
+
+                            }
+
+                        }
+                        else
+                        {
+                            int prhour;
+
+                            if (currentHour.Hour != 0)
+                            {
+                                prhour = currentHour.Hour - 1;
+                            }
+                            else
+                            {
+                                prhour = 23;
+                            }
+                            for (int i = 0; i < Config.QuantityPoint[currentHour.Hour]; i++)
+                            {
+                                if (i < Config.QuantityPoint[currentHour.Hour] - 1)
+                                {
+                                    listdataplanactual.Add(0);
+                                    listdataactual.Add(listdataactual[listdataactual.Count - 1]);
+                                    listdatadatadiff.Add(listdatadatadiff[listdatadatadiff.Count - 1]);
+                                }
+                                else
+                                {
+                                    listdataplanactual.Add(0);
+                                    if (currentHour.Hour > 5)
+                                    {
+                                        int sumquantityactual = 0;
+                                        for (int j = 6; j <= prhour; j++)
+                                        {
+                                            sumquantityactual += Int32.Parse(ds.Tables[0].Rows[j]["Quantity"].ToString());
+                                        }
+                                        listdataactual.Add(sumquantityactual);
+                                        listdatadatadiff.Add(sumquantityactual);
+                                    }
+                                    else
+                                    {
+                                        int sumquantityactual = 0;
+                                        for (int j = 6; j <= 23; j++)
+                                        {
+                                            sumquantityactual += Int32.Parse(ds.Tables[0].Rows[j]["Quantity"].ToString());
+                                        }
+                                        if (prhour <=5)
+                                        {
+                                            for (int k = 0; k <= prhour; k++)
+                                            {
+                                                sumquantityactual += Int32.Parse(ds.Tables[0].Rows[k]["Quantity"].ToString());
+                                            }
+                                        }
+                                        
+                                        listdataactual.Add(sumquantityactual);
+                                        listdatadatadiff.Add(sumquantityactual);
+                                    }
+                                }
+                               
+
+                            }
+                        }
+                    }
+                }
+            }
+
+            int[] dataplan = new int[listdataplanactual.Count];
+            int[] dataactual = new int[listdataplanactual.Count];
+            int[] datadiff = new int[listdataplanactual.Count];
+
+            for (int i = 0; i < listdataplanactual.Count; i++)
+            {
+                dataplan[i] = listdataplanactual[i];
+                dataactual[i] = listdataactual[i];
+                datadiff[i] = listdatadatadiff[i];
+            }
+            var data = new
+            {
+                dataplan,
+                dataactual,
+                datadiff,
+               
+            };
+            return Newtonsoft.Json.JsonConvert.SerializeObject(data);
         }
     }
 }

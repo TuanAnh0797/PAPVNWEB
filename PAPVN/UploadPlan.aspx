@@ -44,6 +44,8 @@
         <asp:Button type ="button" Text="Upload Plan" OnClick="Importdata_Click"  runat="server" name="btn_Import" style="font-size:20px; font-weight:600" class="btn btn-outline-primary btn-block mt-1">
         
         </asp:Button>
+        
+        <button></button>
        
     </div>
     <div class="card">
@@ -60,11 +62,12 @@
                     <tr style="font-size:20px">
                         <th>Model</th>
                         <th>Plan All Day</th>
-                        <th>Plan 1</th>
-                        <th>Plan 2</th>
-                        <th>Plan 3</th>
+                        <th>Plan shift 1</th>
+                        <th>Plan shift 2</th>
+                        <th>Plan shift 3</th>
                         <th>Start Time</th>
                         <th>End Time</th>
+                        <th>Modify Plan</th>
                     </tr>
                 </thead>
                 <tbody style="font-size:25px" id="dt_plan" runat="server">
@@ -76,7 +79,9 @@
         </div>
         <!-- /.card-body -->
     </div>
-    <script>
-       
-    </script>
+   <script type="text/javascript">
+       function showPopup() {
+          alert('Chức năng đang phát triển')
+       }
+   </script>
 </asp:Content>
