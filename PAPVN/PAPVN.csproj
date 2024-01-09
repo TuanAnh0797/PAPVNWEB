@@ -236,6 +236,7 @@
     <Content Include="Mycss\iconio.css" />
     <Content Include="Mycss\myicon.css" />
     <Content Include="MyWebSercive.asmx" />
+    <Content Include="wwwroot\Panasonic_logo_bl_posi_PNG.ico" />
     <Content Include="PlanPAN.aspx" />
     <Content Include="PlanURT.aspx" />
     <Content Include="plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
@@ -2390,6 +2391,9 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>wwwroot\Panasonic_logo_bl_posi_PNG.ico</ApplicationIcon>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

@@ -1,23 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="UploadPlan.aspx.cs" Inherits="PAPVN.UploadPlan" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <style>
         #popupDiv {
             background-color: #f9f9f9;
-            padding: 0px 20px 0px 20px ;
+            padding: 0px 20px 0px 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
             font-family: Arial, sans-serif;
         }
-        /* Style cho nút "Close" của popup */
-        /*.custom-dialog-class .ui-dialog-titlebar-close {
-            width: 20px;*/ /* Đặt kích thước chiều rộng mong muốn */
-            /*height: 20px;*/ /* Đặt kích thước chiều cao mong muốn */
-            /* Thêm bất kỳ thuộc tính CSS tùy chỉnh khác nếu cần thiết */
-        /*}*/
-        /* Hover style cho nút "Close" */
-       /* #btnClosePopup:hover {
-            background-color: #0056b3;
-        }*/
+
         .ui-dialog-titlebar {
             background-color: #007bff;
             color: #fff;
@@ -28,12 +20,18 @@
         }
         /* Style cho nút "Close" trong thanh taskbar */
         .ui-dialog-titlebar-close {
-            color: #fff;
+            color: black;
             font-size: 14px;
-             width: 30px; 
-            height: 30px; 
-            margin-top:10px
+            width: 50px;
+            height: 30px;
+            margin-top: 10px;
+             margin-left: 10px;
+            padding: 0px;
+            background-color: red;
         }
+        /*.ui-dialog .ui-dialog-titlebar-close .ui-icon {
+            background: #ff0000 !important;
+        }*/
     </style>
     <div class="m-2">
         <asp:FileUpload ID="FileUpload1" runat="server" Font-Size="20px" />
@@ -78,7 +76,7 @@
     <div class="card">
         <div class="card-header">
             <div class="text-center">
-                <h2>Kế hoạch sản xuất ngày <%=DateTime.Now.ToString("dd/MM/yyyy")%></h2>
+                <h1 style="font-weight: bold">Kế hoạch sản xuất ngày <%=datenow%></h1>
             </div>
         </div>
         <!-- /.card-header -->
@@ -98,6 +96,21 @@
                     </tr>
                 </thead>
                 <tbody style="font-size: 16px" id="dt_plan" runat="server">
+                    <tr>
+                        <td>{dt.Rows[i][Model]} </td>
+                        <td>{dt.Rows[i][QuantityDay]} </td>
+                        <td>{dt.Rows[i][Quantity1]} </td>
+                        <td>{dt.Rows[i][Quantity2]} </td>
+                        <td>{dt.Rows[i][Quantity3]} </td>
+                        <td>{dt.Rows[i][TimeStart]} </td>
+                        <td>{dt.Rows[i][TimeEnd]} </td>
+                        <td>
+                            <button style="width: 120px" type="button" class="btn-success" onclick="MonitorSpecial(this)"><i class="fas fa-plus"></i>Add </button>
+                        </td>
+                        <td>
+                            <button style="width: 120px" type="button" onclick="showPopup(this)"><i class="fas fa-edit"></i>Edit</button>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -105,11 +118,11 @@
     </div>
     <%--    POPUP_Adjust--%>
     <div id="popupDiv" style="display: none;">
-        <h1 style="text-align:center; margin:0px">Adjust Date Time Plan</h1>
-        <h2 style="margin:0px">Model: <span id="ModelSelect"></span></h2>
+        <h1 style="text-align: center; margin: 0px">Adjust Date Time Plan</h1>
+        <h2 style="margin: 0px">Model: <span id="ModelSelect"></span></h2>
         <div class="d-flex flex-row">
             <div>
-                <p style=" font-size: 25px; font-weight: 600">Thời gian bắt đầu sản xuất:</p>
+                <p style="font-size: 25px; font-weight: 600">Thời gian bắt đầu sản xuất:</p>
             </div>
             <div class="flex-fill">
                 <div class=" input-group date" id="reservationdatetimefromplan" data-target-input="nearest">
@@ -120,9 +133,9 @@
                 </div>
             </div>
         </div>
-        <div class="d-flex flex-row" style="margin:10px 0px">
+        <div class="d-flex flex-row" style="margin: 10px 0px">
             <div>
-                <p style=" font-size: 25px; font-weight: 600">Thời gian bắt đầu sản xuất:</p>
+                <p style="font-size: 25px; font-weight: 600">Thời gian bắt đầu sản xuất:</p>
             </div>
             <div class="flex-fill">
                 <div class=" input-group date" id="reservationdatetimetoplan" data-target-input="nearest">
@@ -133,13 +146,11 @@
                 </div>
             </div>
         </div>
-        <div style="display: flex;
-            justify-content: center;
-            align-items: center;">
-             <button type="button" style="height:40px; width:250px" class="btn-danger" onclick="UpdateDateTimePlan()">
-            <i class="fas fa-upload"></i>
-            Update
-        </button>
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <button type="button" style="height: 40px; width: 250px" class="btn-danger" onclick="UpdateDateTimePlan()">
+                <i class="fas fa-upload"></i>
+                Update
+            </button>
         </div>
     </div>
     <div id="popuploading" style="display: none;">
@@ -167,7 +178,6 @@
                 var datetimefrom = $("#datefrom").val();
                 var datetimeto = $("#dateto").val();
                 var NameModel = $('#ModelSelect').html();
-
                 if (datetimefrom.length < 10 || datetimeto.length < 10) {
                     alert('Hãy nhập thời gian bắt đầu và kết thúc')
                 }
@@ -187,11 +197,9 @@
                         }
                     });
                 }
-               
                 isUpdateDateTimePlan = 0;
             }
-           
-         }
+        }
         function showPopup(elm) {
             var datarow = elm.parentNode.parentNode;
             var windowHeight = $(window).height();
@@ -200,8 +208,12 @@
                 modal: true,
                 width: windowWidth * 0.4,
                 height: windowHeight * 0.33,
-                //dialogClass: 'custom-dialog-class',
-                //closeText: '<span class="ui-icon ui-icon-closethick"></span>',
+                //beforeClose: function (event, ui) {
+                //    // Thêm nội dung bên trong nút close
+                //    $(".ui-dialog-titlebar-close").html("<span class='custom-close-button'>X</span>");
+                //    alert('close')
+                //},
+                
             });
             $('#ModelSelect').html(` ${datarow.cells[0].textContent}`)
         }
@@ -211,9 +223,6 @@
                 var htmlelm = elm.innerHTML;
                 var datarow = elm.parentNode.parentNode;
                 var NameModel = ` ${datarow.cells[0].textContent}`;
-
-                
-
                 $.ajax({
                     type: 'POST',
                     url: '/MyWebSercive.asmx/MonitorSpecial',
@@ -241,7 +250,6 @@
                 });
                 isMonitorSpecial = 0;
             }
-           
         }
     </script>
 </asp:Content>

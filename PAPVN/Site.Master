@@ -43,7 +43,7 @@
     <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" type="image/png" href="../../wwwroot/Panasonic_logo_bl_posi_PNG.ico" sizes="64x64">
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -358,6 +358,7 @@
             });
             $('#reservationdatetimefromplan').datetimepicker({
                 format: 'YYYY-MM-DD HH:mm',
+                stepping: 5,
                 icons: { time: 'far fa-clock' }
             });
             $('#reservationdatetimeto').datetimepicker({
@@ -366,6 +367,7 @@
             });
             $('#reservationdatetimetoplan').datetimepicker({
                 format: 'YYYY-MM-DD HH:mm',
+                stepping: 5,
                 icons: { time: 'far fa-clock' }
             });
 

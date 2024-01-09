@@ -12,6 +12,7 @@ namespace PAPVN
 {
     public partial class PlanGAS : System.Web.UI.Page
     {
+    
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -20,7 +21,7 @@ namespace PAPVN
                 myculture.DateTimeFormat.LongTimePattern = "HH:mm:ss";
                 myculture.DateTimeFormat.ShortDatePattern = "yyyy-MM-dd";
                 System.Threading.Thread.CurrentThread.CurrentCulture = myculture;
-                Load_model();
+                //Load_model();
                 
             }
         }
