@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Globalization;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace PAPVN
 {
     public partial class PlanGAS : System.Web.UI.Page
     {
-    
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)

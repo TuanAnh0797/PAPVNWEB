@@ -43,7 +43,7 @@
     </div>
     <script>
         $(document).ready(function () {
-            //Bar chart
+            //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Bar chart<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
             var databarchart = {
                 labels: [],
                 datasets: [
@@ -52,7 +52,6 @@
                         label: 'Plan',
                         backgroundColor: '#248f24',
                         order: 2,
-                        //data: dataPlan,
                         data: []
                     },
                     {
@@ -61,7 +60,6 @@
                         backgroundColor: '#ffff4d',
                         categoryPercentage: 0.6,
                         order: 1,
-                        //data: dataPlanHour,
                         data: []
                     },
                     {
@@ -70,7 +68,6 @@
                         backgroundColor: '#668cff',
                         order: 0,
                         categoryPercentage: 0.35,
-                        // data: dataPlanActual,
                         data: []
                     },
                 ]
@@ -127,7 +124,7 @@
                 data: databarchart,
                 options: barChartOptions
             })
-            //Pie chart
+            //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Pie chart<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
             var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
             var donutData = {
                 labels: [
@@ -182,7 +179,7 @@
                 data: donutData,
                 options: pieOptions
             })
-            //Line Chart
+            //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Line Chart<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
             var DataLineChart = {
                 labels: ['06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '00:00', '01:00', '02:00', '03:00', '04:00', '05:00'],
                 datasets: [

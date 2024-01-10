@@ -21,7 +21,7 @@ namespace PAPVN
         {
             if (!IsPostBack)
             {
-                //loaddataplan();
+                loaddataplan();
                 if (DateTime.Now.Hour > 5)
                 {
                     datenow = DateTime.Now.ToString("dd/MM/yyyy");
