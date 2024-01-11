@@ -452,11 +452,11 @@
                             DataLineChart.datasets[1].data = data.dataactual;
                             DataLineChart.datasets[2].data = data.datadiff;
                             //DataLineChart.labels = data.labels;
-                            const absoluteValues = data.datadiff.map(value => Math.abs(value));
-                            const maxAbsoluteValue = Math.max(...absoluteValues) + 100;
-                            LineChartOption.scales.yAxes[1].ticks.max = maxAbsoluteValue;
-                            LineChartOption.scales.yAxes[1].ticks.min = -maxAbsoluteValue;
-                            linechart.options = LineChartOption;
+                            //const absoluteValues = data.datadiff.map(value => Math.abs(value));
+                            //const maxAbsoluteValue = Math.max(...absoluteValues) + 100;
+                            //LineChartOption.scales.yAxes[1].ticks.max = maxAbsoluteValue;
+                            //LineChartOption.scales.yAxes[1].ticks.min = -maxAbsoluteValue;
+                            //linechart.options = LineChartOption;
                             var plan = data.TotalPlan;
                             var target = DataLineChart.datasets[0].data[DataLineChart.datasets[0].data.length - 1];
                             var actual = DataLineChart.datasets[1].data[DataLineChart.datasets[1].data.length - 1];

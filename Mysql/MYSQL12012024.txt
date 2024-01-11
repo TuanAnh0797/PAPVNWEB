@@ -1,0 +1,405 @@
+CREATE TABLE `dataplan` (
+  `Model` varchar(30) DEFAULT NULL,
+  `QuantityDay` int DEFAULT NULL,
+  `QuantityPerSec` float DEFAULT NULL,
+  `Quantity1` int DEFAULT NULL,
+  `Quantity2` int DEFAULT NULL,
+  `Quantity3` int DEFAULT NULL,
+  `TotalTime` double DEFAULT NULL,
+  `TimeStart` datetime DEFAULT NULL,
+  `TimeEnd` datetime DEFAULT NULL,
+  `TimeUpdate` datetime DEFAULT CURRENT_TIMESTAMP,
+  `MonitorSpecial` int DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+
+--------------------
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `ClearAllPlan`()
+BEGIN
+	
+    
+    DECLARE _hournow int;
+    Set _hournow = hour(now());
+    IF(_hournow > 5) then
+	DELETE FROM `dataplc`.`dataplan`
+        where Model = 'Total' AND DATE(dataplan.TimeUpdate) = DATE(NOW());
+    ELSE
+	DELETE FROM `dataplc`.`dataplan`
+        where Model = 'Total' AND Date(dataplan.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+    END IF;
+    
+END
+
+-------------
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `GetStartTimeAndEndTimePlan`()
+BEGIN
+ DECLARE _hournow int;
+    Set _hournow = hour(now());
+    IF(_hournow > 5) then
+	select * from dataplan 
+        where Model = 'Total' AND DATE(dataplan.TimeUpdate) = DATE(NOW());
+    ELSE
+	select * from dataplan 
+        where Model = 'Total' AND Date(dataplan.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+    END IF;
+END
+
+---------------
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `LoadDataForBarChartPlanGas`()
+BEGIN
+	DECLARE _hournow int;
+    Set _hournow = hour(now());
+    IF(_hournow > 5) then
+SELECT dataplan.Model, COALESCE(c.QuantityActual, 0) AS QuantityActual, dataplan.QuantityDay,dataplan.Quantity1,dataplan.Quantity2,dataplan.Quantity3,dataplan.QuantityPerSec,dataplan.TimeStart,dataplan.TimeEnd,dataplan.TotalTime
+FROM dataplan
+LEFT JOIN (
+    SELECT Model, COUNT(DISTINCT CodeBack) AS QuantityActual
+    FROM dataplan
+    LEFT JOIN (
+        SELECT * FROM gas
+        WHERE Judge = 'OK' AND DATE(TimePLC) = CURDATE() AND HOUR(TimePLC) > 5
+    ) AS b ON dataplan.Model = b.CodeModel
+    WHERE dataplan.Model <> 'ToTal' AND DATE(dataplan.TimeUpdate) = DATE(NOW())
+    GROUP BY dataplan.Model
+) AS c ON dataplan.Model = c.Model where dataplan.Model <> 'ToTal' AND DATE(dataplan.TimeUpdate) = DATE(NOW());
+    else 
+    SELECT dataplan.Model, COALESCE(c.QuantityActual, 0) AS QuantityActual, dataplan.QuantityDay,dataplan.Quantity1,dataplan.Quantity2,dataplan.Quantity3,dataplan.QuantityPerSec,dataplan.TimeStart,dataplan.TimeEnd,dataplan.TotalTime
+FROM dataplan
+LEFT JOIN (
+    SELECT Model, COUNT(DISTINCT CodeBack) AS QuantityActual
+    FROM dataplan
+    LEFT JOIN (
+        SELECT * FROM gas
+        WHERE Judge = 'OK' AND ((Date(TimePLC) = curdate() and hour(TimePLC)>= 0 AND hour(TimePLC) < 6) or (DATE_SUB(CURDATE(), INTERVAL 1 DAY) = Date(TimePLC) AND hour(TimePLC)>5))
+    ) AS b ON dataplan.Model = b.CodeModel
+    WHERE dataplan.Model <> 'ToTal' AND Date(dataplan.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY)
+    GROUP BY dataplan.Model
+) AS c ON dataplan.Model = c.Model where dataplan.Model <> 'ToTal' AND Date(dataplan.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+   
+	END IF;
+END
+------------------
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `LoadDataForBarChartPlanGasMonitor`()
+BEGIN
+	DECLARE _hournow int;
+    Set _hournow = hour(now());
+    IF(_hournow > 5) then
+SELECT dataplan.Model, COALESCE(c.QuantityActual, 0) AS QuantityActual, dataplan.QuantityDay,dataplan.Quantity1,dataplan.Quantity2,dataplan.Quantity3,dataplan.QuantityPerSec,dataplan.TimeStart,dataplan.TimeEnd,dataplan.TotalTime
+FROM dataplan
+LEFT JOIN (
+    SELECT Model, COUNT(DISTINCT CodeBack) AS QuantityActual
+    FROM dataplan
+    LEFT JOIN (
+        SELECT * FROM gas
+        WHERE Judge = 'OK' AND DATE(TimePLC) = CURDATE() AND HOUR(TimePLC) > 5
+    ) AS b ON dataplan.Model = b.CodeModel
+    WHERE dataplan.Model <> 'ToTal' AND DATE(dataplan.TimeUpdate) = DATE(NOW())
+    GROUP BY dataplan.Model
+) AS c ON dataplan.Model = c.Model where dataplan.Model <> 'ToTal' And MonitorSpecial =1 AND DATE(dataplan.TimeUpdate) = DATE(NOW());
+    else 
+    SELECT dataplan.Model, COALESCE(c.QuantityActual, 0) AS QuantityActual, dataplan.QuantityDay,dataplan.Quantity1,dataplan.Quantity2,dataplan.Quantity3,dataplan.QuantityPerSec,dataplan.TimeStart,dataplan.TimeEnd,dataplan.TotalTime
+FROM dataplan
+LEFT JOIN (
+    SELECT Model, COUNT(DISTINCT CodeBack) AS QuantityActual
+    FROM dataplan
+    LEFT JOIN (
+        SELECT * FROM gas
+        WHERE Judge = 'OK' AND ((Date(TimePLC) = curdate() and hour(TimePLC)>= 0 AND hour(TimePLC) < 6) or (DATE_SUB(CURDATE(), INTERVAL 1 DAY) = Date(TimePLC) AND hour(TimePLC)>5))
+    ) AS b ON dataplan.Model = b.CodeModel
+    WHERE dataplan.Model <> 'ToTal'   AND Date(dataplan.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY)
+    GROUP BY dataplan.Model
+) AS c ON dataplan.Model = c.Model where dataplan.Model <> 'ToTal' And MonitorSpecial =1 AND Date(dataplan.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+   
+	END IF;
+END
+---------------------------
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `LoadDataForLineChartPlanGas`(IN _ModelName nvarchar(30))
+BEGIN
+DECLARE _hournow int;
+    Set _hournow = hour(now());
+	if (_ModelName = 'all') then
+    IF(_hournow > 5) then
+   SELECT NameHour,COALESCE(b.Quantity, 0) AS Quantity FROM dataplc.datamastertime 
+   LEFT JOIN (select hour(TimePLC) as GroupHour, count(DISTINCT CodeBack) as Quantity from gas 
+   where Judge = 'OK' and Date(TimePLC) = curdate() and  hour(TimePLC)>5
+   group by hour(TimePLC)) as b On datamastertime.NameHour = b.GroupHour;
+ select  TimeStart, TimeEnd,QuantityDay,QuantityPerSec,TotalTime from dataplan where Model = 'Total' and Date(dataplan.TimeUpdate ) = Date(now()) limit 1;
+    else
+	SELECT NameHour,COALESCE(b.Quantity, 0) AS Quantity FROM dataplc.datamastertime 
+	LEFT JOIN (select hour(TimePLC) as GroupHour, count(DISTINCT CodeBack) as Quantity from gas 
+	where Judge = 'OK' and (Date(TimePLC) = curdate() and hour(TimePLC)>= 0 AND (hour(TimePLC) < 6) or (DATE_SUB(CURDATE(), INTERVAL 1 DAY) = Date(TimePLC) AND hour(TimePLC)>5))
+	group by hour(TimePLC)) as b On datamastertime.NameHour = b.GroupHour;
+    
+    select  TimeStart, TimeEnd,QuantityDay,QuantityPerSec,TotalTime from dataplan where Model = 'Total' and  Date(dataplan.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY) limit 1;
+    END IF;
+    else
+     IF(_hournow > 5) then
+   SELECT NameHour,COALESCE(b.Quantity, 0) AS Quantity FROM dataplc.datamastertime 
+   LEFT JOIN (select hour(TimePLC) as GroupHour, count(DISTINCT CodeBack) as Quantity from gas 
+   where Judge = 'OK' and CodeModel = _ModelName and Date(TimePLC) = curdate() and  hour(TimePLC)>5
+   group by hour(TimePLC)) as b On datamastertime.NameHour = b.GroupHour;
+ select  TimeStart, TimeEnd,QuantityDay,QuantityPerSec,TotalTime from dataplan where Model = _ModelName and Date(dataplan.TimeUpdate ) = Date(now()) limit 1;
+    else
+	SELECT NameHour,COALESCE(b.Quantity, 0) AS Quantity FROM dataplc.datamastertime 
+	LEFT JOIN (select hour(TimePLC) as GroupHour, count(DISTINCT CodeBack) as Quantity from gas 
+	where Judge = 'OK' and  CodeModel = _ModelName and ((Date(TimePLC) = curdate() and hour(TimePLC)>= 0 AND hour(TimePLC) < 6) or (DATE_SUB(CURDATE(), INTERVAL 1 DAY) = Date(TimePLC) AND hour(TimePLC)>5))
+	group by hour(TimePLC)) as b On datamastertime.NameHour = b.GroupHour;
+    
+    select  TimeStart, TimeEnd,QuantityDay,QuantityPerSec,TotalTime from dataplan where Model = _ModelName and  Date(dataplan.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY) limit 1;
+    END IF;
+    END IF;
+END
+------------------------
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `LoadDataForLineChartPlanGasByTime`(IN _ModelName nvarchar(30))
+BEGIN
+	
+    DECLARE _hournow int;
+    Set _hournow = hour(now());
+    if (_ModelName = 'all') then
+      IF(_hournow > 5) then
+       SET @StartDate = CONCAT(CURRENT_DATE, ' 06:00:00');
+SET @EndDate = CONCAT(DATE_ADD(CURRENT_DATE, INTERVAL 1 DAY), ' 06:00:00');
+SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    (SELECT 
+        TimePLC, CodeBack
+    FROM
+        gas t1
+    WHERE
+        TimePLC BETWEEN @StartDate AND @EndDate
+            AND Judge = 'OK'
+            AND TimePLC = (SELECT 
+                MAX(TimePLC)
+            FROM
+                gas t2
+            WHERE
+                t1.CodeBack = t2.CodeBack)) AS ta
+WHERE
+    ta.TimePLC BETWEEN @StartDate AND @EndDate
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime
+FROM
+    dataplan
+WHERE
+    Model = 'Total'
+        AND DATE(dataplan.TimeUpdate) = DATE(NOW())
+LIMIT 1;
+
+      else
+		SET @StartDate = CONCAT(DATE_SUB(CURRENT_DATE, INTERVAL 1 DAY), ' 06:00:00');
+		SET @EndDate = CONCAT(CURRENT_DATE, ' 06:00:00');
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    (SELECT 
+        TimePLC, CodeBack
+    FROM
+        gas t1
+    WHERE
+        TimePLC BETWEEN @StartDate AND @EndDate
+            AND Judge = 'OK'
+            AND TimePLC = (SELECT 
+                MAX(TimePLC)
+            FROM
+                gas t2
+            WHERE
+                t1.CodeBack = t2.CodeBack)) AS ta
+WHERE
+    ta.TimePLC BETWEEN @StartDate AND @EndDate
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime
+FROM
+    dataplan
+WHERE
+    Model = 'Total'
+        AND DATE(dataplan.TimeUpdate) = DATE_SUB(CURDATE(), INTERVAL 1 DAY)
+LIMIT 1;
+
+        END IF;
+   else
+     IF(_hournow > 5) then
+        SET @StartDate = CONCAT(CURRENT_DATE, ' 06:00:00');
+		SET @EndDate = CONCAT(DATE_ADD(CURRENT_DATE, INTERVAL 1 DAY), ' 06:00:00');
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    (SELECT 
+        TimePLC, CodeBack
+    FROM
+        gas t1
+    WHERE
+        TimePLC BETWEEN @StartDate AND @EndDate
+            AND Judge = 'OK'
+            AND CodeModel = _ModelName
+            AND TimePLC = (SELECT 
+                MAX(TimePLC)
+            FROM
+                gas t2
+            WHERE
+                t1.CodeBack = t2.CodeBack)) AS ta
+WHERE
+    ta.TimePLC BETWEEN @StartDate AND @EndDate
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime
+FROM
+    dataplan
+WHERE
+    Model = _ModelName
+        AND DATE(dataplan.TimeUpdate) = DATE(NOW())
+LIMIT 1;
+
+      else
+		SET @StartDate = CONCAT(DATE_SUB(CURRENT_DATE, INTERVAL 1 DAY), ' 06:00:00');
+		SET @EndDate = CONCAT(CURRENT_DATE, ' 06:00:00');
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    (SELECT 
+        TimePLC, CodeBack
+    FROM
+        gas t1
+    WHERE
+        TimePLC BETWEEN @StartDate AND @EndDate
+            AND Judge = 'OK'
+            AND CodeModel = _ModelName
+            AND TimePLC = (SELECT 
+                MAX(TimePLC)
+            FROM
+                gas t2
+            WHERE
+                t1.CodeBack = t2.CodeBack)) AS ta
+WHERE
+    ta.TimePLC BETWEEN @StartDate AND @EndDate
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime
+FROM
+    dataplan
+WHERE
+    Model = _ModelName
+        AND DATE(dataplan.TimeUpdate) = DATE_SUB(CURDATE(), INTERVAL 1 DAY)
+LIMIT 1;
+
+        END IF;
+  END IF;
+   
+    
+END
+--------------------------
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `LoadDataForPieChartPlan`()
+BEGIN
+DECLARE rsOK int;
+	DECLARE rsNG int;
+    declare rsTotal int;
+DECLARE _hournow int;
+    Set _hournow = hour(now());
+    IF(_hournow > 5) then
+		select count(DISTINCT CodeBack) into rsTotal from gas where  Date(TimePLC) = curdate() and  hour(TimePLC)>5;
+		select count(DISTINCT CodeBack) into rsOK from gas where Judge = 'OK' and Date(TimePLC) = curdate() and  hour(TimePLC)>5;
+    set rsNG = rsTotal - rsOK;
+    select rsOK as DataOK, rsNG as DataNG;
+    else
+		select count(DISTINCT CodeBack) into rsTotal from gas where (Date(TimePLC) = curdate() and hour(TimePLC)>= 0 AND hour(TimePLC) < 6) or (DATE_SUB(CURDATE(), INTERVAL 1 DAY) = Date(TimePLC) AND hour(TimePLC)>5);
+		select count(DISTINCT CodeBack) into rsOK from gas where Judge = 'OK' and (Date(TimePLC) = curdate() and hour(TimePLC)>= 0 AND hour(TimePLC) < 6) or (DATE_SUB(CURDATE(), INTERVAL 1 DAY) = Date(TimePLC) AND hour(TimePLC)>5);
+		set rsNG = rsTotal - rsOK;
+		select rsOK as DataOK, rsNG as DataNG;
+    END IF;
+END
+-------------------------
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `LoadDataPlan`()
+BEGIN
+	DECLARE _hournow int;
+    Set _hournow = hour(now());
+    IF(_hournow > 5) then
+	SELECT * FROM dataplc.dataplan where Date(TimeUpdate) = Date(now()) and Model <> 'Total';
+    ELSE
+	SELECT * FROM dataplc.dataplan
+        where Model <> 'Total' AND Date(dataplan.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+    END IF;
+END
+---------------------------
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `LoadModelPlan`()
+BEGIN
+	DECLARE _hournow int;
+    Set _hournow = hour(now());
+    IF(_hournow > 5) then
+   SELECT Model FROM dataplan
+   where Model <> 'Total' and  Date(dataplan.TimeUpdate ) = Date(now());
+    else
+    SELECT Model FROM dataplan
+   where Model <> 'Total' and  Date(dataplan.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+    END IF;
+END
+---------------------------
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `LoadQuantityPlan`(IN _ModelName nvarchar(30))
+BEGIN
+
+ DECLARE _hournow int;
+    Set _hournow = hour(now());
+    IF(_hournow > 5) then
+	 if (_ModelName = 'all') then
+            select QuantityDay from dataplan where Model = 'Total' and  Date(dataplan.TimeUpdate ) = Date(now());
+         else
+            select QuantityDay from dataplan where Model = _ModelName and  Date(dataplan.TimeUpdate ) = Date(now());
+         end if;
+     else
+	 if (_ModelName = 'all') then
+            select QuantityDay from dataplan where Model = 'Total' and  Date(dataplan.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+         else
+            select QuantityDay from dataplan where Model = _ModelName and  Date(dataplan.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+         end if; 
+    END IF;
+
+END
+------------------------------
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `MonitorSpecial`(IN _ModelName nvarchar(30))
+BEGIN
+ DECLARE _hournow int;
+    Set _hournow = hour(now());
+    IF(_hournow > 5) then
+      SELECT dataplan.Model, COALESCE(c.QuantityActual, 0) AS QuantityActual, dataplan.QuantityDay,dataplan.Quantity1,dataplan.Quantity2,dataplan.Quantity3,dataplan.QuantityPerSec,dataplan.TimeStart,dataplan.TimeEnd,dataplan.TotalTime
+      FROM dataplan
+      LEFT JOIN (SELECT Model, COUNT(DISTINCT CodeBack) AS QuantityActual
+      FROM dataplan
+      LEFT JOIN (SELECT * FROM gas
+      WHERE Judge = 'OK' AND DATE(TimePLC) = CURDATE() AND HOUR(TimePLC) > 5) AS b ON dataplan.Model = b.CodeModel
+      WHERE dataplan.Model <> 'ToTal' AND DATE(dataplan.TimeUpdate) = DATE(NOW())
+      GROUP BY dataplan.Model) AS c ON dataplan.Model = c.Model 
+      where dataplan.Model <> 'ToTal' And MonitorSpecial =1 AND DATE(dataplan.TimeUpdate) = DATE(NOW());
+    ELSE
+      SELECT dataplan.Model, COALESCE(c.QuantityActual, 0) AS QuantityActual, dataplan.QuantityDay,dataplan.Quantity1,dataplan.Quantity2,dataplan.Quantity3,dataplan.QuantityPerSec,dataplan.TimeStart,dataplan.TimeEnd,dataplan.TotalTime
+      FROM dataplan
+      LEFT JOIN (SELECT Model, COUNT(DISTINCT CodeBack) AS QuantityActual
+      FROM dataplan
+      LEFT JOIN (SELECT * FROM gas
+      WHERE Judge = 'OK' AND ((Date(TimePLC) = curdate() and hour(TimePLC)>= 0 AND hour(TimePLC) < 6) or (DATE_SUB(CURDATE(), INTERVAL 1 DAY) = Date(TimePLC) AND hour(TimePLC)>5))) AS b ON dataplan.Model = b.CodeModel
+      WHERE dataplan.Model <> 'ToTal'   AND Date(dataplan.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY)
+      GROUP BY dataplan.Model) AS c ON dataplan.Model = c.Model where dataplan.Model <> 'ToTal' And MonitorSpecial =1 AND Date(dataplan.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+    END IF;
+
+END
+----------------------------------
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `UpdateDateTimePlan`(IN _ModelName nvarchar(30),IN _TimeFrom datetime,IN _TimeTo datetime,IN _TotalTime double)
+BEGIN
+	DECLARE _hournow int;
+    	Set _hournow = hour(now());
+    	IF(_hournow > 5) then
+		UPDATE `dataplc`.`dataplan`
+		SET `TotalTime` = _TotalTime,`TimeStart` = _TimeFrom,`TimeEnd` = _TimeTo, `QuantityPerSec` = QuantityDay/_TotalTime
+		WHERE Model = _ModelName and  Date(dataplan.TimeUpdate ) = Date(now());
+    	else
+		UPDATE `dataplc`.`dataplan`
+		SET `TotalTime` = _TotalTime,`TimeStart` = _TimeFrom,`TimeEnd` = _TimeTo, `QuantityPerSec` = QuantityDay/_TotalTime
+		WHERE Model = _ModelName and  Date(dataplan.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+    	END IF;
+
+END
