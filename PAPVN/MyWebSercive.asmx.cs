@@ -489,7 +489,7 @@ namespace PAPVN
                 parammysql = ModelName.Trim();
             }
             DataTable dt = dBConnect.StoreFillDT("LoadQuantityPlan", CommandType.StoredProcedure, parammysql);
-            if (dt.Rows[0]["QuantityDay"].ToString() != "")
+            if (dt.Rows.Count > 0)
             {
                 TotalPlan = Int32.Parse(dt.Rows[0]["QuantityDay"].ToString());
             }
@@ -605,24 +605,38 @@ namespace PAPVN
                         listdatadatadiff.Add(sumquantityactual);
                     }
                 }
+                int[] dataplan = new int[listdataplanactual.Count];
+                int[] dataactual = new int[listdataplanactual.Count];
+                int[] datadiff = new int[listdataplanactual.Count];
+                for (int i = 0; i < listdataplanactual.Count; i++)
+                {
+                    dataplan[i] = listdataplanactual[i];
+                    dataactual[i] = listdataactual[i];
+                    datadiff[i] = listdatadatadiff[i];
+                }
+                var data = new
+                {
+                    dataplan,
+                    dataactual,
+                    datadiff,
+                    TotalPlan,
+                };
+                return Newtonsoft.Json.JsonConvert.SerializeObject(data);
             }
-            int[] dataplan = new int[listdataplanactual.Count];
-            int[] dataactual = new int[listdataplanactual.Count];
-            int[] datadiff = new int[listdataplanactual.Count];
-            for (int i = 0; i < listdataplanactual.Count; i++)
+            else
             {
-                dataplan[i] = listdataplanactual[i];
-                dataactual[i] = listdataactual[i];
-                datadiff[i] = listdatadatadiff[i];
+                var data = new
+                {
+                    dataplan = new[] {0},
+                    dataactual = new[] { 0 },
+                    datadiff = new[] { 0 },
+                    TotalPlan,
+                };
+                return Newtonsoft.Json.JsonConvert.SerializeObject(data);
             }
-            var data = new
-            {
-                dataplan,
-                dataactual,
-                datadiff,
-                TotalPlan,
-            };
-            return Newtonsoft.Json.JsonConvert.SerializeObject(data);
+
+
+            
         }
         [WebMethod]
         public string MonitorSpecial(string ModelName)

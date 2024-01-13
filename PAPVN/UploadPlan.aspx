@@ -135,7 +135,7 @@
         </div>
         <div class="d-flex flex-row" style="margin: 10px 0px">
             <div>
-                <p style="font-size: 25px; font-weight: 600">Thời gian bắt đầu sản xuất:</p>
+                <p style="font-size: 25px; font-weight: 600">Thời gian kết thúc sản xuất:</p>
             </div>
             <div class="flex-fill">
                 <div class=" input-group date" id="reservationdatetimetoplan" data-target-input="nearest">

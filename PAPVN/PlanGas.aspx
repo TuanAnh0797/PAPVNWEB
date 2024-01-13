@@ -48,13 +48,13 @@
                         </div>
                         <div class="row ml-3">
                             <div class=" col-sm-2">
-                                <h3 style="color:blue; font-weight:bold">Plan: <span id="dataplan"></span></h3>
+                                <h1 style="color:blue; font-weight:bold">Plan: <span id="dataplan"></span></h1>
                             </div>
                             <div class=" col-sm-2">
-                                <h3 style="color:#cc9900; font-weight:bold">Target: <span id="datatarget"></span></h3>
+                                <h1 style="color:#cc9900; font-weight:bold">Target: <span id="datatarget"></span></h1>
                             </div>
                             <div class=" col-sm-2">
-                                <h3 style="color:green; font-weight:bold">Actual: <span id="dataactual"></span></h3>
+                                <h1 style="color:green; font-weight:bold">Actual: <span id="dataactual"></span></h1>
                             </div>
                             <div class=" col-sm-6" style="display: flex; justify-content: flex-end;">
                                 <select runat="server" id="modelplan" class="form-control select2" style="width: 250px">
@@ -490,9 +490,9 @@
             //setInterval(LoadDataForLineChart, 2000);
             //setInterval(LoadDataForBarchart, 2000);
             //setInterval(LoadDataForBarchartMonitor, 2000);
-            //setInterval(LoadDataForLineChart, 60000);
-            //setInterval(LoadDataForBarchart, 60000);
-            //setInterval(LoadDataForBarchartMonitor, 60000);
+            setInterval(LoadDataForLineChart, 120000);
+            setInterval(LoadDataForBarchart, 120000);
+            setInterval(LoadDataForBarchartMonitor, 120000);
 
              // Load Data OK NG
             //function LoadDataForPieChart() {
