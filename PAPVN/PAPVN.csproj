@@ -236,6 +236,9 @@
     <Content Include="Mycss\iconio.css" />
     <Content Include="Mycss\myicon.css" />
     <Content Include="MyWebSercive.asmx" />
+    <Content Include="UploadPlanCa1.aspx" />
+    <Content Include="UploadPlanCa2.aspx" />
+    <Content Include="UploadPlanCa3.aspx" />
     <Content Include="wwwroot\Panasonic_logo_bl_posi_PNG.ico" />
     <Content Include="PlanPAN.aspx" />
     <Content Include="PlanURT.aspx" />
@@ -2372,6 +2375,27 @@
     </Compile>
     <Compile Include="UploadPlan.aspx.designer.cs">
       <DependentUpon>UploadPlan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UploadPlanCa1.aspx.cs">
+      <DependentUpon>UploadPlanCa1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UploadPlanCa1.aspx.designer.cs">
+      <DependentUpon>UploadPlanCa1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UploadPlanCa2.aspx.cs">
+      <DependentUpon>UploadPlanCa2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UploadPlanCa2.aspx.designer.cs">
+      <DependentUpon>UploadPlanCa2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UploadPlanCa3.aspx.cs">
+      <DependentUpon>UploadPlanCa3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UploadPlanCa3.aspx.designer.cs">
+      <DependentUpon>UploadPlanCa3.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

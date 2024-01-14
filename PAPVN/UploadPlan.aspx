@@ -25,7 +25,7 @@
             width: 50px;
             height: 30px;
             margin-top: 10px;
-             margin-left: 10px;
+            margin-left: 10px;
             padding: 0px;
             background-color: red;
         }
@@ -34,8 +34,7 @@
         }*/
     </style>
     <div class="m-2">
-        <asp:FileUpload ID="FileUpload1" runat="server" Font-Size="20px" />
-        <div class="row" style="margin: 0px 0px 0px 0px; background-color: #fffefe; border-radius: 8px;">
+        <div class="row" style="background-color: #fffefe; border-radius: 8px;">
             <%--            <div class="col">
                 <div class="form-group" style="margin: 10px 0px 10px 0px">
                     <div class="d-flex flex-row">
@@ -70,9 +69,30 @@
                     </div>
                 </div>
             </div>--%>
+
+            <div class="col" style="margin-top:5px; margin-bottom:5px">
+                 <asp:FileUpload ID="FileUpload1" runat="server" Font-Size="20px" />
+            </div>
+
+             <div class="col-sm-3" style="margin-top:5px; margin-bottom:5px">
+            <asp:Button type="button" Text="Upload Plan" OnClick="Importdata_Click" runat="server" name="btn_Import" Style=" font-size: 20px; font-weight: 600; padding: 5px" class="btn btn-outline-primary btn-block "></asp:Button>
+            </div>
+           
         </div>
-        <asp:Button type="button" Text="Upload Plan" OnClick="Importdata_Click" runat="server" name="btn_Import" Style="font-size: 20px; font-weight: 600" class="btn btn-outline-primary btn-block mt-1"></asp:Button>
+
     </div>
+    <div class="row ml-5 mt-1 mb-1">
+        <div class="col">
+            <a href="UploadPlanCa1.aspx"> <span style="font-size:20px">Điều chỉnh kế hoạch ca 1</span> </a>
+        </div>
+        <div class="col">
+            <a href="UploadPlanCa2.aspx"><span style="font-size:20px">Điều chỉnh kế hoạch ca 2</span></a>
+        </div>
+        <div class="col">
+            <a href="UploadPlanCa3.aspx"><span style="font-size:20px">Điều chỉnh kế hoạch ca 3</span></a>
+        </div>
+    </div>
+
     <div class="card">
         <div class="card-header">
             <div class="text-center">
@@ -96,21 +116,6 @@
                     </tr>
                 </thead>
                 <tbody style="font-size: 16px" id="dt_plan" runat="server">
-                    <tr>
-                        <td>{dt.Rows[i][Model]} </td>
-                        <td>{dt.Rows[i][QuantityDay]} </td>
-                        <td>{dt.Rows[i][Quantity1]} </td>
-                        <td>{dt.Rows[i][Quantity2]} </td>
-                        <td>{dt.Rows[i][Quantity3]} </td>
-                        <td>{dt.Rows[i][TimeStart]} </td>
-                        <td>{dt.Rows[i][TimeEnd]} </td>
-                        <td>
-                            <button style="width: 120px" type="button" class="btn-success" onclick="MonitorSpecial(this)"><i class="fas fa-plus"></i>Add </button>
-                        </td>
-                        <td>
-                            <button style="width: 120px" type="button" onclick="showPopup(this)"><i class="fas fa-edit"></i>Edit</button>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
         </div>
@@ -213,7 +218,6 @@
                 //    $(".ui-dialog-titlebar-close").html("<span class='custom-close-button'>X</span>");
                 //    alert('close')
                 //},
-                
             });
             $('#ModelSelect').html(` ${datarow.cells[0].textContent}`)
         }
