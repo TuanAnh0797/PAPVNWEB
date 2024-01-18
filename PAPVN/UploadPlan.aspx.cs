@@ -21,7 +21,7 @@ namespace PAPVN
         {
             if (!IsPostBack)
             {
-                //loaddataplan();
+                loaddataplan();
                 if (DateTime.Now.Hour > 5)
                 {
                     datenow = DateTime.Now.ToString("dd/MM/yyyy");
@@ -163,7 +163,7 @@ namespace PAPVN
             // Cấu hình Cột DataPlan ca 3
             DataTable datahavequantityca3 = new DataTable();
             datahavequantityca3.Columns.Add("Model", typeof(string));
-            datahavequantityca3.Columns.Add("QuantityDay", typeof(int));
+            datahavequantityca3.Columns.Add("Quantity", typeof(int));
             datahavequantityca3.Columns.Add("QuantityPerSec", typeof(float));
             datahavequantityca3.Columns.Add("TotalTime", typeof(double));
             datahavequantityca3.Columns.Add("TimeStart", typeof(string));
@@ -207,17 +207,18 @@ namespace PAPVN
 
                 if (item.Quantity1 > 0)
                 {
-                    datahavequantityca1.Rows.Add("Total", item.Quantity1, item.Quantity1 / 25500, 25500, DateTime.Now.ToString("yyyy-MM-dd") + " 06:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 14:00:00");
+                    datahavequantityca1.Rows.Add(item.Model, item.Quantity1, item.Quantity1 / 25500.0, 25500, DateTime.Now.ToString("yyyy-MM-dd") + " 06:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 14:00:00");
 
                 }
                 if (item.Quantity2 > 0)
                 {
-                    datahavequantityca2.Rows.Add("Total", item.Quantity2, item.Quantity2 / 25500, 25500, DateTime.Now.ToString("yyyy-MM-dd") + " 14:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00");
+                    datahavequantityca2.Rows.Add(item.Model, item.Quantity2, item.Quantity2 / 25500.0, 25500, DateTime.Now.ToString("yyyy-MM-dd") + " 14:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00");
 
                 }
                 if (item.Quantity3 > 0)
                 {
-                    datahavequantityca3.Rows.Add("Total", item.Quantity3, item.Quantity3 / 24300, 24300, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 06:00:00");
+                   
+                    datahavequantityca3.Rows.Add(item.Model, item.Quantity3, item.Quantity3 / 24300.0, 24300, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 06:00:00");
                 }
             }
 
@@ -229,21 +230,21 @@ namespace PAPVN
             //update total ca 1
             if (QuantityTotal1 > 0)
             {
-                datahavequantityca1.Rows.Add("Total", QuantityTotal1, QuantityTotal1 / 25500, 25500, DateTime.Now.ToString("yyyy-MM-dd") + " 06:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 14:00:00");
+                datahavequantityca1.Rows.Add("Total", QuantityTotal1, QuantityTotal1 / 25500.0, 25500, DateTime.Now.ToString("yyyy-MM-dd") + " 06:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 14:00:00");
             }
             //update total ca 2
             if (QuantityTotal2 > 0)
             {
-                datahavequantityca2.Rows.Add("Total", QuantityTotal2, QuantityTotal2 / 25500, 25500, DateTime.Now.ToString("yyyy-MM-dd") + " 14:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00");
+                datahavequantityca2.Rows.Add("Total", QuantityTotal2, QuantityTotal2 / 25500.0, 25500, DateTime.Now.ToString("yyyy-MM-dd") + " 14:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00");
             }
             //update total ca 3
             if (QuantityTotal3 > 0)
             {
-                datahavequantityca3.Rows.Add("Total", QuantityTotal3, QuantityTotal3 / 24300, 24300, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 06:00:00");
+                datahavequantityca3.Rows.Add("Total", QuantityTotal3, QuantityTotal3 / 24300.0, 24300, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 06:00:00");
             }
 
             DBConnect dBConnect = new DBConnect();
-            dBConnect.exnonquery("ClearAllPlan", CommandType.StoredProcedure);
+            dBConnect.exnonquery("TA_ClearAllPlan", CommandType.StoredProcedure);
             SaveMySql(datahavequantity, datahavequantityca1, datahavequantityca2, datahavequantityca3);
             loaddataplan();
         }
@@ -252,8 +253,7 @@ namespace PAPVN
             using (MySqlConnector.MySqlConnection connection = new MySqlConnector.MySqlConnection(DBConnect.connection_string))
             {
                 connection.Open();
-                using (MySqlConnector.MySqlTransaction transaction = connection.BeginTransaction())
-                {
+               
                     try
                     {
                         var bulkCopy = new MySqlBulkCopy(connection);
@@ -265,15 +265,15 @@ namespace PAPVN
                         var resultca2 = bulkCopy.WriteToServer(dataca2);
                         bulkCopy.DestinationTableName = "dataplanca3";
                         var resultca3 = bulkCopy.WriteToServer(dataca3);
-                        transaction.Commit();
+                       
                       
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
-                        transaction.Rollback();
+                       
                        
                     }
-                }
+               
                 connection.Close();
             }
         }
@@ -281,7 +281,7 @@ namespace PAPVN
         {
             string HTML = "";
             DBConnect dBConnect = new DBConnect();
-            DataTable dt = dBConnect.StoreFillDT("LoadDataPlan", CommandType.StoredProcedure);
+            DataTable dt = dBConnect.StoreFillDT("TA_LoadDataPlan", CommandType.StoredProcedure);
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 if (dt.Rows[i]["Model"].ToString() != "Total")

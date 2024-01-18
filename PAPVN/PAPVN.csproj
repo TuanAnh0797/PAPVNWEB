@@ -233,9 +233,10 @@
     <Content Include="Global.asax" />
     <Content Include="Image\panasonic-logo.jpg" />
     <Content Include="Image\panasonic-logo.png" />
+    <Content Include="WebServiceModifyPlan.asmx" />
     <Content Include="Mycss\iconio.css" />
     <Content Include="Mycss\myicon.css" />
-    <Content Include="MyWebSercive.asmx" />
+    <Content Include="WebServicePlanGas.asmx" />
     <Content Include="UploadPlanCa1.aspx" />
     <Content Include="UploadPlanCa2.aspx" />
     <Content Include="UploadPlanCa3.aspx" />
@@ -2315,8 +2316,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="MyWebSercive.asmx.cs">
-      <DependentUpon>MyWebSercive.asmx</DependentUpon>
+    <Compile Include="WebServiceModifyPlan.asmx.cs">
+      <DependentUpon>WebServiceModifyPlan.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WebServicePlanGas.asmx.cs">
+      <DependentUpon>WebServicePlanGas.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="PlanPAN.aspx.cs">

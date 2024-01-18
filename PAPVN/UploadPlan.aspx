@@ -189,7 +189,7 @@
                 else {
                     $.ajax({
                         type: 'POST',
-                        url: '/MyWebSercive.asmx/UpdateDateTimePlan',
+                        url: '/WebServiceModifyPlan.asmx/UpdateDateTimePlan',
                         contentType: 'application/json; charset=utf-8',
                         dataType: 'json',
                         data: JSON.stringify({ ModelName: NameModel, TimeFrom: datetimefrom, TimeTo: datetimeto }),
@@ -229,7 +229,7 @@
                 var NameModel = ` ${datarow.cells[0].textContent}`;
                 $.ajax({
                     type: 'POST',
-                    url: '/MyWebSercive.asmx/MonitorSpecial',
+                    url: '/WebServiceModifyPlan.asmx/MonitorSpecial',
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     data: JSON.stringify({ ModelName: NameModel }),
