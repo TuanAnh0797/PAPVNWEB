@@ -663,28 +663,28 @@ namespace PAPVN
                 {
                     selectshift = 1;
                     dt = dBConnect.StoreFillDT("TA_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "1");
-                    ds = dBConnect.StoreFillDS("LoadDataForLineChartPlanGasByTime", CommandType.StoredProcedure, parammysql, "1");
+                    ds = dBConnect.StoreFillDS("TA_LoadDataForLineChartPlanGasByTime", CommandType.StoredProcedure, parammysql, "1");
                     dt1 = ds.Tables[0];
                 }
                 else if (SelectedShift == "Ca 2")
                 {
                     selectshift = 2;
                     dt = dBConnect.StoreFillDT("TA_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "2");
-                    ds = dBConnect.StoreFillDS("LoadDataForLineChartPlanGasByTime", CommandType.StoredProcedure, parammysql, "2");
+                    ds = dBConnect.StoreFillDS("TA_LoadDataForLineChartPlanGasByTime", CommandType.StoredProcedure, parammysql, "2");
                     dt1 = ds.Tables[0];
                 }
                 else if (SelectedShift == "Ca 3")
                 {
                     selectshift = 3;
                     dt = dBConnect.StoreFillDT("TA_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "3");
-                    ds = dBConnect.StoreFillDS("LoadDataForLineChartPlanGasByTime", CommandType.StoredProcedure, parammysql, "3");
+                    ds = dBConnect.StoreFillDS("TA_LoadDataForLineChartPlanGasByTime", CommandType.StoredProcedure, parammysql, "3");
                     dt1 = ds.Tables[0];
                 }
                 else
                 {
                     selectshift = 0;
                     dt = dBConnect.StoreFillDT("TA_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "all");
-                    ds = dBConnect.StoreFillDS("LoadDataForLineChartPlanGasByTime", CommandType.StoredProcedure, parammysql, "all");
+                    ds = dBConnect.StoreFillDS("TA_LoadDataForLineChartPlanGasByTime", CommandType.StoredProcedure, parammysql, "all");
                     dt1 = ds.Tables[0];
                 }
                 if (dt.Rows.Count > 0)
