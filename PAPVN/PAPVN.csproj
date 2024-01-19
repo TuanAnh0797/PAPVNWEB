@@ -233,6 +233,7 @@
     <Content Include="Global.asax" />
     <Content Include="Image\panasonic-logo.jpg" />
     <Content Include="Image\panasonic-logo.png" />
+    <Content Include="PartCard.html" />
     <Content Include="WebServiceModifyPlan.asmx" />
     <Content Include="Mycss\iconio.css" />
     <Content Include="Mycss\myicon.css" />
@@ -241,8 +242,6 @@
     <Content Include="UploadPlanCa2.aspx" />
     <Content Include="UploadPlanCa3.aspx" />
     <Content Include="wwwroot\Panasonic_logo_bl_posi_PNG.ico" />
-    <Content Include="PlanPAN.aspx" />
-    <Content Include="PlanURT.aspx" />
     <Content Include="plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
     <Content Include="plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.min.css" />
     <Content Include="plugins\bootstrap-colorpicker\js\bootstrap-colorpicker.js" />
@@ -2323,20 +2322,6 @@
     <Compile Include="WebServicePlanGas.asmx.cs">
       <DependentUpon>WebServicePlanGas.asmx</DependentUpon>
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="PlanPAN.aspx.cs">
-      <DependentUpon>PlanPAN.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PlanPAN.aspx.designer.cs">
-      <DependentUpon>PlanPAN.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PlanURT.aspx.cs">
-      <DependentUpon>PlanURT.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PlanURT.aspx.designer.cs">
-      <DependentUpon>PlanURT.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PlanGAS.aspx.cs">

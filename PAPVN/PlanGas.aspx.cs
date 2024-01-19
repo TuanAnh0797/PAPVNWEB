@@ -22,7 +22,7 @@ namespace PAPVN
                 myculture.DateTimeFormat.LongTimePattern = "HH:mm:ss";
                 myculture.DateTimeFormat.ShortDatePattern = "yyyy-MM-dd";
                 System.Threading.Thread.CurrentThread.CurrentCulture = myculture;
-                Load_model();
+                //Load_model();
                 
             }
         }

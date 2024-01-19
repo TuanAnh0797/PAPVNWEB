@@ -205,43 +205,43 @@ namespace PAPVN
                 }
                 datahavequantity.Rows.Add(item.Model, item.QuantityDay, item.QuantityDay / secwork, (item.Quantity1 > 0) ? item.Quantity1:0, (item.Quantity2 > 0) ? item.Quantity2 : 0, (item.Quantity3 > 0) ? item.Quantity3 : 0, secwork, TimeStart, TimeEnd);
 
-                if (item.Quantity1 > 0)
-                {
+                //if (item.Quantity1 > 0)
+                //{
                     datahavequantityca1.Rows.Add(item.Model, item.Quantity1, item.Quantity1 / 25500.0, 25500, DateTime.Now.ToString("yyyy-MM-dd") + " 06:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 14:00:00");
 
-                }
-                if (item.Quantity2 > 0)
-                {
+                //}
+                //if (item.Quantity2 > 0)
+                //{
                     datahavequantityca2.Rows.Add(item.Model, item.Quantity2, item.Quantity2 / 25500.0, 25500, DateTime.Now.ToString("yyyy-MM-dd") + " 14:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00");
 
-                }
-                if (item.Quantity3 > 0)
-                {
+                //}
+                //if (item.Quantity3 > 0)
+                //{
                    
                     datahavequantityca3.Rows.Add(item.Model, item.Quantity3, item.Quantity3 / 24300.0, 24300, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 06:00:00");
-                }
+                //}
             }
 
             //update total all day
-            if (QuantityTotalDay > 0)
-            {
+            //if (QuantityTotalDay > 0)
+            //{
                 datahavequantity.Rows.Add("Total", QuantityTotalDay, QuantityTotalDay / secworkall, QuantityTotal1, QuantityTotal2, QuantityTotal3, secworkall, TimeStartall, TimeEndall);
-            }
+            //}
             //update total ca 1
-            if (QuantityTotal1 > 0)
-            {
+            //if (QuantityTotal1 > 0)
+            //{
                 datahavequantityca1.Rows.Add("Total", QuantityTotal1, QuantityTotal1 / 25500.0, 25500, DateTime.Now.ToString("yyyy-MM-dd") + " 06:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 14:00:00");
-            }
+            //}
             //update total ca 2
-            if (QuantityTotal2 > 0)
-            {
+            //if (QuantityTotal2 > 0)
+            //{
                 datahavequantityca2.Rows.Add("Total", QuantityTotal2, QuantityTotal2 / 25500.0, 25500, DateTime.Now.ToString("yyyy-MM-dd") + " 14:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00");
-            }
+            //}
             //update total ca 3
-            if (QuantityTotal3 > 0)
-            {
+            //if (QuantityTotal3 > 0)
+            //{
                 datahavequantityca3.Rows.Add("Total", QuantityTotal3, QuantityTotal3 / 24300.0, 24300, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 06:00:00");
-            }
+            //}
 
             DBConnect dBConnect = new DBConnect();
             dBConnect.exnonquery("TA_ClearAllPlan", CommandType.StoredProcedure);
@@ -253,26 +253,27 @@ namespace PAPVN
             using (MySqlConnector.MySqlConnection connection = new MySqlConnector.MySqlConnection(DBConnect.connection_string))
             {
                 connection.Open();
-               
-                    try
-                    {
-                        var bulkCopy = new MySqlBulkCopy(connection);
-                        bulkCopy.DestinationTableName = "dataplan";
-                        var result = bulkCopy.WriteToServer(data);
-                        bulkCopy.DestinationTableName = "dataplanca1";
-                        var resultca1 = bulkCopy.WriteToServer(dataca1);
-                        bulkCopy.DestinationTableName = "dataplanca2";
-                        var resultca2 = bulkCopy.WriteToServer(dataca2);
-                        bulkCopy.DestinationTableName = "dataplanca3";
-                        var resultca3 = bulkCopy.WriteToServer(dataca3);
+
+                try
+                {
+                    var bulkCopy = new MySqlBulkCopy(connection);
+                    bulkCopy.DestinationTableName = "dataplan";
+                    var result = bulkCopy.WriteToServer(data);
+                    bulkCopy.DestinationTableName = "dataplanca1";
+                    var resultca1 = bulkCopy.WriteToServer(dataca1);
+                    bulkCopy.DestinationTableName = "dataplanca2";
+                    var resultca2 = bulkCopy.WriteToServer(dataca2);
+                    bulkCopy.DestinationTableName = "dataplanca3";
+                    var resultca3 = bulkCopy.WriteToServer(dataca3);
+
+
+                }
+                catch (Exception ex)
+                {
+                    
+                }
                        
-                      
-                    }
-                    catch (Exception ex)
-                    {
-                       
-                       
-                    }
+                    
                
                 connection.Close();
             }
