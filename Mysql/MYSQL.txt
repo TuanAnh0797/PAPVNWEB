@@ -1,0 +1,294 @@
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_ClearAllPlan`()
+BEGIN
+	
+    
+    DECLARE _hournow int;
+    Set _hournow = hour(now());
+    IF(_hournow > 5) then
+	DELETE FROM `dataplc`.`dataplan`
+        where DATE(dataplan.TimeUpdate) = DATE(NOW());
+        DELETE FROM `dataplc`.`dataplanca1`
+        where  DATE(dataplanca1.TimeUpdate) = DATE(NOW());
+        DELETE FROM `dataplc`.`dataplanca2`
+        where DATE(dataplanca2.TimeUpdate) = DATE(NOW());
+        DELETE FROM `dataplc`.`dataplanca3`
+        where DATE(dataplanca3.TimeUpdate) = DATE(NOW());
+    ELSE
+	DELETE FROM `dataplc`.`dataplan`
+        where  Date(dataplan.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+        DELETE FROM `dataplc`.`dataplanca1`
+        where  Date(dataplanca1.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+        DELETE FROM `dataplc`.`dataplanca2`
+        where  Date(dataplanca2.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+        DELETE FROM `dataplc`.`dataplanca3`
+        where Date(dataplanca3.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+    END IF;
+    
+END
+------------------------------
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_GetStartTimeAndEndTimePlan`(IN _Shift varchar(5))
+BEGIN
+ DECLARE _hournow int;
+    Set _hournow = hour(now());
+    if(_Shift = '1') then
+		 IF(_hournow > 5) then
+	select * from dataplanca1 
+        where Model = 'Total' AND DATE(dataplanca1.TimeUpdate) = DATE(NOW());
+    ELSE
+	select * from dataplanca1 
+        where Model = 'Total' AND Date(dataplanca1.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+    END IF;
+    elseif(_Shift = '2') then
+		 IF(_hournow > 5) then
+	select * from dataplanca2 
+        where Model = 'Total' AND DATE(dataplanca2.TimeUpdate) = DATE(NOW());
+    ELSE
+	select * from dataplanca2 
+        where Model = 'Total' AND Date(dataplanca2.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+    END IF;
+    elseif(_Shift = '3') then
+		 IF(_hournow > 5) then
+	select * from dataplanca3 
+        where Model = 'Total' AND DATE(dataplanca3.TimeUpdate) = DATE(NOW());
+    ELSE
+	select * from dataplanca3 
+        where Model = 'Total' AND Date(dataplanca3.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+    END IF;
+    else
+		 IF(_hournow > 5) then
+	select * from dataplan 
+        where Model = 'Total' AND DATE(dataplan.TimeUpdate) = DATE(NOW());
+    ELSE
+	select * from dataplan 
+        where Model = 'Total' AND Date(dataplan.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+    END IF;
+    end if;
+END
+---------------------------------------
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_LoadDataPlan`()
+BEGIN
+	DECLARE _hournow int;
+    Set _hournow = hour(now());
+    IF(_hournow > 5) then
+	SELECT * FROM dataplc.dataplan where Date(TimeUpdate) = Date(now()) and Model <> 'Total';
+    ELSE
+	SELECT * FROM dataplc.dataplan
+        where Model <> 'Total' AND Date(dataplan.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+    END IF;
+END
+--------------------------
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_LoadDataPlanCa1`()
+BEGIN
+	DECLARE _hournow int;
+    Set _hournow = hour(now());
+    IF(_hournow > 5) then
+	SELECT * FROM dataplc.dataplanca1 where Date(TimeUpdate) = Date(now()) and Model <> 'Total';
+    ELSE
+	SELECT * FROM dataplc.dataplanca1
+        where Model <> 'Total' AND Date(dataplanca1.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+    END IF;
+END
+----------------------------------
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_LoadDataPlanCa2`()
+BEGIN
+	DECLARE _hournow int;
+    Set _hournow = hour(now());
+    IF(_hournow > 5) then
+	SELECT * FROM dataplc.dataplanca2 where Date(dataplanca2.TimeUpdate) = Date(now()) and Model <> 'Total';
+    ELSE
+	SELECT * FROM dataplc.dataplanca2
+        where Model <> 'Total' AND Date(dataplanca2.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+    END IF;
+END
+-------------------------------------
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_LoadDataPlanCa3`()
+BEGIN
+	DECLARE _hournow int;
+    Set _hournow = hour(now());
+    IF(_hournow > 5) then
+	SELECT * FROM dataplc.dataplanca3 where Date(dataplanca3.TimeUpdate) = Date(now()) and Model <> 'Total';
+    ELSE
+	SELECT * FROM dataplc.dataplanca3
+        where Model <> 'Total' AND Date(dataplanca3.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+    END IF;
+END
+----------------------------------------
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_MonitorSpecial`(IN _ModelName nvarchar(30),IN _Shift varchar(5))
+BEGIN
+		DECLARE _hournow int;
+    	Set _hournow = hour(now());
+        IF(_Shift = '1') then
+			IF(_hournow > 5) then
+		if(exists(select MonitorSpecial from dataplanca1 where Model = _ModelName and MonitorSpecial = 0))  then
+			UPDATE `dataplc`.`dataplanca1`
+			SET `MonitorSpecial` = 1
+			WHERE Model = _ModelName and  Date(dataplanca1.TimeUpdate ) = Date(now());
+		else
+			UPDATE `dataplc`.`dataplanca1`
+			SET `MonitorSpecial` = 0
+			WHERE Model = _ModelName and  Date(dataplanca1.TimeUpdate ) = Date(now());
+		end if;
+    	else
+		if(exists(select MonitorSpecial from dataplanca1 where Model = _ModelName and MonitorSpecial = 0))  then
+			UPDATE `dataplc`.`dataplanca1`
+			SET `MonitorSpecial` = 1
+			WHERE Model = _ModelName and  Date(dataplanca1.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+		else
+			UPDATE `dataplc`.`dataplanca1`
+			SET `MonitorSpecial` = 0
+			WHERE Model = _ModelName and  Date(dataplanca1.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+		end if;     		
+    	END IF;
+        elseif(_Shift = '2') then
+			IF(_hournow > 5) then
+		if(exists(select MonitorSpecial from dataplanca2 where Model = _ModelName and MonitorSpecial = 0))  then
+			UPDATE `dataplc`.`dataplanca2`
+			SET `MonitorSpecial` = 1
+			WHERE Model = _ModelName and  Date(dataplanca2.TimeUpdate ) = Date(now());
+		else
+			UPDATE `dataplc`.`dataplanca2`
+			SET `MonitorSpecial` = 0
+			WHERE Model = _ModelName and  Date(dataplanca2.TimeUpdate ) = Date(now());
+		end if;
+    	else
+		if(exists(select MonitorSpecial from dataplanca2 where Model = _ModelName and MonitorSpecial = 0))  then
+			UPDATE `dataplc`.`dataplanca2`
+			SET `MonitorSpecial` = 1
+			WHERE Model = _ModelName and  Date(dataplanca2.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+		else
+			UPDATE `dataplc`.`dataplanca2`
+			SET `MonitorSpecial` = 0
+			WHERE Model = _ModelName and  Date(dataplanca2.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+		end if;     		
+    	END IF;
+        elseif(_Shift = '3') then
+			IF(_hournow > 5) then
+		if(exists(select MonitorSpecial from dataplanca3 where Model = _ModelName and MonitorSpecial = 0))  then
+			UPDATE `dataplc`.`dataplanca3`
+			SET `MonitorSpecial` = 1
+			WHERE Model = _ModelName and  Date(dataplanca3.TimeUpdate ) = Date(now());
+		else
+			UPDATE `dataplc`.`dataplanca3`
+			SET `MonitorSpecial` = 0
+			WHERE Model = _ModelName and  Date(dataplanca3.TimeUpdate ) = Date(now());
+		end if;
+    	else
+		if(exists(select MonitorSpecial from dataplanca3 where Model = _ModelName and MonitorSpecial = 0))  then
+			UPDATE `dataplc`.`dataplanca3`
+			SET `MonitorSpecial` = 1
+			WHERE Model = _ModelName and  Date(dataplanca3.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+		else
+			UPDATE `dataplc`.`dataplanca3`
+			SET `MonitorSpecial` = 0
+			WHERE Model = _ModelName and  Date(dataplanca3.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+		end if;     		
+    	END IF;
+        else
+			IF(_hournow > 5) then
+		if(exists(select MonitorSpecial from dataplan where Model = _ModelName and MonitorSpecial = 0))  then
+			UPDATE `dataplc`.`dataplan`
+			SET `MonitorSpecial` = 1
+			WHERE Model = _ModelName and  Date(dataplan.TimeUpdate ) = Date(now());
+		else
+			UPDATE `dataplc`.`dataplan`
+			SET `MonitorSpecial` = 0
+			WHERE Model = _ModelName and  Date(dataplan.TimeUpdate ) = Date(now());
+		end if;
+    	else
+		if(exists(select MonitorSpecial from dataplan where Model = _ModelName and MonitorSpecial = 0))  then
+			UPDATE `dataplc`.`dataplan`
+			SET `MonitorSpecial` = 1
+			WHERE Model = _ModelName and  Date(dataplan.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+		else
+			UPDATE `dataplc`.`dataplan`
+			SET `MonitorSpecial` = 0
+			WHERE Model = _ModelName and  Date(dataplan.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+		end if;     		
+    	END IF;
+        END IF;
+END
+------------------------------------
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_UpdateDateTimePlan`(IN _ModelName nvarchar(30),IN _TimeFrom datetime,IN _TimeTo datetime,IN _TotalTime double,IN _Shift varchar(5))
+BEGIN
+	DECLARE _hournow int;
+    	Set _hournow = hour(now());
+        
+        if(_Shift = '1') then
+			 IF(_hournow > 5) then
+		UPDATE `dataplc`.`dataplanca1`
+		SET `TotalTime` = _TotalTime,`TimeStart` = _TimeFrom,`TimeEnd` = _TimeTo, `QuantityPerSec` = QuantityDay/_TotalTime
+		WHERE Model = _ModelName and  Date(dataplanca1.TimeUpdate ) = Date(now());
+    	else
+		UPDATE `dataplc`.`dataplanca1`
+		SET `TotalTime` = _TotalTime,`TimeStart` = _TimeFrom,`TimeEnd` = _TimeTo, `QuantityPerSec` = QuantityDay/_TotalTime
+		WHERE Model = _ModelName and  Date(dataplanca1.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+    	END IF;
+        elseif(_Shift = '2') then
+			 IF(_hournow > 5) then
+		UPDATE `dataplc`.`dataplanca2`
+		SET `TotalTime` = _TotalTime,`TimeStart` = _TimeFrom,`TimeEnd` = _TimeTo, `QuantityPerSec` = QuantityDay/_TotalTime
+		WHERE Model = _ModelName and  Date(dataplanca2.TimeUpdate ) = Date(now());
+    	else
+		UPDATE `dataplc`.`dataplanca2`
+		SET `TotalTime` = _TotalTime,`TimeStart` = _TimeFrom,`TimeEnd` = _TimeTo, `QuantityPerSec` = QuantityDay/_TotalTime
+		WHERE Model = _ModelName and  Date(dataplanca2.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+    	END IF;
+        elseif(_Shift = '3') then
+			 IF(_hournow > 5) then
+		UPDATE `dataplc`.`dataplanca3`
+		SET `TotalTime` = _TotalTime,`TimeStart` = _TimeFrom,`TimeEnd` = _TimeTo, `QuantityPerSec` = QuantityDay/_TotalTime
+		WHERE Model = _ModelName and  Date(dataplanca3.TimeUpdate ) = Date(now());
+    	else
+		UPDATE `dataplc`.`dataplanca3`
+		SET `TotalTime` = _TotalTime,`TimeStart` = _TimeFrom,`TimeEnd` = _TimeTo, `QuantityPerSec` = QuantityDay/_TotalTime
+		WHERE Model = _ModelName and  Date(dataplanca3.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+    	END IF;
+        else
+        IF(_hournow > 5) then
+		UPDATE `dataplc`.`dataplan`
+		SET `TotalTime` = _TotalTime,`TimeStart` = _TimeFrom,`TimeEnd` = _TimeTo, `QuantityPerSec` = QuantityDay/_TotalTime
+		WHERE Model = _ModelName and  Date(dataplan.TimeUpdate ) = Date(now());
+    	else
+		UPDATE `dataplc`.`dataplan`
+		SET `TotalTime` = _TotalTime,`TimeStart` = _TimeFrom,`TimeEnd` = _TimeTo, `QuantityPerSec` = QuantityDay/_TotalTime
+		WHERE Model = _ModelName and  Date(dataplan.TimeUpdate ) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+    	END IF;
+        end if;
+        
+        
+    	
+
+END
+-------------------------------
+CREATE TABLE `dataplanca1` (
+  `Model` varchar(30) DEFAULT NULL,
+  `Quantity` int DEFAULT NULL,
+  `QuantityPerSec` float DEFAULT NULL,
+  `TotalTime` double DEFAULT NULL,
+  `TimeStart` datetime DEFAULT NULL,
+  `TimeEnd` datetime DEFAULT NULL,
+  `TimeUpdate` datetime DEFAULT CURRENT_TIMESTAMP,
+  `MonitorSpecial` int DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+--------------------------------
+CREATE TABLE `dataplanca2` (
+  `Model` varchar(30) DEFAULT NULL,
+  `Quantity` int DEFAULT NULL,
+  `QuantityPerSec` float DEFAULT NULL,
+  `TotalTime` double DEFAULT NULL,
+  `TimeStart` datetime DEFAULT NULL,
+  `TimeEnd` datetime DEFAULT NULL,
+  `TimeUpdate` datetime DEFAULT CURRENT_TIMESTAMP,
+  `MonitorSpecial` int DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+------------------------------------
+CREATE TABLE `dataplanca3` (
+  `Model` varchar(30) DEFAULT NULL,
+  `Quantity` int DEFAULT NULL,
+  `QuantityPerSec` float DEFAULT NULL,
+  `TotalTime` double DEFAULT NULL,
+  `TimeStart` datetime DEFAULT NULL,
+  `TimeEnd` datetime DEFAULT NULL,
+  `TimeUpdate` datetime DEFAULT CURRENT_TIMESTAMP,
+  `MonitorSpecial` int DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
