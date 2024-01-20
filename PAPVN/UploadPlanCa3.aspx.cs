@@ -39,7 +39,7 @@ namespace PAPVN
                     {
                         HTML += $"<tr> " +
                         $"<td> {dt.Rows[i]["Model"]} </td>" +
-                        $"<td> {dt.Rows[i]["Quantity"]} </td>" +
+                        $"<td> {dt.Rows[i]["QuantityDay"]} </td>" +
                         $"<td> {dt.Rows[i]["TimeStart"]} </td>" +
                          $"<td> {dt.Rows[i]["TimeEnd"]} </td>" +
                           $"<td> <button style=\"width:120px\" type=\"button\" Class=\"btn-success\" onclick=\"MonitorSpecial(this)\"> <i class=\"fas fa-plus\"></i> Add </button> </td>" +
@@ -50,7 +50,7 @@ namespace PAPVN
                     {
                         HTML += $"<tr> " +
                        $"<td> {dt.Rows[i]["Model"]} </td>" +
-                       $"<td> {dt.Rows[i]["Quantity"]} </td>" +
+                       $"<td> {dt.Rows[i]["QuantityDay"]} </td>" +
                        $"<td> {dt.Rows[i]["TimeStart"]} </td>" +
                         $"<td> {dt.Rows[i]["TimeEnd"]} </td>" +
                          $"<td> <button style=\"width:120px\" type=\"button\" Class=\"btn-danger\" onclick=\"MonitorSpecial(this)\"> <i class=\"fas fa-trash\"></i> Remove</button> </td>" +

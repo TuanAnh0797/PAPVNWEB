@@ -646,6 +646,7 @@ namespace PAPVN
             {
                 DBConnect dBConnect = new DBConnect();
                 string parammysql;
+                bool allday = false;
                 if (ModelName.Contains("All Model"))
                 {
                     parammysql = "all";
@@ -686,6 +687,7 @@ namespace PAPVN
                     dt = dBConnect.StoreFillDT("TA_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "all");
                     ds = dBConnect.StoreFillDS("TA_LoadDataForLineChartPlanGasByTime", CommandType.StoredProcedure, parammysql, "all");
                     dt1 = ds.Tables[0];
+                    allday = true;
                 }
                 if (dt.Rows.Count > 0)
                 {
@@ -702,9 +704,19 @@ namespace PAPVN
                     float quantityPerSec = float.Parse(ds.Tables[1].Rows[0]["QuantityPerSec"].ToString());
                     int index = 1;
                     DateTime EndDateTime = DateTime.Now;
-                    for (DateTime currentHour = TimeStart.AddMinutes(5); currentHour <= TimeEnd; currentHour = currentHour.AddMinutes(5))
+                    int minutestart = 5;
+                    if (TimeStart.ToString().Contains("22:00"))
+                    {
+                        minutestart = 10;
+                    }
+                    for (DateTime currentHour = TimeStart.AddMinutes(minutestart); currentHour <= TimeEnd; currentHour = currentHour.AddMinutes(5))
                     {
                         int TotalTimeNow = index * 300;
+
+                        if (index == 1 && minutestart == 10)
+                        {
+                            TotalTimeNow = TotalTimeNow * 2;
+                        }
                         for (DateTime currentHour1 = TimeStart; currentHour1 <= currentHour; currentHour1 = currentHour1.AddHours(1))
                         {
                             if (currentHour == TimeEnd)
@@ -775,29 +787,62 @@ namespace PAPVN
                     {
                         dateindex = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd");
                     }
-                    for (DateTime currentHour = DateTime.Parse(dateindex + " 06:00:00"); currentHour <= DateTime.Now; currentHour = currentHour.AddMinutes(5))
+                    if (allday)
                     {
-                        if (listdataplan.Keys.Contains(currentHour.ToString("yyyy-MM-dd HH:mm:ss")))
+                        for (DateTime currentHour = DateTime.Parse(dateindex + " 06:00:00"); currentHour <= DateTime.Now; currentHour = currentHour.AddMinutes(5))
                         {
-                            listdataplanactual.Add(listdataplan[currentHour.ToString("yyyy-MM-dd HH:mm:ss")]);
-                            //var datarow = (from row in dt1.AsEnumerable()
-                            //              where row["TimeDataActual"].ToString() == currentHour.ToString("yyyy-MM-dd HH:mm:ss")
-                            //              select row["TimeDataActual"].ToString()).FirstOrDefault();
-                            int sumquantityactual = dt1.AsEnumerable()
-                                                     .Where(row => DateTime.Parse(row["TimeDataActual"].ToString()) <= currentHour)
-                                                     .Sum(row => Int32.Parse(row["mycount"].ToString()));
-                            listdataactual.Add(sumquantityactual);
-                            listdatadatadiff.Add(sumquantityactual - listdataplan[currentHour.ToString("yyyy-MM-dd HH:mm:ss")]);
+                            if (listdataplan.Keys.Contains(currentHour.ToString("yyyy-MM-dd HH:mm:ss")))
+                            {
+                                listdataplanactual.Add(listdataplan[currentHour.ToString("yyyy-MM-dd HH:mm:ss")]);
+                                //var datarow = (from row in dt1.AsEnumerable()
+                                //              where row["TimeDataActual"].ToString() == currentHour.ToString("yyyy-MM-dd HH:mm:ss")
+                                //              select row["TimeDataActual"].ToString()).FirstOrDefault();
+                                int sumquantityactual = dt1.AsEnumerable()
+                                                         .Where(row => DateTime.Parse(row["TimeDataActual"].ToString()) <= currentHour)
+                                                         .Sum(row => Int32.Parse(row["mycount"].ToString()));
+                                listdataactual.Add(sumquantityactual);
+                                listdatadatadiff.Add(sumquantityactual - listdataplan[currentHour.ToString("yyyy-MM-dd HH:mm:ss")]);
+                            }
+                            else
+                            {
+                                listdataplanactual.Add(0);
+                                int sumquantityactual = dt1.AsEnumerable()
+                                                         .Where(row => DateTime.Parse(row["TimeDataActual"].ToString()) <= currentHour)
+                                                         .Sum(row => Int32.Parse(row["mycount"].ToString()));
+                                listdataactual.Add(sumquantityactual);
+                                listdatadatadiff.Add(sumquantityactual);
+                            }
                         }
-                        else
+
+                    }
+                    else
+                    {
+                        for (DateTime currentHour = TimeStart; currentHour <= DateTime.Now; currentHour = currentHour.AddMinutes(5))
+
                         {
-                            listdataplanactual.Add(0);
-                            int sumquantityactual = dt1.AsEnumerable()
-                                                     .Where(row => DateTime.Parse(row["TimeDataActual"].ToString()) <= currentHour)
-                                                     .Sum(row => Int32.Parse(row["mycount"].ToString()));
-                            listdataactual.Add(sumquantityactual);
-                            listdatadatadiff.Add(sumquantityactual);
+                            if (listdataplan.Keys.Contains(currentHour.ToString("yyyy-MM-dd HH:mm:ss")))
+                            {
+                                listdataplanactual.Add(listdataplan[currentHour.ToString("yyyy-MM-dd HH:mm:ss")]);
+                                //var datarow = (from row in dt1.AsEnumerable()
+                                //              where row["TimeDataActual"].ToString() == currentHour.ToString("yyyy-MM-dd HH:mm:ss")
+                                //              select row["TimeDataActual"].ToString()).FirstOrDefault();
+                                int sumquantityactual = dt1.AsEnumerable()
+                                                         .Where(row => DateTime.Parse(row["TimeDataActual"].ToString()) <= currentHour)
+                                                         .Sum(row => Int32.Parse(row["mycount"].ToString()));
+                                listdataactual.Add(sumquantityactual);
+                                listdatadatadiff.Add(sumquantityactual - listdataplan[currentHour.ToString("yyyy-MM-dd HH:mm:ss")]);
+                            }
+                            else
+                            {
+                                listdataplanactual.Add(0);
+                                int sumquantityactual = dt1.AsEnumerable()
+                                                         .Where(row => DateTime.Parse(row["TimeDataActual"].ToString()) <= currentHour)
+                                                         .Sum(row => Int32.Parse(row["mycount"].ToString()));
+                                listdataactual.Add(sumquantityactual);
+                                listdatadatadiff.Add(sumquantityactual);
+                            }
                         }
+
                     }
                     int[] dataplan = new int[listdataplanactual.Count];
                     int[] dataactual = new int[listdataplanactual.Count];

@@ -2274,6 +2274,7 @@
     <Content Include="plugins\toastr\toastr.js.map" />
     <Content Include="AgingHistory.aspx" />
     <Content Include="AgingRealTime.aspx" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
