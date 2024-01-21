@@ -344,7 +344,7 @@
             var datetimeto = $('#dateto').val();
             $.ajax({
                 type: 'POST',
-                url: '/MyWebSercive.asmx/DataForLineChartRealTime',
+                url: '/WebServicePlanGas.asmx/DataForLineChartRealTime',
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 success: function (response) {
@@ -371,7 +371,7 @@
             var datetimeto = $('#dateto').val();
             $.ajax({
                 type: 'POST',
-                url: '/MyWebSercive.asmx/DataForLineChart',
+                url: '/WebServicePlanGas.asmx/DataForLineChart',
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 data: JSON.stringify({ DateTimeFrom: datetimefrom, DateTimeTo: datetimeto }),

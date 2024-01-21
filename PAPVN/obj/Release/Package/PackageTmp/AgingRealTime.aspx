@@ -291,7 +291,7 @@
                         // Thực hiện yêu cầu Ajax
                         currentRequest = $.ajax({
                             type: 'POST',
-                            url: '/MyWebSercive.asmx/DataForLineChartRealTime',
+                            url: '/WebServicePlanGas.asmx/DataForLineChartRealTime',
                             contentType: 'application/json; charset=utf-8',
                             dataType: 'json',
                             timeout: 10000, // Thời gian chờ (10 giây)
