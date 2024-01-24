@@ -100,9 +100,9 @@ namespace PAPVN
                               Quantity3 = Int32.TryParse(row[indexcolumn + 4].ToString(), out int rs2) ? Int32.Parse(row[indexcolumn + 4].ToString()) : 0,
                           };
             int QuantityTotalDay = datarow.Sum(d => d.QuantityDay);
-            int QuantityTotal1 = datarow.Sum(d => d.Quantity1);
-            int QuantityTotal2 = datarow.Sum(d => d.Quantity2);
-            int QuantityTotal3 = datarow.Sum(d => d.Quantity3);
+            int QuantityTotal1 = datarow.Where(d => d.Quantity1 > 0).Sum(d => d.Quantity1);
+            int QuantityTotal2 = datarow.Where(d => d.Quantity2 > 0).Sum(d => d.Quantity2);
+            int QuantityTotal3 = datarow.Where(d => d.Quantity3 > 0).Sum(d => d.Quantity3);
             if (QuantityTotal1 > 0)
             {
                 TimeStartall = DateTime.Now.ToString("yyyy-MM-dd") + " 06:00:00";
@@ -207,18 +207,18 @@ namespace PAPVN
 
                 //if (item.Quantity1 > 0)
                 //{
-                    datahavequantityca1.Rows.Add(item.Model, item.Quantity1, item.Quantity1 / 25500.0, 25500, DateTime.Now.ToString("yyyy-MM-dd") + " 06:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 14:00:00");
+                    datahavequantityca1.Rows.Add(item.Model, (item.Quantity1>0)? item.Quantity1:0, (item.Quantity1 > 0) ? item.Quantity1 / 25500.0:0, 25500, DateTime.Now.ToString("yyyy-MM-dd") + " 06:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 14:00:00");
 
                 //}
                 //if (item.Quantity2 > 0)
                 //{
-                    datahavequantityca2.Rows.Add(item.Model, item.Quantity2, item.Quantity2 / 25500.0, 25500, DateTime.Now.ToString("yyyy-MM-dd") + " 14:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00");
+                    datahavequantityca2.Rows.Add(item.Model, (item.Quantity2>0)? item.Quantity2:0, (item.Quantity2 > 0) ? item.Quantity2 / 25500.0:0, 25500, DateTime.Now.ToString("yyyy-MM-dd") + " 14:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00");
 
                 //}
                 //if (item.Quantity3 > 0)
                 //{
                    
-                    datahavequantityca3.Rows.Add(item.Model, item.Quantity3, item.Quantity3 / 24300.0, 24300, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 06:00:00");
+                    datahavequantityca3.Rows.Add(item.Model, (item.Quantity3>0)? item.Quantity3:0, (item.Quantity3 > 0) ? item.Quantity3 / 24300.0:0, 24300, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 06:00:00");
                 //}
             }
 

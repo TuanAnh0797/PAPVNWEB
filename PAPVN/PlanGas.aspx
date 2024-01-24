@@ -422,7 +422,7 @@
                         });
                         databarchartmonitor.datasets[2].backgroundColor = bgr;
                         barchartplanmonitor.update();
-                        loadDataForLineChart(selectedShift);
+                        loadDataForLineChart();
                     }
                 } catch (error) {
                     console.error(error);
@@ -436,12 +436,13 @@
 
             var isRequestPending = false;
             var currentRequest;
-            async function loadDataForLineChart(selectedShift) {
+            async function loadDataForLineChart() {
                 try {
                     if (!isRequestPending) {
                         isRequestPending = true;
 
                         var selectedModel = document.getElementById('<%= modelplan.ClientID %>').value;
+                        var selectedShift = document.getElementById('<%= cmb_shift.ClientID %>').value;
 
                     // Hủy bỏ yêu cầu Ajax cũ nếu có
                     if (currentRequest && currentRequest.readyState !== 4) {
