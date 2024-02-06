@@ -46,7 +46,7 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" data-auto-collapse-size="2000" href="#" role="button"><i class="fas fa-bars"></i></a>
+                    <a class="nav-link" id="toggle-button"  data-widget="control-sidebar"  role="button"><i class="fas fa-bars"></i></a>
                 </li>
             </ul>
             <!-- Right navbar links -->
@@ -303,6 +303,8 @@
     <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <script>
         $(function () {
+            //
+
             //Initialize Select2 Elements
             $('.select2').select2()
             //Initialize Select2 Elements
@@ -384,13 +386,19 @@
             })
             // Datatable
             $("#example1").DataTable({
-                "responsive": true, "lengthChange": true, "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "print"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+                "responsive": true, "lengthChange": false, "autoWidth": false, searching: false,
+                "scrollY": "800px", // Chiều cao thanh cuộn
+                "scrollCollapse": true,
+                "paging": false, // Tắt phân trang
+            });
         })
         function showpopupfuture() {
             alert('Tính năng chờ phát triển');
         }
+        $(document).ready(function () {
+            $('#toggle-button').ControlSidebar('collapse')
+            //$('#toggle-button').on('expanded.lte.controlsidebar', handleExpandedEvent)
+        });
     </script>
 </body>
 </html>
