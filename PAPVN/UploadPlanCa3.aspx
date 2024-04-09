@@ -58,13 +58,22 @@
         </div>
         <!-- /.card-body -->
     </div>
-    <%--    POPUP_Adjust--%>
-    <div id="popupDiv" style="display: none;">
-        <h1 style="text-align: center; margin: 0px">Adjust Date Time Plan</h1>
-        <h2 style="margin: 0px">Model: <span id="ModelSelect"></span></h2>
-        <div class="d-flex flex-row">
+ <%--    POPUP_Adjust--%>
+    <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <%--<h4 class="modal-title">Adjust Date Time Plan</h4>--%>
+                <h2 class="modal-title"  style="margin: 0px; margin-bottom:5px; font-weight: 600; text-align:center">Adjust Model: <span id="ModelSelect"></span></h2>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                 
+               <div class="d-flex flex-row">
             <div>
-                <p style="font-size: 25px; font-weight: 600">Thời gian bắt đầu sản xuất:</p>
+                <p style="font-size: 25px; font-weight: 600">Time Start:</p>
             </div>
             <div class="flex-fill">
                 <div class=" input-group date" id="reservationdatetimefromplan" data-target-input="nearest">
@@ -77,7 +86,7 @@
         </div>
         <div class="d-flex flex-row" style="margin: 10px 0px">
             <div>
-                <p style="font-size: 25px; font-weight: 600">Thời gian kết thúc sản xuất:</p>
+                <p style="font-size: 25px; font-weight: 600">Time End:&ensp;</p>
             </div>
             <div class="flex-fill">
                 <div class=" input-group date" id="reservationdatetimetoplan" data-target-input="nearest">
@@ -88,16 +97,17 @@
                 </div>
             </div>
         </div>
-        <div style="display: flex; justify-content: center; align-items: center;">
-            <button type="button" style="height: 40px; width: 250px" class="btn-danger" onclick="UpdateDateTimePlan()">
-                <i class="fas fa-upload"></i>
-                Update
-            </button>
+            </div>
+            <div class="modal-footer justify-content-center">
+              <%--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--%>
+              <button type="button" class="btn btn-primary" onclick="UpdateDateTimePlan()">Confirm Update</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
         </div>
-    </div>
-    <div id="popuploading" style="display: none;">
-        <h2>LOADING...</h2>
-    </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
     <script>
         var isMonitorSpecial = 0;
         var isUpdateDateTimePlan = 0;
@@ -131,6 +141,12 @@
                         dataType: 'json',
                         data: JSON.stringify({ ModelName: NameModel, TimeFrom: datetimefrom, TimeTo: datetimeto }),
                         success: function (response) {
+                            if (response.d = '0') {
+                                alert('Thay đổi không thành công!!!!!!!!!!\nThời gian điều trỉnh phải nằm trong khoảng thời gian bắt đầu ca và kết thúc ca')
+                            }
+                            else {
+                                alert('Thay đổi thành công!!!!')
+                            }
                             location.reload();
                         },
                         error: function (xhr, status, error) {
@@ -144,13 +160,7 @@
         }
         function showPopup(elm) {
             var datarow = elm.parentNode.parentNode;
-            var windowHeight = $(window).height();
-            var windowWidth = $(window).width();
-            $("#popupDiv").dialog({
-                modal: true,
-                width: windowWidth * 0.4,
-                height: windowHeight * 0.33,
-            });
+           
             $('#ModelSelect').html(` ${datarow.cells[0].textContent}`)
         }
         function MonitorSpecial(elm) {

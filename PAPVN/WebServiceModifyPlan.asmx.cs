@@ -72,7 +72,7 @@ namespace PAPVN
             {
                 string _model = ModelName.Trim();
                 DBConnect dBConnect = new DBConnect();
-                int dt = dBConnect.exnonquery("TA_MonitorSpecial", CommandType.StoredProcedure, _model, type);
+                int dt = dBConnect.exnonquery("TA_sp_MonitorSpecial", CommandType.StoredProcedure, _model, type);
                 if (dt > 0)
                 {
                     var data = new
@@ -105,36 +105,66 @@ namespace PAPVN
             try
             {
                 DBConnect dBConnect = new DBConnect();
-                DataTable dt = dBConnect.StoreFillDT("TA_GetStartTimeAndEndTimePlan", CommandType.StoredProcedure, type);
+                DataTable dt = dBConnect.StoreFillDT("TA_sp_GetStartTimeAndEndTimePlan", CommandType.StoredProcedure, type);
                 if (dt.Rows.Count > 0)
                 {
+                    string typeplan = dt.Rows[0]["TypePlan"].ToString();
                     if (DateTime.Parse(TimeFrom.Trim() + ":00") < DateTime.Parse(dt.Rows[0]["TimeStart"].ToString()) || DateTime.Parse(TimeTo.Trim() + ":00") > DateTime.Parse(dt.Rows[0]["TimeEnd"].ToString()))
                     {
                         return "0";
                     }
                     else
                     {
-                        TimeSpan subtime = DateTime.Parse(TimeTo) - DateTime.Parse(TimeFrom);
-                        double secwork = subtime.TotalSeconds;
+                        if (typeplan == "2_10")
+                        {
+                            TimeSpan subtime = DateTime.Parse(TimeTo) - DateTime.Parse(TimeFrom);
+                            double secwork = subtime.TotalSeconds;
 
-                        for (DateTime currentHour = DateTime.Parse(TimeFrom.Trim() + ":00").AddHours(1); currentHour < DateTime.Parse(TimeTo.Trim() + ":00"); currentHour = currentHour.AddHours(1))
-                        {
-                            secwork = secwork - Config.TimeRest[currentHour.Hour] * 60;
-                        }
-                        if (DateTime.Parse(TimeTo.Trim() + ":00").Minute >= Config.TimeRest[DateTime.Parse(TimeTo.Trim() + ":00").Hour])
-                        {
-                            secwork = secwork - Config.TimeRest[DateTime.Parse(TimeTo.Trim() + ":00").Hour] * 60;
+                            for (DateTime currentHour = DateTime.Parse(TimeFrom.Trim() + ":00").AddHours(1); currentHour < DateTime.Parse(TimeTo.Trim() + ":00"); currentHour = currentHour.AddHours(1))
+                            {
+                                secwork = secwork - Config.TimeRest2Ca[currentHour.Hour] * 60;
+                            }
+                            if (DateTime.Parse(TimeTo.Trim() + ":00").Minute >= Config.TimeRest2Ca[DateTime.Parse(TimeTo.Trim() + ":00").Hour])
+                            {
+                                secwork = secwork - Config.TimeRest2Ca[DateTime.Parse(TimeTo.Trim() + ":00").Hour] * 60;
+                            }
+                            else
+                            {
+                                secwork = secwork - DateTime.Parse(TimeTo.Trim() + ":00").Minute * 60;
+                            }
+                            if (DateTime.Parse(TimeFrom.Trim() + ":00").Minute < Config.TimeRest2Ca[DateTime.Parse(TimeFrom.Trim() + ":00").Hour])
+                            {
+                                secwork = secwork - (Config.TimeRest2Ca[DateTime.Parse(TimeFrom.Trim() + ":00").Hour] - DateTime.Parse(TimeFrom.Trim() + ":00").Minute) * 60;
+                            }
+                            dBConnect.exnonquery("TA_sp_UpdateDateTimePlan", CommandType.StoredProcedure, ModelName.Trim(), TimeFrom.Trim() + ":00", TimeTo.Trim() + ":00", secwork, type);
+                            return "1";
+
                         }
                         else
                         {
-                            secwork = secwork - DateTime.Parse(TimeTo.Trim() + ":00").Minute * 60;
+                            TimeSpan subtime = DateTime.Parse(TimeTo) - DateTime.Parse(TimeFrom);
+                            double secwork = subtime.TotalSeconds;
+
+                            for (DateTime currentHour = DateTime.Parse(TimeFrom.Trim() + ":00").AddHours(1); currentHour < DateTime.Parse(TimeTo.Trim() + ":00"); currentHour = currentHour.AddHours(1))
+                            {
+                                secwork = secwork - Config.TimeRest[currentHour.Hour] * 60;
+                            }
+                            if (DateTime.Parse(TimeTo.Trim() + ":00").Minute >= Config.TimeRest[DateTime.Parse(TimeTo.Trim() + ":00").Hour])
+                            {
+                                secwork = secwork - Config.TimeRest[DateTime.Parse(TimeTo.Trim() + ":00").Hour] * 60;
+                            }
+                            else
+                            {
+                                secwork = secwork - DateTime.Parse(TimeTo.Trim() + ":00").Minute * 60;
+                            }
+                            if (DateTime.Parse(TimeFrom.Trim() + ":00").Minute < Config.TimeRest[DateTime.Parse(TimeFrom.Trim() + ":00").Hour])
+                            {
+                                secwork = secwork - (Config.TimeRest[DateTime.Parse(TimeFrom.Trim() + ":00").Hour] - DateTime.Parse(TimeFrom.Trim() + ":00").Minute) * 60;
+                            }
+                            dBConnect.exnonquery("TA_sp_UpdateDateTimePlan", CommandType.StoredProcedure, ModelName.Trim(), TimeFrom.Trim() + ":00", TimeTo.Trim() + ":00", secwork, type);
+                            return "1";
                         }
-                        if (DateTime.Parse(TimeFrom.Trim() + ":00").Minute < Config.TimeRest[DateTime.Parse(TimeFrom.Trim() + ":00").Hour])
-                        {
-                            secwork = secwork - (Config.TimeRest[DateTime.Parse(TimeFrom.Trim() + ":00").Hour] - DateTime.Parse(TimeFrom.Trim() + ":00").Minute) * 60;
-                        }
-                        dBConnect.exnonquery("TA_UpdateDateTimePlan", CommandType.StoredProcedure, ModelName.Trim(), TimeFrom.Trim() + ":00", TimeTo.Trim() + ":00", secwork, type);
-                        return "1";
+                       
                     }
                 }
                 return "0";

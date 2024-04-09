@@ -22,15 +22,15 @@ namespace PAPVN
             if (!IsPostBack)
             {
                 //cmb_TypePlan.Items.Add("abc");
-                //loaddataplan();
-                //if (DateTime.Now.Hour > 5)
-                //{
-                //    datenow = DateTime.Now.ToString("dd/MM/yyyy");
-                //}
-                //else
-                //{
-                //    datenow = DateTime.Now.AddDays(-1).ToString("dd/MM/yyyy");
-                //}
+                loaddataplan();
+                if (DateTime.Now.Hour > 5)
+                {
+                    datenow = DateTime.Now.ToString("dd/MM/yyyy");
+                }
+                else
+                {
+                    datenow = DateTime.Now.AddDays(-1).ToString("dd/MM/yyyy");
+                }
             }
             //else
             //{
@@ -101,18 +101,25 @@ namespace PAPVN
                               Quantity3 = Int32.TryParse(row[indexcolumn + 4].ToString(), out int rs2) ? Int32.Parse(row[indexcolumn + 4].ToString()) : 0,
                           };
 
+
             //Tổng số lượng sản phẩm làm 1 ngày
-            int QuantityTotalDay = datarow.Sum(d => d.QuantityDay);
+            int QuantityTotalDay = 0;
             //Tổng số lượng sản phẩm làm ca 1
             int QuantityTotal1 = datarow.Where(d => d.Quantity1 > 0).Sum(d => d.Quantity1);
             //Tổng số lượng sản phẩm làm ca 2
             int QuantityTotal2 = datarow.Where(d => d.Quantity2 > 0).Sum(d => d.Quantity2);
             //Tổng số lượng sản phẩm làm ca 3
             int QuantityTotal3 = datarow.Where(d => d.Quantity3 > 0).Sum(d => d.Quantity3);
-
+            if (cmb_TypePlan.Value == "Kế hoạch 2 ca")
+            {
+                QuantityTotalDay = QuantityTotal1 + QuantityTotal2;
+            }
+            else
+            {
+                QuantityTotalDay = QuantityTotal1 + QuantityTotal2 + QuantityTotal3;
+            }
 
             // Bước 1:
-
             // lấy thời gian bắt đầu sản xuất
             // 2 ca 10 tiếng
             if (cmb_TypePlan.Value == "Kế hoạch 2 ca")
@@ -234,19 +241,20 @@ namespace PAPVN
                 // Duyệt từng dữ liệu trong file excel
                 foreach (var item in datarow)
                 {
+
                     // Thêm dữ liệu vào bảng kế hoạch cả ngày
-                    datahavequantity.Rows.Add(item.Model, item.QuantityDay, item.QuantityDay / secworkall, (item.Quantity1 > 0) ? item.Quantity1 : 0, (item.Quantity2 > 0) ? item.Quantity2 : 0, (item.Quantity3 > 0) ? item.Quantity3 : 0, secworkall, TimeStartall, TimeEndall);
+                    datahavequantity.Rows.Add(item.Model, item.Quantity1 + item.Quantity2, item.QuantityDay / secworkall, (item.Quantity1 > 0) ? item.Quantity1 : 0, (item.Quantity2 > 0) ? item.Quantity2 : 0, 0, secworkall, TimeStartall, TimeEndall,"2_10");
                     // Thêm dữ liệu vào bảng kế hoạch ca 1
-                    datahavequantityca1.Rows.Add(item.Model, (item.Quantity1 > 0) ? item.Quantity1 : 0, (item.Quantity1 > 0) ? item.Quantity1 / 32400.0 : 0, 32400, DateTime.Now.ToString("yyyy-MM-dd") + " 12:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00");
+                    datahavequantityca1.Rows.Add(item.Model, (item.Quantity1 > 0) ? item.Quantity1 : 0, (item.Quantity1 > 0) ? item.Quantity1 / 32400.0 : 0, 32400, DateTime.Now.ToString("yyyy-MM-dd") + " 12:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", "2_10");
                     // Thêm dữ liệu vào bảng kế hoạch ca 2
-                    datahavequantityca2.Rows.Add(item.Model, (item.Quantity2 > 0) ? item.Quantity2 : 0, (item.Quantity2 > 0) ? item.Quantity2 / 31500.0 : 0, 31500, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 08:00:00");
+                    datahavequantityca2.Rows.Add(item.Model, (item.Quantity2 > 0) ? item.Quantity2 : 0, (item.Quantity2 > 0) ? item.Quantity2 / 31500.0 : 0, 31500, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 08:00:00", "2_10");
                 }
                 // Thêm dữ liệu Total vào bảng kế hoạch cả ngày
-                datahavequantity.Rows.Add("Total", QuantityTotalDay, QuantityTotalDay / secworkall, QuantityTotal1, QuantityTotal2, QuantityTotal3, secworkall, TimeStartall, TimeEndall);
+                datahavequantity.Rows.Add("Total", QuantityTotalDay, QuantityTotalDay / secworkall, QuantityTotal1, QuantityTotal2, QuantityTotal3, secworkall, TimeStartall, TimeEndall, "2_10");
                 // Thêm dữ liệu Total vào bảng kế hoạch ca 1
-                datahavequantityca1.Rows.Add("Total", QuantityTotal1, QuantityTotal1 / 32400.0, 32400, DateTime.Now.ToString("yyyy-MM-dd") + " 12:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00");
+                datahavequantityca1.Rows.Add("Total", QuantityTotal1, QuantityTotal1 / 32400.0, 32400, DateTime.Now.ToString("yyyy-MM-dd") + " 12:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", "2_10");
                 // Thêm dữ liệu Total vào bảng kế hoạch ca 2
-                datahavequantityca2.Rows.Add("Total", QuantityTotal2, QuantityTotal2 / 31500.0, 31500, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 08:00:00");
+                datahavequantityca2.Rows.Add("Total", QuantityTotal2, QuantityTotal2 / 31500.0, 31500, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 08:00:00", "2_10");
             }
             else
             {
@@ -254,27 +262,27 @@ namespace PAPVN
                 foreach (var item in datarow)
                 {
                     // Thêm dữ liệu vào bảng kế hoạch cả ngày
-                    datahavequantity.Rows.Add(item.Model, item.QuantityDay, item.QuantityDay / secworkall, (item.Quantity1 > 0) ? item.Quantity1 : 0, (item.Quantity2 > 0) ? item.Quantity2 : 0, (item.Quantity3 > 0) ? item.Quantity3 : 0, secworkall, TimeStartall, TimeEndall);
+                    datahavequantity.Rows.Add(item.Model, item.QuantityDay, item.QuantityDay / secworkall, (item.Quantity1 > 0) ? item.Quantity1 : 0, (item.Quantity2 > 0) ? item.Quantity2 : 0, (item.Quantity3 > 0) ? item.Quantity3 : 0, secworkall, TimeStartall, TimeEndall,"3_8");
                     // Thêm dữ liệu vào bảng kế hoạch ca 1
-                    datahavequantityca1.Rows.Add(item.Model, (item.Quantity1 > 0) ? item.Quantity1 : 0, (item.Quantity1 > 0) ? item.Quantity1 / 25500.0 : 0, 25500, DateTime.Now.ToString("yyyy-MM-dd") + " 06:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 14:00:00");
+                    datahavequantityca1.Rows.Add(item.Model, (item.Quantity1 > 0) ? item.Quantity1 : 0, (item.Quantity1 > 0) ? item.Quantity1 / 25500.0 : 0, 25500, DateTime.Now.ToString("yyyy-MM-dd") + " 06:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 14:00:00", "3_8");
                     // Thêm dữ liệu vào bảng kế hoạch ca 2
-                    datahavequantityca2.Rows.Add(item.Model, (item.Quantity2 > 0) ? item.Quantity2 : 0, (item.Quantity2 > 0) ? item.Quantity2 / 25500.0 : 0, 25500, DateTime.Now.ToString("yyyy-MM-dd") + " 14:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00");
+                    datahavequantityca2.Rows.Add(item.Model, (item.Quantity2 > 0) ? item.Quantity2 : 0, (item.Quantity2 > 0) ? item.Quantity2 / 25500.0 : 0, 25500, DateTime.Now.ToString("yyyy-MM-dd") + " 14:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", "3_8");
                     // Thêm dữ liệu vào bảng kế hoạch ca 3
-                    datahavequantityca3.Rows.Add(item.Model, (item.Quantity3 > 0) ? item.Quantity3 : 0, (item.Quantity3 > 0) ? item.Quantity3 / 24300.0 : 0, 24300, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 06:00:00");
+                    datahavequantityca3.Rows.Add(item.Model, (item.Quantity3 > 0) ? item.Quantity3 : 0, (item.Quantity3 > 0) ? item.Quantity3 / 24300.0 : 0, 24300, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 06:00:00", "3_8");
                 }
                 // Thêm dữ liệu Total vào bảng kế hoạch cả ngày
-                datahavequantity.Rows.Add("Total", QuantityTotalDay, QuantityTotalDay / secworkall, QuantityTotal1, QuantityTotal2, QuantityTotal3, secworkall, TimeStartall, TimeEndall);
+                datahavequantity.Rows.Add("Total", QuantityTotalDay, QuantityTotalDay / secworkall, QuantityTotal1, QuantityTotal2, QuantityTotal3, secworkall, TimeStartall, TimeEndall, "3_8");
                 // Thêm dữ liệu Total vào bảng kế hoạch ca 1
-                datahavequantityca1.Rows.Add("Total", QuantityTotal1, QuantityTotal1 / 25500.0, 25500, DateTime.Now.ToString("yyyy-MM-dd") + " 06:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 14:00:00");
+                datahavequantityca1.Rows.Add("Total", QuantityTotal1, QuantityTotal1 / 25500.0, 25500, DateTime.Now.ToString("yyyy-MM-dd") + " 06:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 14:00:00", "3_8");
                 // Thêm dữ liệu Total vào bảng kế hoạch ca 2
-                datahavequantityca2.Rows.Add("Total", QuantityTotal2, QuantityTotal2 / 25500.0, 25500, DateTime.Now.ToString("yyyy-MM-dd") + " 14:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00");
+                datahavequantityca2.Rows.Add("Total", QuantityTotal2, QuantityTotal2 / 25500.0, 25500, DateTime.Now.ToString("yyyy-MM-dd") + " 14:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", "3_8");
                 // Thêm dữ liệu Total vào bảng kế hoạch ca 3
-                datahavequantityca3.Rows.Add("Total", QuantityTotal3, QuantityTotal3 / 24300.0, 24300, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 06:00:00");
+                datahavequantityca3.Rows.Add("Total", QuantityTotal3, QuantityTotal3 / 24300.0, 24300, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 06:00:00", "3_8");
             }
             // Đẩy dữ liệu lên server
             DBConnect dBConnect = new DBConnect();
             // Xóa kế hoạch cũ
-            dBConnect.exnonquery("TA_ClearAllPlan", CommandType.StoredProcedure);
+            dBConnect.exnonquery("TA_sp_ClearAllPlan", CommandType.StoredProcedure);
             // Đẩy kế hoạch mới
             SaveMySql(datahavequantity, datahavequantityca1, datahavequantityca2, datahavequantityca3);
             // tải lại kế hoạch mới
@@ -289,13 +297,13 @@ namespace PAPVN
                 try
                 {
                     var bulkCopy = new MySqlBulkCopy(connection);
-                    bulkCopy.DestinationTableName = "dataplan";
+                    bulkCopy.DestinationTableName = "ta_tbl_dataplan";
                     var result = bulkCopy.WriteToServer(data);
-                    bulkCopy.DestinationTableName = "dataplanca1";
+                    bulkCopy.DestinationTableName = "ta_tbl_dataplanca1";
                     var resultca1 = bulkCopy.WriteToServer(dataca1);
-                    bulkCopy.DestinationTableName = "dataplanca2";
+                    bulkCopy.DestinationTableName = "ta_tbl_dataplanca2";
                     var resultca2 = bulkCopy.WriteToServer(dataca2);
-                    bulkCopy.DestinationTableName = "dataplanca3";
+                    bulkCopy.DestinationTableName = "ta_tbl_dataplanca3";
                     var resultca3 = bulkCopy.WriteToServer(dataca3);
                 }
                 catch (Exception ex)
@@ -309,7 +317,7 @@ namespace PAPVN
         {
             string HTML = "";
             DBConnect dBConnect = new DBConnect();
-            DataTable dt = dBConnect.StoreFillDT("TA_LoadDataPlan", CommandType.StoredProcedure);
+            DataTable dt = dBConnect.StoreFillDT("TA_sp_LoadDataPlan", CommandType.StoredProcedure);
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 if (dt.Rows[i]["Model"].ToString() != "Total")
@@ -325,7 +333,7 @@ namespace PAPVN
                         $"<td> {dt.Rows[i]["TimeStart"]} </td>" +
                          $"<td> {dt.Rows[i]["TimeEnd"]} </td>" +
                           $"<td> <button style=\"width:120px\" type=\"button\" Class=\"btn-success\" onclick=\"MonitorSpecial(this)\"> <i class=\"fas fa-plus\"></i> Add </button> </td>" +
-                          $"<td> <button style=\"width:120px\" type=\"button\" onclick=\"showPopup(this)\"><i class=\"fas fa-edit\"></i>Edit</button> </td>" +
+                        $"<td> <button style=\"width:120px\" type=\"button\" class=\"btn btn-danger\" data-toggle=\"modal\" data-target=\"#modal-default\" onclick=\"showPopup(this)\"><i class=\"fas fa-edit\"></i>Edit</button> </td>" +
                         $"</tr>";
                     }
                     else
@@ -339,7 +347,7 @@ namespace PAPVN
                        $"<td> {dt.Rows[i]["TimeStart"]} </td>" +
                         $"<td> {dt.Rows[i]["TimeEnd"]} </td>" +
                          $"<td> <button style=\"width:120px\" type=\"button\" Class=\"btn-danger\" onclick=\"MonitorSpecial(this)\"> <i class=\"fas fa-trash\"></i> Remove</button> </td>" +
-                         $"<td> <button style=\"width:120px\" type=\"button\" onclick=\"showPopup(this)\"><i class=\"fas fa-edit\"></i>Edit</button> </td>" +
+                          $"<td> <button style=\"width:120px\" type=\"button\" class=\"btn btn-danger\" data-toggle=\"modal\" data-target=\"#modal-default\" onclick=\"showPopup(this)\"><i class=\"fas fa-edit\"></i>Edit</button> </td>" +
                        $"</tr>";
                     }
                 }
