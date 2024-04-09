@@ -371,9 +371,6 @@ namespace PAPVN
                 {
                     dt = dBConnect.StoreFillDT("TA_LoadDataForBarChartPlanGas", CommandType.StoredProcedure, "all");
                 }
-                //DBConnect dBConnect = new DBConnect();
-                //DataTable dt = dBConnect.StoreFillDT("TA_LoadDataForBarChartPlanGas", CommandType.StoredProcedure);
-                //DateTime datetimenow = DateTime.Now;
                 if (dt.Rows.Count > 1)
                 {
                     int[] dataplan = new int[dt.Rows.Count - 1];

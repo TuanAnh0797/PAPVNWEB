@@ -24,6 +24,15 @@ namespace PAPVN
         protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
 
         /// <summary>
+        /// cmb_TypePlan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect cmb_TypePlan;
+
+        /// <summary>
         /// dt_plan control.
         /// </summary>
         /// <remarks>

@@ -15,15 +15,15 @@ namespace PAPVN
         {
             if (!IsPostBack)
             {
-                loaddataplan();
-                if (DateTime.Now.Hour > 5)
-                {
-                    datenow = DateTime.Now.ToString("dd/MM/yyyy");
-                }
-                else
-                {
-                    datenow = DateTime.Now.AddDays(-1).ToString("dd/MM/yyyy");
-                }
+                //loaddataplan();
+                //if (DateTime.Now.Hour > 5)
+                //{
+                //    datenow = DateTime.Now.ToString("dd/MM/yyyy");
+                //}
+                //else
+                //{
+                //    datenow = DateTime.Now.AddDays(-1).ToString("dd/MM/yyyy");
+                //}
             }
         }
         private void loaddataplan()

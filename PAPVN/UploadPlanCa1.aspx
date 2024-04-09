@@ -185,6 +185,7 @@
                     }
                 });
                 isMonitorSpecial = 0;
+                
             }
         }
     </script>

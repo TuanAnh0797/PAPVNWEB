@@ -32,64 +32,39 @@
         /*.ui-dialog .ui-dialog-titlebar-close .ui-icon {
             background: #ff0000 !important;
         }*/
+        /*table {
+            width:100%;
+            table-layout:fixed;
+        }*/
     </style>
     <div class="m-2">
         <div class="row" style="background-color: #fffefe; border-radius: 8px;">
-            <%--            <div class="col">
-                <div class="form-group" style="margin: 10px 0px 10px 0px">
-                    <div class="d-flex flex-row">
-                        <div>
-                            <p style="margin:5px 3px 0px 0px; font-size:20px; font-weight:600"> Thời gian bắt đầu sản xuất:</p>
-                        </div>
-                         <div class="flex-fill">
-                             <div class=" input-group date" id="reservationdatetimefromplan" data-target-input="nearest">
-                            <input runat="server" id="datefrom" style="font-size: 20px; font-weight: 400" placeholder="Select Date Time From" type="text" class="form-control datetimepicker-input" data-target="#reservationdatetimefrom">
-                            <div class="input-group-append" data-target="#reservationdatetimefromplan" data-toggle="datetimepicker">
-                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                            </div>
-                        </div>
-                         </div>
-                    </div>
-                </div>
-            </div>--%>
-            <%-- <div class="col">
-                <div class="form-group" style="margin: 10px 0px 10px 0px">
-                    <div class="d-flex flex-row">
-                        <div>
-                            <p style="margin:5px 3px 0px 0px; font-size:20px; font-weight:600"> Thời gian kết thúc sản xuất:</p>
-                        </div>
-                        <div class="flex-fill">
-                            <div class="input-group date" id="reservationdatetimetoplan" data-target-input="nearest">
-                        <input runat="server" id="dateto" style="font-size: 20px; font-weight: 400" placeholder="Select Date Time To" type="text" class="form-control datetimepicker-input" data-target="#reservationdatetimeto">
-                        <div class="input-group-append" data-target="#reservationdatetimetoplan" data-toggle="datetimepicker">
-                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                        </div>
-                    </div>
-                        </div>
-                    </div>
-                </div>
-            </div>--%>
-
-            <div class="col" style="margin-top:5px; margin-bottom:5px">
-                 <asp:FileUpload ID="FileUpload1" runat="server" Font-Size="20px" />
+            <div class="col" style="margin-top: 5px; margin-bottom: 5px">
+                <%--<asp:FileUpload ID="FileUpload1" runat="server" Font-Size="20px" Style="padding: 10px; background-color: #f0f0f0; border: 1px solid #ccc;" />--%>
+                <asp:FileUpload ID="FileUpload1" runat="server" Font-Size="20px" />
+            </div>
+            <div style="display: flex; justify-content: right; margin-right: 3px; margin-top: 2px; margin-bottom: 2px">
+                <select runat="server" id="cmb_TypePlan" class="form-control" style="width: 250px;margin-top:5px">
+                    <option>Kế hoạch 3 ca</option>
+                    <option>Kế hoạch 2 ca</option>
+                </select>
+            </div>
+            <div class="col-sm-3" style="margin-top: 5px; margin-bottom: 5px">
+                <asp:Button type="button" Text="Upload Plan" OnClick="Importdata_Click" runat="server" name="btn_Import" Style="font-size: 20px; font-weight: 600; padding: 5px" class="btn btn-outline-primary btn-block "></asp:Button>
             </div>
 
-             <div class="col-sm-3" style="margin-top:5px; margin-bottom:5px">
-            <asp:Button type="button" Text="Upload Plan" OnClick="Importdata_Click" runat="server" name="btn_Import" Style=" font-size: 20px; font-weight: 600; padding: 5px" class="btn btn-outline-primary btn-block "></asp:Button>
-            </div>
-           
         </div>
 
     </div>
     <div class="row ml-5 mt-1 mb-1">
         <div class="col">
-            <a href="UploadPlanCa1.aspx"> <span style="font-size:20px">Điều chỉnh kế hoạch ca 1</span> </a>
+            <a href="UploadPlanCa1.aspx"><span style="font-size: 20px">Điều chỉnh kế hoạch ca 1</span> </a>
         </div>
         <div class="col">
-            <a href="UploadPlanCa2.aspx"><span style="font-size:20px">Điều chỉnh kế hoạch ca 2</span></a>
+            <a href="UploadPlanCa2.aspx"><span style="font-size: 20px">Điều chỉnh kế hoạch ca 2</span></a>
         </div>
         <div class="col">
-            <a href="UploadPlanCa3.aspx"><span style="font-size:20px">Điều chỉnh kế hoạch ca 3</span></a>
+            <a href="UploadPlanCa3.aspx"><span style="font-size: 20px">Điều chỉnh kế hoạch ca 3</span></a>
         </div>
     </div>
 

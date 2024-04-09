@@ -9,7 +9,7 @@
 
     <div class="content" style="margin: 0px 0px 0px 0px;">
         <div class="row">
-            <div class="col-sm-3 p-0" style="margin-left:3px">
+            <%--<div class="col-sm-3 p-0" style="margin-left:3px">
                 <h2 style="text-align:center; font-weight:bold; margin-top:10px">Lịch sử 50 tủ gần nhất</h2>
                     <table id="table_history" class="table table-bordered">
                         <thead>
@@ -24,7 +24,7 @@
                         </tbody>
                     </table>
 
-            </div>
+            </div>--%>
             <div class="col p-0">
                 <div class="container-fluid" style="padding-left:0px; padding-right:3px">
                     <div class="row" style="margin: 10px 0px 0px 0px">

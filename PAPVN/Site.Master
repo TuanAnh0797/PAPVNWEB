@@ -46,7 +46,7 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" id="toggle-button"  data-widget="control-sidebar"  role="button"><i class="fas fa-bars"></i></a>
+                    <a class="nav-link" data-widget="pushmenu"  role="button"><i class="fas fa-bars"></i></a>
                 </li>
             </ul>
             <!-- Right navbar links -->
@@ -390,6 +390,7 @@
                 "scrollY": "800px", // Chiều cao thanh cuộn
                 "scrollCollapse": true,
                 "paging": false, // Tắt phân trang
+                "autoFill": true
             });
         })
         function showpopupfuture() {
