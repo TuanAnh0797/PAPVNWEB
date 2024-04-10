@@ -397,7 +397,38 @@ namespace PAPVN
                         else
                         {
                             double totalsec = subtimenow.TotalSeconds;
-                            if (datetimenow.Hour > 5)
+
+
+                            if (dt.Rows[i]["TypePlan"].ToString() == "")
+                            {
+
+                            }
+
+
+
+                            //if (datetimenow.Hour > 5)
+                            //{
+                            //    for (int currentHour = TimeStart.Hour; currentHour <= datetimenow.Hour; currentHour++)
+                            //    {
+                            //        if (currentHour < datetimenow.Hour)
+                            //        {
+                            //            totalsec = totalsec - Config.TimeRest[currentHour] * 60;
+                            //        }
+                            //        else
+                            //        {
+                            //            if (datetimenow.Minute >= Config.TimeRest[currentHour])
+                            //            {
+                            //                totalsec = totalsec - Config.TimeRest[currentHour] * 60;
+                            //            }
+                            //            else
+                            //            {
+                            //                totalsec = totalsec - datetimenow.Minute * 60;
+                            //            }
+                            //        }
+                            //    }
+                            //}
+
+                            if (datetimenow.Date == TimeStart.Date)
                             {
                                 for (int currentHour = TimeStart.Hour; currentHour <= datetimenow.Hour; currentHour++)
                                 {
@@ -422,12 +453,14 @@ namespace PAPVN
                             {
                                 for (int currentHour = TimeStart.Hour; currentHour <= 23; currentHour++)
                                 {
-                                    if (currentHour > 5)
-                                    {
-                                        totalsec = totalsec - Config.TimeRest[currentHour] * 60;
-                                    }
+                                    //if (currentHour > 5)
+                                    //{
+                                    //    totalsec = totalsec - Config.TimeRest[currentHour] * 60;
+                                    //}
+                                    totalsec = totalsec - Config.TimeRest[currentHour] * 60;
                                 }
-                                for (int j = 0; j <= TimeEnd.Hour; j++)
+                                //for (int j = 0; j <= TimeEnd.Hour; j++)
+                                for (int j = 0; j <= datetimenow.Hour; j++)
                                 {
                                     if (j < datetimenow.Hour)
                                     {
