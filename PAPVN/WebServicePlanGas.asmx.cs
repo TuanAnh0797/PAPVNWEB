@@ -398,87 +398,137 @@ namespace PAPVN
                         {
                             double totalsec = subtimenow.TotalSeconds;
 
-
-                            if (dt.Rows[i]["TypePlan"].ToString() == "")
+                            // Trừ thời gian nghỉ
+                            // trường hợp 2 ca
+                            if (dt.Rows[i]["TypePlan"].ToString() == "2_10")
                             {
-
-                            }
-
-
-
-                            //if (datetimenow.Hour > 5)
-                            //{
-                            //    for (int currentHour = TimeStart.Hour; currentHour <= datetimenow.Hour; currentHour++)
-                            //    {
-                            //        if (currentHour < datetimenow.Hour)
-                            //        {
-                            //            totalsec = totalsec - Config.TimeRest[currentHour] * 60;
-                            //        }
-                            //        else
-                            //        {
-                            //            if (datetimenow.Minute >= Config.TimeRest[currentHour])
-                            //            {
-                            //                totalsec = totalsec - Config.TimeRest[currentHour] * 60;
-                            //            }
-                            //            else
-                            //            {
-                            //                totalsec = totalsec - datetimenow.Minute * 60;
-                            //            }
-                            //        }
-                            //    }
-                            //}
-
-                            if (datetimenow.Date == TimeStart.Date)
-                            {
-                                for (int currentHour = TimeStart.Hour; currentHour <= datetimenow.Hour; currentHour++)
+                                if (datetimenow.Date == TimeStart.Date)
                                 {
-                                    if (currentHour < datetimenow.Hour)
+                                    for (int currentHour = TimeStart.Hour; currentHour <= datetimenow.Hour; currentHour++)
                                     {
-                                        totalsec = totalsec - Config.TimeRest[currentHour] * 60;
-                                    }
-                                    else
-                                    {
-                                        if (datetimenow.Minute >= Config.TimeRest[currentHour])
+                                        if (currentHour < datetimenow.Hour)
                                         {
-                                            totalsec = totalsec - Config.TimeRest[currentHour] * 60;
+                                            totalsec = totalsec - Config.TimeRest2Ca[currentHour] * 60;
                                         }
                                         else
                                         {
-                                            totalsec = totalsec - datetimenow.Minute * 60;
+                                            if (datetimenow.Minute >= Config.TimeRest2Ca[currentHour])
+                                            {
+                                                totalsec = totalsec - Config.TimeRest2Ca[currentHour] * 60;
+                                            }
+                                            else
+                                            {
+                                                totalsec = totalsec - datetimenow.Minute * 60;
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    for (int currentHour = TimeStart.Hour; currentHour <= 23; currentHour++)
+                                    {
+                                      
+                                        totalsec = totalsec - Config.TimeRest2Ca[currentHour] * 60;
+                                    }
+                                    for (int j = 0; j <= datetimenow.Hour; j++)
+                                    {
+                                        if (j < datetimenow.Hour)
+                                        {
+                                            totalsec = totalsec - Config.TimeRest2Ca[j] * 60;
+                                        }
+                                        else
+                                        {
+                                            if (datetimenow.Minute >= Config.TimeRest2Ca[j])
+                                            {
+                                                totalsec = totalsec - Config.TimeRest2Ca[j] * 60;
+                                            }
+                                            else
+                                            {
+                                                totalsec = totalsec - datetimenow.Minute * 60;
+                                            }
                                         }
                                     }
                                 }
                             }
                             else
                             {
-                                for (int currentHour = TimeStart.Hour; currentHour <= 23; currentHour++)
+                                //if (datetimenow.Hour > 5)
+                                //{
+                                //    for (int currentHour = TimeStart.Hour; currentHour <= datetimenow.Hour; currentHour++)
+                                //    {
+                                //        if (currentHour < datetimenow.Hour)
+                                //        {
+                                //            totalsec = totalsec - Config.TimeRest[currentHour] * 60;
+                                //        }
+                                //        else
+                                //        {
+                                //            if (datetimenow.Minute >= Config.TimeRest[currentHour])
+                                //            {
+                                //                totalsec = totalsec - Config.TimeRest[currentHour] * 60;
+                                //            }
+                                //            else
+                                //            {
+                                //                totalsec = totalsec - datetimenow.Minute * 60;
+                                //            }
+                                //        }
+                                //    }
+                                //}
+
+                                if (datetimenow.Date == TimeStart.Date)
                                 {
-                                    //if (currentHour > 5)
-                                    //{
-                                    //    totalsec = totalsec - Config.TimeRest[currentHour] * 60;
-                                    //}
-                                    totalsec = totalsec - Config.TimeRest[currentHour] * 60;
-                                }
-                                //for (int j = 0; j <= TimeEnd.Hour; j++)
-                                for (int j = 0; j <= datetimenow.Hour; j++)
-                                {
-                                    if (j < datetimenow.Hour)
+                                    for (int currentHour = TimeStart.Hour; currentHour <= datetimenow.Hour; currentHour++)
                                     {
-                                        totalsec = totalsec - Config.TimeRest[j] * 60;
+                                        if (currentHour < datetimenow.Hour)
+                                        {
+                                            totalsec = totalsec - Config.TimeRest[currentHour] * 60;
+                                        }
+                                        else
+                                        {
+                                            if (datetimenow.Minute >= Config.TimeRest[currentHour])
+                                            {
+                                                totalsec = totalsec - Config.TimeRest[currentHour] * 60;
+                                            }
+                                            else
+                                            {
+                                                totalsec = totalsec - datetimenow.Minute * 60;
+                                            }
+                                        }
                                     }
-                                    else
+                                }
+                                else
+                                {
+                                    for (int currentHour = TimeStart.Hour; currentHour <= 23; currentHour++)
                                     {
-                                        if (datetimenow.Minute >= Config.TimeRest[j])
+                                        //if (currentHour > 5)
+                                        //{
+                                        //    totalsec = totalsec - Config.TimeRest[currentHour] * 60;
+                                        //}
+                                        totalsec = totalsec - Config.TimeRest[currentHour] * 60;
+                                    }
+                                    //for (int j = 0; j <= TimeEnd.Hour; j++)
+                                    for (int j = 0; j <= datetimenow.Hour; j++)
+                                    {
+                                        if (j < datetimenow.Hour)
                                         {
                                             totalsec = totalsec - Config.TimeRest[j] * 60;
                                         }
                                         else
                                         {
-                                            totalsec = totalsec - datetimenow.Minute * 60;
+                                            if (datetimenow.Minute >= Config.TimeRest[j])
+                                            {
+                                                totalsec = totalsec - Config.TimeRest[j] * 60;
+                                            }
+                                            else
+                                            {
+                                                totalsec = totalsec - datetimenow.Minute * 60;
+                                            }
                                         }
                                     }
                                 }
                             }
+
+
+
                             int QuantityPlan = (int)Math.Round(totalsec * float.Parse(dt.Rows[i]["QuantityPerSec"].ToString()));
                             if (QuantityPlan >= dataplan[i])
                             {
@@ -576,55 +626,142 @@ namespace PAPVN
                         else
                         {
                             double totalsec = subtimenow.TotalSeconds;
-                            if (datetimenow.Hour > 5)
+
+
+
+
+
+
+
+                            // Trừ thời gian nghỉ
+                            // trường hợp 2 ca
+                            if (dt.Rows[i]["TypePlan"].ToString() == "2_10")
                             {
-                                for (int currentHour = TimeStart.Hour; currentHour <= datetimenow.Hour; currentHour++)
+                                if (datetimenow.Date == TimeStart.Date)
                                 {
-                                    if (currentHour < datetimenow.Hour)
+                                    for (int currentHour = TimeStart.Hour; currentHour <= datetimenow.Hour; currentHour++)
                                     {
-                                        totalsec = totalsec - Config.TimeRest[currentHour] * 60;
-                                    }
-                                    else
-                                    {
-                                        if (datetimenow.Minute >= Config.TimeRest[currentHour])
+                                        if (currentHour < datetimenow.Hour)
                                         {
-                                            totalsec = totalsec - Config.TimeRest[currentHour] * 60;
+                                            totalsec = totalsec - Config.TimeRest2Ca[currentHour] * 60;
                                         }
                                         else
                                         {
-                                            totalsec = totalsec - datetimenow.Minute * 60;
+                                            if (datetimenow.Minute >= Config.TimeRest2Ca[currentHour])
+                                            {
+                                                totalsec = totalsec - Config.TimeRest2Ca[currentHour] * 60;
+                                            }
+                                            else
+                                            {
+                                                totalsec = totalsec - datetimenow.Minute * 60;
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    for (int currentHour = TimeStart.Hour; currentHour <= 23; currentHour++)
+                                    {
+
+                                        totalsec = totalsec - Config.TimeRest2Ca[currentHour] * 60;
+                                    }
+                                    for (int j = 0; j <= datetimenow.Hour; j++)
+                                    {
+                                        if (j < datetimenow.Hour)
+                                        {
+                                            totalsec = totalsec - Config.TimeRest2Ca[j] * 60;
+                                        }
+                                        else
+                                        {
+                                            if (datetimenow.Minute >= Config.TimeRest2Ca[j])
+                                            {
+                                                totalsec = totalsec - Config.TimeRest2Ca[j] * 60;
+                                            }
+                                            else
+                                            {
+                                                totalsec = totalsec - datetimenow.Minute * 60;
+                                            }
                                         }
                                     }
                                 }
                             }
                             else
                             {
-                                for (int currentHour = TimeStart.Hour; currentHour <= 23; currentHour++)
+                                //if (datetimenow.Hour > 5)
+                                //{
+                                //    for (int currentHour = TimeStart.Hour; currentHour <= datetimenow.Hour; currentHour++)
+                                //    {
+                                //        if (currentHour < datetimenow.Hour)
+                                //        {
+                                //            totalsec = totalsec - Config.TimeRest[currentHour] * 60;
+                                //        }
+                                //        else
+                                //        {
+                                //            if (datetimenow.Minute >= Config.TimeRest[currentHour])
+                                //            {
+                                //                totalsec = totalsec - Config.TimeRest[currentHour] * 60;
+                                //            }
+                                //            else
+                                //            {
+                                //                totalsec = totalsec - datetimenow.Minute * 60;
+                                //            }
+                                //        }
+                                //    }
+                                //}
+
+                                if (datetimenow.Date == TimeStart.Date)
                                 {
-                                    if (currentHour > 5)
+                                    for (int currentHour = TimeStart.Hour; currentHour <= datetimenow.Hour; currentHour++)
                                     {
-                                        totalsec = totalsec - Config.TimeRest[currentHour] * 60;
+                                        if (currentHour < datetimenow.Hour)
+                                        {
+                                            totalsec = totalsec - Config.TimeRest[currentHour] * 60;
+                                        }
+                                        else
+                                        {
+                                            if (datetimenow.Minute >= Config.TimeRest[currentHour])
+                                            {
+                                                totalsec = totalsec - Config.TimeRest[currentHour] * 60;
+                                            }
+                                            else
+                                            {
+                                                totalsec = totalsec - datetimenow.Minute * 60;
+                                            }
+                                        }
                                     }
                                 }
-                                for (int j = 0; j <= TimeEnd.Hour; j++)
+                                else
                                 {
-                                    if (j < datetimenow.Hour)
+                                    for (int currentHour = TimeStart.Hour; currentHour <= 23; currentHour++)
                                     {
-                                        totalsec = totalsec - Config.TimeRest[j] * 60;
+                                        //if (currentHour > 5)
+                                        //{
+                                        //    totalsec = totalsec - Config.TimeRest[currentHour] * 60;
+                                        //}
+                                        totalsec = totalsec - Config.TimeRest[currentHour] * 60;
                                     }
-                                    else
+                                    //for (int j = 0; j <= TimeEnd.Hour; j++)
+                                    for (int j = 0; j <= datetimenow.Hour; j++)
                                     {
-                                        if (datetimenow.Minute >= Config.TimeRest[j])
+                                        if (j < datetimenow.Hour)
                                         {
                                             totalsec = totalsec - Config.TimeRest[j] * 60;
                                         }
                                         else
                                         {
-                                            totalsec = totalsec - datetimenow.Minute * 60;
+                                            if (datetimenow.Minute >= Config.TimeRest[j])
+                                            {
+                                                totalsec = totalsec - Config.TimeRest[j] * 60;
+                                            }
+                                            else
+                                            {
+                                                totalsec = totalsec - datetimenow.Minute * 60;
+                                            }
                                         }
                                     }
                                 }
                             }
+
                             int QuantityPlan = (int)Math.Round(totalsec * float.Parse(dt.Rows[i]["QuantityPerSec"].ToString()));
                             if (QuantityPlan >= dataplan[i])
                             {
@@ -675,8 +812,11 @@ namespace PAPVN
             try
             {
                 DBConnect dBConnect = new DBConnect();
+
                 string parammysql;
-                bool allday = false;
+
+                //bool allday = false;
+
                 if (ModelName.Contains("All Model"))
                 {
                     parammysql = "all";
@@ -685,7 +825,13 @@ namespace PAPVN
                 {
                     parammysql = ModelName.Trim();
                 }
+                // Thời gian bắt đầu ca lấy từ database
+                DateTime TimeStartShift = DateTime.Now;
+
+
+
                 int selectshift = 0;
+                string typeplan = "3_8";
                 int TotalPlan = 0;
                 DataTable dt;
                 DataSet ds;
@@ -717,7 +863,7 @@ namespace PAPVN
                     dt = dBConnect.StoreFillDT("TA_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "all");
                     ds = dBConnect.StoreFillDS("TA_LoadDataForLineChartPlanGasByTime", CommandType.StoredProcedure, parammysql, "all");
                     dt1 = ds.Tables[0];
-                    allday = true;
+                    //allday = true;
                 }
                 if (dt.Rows.Count > 0)
                 {
@@ -732,33 +878,33 @@ namespace PAPVN
                     DateTime TimeStart = DateTime.Parse(ds.Tables[1].Rows[0]["TimeStart"].ToString());
                     DateTime TimeEnd = DateTime.Parse(ds.Tables[1].Rows[0]["TimeEnd"].ToString());
                     float quantityPerSec = float.Parse(ds.Tables[1].Rows[0]["QuantityPerSec"].ToString());
-                    int index = 1;
+
+                    typeplan = ds.Tables[1].Rows[0]["TypePlan"].ToString();
+                    int index = 0;
+                    //DateTime EndDateTime = DateTime.Now;
+                    //int minutestart = 5;
+                    //if (TimeStart.ToString().Contains("22:00"))
+                    //{
+                    //    minutestart = 10;
+                    //}
+
                     DateTime EndDateTime = DateTime.Now;
-                    int minutestart = 5;
-                    if (TimeStart.ToString().Contains("22:00"))
-                    {
-                        minutestart = 10;
-                    }
-                    for (DateTime currentHour = TimeStart.AddMinutes(minutestart); currentHour <= TimeEnd; currentHour = currentHour.AddMinutes(5))
+                    for (DateTime currentHour = TimeStart; currentHour <= TimeEnd; currentHour = currentHour.AddMinutes(5))
                     {
                         int TotalTimeNow = index * 300;
 
-                        if (index == 1 && minutestart == 10)
-                        {
-                            TotalTimeNow = TotalTimeNow * 2;
-                        }
                         for (DateTime currentHour1 = TimeStart; currentHour1 <= currentHour; currentHour1 = currentHour1.AddHours(1))
                         {
                             if (currentHour == TimeEnd)
                             {
-                                if (currentHour1.Hour != 6)
+                                if (currentHour1.Hour != TimeEnd.Hour)
                                 {
                                     TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
                                 }
                             }
                             else
                             {
-                                if (currentHour.Hour > 5)
+                                if (currentHour.Date == TimeStart.Date)
                                 {
                                     if (currentHour.Hour > currentHour1.Hour)
                                     {
@@ -779,7 +925,7 @@ namespace PAPVN
                                 }
                                 else
                                 {
-                                    if (currentHour1.Hour > 5)
+                                    if (currentHour1.Date == TimeStart.Date)
                                     {
                                         TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
                                     }
@@ -808,20 +954,125 @@ namespace PAPVN
                         listdataplan.Add(currentHour.ToString("yyyy-MM-dd HH:mm:ss"), (int)Math.Round(TotalTimeNow * quantityPerSec));
                         index++;
                     }
-                    string dateindex;
-                    if (DateTime.Now.Hour > 5)
+
+
+
+
+
+                    //
+                    //for (DateTime currentHour = TimeStart.AddMinutes(minutestart); currentHour <= TimeEnd; currentHour = currentHour.AddMinutes(5))
+                    //{
+                    //    int TotalTimeNow = index * 300;
+
+                    //    if (index == 1 && minutestart == 10)
+                    //    {
+                    //        TotalTimeNow = TotalTimeNow * 2;
+                    //    }
+                    //    for (DateTime currentHour1 = TimeStart; currentHour1 <= currentHour; currentHour1 = currentHour1.AddHours(1))
+                    //    {
+                    //        if (currentHour == TimeEnd)
+                    //        {
+                    //            if (currentHour1.Hour != 6)
+                    //            {
+                    //                TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
+                    //            }
+                    //        }
+                    //        else
+                    //        {
+                    //            if (currentHour.Hour > 5)
+                    //            {
+                    //                if (currentHour.Hour > currentHour1.Hour)
+                    //                {
+                    //                    TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
+                    //                }
+                    //                else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute < Config.TimeRest[currentHour1.Hour])
+                    //                {
+                    //                    TotalTimeNow = TotalTimeNow - currentHour.Minute * 60;
+                    //                }
+                    //                else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute >= Config.TimeRest[currentHour1.Hour])
+                    //                {
+                    //                    TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
+                    //                }
+                    //                else
+                    //                {
+                    //                    break;
+                    //                }
+                    //            }
+                    //            else
+                    //            {
+                    //                if (currentHour1.Hour > 5)
+                    //                {
+                    //                    TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
+                    //                }
+                    //                else
+                    //                {
+                    //                    if (currentHour.Hour > currentHour1.Hour)
+                    //                    {
+                    //                        TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
+                    //                    }
+                    //                    else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute < Config.TimeRest[currentHour1.Hour])
+                    //                    {
+                    //                        TotalTimeNow = TotalTimeNow - currentHour.Minute * 60;
+                    //                    }
+                    //                    else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute >= Config.TimeRest[currentHour1.Hour])
+                    //                    {
+                    //                        TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
+                    //                    }
+                    //                    else
+                    //                    {
+                    //                        break;
+                    //                    }
+                    //                }
+                    //            }
+                    //        }
+                    //    }
+                    //    listdataplan.Add(currentHour.ToString("yyyy-MM-dd HH:mm:ss"), (int)Math.Round(TotalTimeNow * quantityPerSec));
+                    //    index++;
+                    //}
+                    //string dateindex;
+                    //if (DateTime.Now.Hour > 5)
+                    //{
+                    //    dateindex = DateTime.Now.ToString("yyyy-MM-dd");
+                    //}
+                    //else
+                    //{
+                    //    dateindex = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd");
+                    //}
+                    //if (allday)
+                    //{
+                    //    for (DateTime currentHour = DateTime.Parse(dateindex + " 06:00:00"); currentHour <= DateTime.Now; currentHour = currentHour.AddMinutes(5))
+                    //    {
+                    //        if (listdataplan.Keys.Contains(currentHour.ToString("yyyy-MM-dd HH:mm:ss")))
+                    //        {
+                    //            listdataplanactual.Add(listdataplan[currentHour.ToString("yyyy-MM-dd HH:mm:ss")]);
+                    //            //var datarow = (from row in dt1.AsEnumerable()
+                    //            //              where row["TimeDataActual"].ToString() == currentHour.ToString("yyyy-MM-dd HH:mm:ss")
+                    //            //              select row["TimeDataActual"].ToString()).FirstOrDefault();
+                    //            int sumquantityactual = dt1.AsEnumerable()
+                    //                                     .Where(row => DateTime.Parse(row["TimeDataActual"].ToString()) <= currentHour)
+                    //                                     .Sum(row => Int32.Parse(row["mycount"].ToString()));
+                    //            listdataactual.Add(sumquantityactual);
+                    //            listdatadatadiff.Add(sumquantityactual - listdataplan[currentHour.ToString("yyyy-MM-dd HH:mm:ss")]);
+                    //        }
+                    //        else
+                    //        {
+                    //            listdataplanactual.Add(0);
+                    //            int sumquantityactual = dt1.AsEnumerable()
+                    //                                     .Where(row => DateTime.Parse(row["TimeDataActual"].ToString()) <= currentHour)
+                    //                                     .Sum(row => Int32.Parse(row["mycount"].ToString()));
+                    //            listdataactual.Add(sumquantityactual);
+                    //            listdatadatadiff.Add(sumquantityactual);
+                    //        }
+                    //    }
+
+                    //}
+                    //else
+                    //{
+                    //for (DateTime currentHour = TimeStart; currentHour <= DateTime.Now; currentHour = currentHour.AddMinutes(5))
+                    //TimeStartShift
+                    for (DateTime currentHour = TimeStartShift; currentHour <= DateTime.Now; currentHour = currentHour.AddMinutes(5))
                     {
-                        dateindex = DateTime.Now.ToString("yyyy-MM-dd");
-                    }
-                    else
-                    {
-                        dateindex = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd");
-                    }
-                    if (allday)
-                    {
-                        for (DateTime currentHour = DateTime.Parse(dateindex + " 06:00:00"); currentHour <= DateTime.Now; currentHour = currentHour.AddMinutes(5))
-                        {
-                            if (listdataplan.Keys.Contains(currentHour.ToString("yyyy-MM-dd HH:mm:ss")))
+                        if (listdataplan.Keys.Contains(currentHour.ToString("yyyy-MM-dd HH:mm:ss")))
                             {
                                 listdataplanactual.Add(listdataplan[currentHour.ToString("yyyy-MM-dd HH:mm:ss")]);
                                 //var datarow = (from row in dt1.AsEnumerable()
@@ -844,36 +1095,7 @@ namespace PAPVN
                             }
                         }
 
-                    }
-                    else
-                    {
-                        for (DateTime currentHour = TimeStart; currentHour <= DateTime.Now; currentHour = currentHour.AddMinutes(5))
-
-                        {
-                            if (listdataplan.Keys.Contains(currentHour.ToString("yyyy-MM-dd HH:mm:ss")))
-                            {
-                                listdataplanactual.Add(listdataplan[currentHour.ToString("yyyy-MM-dd HH:mm:ss")]);
-                                //var datarow = (from row in dt1.AsEnumerable()
-                                //              where row["TimeDataActual"].ToString() == currentHour.ToString("yyyy-MM-dd HH:mm:ss")
-                                //              select row["TimeDataActual"].ToString()).FirstOrDefault();
-                                int sumquantityactual = dt1.AsEnumerable()
-                                                         .Where(row => DateTime.Parse(row["TimeDataActual"].ToString()) <= currentHour)
-                                                         .Sum(row => Int32.Parse(row["mycount"].ToString()));
-                                listdataactual.Add(sumquantityactual);
-                                listdatadatadiff.Add(sumquantityactual - listdataplan[currentHour.ToString("yyyy-MM-dd HH:mm:ss")]);
-                            }
-                            else
-                            {
-                                listdataplanactual.Add(0);
-                                int sumquantityactual = dt1.AsEnumerable()
-                                                         .Where(row => DateTime.Parse(row["TimeDataActual"].ToString()) <= currentHour)
-                                                         .Sum(row => Int32.Parse(row["mycount"].ToString()));
-                                listdataactual.Add(sumquantityactual);
-                                listdatadatadiff.Add(sumquantityactual);
-                            }
-                        }
-
-                    }
+                    //}
                     int[] dataplan = new int[listdataplanactual.Count];
                     int[] dataactual = new int[listdataplanactual.Count];
                     int[] datadiff = new int[listdataplanactual.Count];
@@ -890,6 +1112,7 @@ namespace PAPVN
                         datadiff,
                         shift = selectshift,
                         TotalPlan,
+                        typeplan = typeplan,
                     };
                     return Newtonsoft.Json.JsonConvert.SerializeObject(data);
                 }
@@ -902,6 +1125,7 @@ namespace PAPVN
                         datadiff = new[] { 0 },
                         shift = selectshift,
                         TotalPlan,
+                        typeplan = typeplan,
                     };
                     return Newtonsoft.Json.JsonConvert.SerializeObject(data);
                 }
@@ -916,6 +1140,7 @@ namespace PAPVN
                     datadiff = new[] { 0 },
                     shift = 0,
                     TotalPlan,
+                    typeplan = typeplan,
                 };
                 return Newtonsoft.Json.JsonConvert.SerializeObject(data);
             }
