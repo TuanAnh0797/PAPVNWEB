@@ -386,8 +386,12 @@
                     // Vẽ lại bảng
                     dataTable.draw();
         };
-            //setTimeout(LoadDataForChart, 1000);
-            //setInterval(LoadDataForChart, 300000);
+            setTimeout(LoadDataForChart, 1000);
+        var tmr1 = setInterval(LoadDataForChart, 300000);
+
+        window.onbeforeunload = function () {
+            clearInterval(tmr1);
+        };
 
         //function labelFormatter(label, series) {
         //    return '<div style="font-size:13px; text-align:center; padding:2px;; color: #fff; font-weight: 600;">'

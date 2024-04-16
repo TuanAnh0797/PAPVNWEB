@@ -357,27 +357,31 @@ namespace PAPVN
                 DateTime datetimenow = DateTime.Now;
                 if (SelectedShift == "Ca 1")
                 {
-                    dt = dBConnect.StoreFillDT("TA_LoadDataForBarChartPlanGas", CommandType.StoredProcedure, "1");
+                    dt = dBConnect.StoreFillDT("TA_sp_LoadDataForBarChartPlanGas", CommandType.StoredProcedure, "1");
                 }
                 else if (SelectedShift == "Ca 2")
                 {
-                    dt = dBConnect.StoreFillDT("TA_LoadDataForBarChartPlanGas", CommandType.StoredProcedure, "2");
+                    dt = dBConnect.StoreFillDT("TA_sp_LoadDataForBarChartPlanGas", CommandType.StoredProcedure, "2");
                 }
                 else if (SelectedShift == "Ca 3")
                 {
-                    dt = dBConnect.StoreFillDT("TA_LoadDataForBarChartPlanGas", CommandType.StoredProcedure, "3");
+                    dt = dBConnect.StoreFillDT("TA_sp_LoadDataForBarChartPlanGas", CommandType.StoredProcedure, "3");
                 }
                 else
                 {
-                    dt = dBConnect.StoreFillDT("TA_LoadDataForBarChartPlanGas", CommandType.StoredProcedure, "all");
+                    dt = dBConnect.StoreFillDT("TA_sp_LoadDataForBarChartPlanGas", CommandType.StoredProcedure, "all");
                 }
-                if (dt.Rows.Count > 1)
+                if (dt.Rows.Count > 0)
                 {
-                    int[] dataplan = new int[dt.Rows.Count - 1];
-                    int[] dataplanpertime = new int[dt.Rows.Count - 1];
-                    int[] dataactual = new int[dt.Rows.Count - 1];
-                    string[] labels = new string[dt.Rows.Count - 1];
-                    for (int i = 0; i < dt.Rows.Count - 1; i++)
+                    int[] dataplan = new int[dt.Rows.Count];
+                    int[] dataplanpertime = new int[dt.Rows.Count];
+                    int[] dataactual = new int[dt.Rows.Count];
+                    string[] labels = new string[dt.Rows.Count];
+
+                    DataTable dt2 = dBConnect.StoreFillDT("TA_sp_GetStartTime", CommandType.StoredProcedure);
+                    DateTime TimeStartPlan = DateTime.Parse(dt2.Rows[0]["TimeStart"].ToString());
+
+                    for (int i = 0; i < dt.Rows.Count; i++)
                     {
                         labels[i] = dt.Rows[i]["Model"].ToString();
                         dataplan[i] = Int32.Parse(dt.Rows[i]["QuantityDay"].ToString());
@@ -402,7 +406,7 @@ namespace PAPVN
                             // trường hợp 2 ca
                             if (dt.Rows[i]["TypePlan"].ToString() == "2_10")
                             {
-                                if (datetimenow.Date == TimeStart.Date)
+                                if (datetimenow.Date == TimeStartPlan.Date)
                                 {
                                     for (int currentHour = TimeStart.Hour; currentHour <= datetimenow.Hour; currentHour++)
                                     {
@@ -427,7 +431,7 @@ namespace PAPVN
                                 {
                                     for (int currentHour = TimeStart.Hour; currentHour <= 23; currentHour++)
                                     {
-                                      
+
                                         totalsec = totalsec - Config.TimeRest2Ca[currentHour] * 60;
                                     }
                                     for (int j = 0; j <= datetimenow.Hour; j++)
@@ -450,31 +454,11 @@ namespace PAPVN
                                     }
                                 }
                             }
+                            // Trường hợp 3 ca
                             else
                             {
-                                //if (datetimenow.Hour > 5)
-                                //{
-                                //    for (int currentHour = TimeStart.Hour; currentHour <= datetimenow.Hour; currentHour++)
-                                //    {
-                                //        if (currentHour < datetimenow.Hour)
-                                //        {
-                                //            totalsec = totalsec - Config.TimeRest[currentHour] * 60;
-                                //        }
-                                //        else
-                                //        {
-                                //            if (datetimenow.Minute >= Config.TimeRest[currentHour])
-                                //            {
-                                //                totalsec = totalsec - Config.TimeRest[currentHour] * 60;
-                                //            }
-                                //            else
-                                //            {
-                                //                totalsec = totalsec - datetimenow.Minute * 60;
-                                //            }
-                                //        }
-                                //    }
-                                //}
 
-                                if (datetimenow.Date == TimeStart.Date)
+                                if (datetimenow.Date == TimeStartPlan.Date)
                                 {
                                     for (int currentHour = TimeStart.Hour; currentHour <= datetimenow.Hour; currentHour++)
                                     {
@@ -499,13 +483,9 @@ namespace PAPVN
                                 {
                                     for (int currentHour = TimeStart.Hour; currentHour <= 23; currentHour++)
                                     {
-                                        //if (currentHour > 5)
-                                        //{
-                                        //    totalsec = totalsec - Config.TimeRest[currentHour] * 60;
-                                        //}
+
                                         totalsec = totalsec - Config.TimeRest[currentHour] * 60;
                                     }
-                                    //for (int j = 0; j <= TimeEnd.Hour; j++)
                                     for (int j = 0; j <= datetimenow.Hour; j++)
                                     {
                                         if (j < datetimenow.Hour)
@@ -526,8 +506,6 @@ namespace PAPVN
                                     }
                                 }
                             }
-
-
 
                             int QuantityPlan = (int)Math.Round(totalsec * float.Parse(dt.Rows[i]["QuantityPerSec"].ToString()));
                             if (QuantityPlan >= dataplan[i])
@@ -583,29 +561,30 @@ namespace PAPVN
                 DataTable dt;
                 if (SelectedShift == "Ca 1")
                 {
-                    dt = dBConnect.StoreFillDT("TA_LoadDataForBarChartPlanGasMonitor", CommandType.StoredProcedure, "1");
+                    dt = dBConnect.StoreFillDT("TA_sp_LoadDataForBarChartPlanGasMonitor", CommandType.StoredProcedure, "1");
                 }
                 else if (SelectedShift == "Ca 2")
                 {
-                    dt = dBConnect.StoreFillDT("TA_LoadDataForBarChartPlanGasMonitor", CommandType.StoredProcedure, "2");
+                    dt = dBConnect.StoreFillDT("TA_sp_LoadDataForBarChartPlanGasMonitor", CommandType.StoredProcedure, "2");
                 }
                 else if (SelectedShift == "Ca 3")
                 {
-                    dt = dBConnect.StoreFillDT("TA_LoadDataForBarChartPlanGasMonitor", CommandType.StoredProcedure, "3");
+                    dt = dBConnect.StoreFillDT("TA_sp_LoadDataForBarChartPlanGasMonitor", CommandType.StoredProcedure, "3");
                 }
                 else
                 {
-                    dt = dBConnect.StoreFillDT("TA_LoadDataForBarChartPlanGasMonitor", CommandType.StoredProcedure, "all");
+                    dt = dBConnect.StoreFillDT("TA_sp_LoadDataForBarChartPlanGasMonitor", CommandType.StoredProcedure, "all");
                 }
-                //DBConnect dBConnect = new DBConnect();
-                //DateTime datetimenow = DateTime.Now;
-                //DataTable dt = dBConnect.StoreFillDT("TA_LoadDataForBarChartPlanGasMonitor", CommandType.StoredProcedure);
                 if (dt.Rows.Count > 0)
                 {
                     int[] dataplan = new int[dt.Rows.Count];
                     int[] dataplanpertime = new int[dt.Rows.Count];
                     int[] dataactual = new int[dt.Rows.Count];
                     string[] labels = new string[dt.Rows.Count];
+
+                    DataTable dt2 = dBConnect.StoreFillDT("TA_sp_GetStartTime", CommandType.StoredProcedure);
+                    DateTime TimeStartPlan = DateTime.Parse(dt2.Rows[0]["TimeStart"].ToString());
+
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
                         labels[i] = dt.Rows[i]["Model"].ToString();
@@ -627,17 +606,11 @@ namespace PAPVN
                         {
                             double totalsec = subtimenow.TotalSeconds;
 
-
-
-
-
-
-
                             // Trừ thời gian nghỉ
                             // trường hợp 2 ca
                             if (dt.Rows[i]["TypePlan"].ToString() == "2_10")
                             {
-                                if (datetimenow.Date == TimeStart.Date)
+                                if (datetimenow.Date == TimeStartPlan.Date)
                                 {
                                     for (int currentHour = TimeStart.Hour; currentHour <= datetimenow.Hour; currentHour++)
                                     {
@@ -685,31 +658,11 @@ namespace PAPVN
                                     }
                                 }
                             }
+                            // Trường hợp 3 ca
                             else
                             {
-                                //if (datetimenow.Hour > 5)
-                                //{
-                                //    for (int currentHour = TimeStart.Hour; currentHour <= datetimenow.Hour; currentHour++)
-                                //    {
-                                //        if (currentHour < datetimenow.Hour)
-                                //        {
-                                //            totalsec = totalsec - Config.TimeRest[currentHour] * 60;
-                                //        }
-                                //        else
-                                //        {
-                                //            if (datetimenow.Minute >= Config.TimeRest[currentHour])
-                                //            {
-                                //                totalsec = totalsec - Config.TimeRest[currentHour] * 60;
-                                //            }
-                                //            else
-                                //            {
-                                //                totalsec = totalsec - datetimenow.Minute * 60;
-                                //            }
-                                //        }
-                                //    }
-                                //}
-
-                                if (datetimenow.Date == TimeStart.Date)
+                                
+                                if (datetimenow.Date == TimeStartPlan.Date)
                                 {
                                     for (int currentHour = TimeStart.Hour; currentHour <= datetimenow.Hour; currentHour++)
                                     {
@@ -734,13 +687,9 @@ namespace PAPVN
                                 {
                                     for (int currentHour = TimeStart.Hour; currentHour <= 23; currentHour++)
                                     {
-                                        //if (currentHour > 5)
-                                        //{
-                                        //    totalsec = totalsec - Config.TimeRest[currentHour] * 60;
-                                        //}
+                                       
                                         totalsec = totalsec - Config.TimeRest[currentHour] * 60;
                                     }
-                                    //for (int j = 0; j <= TimeEnd.Hour; j++)
                                     for (int j = 0; j <= datetimenow.Hour; j++)
                                     {
                                         if (j < datetimenow.Hour)
@@ -809,6 +758,7 @@ namespace PAPVN
         [WebMethod]
         public string DataForLineChart(string ModelName, string SelectedShift)
         {
+            string typeplan = "3_8";
             try
             {
                 DBConnect dBConnect = new DBConnect();
@@ -826,48 +776,46 @@ namespace PAPVN
                     parammysql = ModelName.Trim();
                 }
                 // Thời gian bắt đầu ca lấy từ database
-                DateTime TimeStartShift = DateTime.Now;
-
-
+                DateTime TimeStartShift = new DateTime();
 
                 int selectshift = 0;
-                string typeplan = "3_8";
                 int TotalPlan = 0;
-                DataTable dt;
+                DataSet ds1;
                 DataSet ds;
                 DataTable dt1;
                 if (SelectedShift == "Ca 1")
                 {
                     selectshift = 1;
-                    dt = dBConnect.StoreFillDT("TA_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "1");
-                    ds = dBConnect.StoreFillDS("TA_LoadDataForLineChartPlanGasByTime", CommandType.StoredProcedure, parammysql, "1");
+                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "1");
+                    ds = dBConnect.StoreFillDS("TA_sp_LoadDataForLineChartPlanGasByTime", CommandType.StoredProcedure, parammysql, "1");
                     dt1 = ds.Tables[0];
                 }
                 else if (SelectedShift == "Ca 2")
                 {
                     selectshift = 2;
-                    dt = dBConnect.StoreFillDT("TA_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "2");
-                    ds = dBConnect.StoreFillDS("TA_LoadDataForLineChartPlanGasByTime", CommandType.StoredProcedure, parammysql, "2");
+                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "2");
+                    ds = dBConnect.StoreFillDS("TA_sp_LoadDataForLineChartPlanGasByTime", CommandType.StoredProcedure, parammysql, "2");
                     dt1 = ds.Tables[0];
                 }
                 else if (SelectedShift == "Ca 3")
                 {
                     selectshift = 3;
-                    dt = dBConnect.StoreFillDT("TA_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "3");
-                    ds = dBConnect.StoreFillDS("TA_LoadDataForLineChartPlanGasByTime", CommandType.StoredProcedure, parammysql, "3");
+                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "3");
+                    ds = dBConnect.StoreFillDS("TA_sp_LoadDataForLineChartPlanGasByTime", CommandType.StoredProcedure, parammysql, "3");
                     dt1 = ds.Tables[0];
                 }
                 else
                 {
                     selectshift = 0;
-                    dt = dBConnect.StoreFillDT("TA_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "all");
-                    ds = dBConnect.StoreFillDS("TA_LoadDataForLineChartPlanGasByTime", CommandType.StoredProcedure, parammysql, "all");
+                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "all");
+                    ds = dBConnect.StoreFillDS("TA_sp_LoadDataForLineChartPlanGasByTime", CommandType.StoredProcedure, parammysql, "all");
                     dt1 = ds.Tables[0];
                     //allday = true;
                 }
-                if (dt.Rows.Count > 0)
+                if (ds1.Tables[0].Rows.Count > 0)
                 {
-                    TotalPlan = Int32.Parse(dt.Rows[0]["QuantityDay"].ToString());
+                    TotalPlan = Int32.Parse(ds1.Tables[0].Rows[0]["QuantityDay"].ToString());
+                    TimeStartShift = DateTime.Parse(ds1.Tables[1].Rows[0]["TimeStart"].ToString());
                 }
                 Dictionary<string, int> listdataplan = new Dictionary<string, int>();
                 List<int> listdataactual = new List<int>();
@@ -875,61 +823,35 @@ namespace PAPVN
                 List<int> listdataplanactual = new List<int>();
                 if (ds.Tables[1].Rows.Count > 0)
                 {
+
                     DateTime TimeStart = DateTime.Parse(ds.Tables[1].Rows[0]["TimeStart"].ToString());
                     DateTime TimeEnd = DateTime.Parse(ds.Tables[1].Rows[0]["TimeEnd"].ToString());
                     float quantityPerSec = float.Parse(ds.Tables[1].Rows[0]["QuantityPerSec"].ToString());
 
                     typeplan = ds.Tables[1].Rows[0]["TypePlan"].ToString();
                     int index = 0;
-                    //DateTime EndDateTime = DateTime.Now;
-                    //int minutestart = 5;
-                    //if (TimeStart.ToString().Contains("22:00"))
-                    //{
-                    //    minutestart = 10;
-                    //}
+                   
 
-                    DateTime EndDateTime = DateTime.Now;
+                    //DateTime EndDateTime = DateTime.Now;
+
                     for (DateTime currentHour = TimeStart; currentHour <= TimeEnd; currentHour = currentHour.AddMinutes(5))
                     {
                         int TotalTimeNow = index * 300;
 
                         for (DateTime currentHour1 = TimeStart; currentHour1 <= currentHour; currentHour1 = currentHour1.AddHours(1))
                         {
-                            if (currentHour == TimeEnd)
+                            if (TotalTimeNow >= Config.TimeRest[currentHour1.Hour] * 60)
                             {
-                                if (currentHour1.Hour != TimeEnd.Hour)
+                                if (currentHour == TimeEnd)
                                 {
-                                    TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
-                                }
-                            }
-                            else
-                            {
-                                if (currentHour.Date == TimeStart.Date)
-                                {
-                                    if (currentHour.Hour > currentHour1.Hour)
+                                    if (currentHour1.Hour != TimeEnd.Hour)
                                     {
                                         TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
-                                    }
-                                    else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute < Config.TimeRest[currentHour1.Hour])
-                                    {
-                                        TotalTimeNow = TotalTimeNow - currentHour.Minute * 60;
-                                    }
-                                    else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute >= Config.TimeRest[currentHour1.Hour])
-                                    {
-                                        TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
-                                    }
-                                    else
-                                    {
-                                        break;
                                     }
                                 }
                                 else
                                 {
-                                    if (currentHour1.Date == TimeStart.Date)
-                                    {
-                                        TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
-                                    }
-                                    else
+                                    if (currentHour.Date == TimeStartShift.Date)
                                     {
                                         if (currentHour.Hour > currentHour1.Hour)
                                         {
@@ -948,152 +870,65 @@ namespace PAPVN
                                             break;
                                         }
                                     }
+                                    else
+                                    {
+                                        if (currentHour1.Date == TimeStartShift.Date)
+                                        {
+                                            TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
+                                        }
+                                        else
+                                        {
+                                            if (currentHour.Hour > currentHour1.Hour)
+                                            {
+                                                TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
+                                            }
+                                            else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute < Config.TimeRest[currentHour1.Hour])
+                                            {
+                                                TotalTimeNow = TotalTimeNow - currentHour.Minute * 60;
+                                            }
+                                            else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute >= Config.TimeRest[currentHour1.Hour])
+                                            {
+                                                TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
+                                            }
+                                            else
+                                            {
+                                                break;
+                                            }
+                                        }
+                                    }
                                 }
                             }
+                            
                         }
                         listdataplan.Add(currentHour.ToString("yyyy-MM-dd HH:mm:ss"), (int)Math.Round(TotalTimeNow * quantityPerSec));
                         index++;
                     }
 
 
-
-
-
-                    //
-                    //for (DateTime currentHour = TimeStart.AddMinutes(minutestart); currentHour <= TimeEnd; currentHour = currentHour.AddMinutes(5))
-                    //{
-                    //    int TotalTimeNow = index * 300;
-
-                    //    if (index == 1 && minutestart == 10)
-                    //    {
-                    //        TotalTimeNow = TotalTimeNow * 2;
-                    //    }
-                    //    for (DateTime currentHour1 = TimeStart; currentHour1 <= currentHour; currentHour1 = currentHour1.AddHours(1))
-                    //    {
-                    //        if (currentHour == TimeEnd)
-                    //        {
-                    //            if (currentHour1.Hour != 6)
-                    //            {
-                    //                TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
-                    //            }
-                    //        }
-                    //        else
-                    //        {
-                    //            if (currentHour.Hour > 5)
-                    //            {
-                    //                if (currentHour.Hour > currentHour1.Hour)
-                    //                {
-                    //                    TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
-                    //                }
-                    //                else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute < Config.TimeRest[currentHour1.Hour])
-                    //                {
-                    //                    TotalTimeNow = TotalTimeNow - currentHour.Minute * 60;
-                    //                }
-                    //                else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute >= Config.TimeRest[currentHour1.Hour])
-                    //                {
-                    //                    TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
-                    //                }
-                    //                else
-                    //                {
-                    //                    break;
-                    //                }
-                    //            }
-                    //            else
-                    //            {
-                    //                if (currentHour1.Hour > 5)
-                    //                {
-                    //                    TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
-                    //                }
-                    //                else
-                    //                {
-                    //                    if (currentHour.Hour > currentHour1.Hour)
-                    //                    {
-                    //                        TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
-                    //                    }
-                    //                    else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute < Config.TimeRest[currentHour1.Hour])
-                    //                    {
-                    //                        TotalTimeNow = TotalTimeNow - currentHour.Minute * 60;
-                    //                    }
-                    //                    else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute >= Config.TimeRest[currentHour1.Hour])
-                    //                    {
-                    //                        TotalTimeNow = TotalTimeNow - Config.TimeRest[currentHour1.Hour] * 60;
-                    //                    }
-                    //                    else
-                    //                    {
-                    //                        break;
-                    //                    }
-                    //                }
-                    //            }
-                    //        }
-                    //    }
-                    //    listdataplan.Add(currentHour.ToString("yyyy-MM-dd HH:mm:ss"), (int)Math.Round(TotalTimeNow * quantityPerSec));
-                    //    index++;
-                    //}
-                    //string dateindex;
-                    //if (DateTime.Now.Hour > 5)
-                    //{
-                    //    dateindex = DateTime.Now.ToString("yyyy-MM-dd");
-                    //}
-                    //else
-                    //{
-                    //    dateindex = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd");
-                    //}
-                    //if (allday)
-                    //{
-                    //    for (DateTime currentHour = DateTime.Parse(dateindex + " 06:00:00"); currentHour <= DateTime.Now; currentHour = currentHour.AddMinutes(5))
-                    //    {
-                    //        if (listdataplan.Keys.Contains(currentHour.ToString("yyyy-MM-dd HH:mm:ss")))
-                    //        {
-                    //            listdataplanactual.Add(listdataplan[currentHour.ToString("yyyy-MM-dd HH:mm:ss")]);
-                    //            //var datarow = (from row in dt1.AsEnumerable()
-                    //            //              where row["TimeDataActual"].ToString() == currentHour.ToString("yyyy-MM-dd HH:mm:ss")
-                    //            //              select row["TimeDataActual"].ToString()).FirstOrDefault();
-                    //            int sumquantityactual = dt1.AsEnumerable()
-                    //                                     .Where(row => DateTime.Parse(row["TimeDataActual"].ToString()) <= currentHour)
-                    //                                     .Sum(row => Int32.Parse(row["mycount"].ToString()));
-                    //            listdataactual.Add(sumquantityactual);
-                    //            listdatadatadiff.Add(sumquantityactual - listdataplan[currentHour.ToString("yyyy-MM-dd HH:mm:ss")]);
-                    //        }
-                    //        else
-                    //        {
-                    //            listdataplanactual.Add(0);
-                    //            int sumquantityactual = dt1.AsEnumerable()
-                    //                                     .Where(row => DateTime.Parse(row["TimeDataActual"].ToString()) <= currentHour)
-                    //                                     .Sum(row => Int32.Parse(row["mycount"].ToString()));
-                    //            listdataactual.Add(sumquantityactual);
-                    //            listdatadatadiff.Add(sumquantityactual);
-                    //        }
-                    //    }
-
-                    //}
-                    //else
-                    //{
-                    //for (DateTime currentHour = TimeStart; currentHour <= DateTime.Now; currentHour = currentHour.AddMinutes(5))
-                    //TimeStartShift
                     for (DateTime currentHour = TimeStartShift; currentHour <= DateTime.Now; currentHour = currentHour.AddMinutes(5))
                     {
                         if (listdataplan.Keys.Contains(currentHour.ToString("yyyy-MM-dd HH:mm:ss")))
-                            {
-                                listdataplanactual.Add(listdataplan[currentHour.ToString("yyyy-MM-dd HH:mm:ss")]);
-                                //var datarow = (from row in dt1.AsEnumerable()
-                                //              where row["TimeDataActual"].ToString() == currentHour.ToString("yyyy-MM-dd HH:mm:ss")
-                                //              select row["TimeDataActual"].ToString()).FirstOrDefault();
-                                int sumquantityactual = dt1.AsEnumerable()
-                                                         .Where(row => DateTime.Parse(row["TimeDataActual"].ToString()) <= currentHour)
-                                                         .Sum(row => Int32.Parse(row["mycount"].ToString()));
-                                listdataactual.Add(sumquantityactual);
-                                listdatadatadiff.Add(sumquantityactual - listdataplan[currentHour.ToString("yyyy-MM-dd HH:mm:ss")]);
-                            }
-                            else
-                            {
-                                listdataplanactual.Add(0);
-                                int sumquantityactual = dt1.AsEnumerable()
-                                                         .Where(row => DateTime.Parse(row["TimeDataActual"].ToString()) <= currentHour)
-                                                         .Sum(row => Int32.Parse(row["mycount"].ToString()));
-                                listdataactual.Add(sumquantityactual);
-                                listdatadatadiff.Add(sumquantityactual);
-                            }
+                        {
+                            listdataplanactual.Add(listdataplan[currentHour.ToString("yyyy-MM-dd HH:mm:ss")]);
+                            //var datarow = (from row in dt1.AsEnumerable()
+                            //              where row["TimeDataActual"].ToString() == currentHour.ToString("yyyy-MM-dd HH:mm:ss")
+                            //              select row["TimeDataActual"].ToString()).FirstOrDefault();
+                            int sumquantityactual = dt1.AsEnumerable()
+                                                     .Where(row => DateTime.Parse(row["TimeDataActual"].ToString()) <= currentHour)
+                                                     .Sum(row => Int32.Parse(row["mycount"].ToString()));
+                            listdataactual.Add(sumquantityactual);
+                            listdatadatadiff.Add(sumquantityactual - listdataplan[currentHour.ToString("yyyy-MM-dd HH:mm:ss")]);
                         }
+                        else
+                        {
+                            listdataplanactual.Add(0);
+                            int sumquantityactual = dt1.AsEnumerable()
+                                                     .Where(row => DateTime.Parse(row["TimeDataActual"].ToString()) <= currentHour)
+                                                     .Sum(row => Int32.Parse(row["mycount"].ToString()));
+                            listdataactual.Add(sumquantityactual);
+                            listdatadatadiff.Add(sumquantityactual);
+                        }
+                    }
 
                     //}
                     int[] dataplan = new int[listdataplanactual.Count];

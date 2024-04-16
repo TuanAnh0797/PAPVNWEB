@@ -23,19 +23,41 @@ namespace PAPVN
                 myculture.DateTimeFormat.ShortDatePattern = "yyyy-MM-dd";
                 System.Threading.Thread.CurrentThread.CurrentCulture = myculture;
                 Load_model();
-                
+                Load_shift();
+
+
             }
         }
         protected void Load_model()
         {
             // load model
             DBConnect dBConnect = new DBConnect();
-            DataTable dt = dBConnect.StoreFillDT("LoadModelPlan", CommandType.StoredProcedure);
+            DataTable dt = dBConnect.StoreFillDT("TA_sp_LoadModelPlan", CommandType.StoredProcedure);
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 modelplan.Items.Add($"{dt.Rows[i][0]}");
             }
 
+        }
+        protected void Load_shift()
+        {
+            DBConnect dBConnect = new DBConnect();
+            DataTable dt = dBConnect.StoreFillDT("TA_sp_LoadShift", CommandType.StoredProcedure);
+            if (dt.Rows.Count > 0)
+            {
+                if (dt.Rows[0]["TypePlan"].ToString() == "2_10")
+                {
+                    cmb_shift.Items.Add("Ca1");
+                    cmb_shift.Items.Add("Ca2");
+                }
+                else
+                {
+                    cmb_shift.Items.Add("Ca1");
+                    cmb_shift.Items.Add("Ca2");
+                    cmb_shift.Items.Add("Ca3");
+                    
+                }
+            }
         }
 
 
