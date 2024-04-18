@@ -45,16 +45,16 @@ namespace PAPVN
             DataTable dt = dBConnect.StoreFillDT("TA_sp_LoadShift", CommandType.StoredProcedure);
             if (dt.Rows.Count > 0)
             {
-                if (dt.Rows[0]["TypePlan"].ToString() == "2_10")
+                if (dt.Rows[0]["TypePlan"].ToString() == "2_10" || dt.Rows[0]["TypePlan"].ToString() == "2_12")
                 {
-                    cmb_shift.Items.Add("Ca1");
-                    cmb_shift.Items.Add("Ca2");
+                    cmb_shift.Items.Add("Ca 1");
+                    cmb_shift.Items.Add("Ca 2");
                 }
                 else
                 {
-                    cmb_shift.Items.Add("Ca1");
-                    cmb_shift.Items.Add("Ca2");
-                    cmb_shift.Items.Add("Ca3");
+                    cmb_shift.Items.Add("Ca 1");
+                    cmb_shift.Items.Add("Ca 2");
+                    cmb_shift.Items.Add("Ca 3");
                     
                 }
             }

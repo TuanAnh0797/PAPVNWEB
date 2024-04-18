@@ -46,7 +46,8 @@
             <div style="display: flex; justify-content: right; margin-right: 3px; margin-top: 2px; margin-bottom: 2px">
                 <select runat="server" id="cmb_TypePlan" class="form-control" style="width: 250px;margin-top:5px">
                     <option>Kế hoạch 3 ca</option>
-                    <option>Kế hoạch 2 ca</option>
+                    <option>Kế hoạch 2 ca 10 giờ</option>
+                    <option>Kế hoạch 2 ca 12 giờ</option>
                 </select>
             </div>
             <div class="col-sm-3" style="margin-top: 5px; margin-bottom: 5px">
@@ -71,7 +72,7 @@
     <div class="card">
         <div class="card-header">
             <div class="text-center">
-                <h1 style="font-weight: bold">Kế hoạch sản xuất ngày <%=datenow%></h1>
+                <h1 style="font-weight: bold">Kế hoạch sản xuất </h1>
             </div>
         </div>
         <!-- /.card-header -->

@@ -35,7 +35,7 @@
     <div class="card">
         <div class="card-header">
             <div class="text-center">
-                <h1 style="font-weight: bold">Kế hoạch sản xuất ngày <%=datenow%> Ca 1</h1>
+                <h1 style="font-weight: bold">Kế hoạch sản xuất Ca 1</h1>
             </div>
         </div>
         <!-- /.card-header -->

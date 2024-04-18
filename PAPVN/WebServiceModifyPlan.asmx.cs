@@ -140,6 +140,32 @@ namespace PAPVN
                             return "1";
 
                         }
+                        else if(typeplan == "2_12")
+                        {
+                            TimeSpan subtime = DateTime.Parse(TimeTo) - DateTime.Parse(TimeFrom);
+                            double secwork = subtime.TotalSeconds;
+
+                            for (DateTime currentHour = DateTime.Parse(TimeFrom.Trim() + ":00").AddHours(1); currentHour < DateTime.Parse(TimeTo.Trim() + ":00"); currentHour = currentHour.AddHours(1))
+                            {
+                                secwork = secwork - Config.TimeRest2Ca12[currentHour.Hour] * 60;
+                            }
+                            if (DateTime.Parse(TimeTo.Trim() + ":00").Minute >= Config.TimeRest2Ca12[DateTime.Parse(TimeTo.Trim() + ":00").Hour])
+                            {
+                                secwork = secwork - Config.TimeRest2Ca12[DateTime.Parse(TimeTo.Trim() + ":00").Hour] * 60;
+                            }
+                            else
+                            {
+                                secwork = secwork - DateTime.Parse(TimeTo.Trim() + ":00").Minute * 60;
+                            }
+                            if (DateTime.Parse(TimeFrom.Trim() + ":00").Minute < Config.TimeRest2Ca12[DateTime.Parse(TimeFrom.Trim() + ":00").Hour])
+                            {
+                                secwork = secwork - (Config.TimeRest2Ca12[DateTime.Parse(TimeFrom.Trim() + ":00").Hour] - DateTime.Parse(TimeFrom.Trim() + ":00").Minute) * 60;
+                            }
+                            dBConnect.exnonquery("TA_sp_UpdateDateTimePlan", CommandType.StoredProcedure, ModelName.Trim(), TimeFrom.Trim() + ":00", TimeTo.Trim() + ":00", secwork, type);
+                            return "1";
+
+
+                        }
                         else
                         {
                             TimeSpan subtime = DateTime.Parse(TimeTo) - DateTime.Parse(TimeFrom);

@@ -32,71 +32,47 @@
         /*.ui-dialog .ui-dialog-titlebar-close .ui-icon {
             background: #ff0000 !important;
         }*/
+        /*table {
+            width:100%;
+            table-layout:fixed;
+        }*/
     </style>
     <div class="m-2">
         <div class="row" style="background-color: #fffefe; border-radius: 8px;">
-            <%--            <div class="col">
-                <div class="form-group" style="margin: 10px 0px 10px 0px">
-                    <div class="d-flex flex-row">
-                        <div>
-                            <p style="margin:5px 3px 0px 0px; font-size:20px; font-weight:600"> Thời gian bắt đầu sản xuất:</p>
-                        </div>
-                         <div class="flex-fill">
-                             <div class=" input-group date" id="reservationdatetimefromplan" data-target-input="nearest">
-                            <input runat="server" id="datefrom" style="font-size: 20px; font-weight: 400" placeholder="Select Date Time From" type="text" class="form-control datetimepicker-input" data-target="#reservationdatetimefrom">
-                            <div class="input-group-append" data-target="#reservationdatetimefromplan" data-toggle="datetimepicker">
-                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                            </div>
-                        </div>
-                         </div>
-                    </div>
-                </div>
-            </div>--%>
-            <%-- <div class="col">
-                <div class="form-group" style="margin: 10px 0px 10px 0px">
-                    <div class="d-flex flex-row">
-                        <div>
-                            <p style="margin:5px 3px 0px 0px; font-size:20px; font-weight:600"> Thời gian kết thúc sản xuất:</p>
-                        </div>
-                        <div class="flex-fill">
-                            <div class="input-group date" id="reservationdatetimetoplan" data-target-input="nearest">
-                        <input runat="server" id="dateto" style="font-size: 20px; font-weight: 400" placeholder="Select Date Time To" type="text" class="form-control datetimepicker-input" data-target="#reservationdatetimeto">
-                        <div class="input-group-append" data-target="#reservationdatetimetoplan" data-toggle="datetimepicker">
-                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                        </div>
-                    </div>
-                        </div>
-                    </div>
-                </div>
-            </div>--%>
-
-            <div class="col" style="margin-top:5px; margin-bottom:5px">
-                 <asp:FileUpload ID="FileUpload1" runat="server" Font-Size="20px" />
+            <div class="col" style="margin-top: 5px; margin-bottom: 5px">
+                <%--<asp:FileUpload ID="FileUpload1" runat="server" Font-Size="20px" Style="padding: 10px; background-color: #f0f0f0; border: 1px solid #ccc;" />--%>
+                <asp:FileUpload ID="FileUpload1" runat="server" Font-Size="20px" />
+            </div>
+            <div style="display: flex; justify-content: right; margin-right: 3px; margin-top: 2px; margin-bottom: 2px">
+                <select runat="server" id="cmb_TypePlan" class="form-control" style="width: 250px;margin-top:5px">
+                    <option>Kế hoạch 3 ca</option>
+                    <option>Kế hoạch 2 ca 10 giờ</option>
+                    <option>Kế hoạch 2 ca 12 giờ</option>
+                </select>
+            </div>
+            <div class="col-sm-3" style="margin-top: 5px; margin-bottom: 5px">
+                <asp:Button type="button" Text="Upload Plan" OnClick="Importdata_Click" runat="server" name="btn_Import" Style="font-size: 20px; font-weight: 600; padding: 5px" class="btn btn-outline-primary btn-block "></asp:Button>
             </div>
 
-             <div class="col-sm-3" style="margin-top:5px; margin-bottom:5px">
-            <asp:Button type="button" Text="Upload Plan" OnClick="Importdata_Click" runat="server" name="btn_Import" Style=" font-size: 20px; font-weight: 600; padding: 5px" class="btn btn-outline-primary btn-block "></asp:Button>
-            </div>
-           
         </div>
 
     </div>
     <div class="row ml-5 mt-1 mb-1">
-        <div class="col">
-            <a href="UploadPlanCa1.aspx"> <span style="font-size:20px">Điều chỉnh kế hoạch ca 1</span> </a>
+        <div class="col" >
+            <a href="UploadPlanCa1.aspx"><span style="font-size: 20px">Điều chỉnh kế hoạch ca 1</span> </a>
         </div>
         <div class="col">
-            <a href="UploadPlanCa2.aspx"><span style="font-size:20px">Điều chỉnh kế hoạch ca 2</span></a>
+            <a href="UploadPlanCa2.aspx"><span style="font-size: 20px">Điều chỉnh kế hoạch ca 2</span></a>
         </div>
         <div class="col">
-            <a href="UploadPlanCa3.aspx"><span style="font-size:20px">Điều chỉnh kế hoạch ca 3</span></a>
+            <a href="UploadPlanCa3.aspx"><span style="font-size: 20px">Điều chỉnh kế hoạch ca 3</span></a>
         </div>
     </div>
 
     <div class="card">
         <div class="card-header">
             <div class="text-center">
-                <h1 style="font-weight: bold">Kế hoạch sản xuất ngày <%=datenow%></h1>
+                <h1 style="font-weight: bold">Kế hoạch sản xuất </h1>
             </div>
         </div>
         <!-- /.card-header -->
@@ -122,12 +98,21 @@
         <!-- /.card-body -->
     </div>
     <%--    POPUP_Adjust--%>
-    <div id="popupDiv" style="display: none;">
-        <h1 style="text-align: center; margin: 0px">Adjust Date Time Plan</h1>
-        <h2 style="margin: 0px">Model: <span id="ModelSelect"></span></h2>
-        <div class="d-flex flex-row">
+    <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <%--<h4 class="modal-title">Adjust Date Time Plan</h4>--%>
+                <h2 class="modal-title"  style="margin: 0px; margin-bottom:5px; font-weight: 600; text-align:center">Adjust Model: <span id="ModelSelect"></span></h2>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                 
+               <div class="d-flex flex-row">
             <div>
-                <p style="font-size: 25px; font-weight: 600">Thời gian bắt đầu sản xuất:</p>
+                <p style="font-size: 25px; font-weight: 600">Time Start:</p>
             </div>
             <div class="flex-fill">
                 <div class=" input-group date" id="reservationdatetimefromplan" data-target-input="nearest">
@@ -140,7 +125,7 @@
         </div>
         <div class="d-flex flex-row" style="margin: 10px 0px">
             <div>
-                <p style="font-size: 25px; font-weight: 600">Thời gian kết thúc sản xuất:</p>
+                <p style="font-size: 25px; font-weight: 600">Time End:&ensp;</p>
             </div>
             <div class="flex-fill">
                 <div class=" input-group date" id="reservationdatetimetoplan" data-target-input="nearest">
@@ -151,16 +136,18 @@
                 </div>
             </div>
         </div>
-        <div style="display: flex; justify-content: center; align-items: center;">
-            <button type="button" style="height: 40px; width: 250px" class="btn-danger" onclick="UpdateDateTimePlan()">
-                <i class="fas fa-upload"></i>
-                Update
-            </button>
+            </div>
+            <div class="modal-footer justify-content-center">
+              <%--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--%>
+              <button type="button" class="btn btn-primary" onclick="UpdateDateTimePlan()">Confirm Update</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
         </div>
-    </div>
-    <div id="popuploading" style="display: none;">
-        <h2>LOADING...</h2>
-    </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
     <script>
         var isMonitorSpecial = 0;
         var isUpdateDateTimePlan = 0;
@@ -194,6 +181,12 @@
                         dataType: 'json',
                         data: JSON.stringify({ ModelName: NameModel, TimeFrom: datetimefrom, TimeTo: datetimeto }),
                         success: function (response) {
+                            if (response.d = '0') {
+                                alert('Thay đổi không thành công!!!!!!!!!!\nThời gian điều trỉnh phải nằm trong khoảng thời gian bắt đầu ca và kết thúc ca')
+                            }
+                            else {
+                                alert('Thay đổi thành công!!!!')
+                            }
                             location.reload();
                         },
                         error: function (xhr, status, error) {
@@ -207,18 +200,18 @@
         }
         function showPopup(elm) {
             var datarow = elm.parentNode.parentNode;
-            var windowHeight = $(window).height();
-            var windowWidth = $(window).width();
-            $("#popupDiv").dialog({
-                modal: true,
-                width: windowWidth * 0.4,
-                height: windowHeight * 0.33,
-                //beforeClose: function (event, ui) {
-                //    // Thêm nội dung bên trong nút close
-                //    $(".ui-dialog-titlebar-close").html("<span class='custom-close-button'>X</span>");
-                //    alert('close')
-                //},
-            });
+            //var windowHeight = $(window).height();
+            //var windowWidth = $(window).width();
+            //$("#popupDiv").dialog({
+            //    modal: true,
+            //    width: windowWidth * 0.4,
+            //    height: windowHeight * 0.33,
+            //    //beforeClose: function (event, ui) {
+            //    //    // Thêm nội dung bên trong nút close
+            //    //    $(".ui-dialog-titlebar-close").html("<span class='custom-close-button'>X</span>");
+            //    //    alert('close')
+            //    //},
+            //});
             $('#ModelSelect').html(` ${datarow.cells[0].textContent}`)
         }
         function MonitorSpecial(elm) {

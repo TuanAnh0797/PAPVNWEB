@@ -16,21 +16,21 @@ namespace PAPVN
 {
     public partial class UploadPlan : System.Web.UI.Page
     {
-        protected string datenow;
+        //protected string datenow;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 //cmb_TypePlan.Items.Add("abc");
                 loaddataplan();
-                if (DateTime.Now.Hour > 5)
-                {
-                    datenow = DateTime.Now.ToString("dd/MM/yyyy");
-                }
-                else
-                {
-                    datenow = DateTime.Now.AddDays(-1).ToString("dd/MM/yyyy");
-                }
+                //if (DateTime.Now.Hour > 5)
+                //{
+                //    datenow = DateTime.Now.ToString("dd/MM/yyyy");
+                //}
+                //else
+                //{
+                //    datenow = DateTime.Now.AddDays(-1).ToString("dd/MM/yyyy");
+                //}
             }
             //else
             //{
@@ -122,7 +122,7 @@ namespace PAPVN
             // Bước 1:
             // lấy thời gian bắt đầu sản xuất
             // 2 ca 10 tiếng
-            if (cmb_TypePlan.Value == "Kế hoạch 2 ca")
+            if (cmb_TypePlan.Value == "Kế hoạch 2 ca 10 giờ")
             {
                 if (QuantityTotal1 > 0)
                 {
@@ -135,6 +135,26 @@ namespace PAPVN
                 if (QuantityTotal2 > 0)
                 {
                     TimeEndall = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 08:00:00";
+                }
+                else
+                {
+                    TimeEndall = DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00";
+                }
+            }
+            // 2 ca 12 tiếng
+            else if (cmb_TypePlan.Value == "Kế hoạch 2 ca 12 giờ")
+            {
+                if (QuantityTotal1 > 0)
+                {
+                    TimeStartall = DateTime.Now.ToString("yyyy-MM-dd") + " 10:00:00";
+                }
+                else
+                {
+                    TimeStartall = DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00";
+                }
+                if (QuantityTotal2 > 0)
+                {
+                    TimeEndall = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 10:00:00";
                 }
                 else
                 {
@@ -177,11 +197,18 @@ namespace PAPVN
             double secworkall = subtimeall.TotalSeconds;
             // Trừ thời gian nghỉ và không làm
             // 2 ca
-            if (cmb_TypePlan.Value == "Kế hoạch 2 ca")
+            if (cmb_TypePlan.Value == "Kế hoạch 2 ca 10 giờ")
             {
                 for (DateTime currentHour = DateTime.Parse(TimeStartall); currentHour < DateTime.Parse(TimeEndall); currentHour = currentHour.AddHours(1))
                 {
                     secworkall = secworkall - Config.TimeRest2Ca[currentHour.Hour] * 60;
+                }
+            }
+            else if (cmb_TypePlan.Value == "Kế hoạch 2 ca 12 giờ")
+            {
+                for (DateTime currentHour = DateTime.Parse(TimeStartall); currentHour < DateTime.Parse(TimeEndall); currentHour = currentHour.AddHours(1))
+                {
+                    secworkall = secworkall - Config.TimeRest2Ca12[currentHour.Hour] * 60;
                 }
             }
             else
@@ -236,7 +263,7 @@ namespace PAPVN
             // Bước 3:
             // Thêm dữ liệu vào DataTable
 
-            if (cmb_TypePlan.Value == "Kế hoạch 2 ca")
+            if (cmb_TypePlan.Value == "Kế hoạch 2 ca 10 giờ")
             {
                 // Duyệt từng dữ liệu trong file excel
                 foreach (var item in datarow)
@@ -256,6 +283,29 @@ namespace PAPVN
                 // Thêm dữ liệu Total vào bảng kế hoạch ca 2
                 datahavequantityca2.Rows.Add("Total", QuantityTotal2, QuantityTotal2 / 31500.0, 31500, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 08:00:00", "2_10");
             }
+            // 2 ca 12 giờ
+            else if (cmb_TypePlan.Value == "Kế hoạch 2 ca 12 giờ")
+            {
+                // Duyệt từng dữ liệu trong file excel
+                foreach (var item in datarow)
+                {
+
+                    // Thêm dữ liệu vào bảng kế hoạch cả ngày
+                    datahavequantity.Rows.Add(item.Model, item.Quantity1 + item.Quantity2, item.QuantityDay / secworkall, (item.Quantity1 > 0) ? item.Quantity1 : 0, (item.Quantity2 > 0) ? item.Quantity2 : 0, 0, secworkall, TimeStartall, TimeEndall, "2_12");
+                    // Thêm dữ liệu vào bảng kế hoạch ca 1
+                    datahavequantityca1.Rows.Add(item.Model, (item.Quantity1 > 0) ? item.Quantity1 : 0, (item.Quantity1 > 0) ? item.Quantity1 / 37200.0 : 0, 37200, DateTime.Now.ToString("yyyy-MM-dd") + " 10:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", "2_12");
+                    // Thêm dữ liệu vào bảng kế hoạch ca 2
+                    datahavequantityca2.Rows.Add(item.Model, (item.Quantity2 > 0) ? item.Quantity2 : 0, (item.Quantity2 > 0) ? item.Quantity2 / 36900.0 : 0, 36900, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 10:00:00", "2_12");
+                }
+                // Thêm dữ liệu Total vào bảng kế hoạch cả ngày
+                datahavequantity.Rows.Add("Total", QuantityTotalDay, QuantityTotalDay / secworkall, QuantityTotal1, QuantityTotal2, QuantityTotal3, secworkall, TimeStartall, TimeEndall, "2_12");
+                // Thêm dữ liệu Total vào bảng kế hoạch ca 1
+                datahavequantityca1.Rows.Add("Total", QuantityTotal1, QuantityTotal1 / 32400.0, 32400, DateTime.Now.ToString("yyyy-MM-dd") + " 10:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", "2_12");
+                // Thêm dữ liệu Total vào bảng kế hoạch ca 2
+                datahavequantityca2.Rows.Add("Total", QuantityTotal2, QuantityTotal2 / 31500.0, 31500, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 10:00:00", "2_12");
+
+            }
+            // 3 ca
             else
             {
                 // Duyệt từng dữ liệu trong file excel
