@@ -112,7 +112,8 @@ namespace PAPVN
             int QuantityTotal3 = datarow.Where(d => d.Quantity3 > 0).Sum(d => d.Quantity3);
             if (cmb_TypePlan.Value == "Kế hoạch 2 ca")
             {
-                QuantityTotalDay = QuantityTotal1 + QuantityTotal2;
+                //QuantityTotalDay = QuantityTotal1 + QuantityTotal2;
+                QuantityTotalDay = QuantityTotal3 + QuantityTotal2;
             }
             else
             {
@@ -124,7 +125,7 @@ namespace PAPVN
             // 2 ca 10 tiếng
             if (cmb_TypePlan.Value == "Kế hoạch 2 ca 10 giờ")
             {
-                if (QuantityTotal1 > 0)
+                if (QuantityTotal2 > 0)
                 {
                     TimeStartall = DateTime.Now.ToString("yyyy-MM-dd") + " 12:00:00";
                 }
@@ -132,7 +133,7 @@ namespace PAPVN
                 {
                     TimeStartall = DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00";
                 }
-                if (QuantityTotal2 > 0)
+                if (QuantityTotal3 > 0)
                 {
                     TimeEndall = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 08:00:00";
                 }
@@ -144,7 +145,7 @@ namespace PAPVN
             // 2 ca 12 tiếng
             else if (cmb_TypePlan.Value == "Kế hoạch 2 ca 12 giờ")
             {
-                if (QuantityTotal1 > 0)
+                if (QuantityTotal2 > 0)
                 {
                     TimeStartall = DateTime.Now.ToString("yyyy-MM-dd") + " 10:00:00";
                 }
@@ -152,7 +153,7 @@ namespace PAPVN
                 {
                     TimeStartall = DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00";
                 }
-                if (QuantityTotal2 > 0)
+                if (QuantityTotal3 > 0)
                 {
                     TimeEndall = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 10:00:00";
                 }
@@ -270,18 +271,18 @@ namespace PAPVN
                 {
 
                     // Thêm dữ liệu vào bảng kế hoạch cả ngày
-                    datahavequantity.Rows.Add(item.Model, item.Quantity1 + item.Quantity2, item.QuantityDay / secworkall, (item.Quantity1 > 0) ? item.Quantity1 : 0, (item.Quantity2 > 0) ? item.Quantity2 : 0, 0, secworkall, TimeStartall, TimeEndall,"2_10");
+                    datahavequantity.Rows.Add(item.Model, item.Quantity2 + item.Quantity3, item.QuantityDay / secworkall, (item.Quantity2 > 0) ? item.Quantity2 : 0, (item.Quantity3 > 0) ? item.Quantity3 : 0, 0, secworkall, TimeStartall, TimeEndall,"2_10");
                     // Thêm dữ liệu vào bảng kế hoạch ca 1
-                    datahavequantityca1.Rows.Add(item.Model, (item.Quantity1 > 0) ? item.Quantity1 : 0, (item.Quantity1 > 0) ? item.Quantity1 / 32400.0 : 0, 32400, DateTime.Now.ToString("yyyy-MM-dd") + " 12:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", "2_10");
+                    datahavequantityca1.Rows.Add(item.Model, (item.Quantity2 > 0) ? item.Quantity2 : 0, (item.Quantity2 > 0) ? item.Quantity2 / 32400.0 : 0, 32400, DateTime.Now.ToString("yyyy-MM-dd") + " 12:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", "2_10");
                     // Thêm dữ liệu vào bảng kế hoạch ca 2
-                    datahavequantityca2.Rows.Add(item.Model, (item.Quantity2 > 0) ? item.Quantity2 : 0, (item.Quantity2 > 0) ? item.Quantity2 / 31500.0 : 0, 31500, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 08:00:00", "2_10");
+                    datahavequantityca2.Rows.Add(item.Model, (item.Quantity3 > 0) ? item.Quantity3 : 0, (item.Quantity3 > 0) ? item.Quantity3 / 31500.0 : 0, 31500, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 08:00:00", "2_10");
                 }
                 // Thêm dữ liệu Total vào bảng kế hoạch cả ngày
-                datahavequantity.Rows.Add("Total", QuantityTotalDay, QuantityTotalDay / secworkall, QuantityTotal1, QuantityTotal2, QuantityTotal3, secworkall, TimeStartall, TimeEndall, "2_10");
+                datahavequantity.Rows.Add("Total", QuantityTotalDay, QuantityTotalDay / secworkall, QuantityTotal2, QuantityTotal3, 0, secworkall, TimeStartall, TimeEndall, "2_10");
                 // Thêm dữ liệu Total vào bảng kế hoạch ca 1
-                datahavequantityca1.Rows.Add("Total", QuantityTotal1, QuantityTotal1 / 32400.0, 32400, DateTime.Now.ToString("yyyy-MM-dd") + " 12:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", "2_10");
+                datahavequantityca1.Rows.Add("Total", QuantityTotal2, QuantityTotal2 / 32400.0, 32400, DateTime.Now.ToString("yyyy-MM-dd") + " 12:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", "2_10");
                 // Thêm dữ liệu Total vào bảng kế hoạch ca 2
-                datahavequantityca2.Rows.Add("Total", QuantityTotal2, QuantityTotal2 / 31500.0, 31500, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 08:00:00", "2_10");
+                datahavequantityca2.Rows.Add("Total", QuantityTotal3, QuantityTotal3 / 31500.0, 31500, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 08:00:00", "2_10");
             }
             // 2 ca 12 giờ
             else if (cmb_TypePlan.Value == "Kế hoạch 2 ca 12 giờ")
@@ -291,18 +292,18 @@ namespace PAPVN
                 {
 
                     // Thêm dữ liệu vào bảng kế hoạch cả ngày
-                    datahavequantity.Rows.Add(item.Model, item.Quantity1 + item.Quantity2, item.QuantityDay / secworkall, (item.Quantity1 > 0) ? item.Quantity1 : 0, (item.Quantity2 > 0) ? item.Quantity2 : 0, 0, secworkall, TimeStartall, TimeEndall, "2_12");
+                    datahavequantity.Rows.Add(item.Model, item.Quantity2 + item.Quantity3, item.QuantityDay / secworkall, (item.Quantity2 > 0) ? item.Quantity2 : 0, (item.Quantity3 > 0) ? item.Quantity3 : 0, 0, secworkall, TimeStartall, TimeEndall, "2_12");
                     // Thêm dữ liệu vào bảng kế hoạch ca 1
-                    datahavequantityca1.Rows.Add(item.Model, (item.Quantity1 > 0) ? item.Quantity1 : 0, (item.Quantity1 > 0) ? item.Quantity1 / 37200.0 : 0, 37200, DateTime.Now.ToString("yyyy-MM-dd") + " 10:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", "2_12");
+                    datahavequantityca1.Rows.Add(item.Model, (item.Quantity2 > 0) ? item.Quantity2 : 0, (item.Quantity2 > 0) ? item.Quantity2 / 37200.0 : 0, 37200, DateTime.Now.ToString("yyyy-MM-dd") + " 10:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", "2_12");
                     // Thêm dữ liệu vào bảng kế hoạch ca 2
-                    datahavequantityca2.Rows.Add(item.Model, (item.Quantity2 > 0) ? item.Quantity2 : 0, (item.Quantity2 > 0) ? item.Quantity2 / 36900.0 : 0, 36900, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 10:00:00", "2_12");
+                    datahavequantityca2.Rows.Add(item.Model, (item.Quantity3 > 0) ? item.Quantity3 : 0, (item.Quantity3 > 0) ? item.Quantity3 / 36900.0 : 0, 36900, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 10:00:00", "2_12");
                 }
                 // Thêm dữ liệu Total vào bảng kế hoạch cả ngày
-                datahavequantity.Rows.Add("Total", QuantityTotalDay, QuantityTotalDay / secworkall, QuantityTotal1, QuantityTotal2, QuantityTotal3, secworkall, TimeStartall, TimeEndall, "2_12");
+                datahavequantity.Rows.Add("Total", QuantityTotalDay, QuantityTotalDay / secworkall, QuantityTotal2, QuantityTotal3, 0, secworkall, TimeStartall, TimeEndall, "2_12");
                 // Thêm dữ liệu Total vào bảng kế hoạch ca 1
-                datahavequantityca1.Rows.Add("Total", QuantityTotal1, QuantityTotal1 / 32400.0, 32400, DateTime.Now.ToString("yyyy-MM-dd") + " 10:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", "2_12");
+                datahavequantityca1.Rows.Add("Total", QuantityTotal2, QuantityTotal2 / 32400.0, 32400, DateTime.Now.ToString("yyyy-MM-dd") + " 10:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", "2_12");
                 // Thêm dữ liệu Total vào bảng kế hoạch ca 2
-                datahavequantityca2.Rows.Add("Total", QuantityTotal2, QuantityTotal2 / 31500.0, 31500, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 10:00:00", "2_12");
+                datahavequantityca2.Rows.Add("Total", QuantityTotal3, QuantityTotal3 / 31500.0, 31500, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 10:00:00", "2_12");
 
             }
             // 3 ca
