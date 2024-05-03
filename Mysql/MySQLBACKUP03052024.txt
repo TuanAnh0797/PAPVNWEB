@@ -1,0 +1,621 @@
+==================================
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_sp_ClearAllPlan`()
+BEGIN	
+		DELETE FROM `dataplc`.`ta_tbl_dataplan`;
+        DELETE FROM `dataplc`.`ta_tbl_dataplanca1`;
+        DELETE FROM `dataplc`.`ta_tbl_dataplanca2`;
+        DELETE FROM `dataplc`.`ta_tbl_dataplanca3`;
+END
+==================================
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_sp_GetStartTime`()
+BEGIN
+    SELECT * FROM dataplc.ta_tbl_dataplan where Model = 'Total';
+END
+===================================
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_sp_GetStartTimeAndEndTimePlan`(IN _Shift varchar(5))
+BEGIN
+    if(_Shift = '1') then
+	select * from ta_tbl_dataplanca1 
+        where Model = 'Total';
+    elseif(_Shift = '2') then
+	select * from ta_tbl_dataplanca2
+        where Model = 'Total';
+    elseif(_Shift = '3') then
+	select * from ta_tbl_dataplanca3
+        where Model = 'Total';
+    else
+	select * from ta_tbl_dataplan 
+        where Model = 'Total';
+    end if;
+END
+====================================
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_sp_LoadDataForBarChartPlanGas`(IN _Shift varchar(5))
+BEGIN
+	Declare _StartDate datetime;
+    Declare _EndDate datetime;
+	IF(_Shift = '1') Then
+    SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca1 where Model = 'Total';
+	
+SELECT 
+    ta_tbl_dataplanca1.Model,
+    COALESCE(c.QuantityActual, 0) AS QuantityActual,
+    ta_tbl_dataplanca1.QuantityDay,
+    ta_tbl_dataplanca1.QuantityPerSec,
+    ta_tbl_dataplanca1.TimeStart,
+    ta_tbl_dataplanca1.TimeEnd,
+    ta_tbl_dataplanca1.TotalTime,
+    ta_tbl_dataplanca1.TypePlan
+FROM
+    ta_tbl_dataplanca1
+        LEFT JOIN
+    (SELECT 
+        Model, COUNT(DISTINCT CodeBack) AS QuantityActual
+    FROM
+        ta_tbl_dataplanca1
+    LEFT JOIN (SELECT 
+        *
+    FROM
+        gas
+    WHERE
+        Judge = 'OK'
+            AND TimePLC BETWEEN _StartDate AND _EndDate) AS b ON ta_tbl_dataplanca1.Model = b.CodeModel
+    WHERE
+        ta_tbl_dataplanca1.Model <> 'ToTal'
+            
+    GROUP BY ta_tbl_dataplanca1.Model) AS c ON ta_tbl_dataplanca1.Model = c.Model
+WHERE
+    ta_tbl_dataplanca1.Model <> 'ToTal';
+   
+	ELSEIF(_Shift = '2') Then
+    SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca2 where Model = 'Total';
+SELECT 
+    ta_tbl_dataplanca2.Model,
+    COALESCE(c.QuantityActual, 0) AS QuantityActual,
+    ta_tbl_dataplanca2.QuantityDay,
+    ta_tbl_dataplanca2.QuantityPerSec,
+    ta_tbl_dataplanca2.TimeStart,
+    ta_tbl_dataplanca2.TimeEnd,
+    ta_tbl_dataplanca2.TotalTime,
+    ta_tbl_dataplanca2.TypePlan
+FROM
+    ta_tbl_dataplanca2
+        LEFT JOIN
+    (SELECT 
+        Model, COUNT(DISTINCT CodeBack) AS QuantityActual
+    FROM
+        ta_tbl_dataplanca2
+    LEFT JOIN (SELECT 
+        *
+    FROM
+        gas
+    WHERE
+        Judge = 'OK'
+            AND TimePLC BETWEEN _StartDate AND _EndDate) AS b ON ta_tbl_dataplanca2.Model = b.CodeModel
+    WHERE
+        ta_tbl_dataplanca2.Model <> 'ToTal'
+            
+    GROUP BY ta_tbl_dataplanca2.Model) AS c ON ta_tbl_dataplanca2.Model = c.Model
+WHERE
+    ta_tbl_dataplanca2.Model <> 'ToTal';
+    
+	ELSEIF(_Shift = '3') Then
+    SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca3 where Model = 'Total';
+    
+SELECT 
+    ta_tbl_dataplanca3.Model,
+    COALESCE(c.QuantityActual, 0) AS QuantityActual,
+    ta_tbl_dataplanca3.QuantityDay,
+    ta_tbl_dataplanca3.QuantityPerSec,
+    ta_tbl_dataplanca3.TimeStart,
+    ta_tbl_dataplanca3.TimeEnd,
+    ta_tbl_dataplanca3.TotalTime,
+    ta_tbl_dataplanca3.TypePlan
+FROM
+    ta_tbl_dataplanca3
+        LEFT JOIN
+    (SELECT 
+        Model, COUNT(DISTINCT CodeBack) AS QuantityActual
+    FROM
+        ta_tbl_dataplanca3
+    LEFT JOIN (SELECT 
+        *
+    FROM
+        gas
+    WHERE
+        Judge = 'OK'
+            AND TimePLC BETWEEN _StartDate AND _EndDate) AS b ON ta_tbl_dataplanca3.Model = b.CodeModel
+    WHERE
+        ta_tbl_dataplanca3.Model <> 'ToTal'
+            
+    GROUP BY ta_tbl_dataplanca3.Model) AS c ON ta_tbl_dataplanca3.Model = c.Model
+WHERE
+    ta_tbl_dataplanca3.Model <> 'ToTal';
+
+	ELSE
+    SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplan where Model = 'Total';
+    
+	
+SELECT 
+    ta_tbl_dataplan.Model,
+    COALESCE(c.QuantityActual, 0) AS QuantityActual,
+    ta_tbl_dataplan.QuantityDay,
+    ta_tbl_dataplan.QuantityPerSec,
+    ta_tbl_dataplan.TimeStart,
+    ta_tbl_dataplan.TimeEnd,
+    ta_tbl_dataplan.TotalTime,
+    ta_tbl_dataplan.TypePlan
+FROM
+    ta_tbl_dataplan
+        LEFT JOIN
+    (SELECT 
+        Model, COUNT(DISTINCT CodeBack) AS QuantityActual
+    FROM
+        ta_tbl_dataplan
+    LEFT JOIN (SELECT 
+        *
+    FROM
+        gas
+    WHERE
+        Judge = 'OK'
+            AND TimePLC BETWEEN _StartDate AND _EndDate) AS b ON ta_tbl_dataplan.Model = b.CodeModel
+    WHERE
+        ta_tbl_dataplan.Model <> 'ToTal'
+            
+    GROUP BY ta_tbl_dataplan.Model) AS c ON ta_tbl_dataplan.Model = c.Model
+WHERE
+    ta_tbl_dataplan.Model <> 'ToTal';
+    
+	end if;
+END
+=============================
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_sp_LoadDataForBarChartPlanGasMonitor`(IN _Shift varchar(5))
+BEGIN
+	Declare _StartDate datetime;
+    Declare _EndDate datetime;
+	IF(_Shift = '1') Then
+    SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca1 where Model = 'Total';
+	
+SELECT 
+    ta_tbl_dataplanca1.Model,
+    COALESCE(c.QuantityActual, 0) AS QuantityActual,
+    ta_tbl_dataplanca1.QuantityDay,
+    ta_tbl_dataplanca1.QuantityPerSec,
+    ta_tbl_dataplanca1.TimeStart,
+    ta_tbl_dataplanca1.TimeEnd,
+    ta_tbl_dataplanca1.TotalTime,
+    ta_tbl_dataplanca1.TypePlan
+FROM
+    ta_tbl_dataplanca1
+        LEFT JOIN
+    (SELECT 
+        Model, COUNT(DISTINCT CodeBack) AS QuantityActual
+    FROM
+        ta_tbl_dataplanca1
+    LEFT JOIN (SELECT 
+        *
+    FROM
+        gas
+    WHERE
+        Judge = 'OK'
+            AND TimePLC BETWEEN _StartDate AND _EndDate) AS b ON ta_tbl_dataplanca1.Model = b.CodeModel
+    WHERE
+        ta_tbl_dataplanca1.Model <> 'ToTal'
+            
+    GROUP BY ta_tbl_dataplanca1.Model) AS c ON ta_tbl_dataplanca1.Model = c.Model
+WHERE
+	
+    ta_tbl_dataplanca1.Model <> 'ToTal' AND MonitorSpecial = 1;
+   
+	ELSEIF(_Shift = '2') Then
+    SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca2 where Model = 'Total';
+    
+	
+SELECT 
+    ta_tbl_dataplanca2.Model,
+    COALESCE(c.QuantityActual, 0) AS QuantityActual,
+    ta_tbl_dataplanca2.QuantityDay,
+    ta_tbl_dataplanca2.QuantityPerSec,
+    ta_tbl_dataplanca2.TimeStart,
+    ta_tbl_dataplanca2.TimeEnd,
+    ta_tbl_dataplanca2.TotalTime,
+    ta_tbl_dataplanca2.TypePlan
+FROM
+    ta_tbl_dataplanca2
+        LEFT JOIN
+    (SELECT 
+        Model, COUNT(DISTINCT CodeBack) AS QuantityActual
+    FROM
+        ta_tbl_dataplanca2
+    LEFT JOIN (SELECT 
+        *
+    FROM
+        gas
+    WHERE
+        Judge = 'OK'
+            AND TimePLC BETWEEN @StartDate AND @EndDate) AS b ON ta_tbl_dataplanca2.Model = b.CodeModel
+    WHERE
+        ta_tbl_dataplanca2.Model <> 'ToTal'
+            
+    GROUP BY ta_tbl_dataplanca2.Model) AS c ON ta_tbl_dataplanca2.Model = c.Model
+WHERE
+    ta_tbl_dataplanca2.Model <> 'ToTal' AND MonitorSpecial = 1;
+   
+	ELSEIF(_Shift = '3') Then
+    SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca3 where Model = 'Total';
+    
+	
+SELECT 
+    ta_tbl_dataplanca3.Model,
+    COALESCE(c.QuantityActual, 0) AS QuantityActual,
+    ta_tbl_dataplanca3.QuantityDay,
+    ta_tbl_dataplanca3.QuantityPerSec,
+    ta_tbl_dataplanca3.TimeStart,
+    ta_tbl_dataplanca3.TimeEnd,
+    ta_tbl_dataplanca3.TotalTime,
+    ta_tbl_dataplanca3.TypePlan
+FROM
+    ta_tbl_dataplanca3
+        LEFT JOIN
+    (SELECT 
+        Model, COUNT(DISTINCT CodeBack) AS QuantityActual
+    FROM
+        ta_tbl_dataplanca3
+    LEFT JOIN (SELECT 
+        *
+    FROM
+        gas
+    WHERE
+        Judge = 'OK'
+            AND TimePLC BETWEEN @StartDate AND @EndDate) AS b ON ta_tbl_dataplanca3.Model = b.CodeModel
+    WHERE
+        ta_tbl_dataplanca3.Model <> 'ToTal'
+            
+    GROUP BY ta_tbl_dataplanca3.Model) AS c ON ta_tbl_dataplanca3.Model = c.Model
+WHERE
+    ta_tbl_dataplanca3.Model <> 'ToTal' AND MonitorSpecial = 1;
+   
+	ELSE
+    SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplan where Model = 'Total';
+	
+SELECT 
+    ta_tbl_dataplan.Model,
+    COALESCE(c.QuantityActual, 0) AS QuantityActual,
+    ta_tbl_dataplan.QuantityDay,
+    ta_tbl_dataplan.QuantityPerSec,
+    ta_tbl_dataplan.TimeStart,
+    ta_tbl_dataplan.TimeEnd,
+    ta_tbl_dataplan.TotalTime,
+    ta_tbl_dataplan.TypePlan
+FROM
+    ta_tbl_dataplan
+        LEFT JOIN
+    (SELECT 
+        Model, COUNT(DISTINCT CodeBack) AS QuantityActual
+    FROM
+        ta_tbl_dataplan
+    LEFT JOIN (SELECT 
+        *
+    FROM
+        gas
+    WHERE
+        Judge = 'OK'
+            AND TimePLC BETWEEN _StartDate AND _EndDate) AS b ON ta_tbl_dataplan.Model = b.CodeModel
+    WHERE
+        ta_tbl_dataplan.Model <> 'ToTal'
+            
+    GROUP BY ta_tbl_dataplan.Model) AS c ON ta_tbl_dataplan.Model = c.Model
+WHERE
+    ta_tbl_dataplan.Model <> 'ToTal' AND MonitorSpecial = 1;
+	end if;
+END
+========================================
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_sp_LoadDataForLineChartPlanGasByTime`(IN _ModelName nvarchar(30),IN _Shift varchar(5))
+BEGIN	
+   Declare _StartDate datetime;
+   Declare _EndDate datetime;
+if(_Shift = '1') then
+	 SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca1 where Model = 'Total';
+	if (_ModelName = 'all') then
+SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    gas_ok AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca1
+WHERE
+    Model = 'Total'
+LIMIT 1;
+   else
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    gas_ok AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+        AND CodeModel = _ModelName
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca1
+WHERE
+    Model = _ModelName
+LIMIT 1;
+  END IF;
+elseif(_Shift = '2') then
+		 SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca2 where Model = 'Total';
+	if (_ModelName = 'all') then
+SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    gas_ok AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca2
+WHERE
+    Model = 'Total'
+LIMIT 1;
+   else
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    gas_ok AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+        AND CodeModel = _ModelName
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca2
+WHERE
+    Model = _ModelName
+LIMIT 1;
+  END IF;
+elseif(_Shift = '3') then
+		 SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca3 where Model = 'Total';
+	if (_ModelName = 'all') then
+SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    gas_ok AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca3
+WHERE
+    Model = 'Total'
+LIMIT 1;
+   else
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    gas_ok AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+        AND CodeModel = _ModelName
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca3
+WHERE
+    Model = _ModelName
+LIMIT 1;
+  END IF;
+else
+		 SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplan where Model = 'Total';
+	if (_ModelName = 'all') then
+SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    gas_ok AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplan
+WHERE
+    Model = 'Total'
+LIMIT 1;
+   else
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    gas_ok AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+        AND CodeModel = _ModelName
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplan
+WHERE
+    Model = _ModelName
+LIMIT 1;
+  END IF;
+  END IF;
+END
+========================================
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_sp_LoadDataPlan`()
+BEGIN
+	
+	SELECT * FROM dataplc.ta_tbl_dataplan where Model <> 'Total';
+    
+END
+=======================================
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_sp_LoadDataPlanCa1`()
+BEGIN		
+	SELECT * FROM dataplc.ta_tbl_dataplanca1 where Model <> 'Total';
+END
+=======================================
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_sp_LoadDataPlanCa2`()
+BEGIN
+	SELECT * FROM dataplc.ta_tbl_dataplanca2 where Model <> 'Total';
+END
+========================================
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_sp_LoadDataPlanCa3`()
+BEGIN
+	SELECT * FROM dataplc.ta_tbl_dataplanca3 where Model <> 'Total';
+END
+=========================================
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_sp_LoadModelPlan`()
+BEGIN
+	
+   SELECT Model FROM ta_tbl_dataplan  where Model <> 'Total';
+   
+END
+=============================================
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_sp_LoadQuantityPlan`(IN _ModelName nvarchar(30),IN _Shift varchar(5))
+BEGIN
+	
+if(_Shift  = 1) then
+	 if (_ModelName = 'all') then
+            select QuantityDay from ta_tbl_dataplanca1 where Model = 'Total';
+             SELECT * FROM dataplc.ta_tbl_dataplan where Model = 'Total';
+         else
+            select QuantityDay from ta_tbl_dataplanca1 where Model = _ModelName;
+             SELECT * FROM dataplc.ta_tbl_dataplan where Model = 'Total';
+         end if;
+elseif(_Shift  = 2) then
+	
+	 if (_ModelName = 'all') then
+            select QuantityDay from ta_tbl_dataplanca2 where Model = 'Total';
+            SELECT * FROM dataplc.ta_tbl_dataplan where Model = 'Total';
+         else
+            select QuantityDay from ta_tbl_dataplanca2 where Model = _ModelName;
+            SELECT * FROM dataplc.ta_tbl_dataplan where Model = 'Total';
+         end if;
+         
+elseif(_Shift  = 3) then
+	 if (_ModelName = 'all') then
+            select QuantityDay from ta_tbl_dataplanca3 where Model = 'Total';
+            SELECT * FROM dataplc.ta_tbl_dataplan where Model = 'Total';
+         else
+            select QuantityDay from ta_tbl_dataplanca3 where Model = _ModelName;
+            SELECT * FROM dataplc.ta_tbl_dataplan where Model = 'Total';
+         end if;
+else
+
+	 if (_ModelName = 'all') then
+            select QuantityDay from ta_tbl_dataplan where Model = 'Total';
+            SELECT * FROM dataplc.ta_tbl_dataplan where Model = 'Total';
+         else
+            select QuantityDay from ta_tbl_dataplan where Model = _ModelName;
+            SELECT * FROM dataplc.ta_tbl_dataplan where Model = 'Total';
+         end if;
+    
+end if;
+END
+=========================================
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_sp_LoadShift`()
+BEGIN	
+		SELECT * FROM dataplc.ta_tbl_dataplan where Model = 'Total';
+END
+==========================================
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_sp_MonitorSpecial`(IN _ModelName nvarchar(30),IN _Shift varchar(5))
+BEGIN
+		DECLARE _hournow int;
+    	Set _hournow = hour(now());
+        IF(_Shift = '1') then
+		if(exists(select MonitorSpecial from ta_tbl_dataplanca1 where Model = _ModelName and MonitorSpecial = 0))  then
+			UPDATE `dataplc`.`ta_tbl_dataplanca1`
+			SET `MonitorSpecial` = 1
+			WHERE Model = _ModelName;
+		else
+			UPDATE `dataplc`.`ta_tbl_dataplanca1`
+			SET `MonitorSpecial` = 0
+			WHERE Model = _ModelName;
+		end if;
+        elseif(_Shift = '2') then
+			
+		if(exists(select MonitorSpecial from ta_tbl_dataplanca2 where Model = _ModelName and MonitorSpecial = 0))  then
+			UPDATE `dataplc`.`ta_tbl_dataplanca2`
+			SET `MonitorSpecial` = 1
+			WHERE Model = _ModelName; 
+		else
+			UPDATE `dataplc`.`ta_tbl_dataplanca2`
+			SET `MonitorSpecial` = 0
+			WHERE Model = _ModelName;
+		end if;
+        elseif(_Shift = '3') then
+			
+		if(exists(select MonitorSpecial from ta_tbl_dataplanca3 where Model = _ModelName and MonitorSpecial = 0))  then
+			UPDATE `dataplc`.`ta_tbl_dataplanca3`
+			SET `MonitorSpecial` = 1
+			WHERE Model = _ModelName;
+		else
+			UPDATE `dataplc`.`ta_tbl_dataplanca3`
+			SET `MonitorSpecial` = 0
+			WHERE Model = _ModelName;
+		end if;
+        else
+		if(exists(select MonitorSpecial from ta_tbl_dataplan where Model = _ModelName and MonitorSpecial = 0))  then
+			UPDATE `dataplc`.`ta_tbl_dataplan`
+			SET `MonitorSpecial` = 1
+			WHERE Model = _ModelName;
+		else
+			UPDATE `dataplc`.`ta_tbl_dataplan`
+			SET `MonitorSpecial` = 0
+			WHERE Model = _ModelName;
+		end if;
+        END IF;
+END
+===========================================
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_sp_UpdateDateTimePlan`(IN _ModelName nvarchar(30),IN _TimeFrom datetime,IN _TimeTo datetime,IN _TotalTime double,IN _Shift varchar(5))
+BEGIN
+	DECLARE _hournow int;
+    	Set _hournow = hour(now());
+        
+        if(_Shift = '1') then
+			
+		UPDATE `dataplc`.`ta_tbl_dataplanca1`
+		SET `TotalTime` = _TotalTime,`TimeStart` = _TimeFrom,`TimeEnd` = _TimeTo, `QuantityPerSec` = QuantityDay/_TotalTime
+		WHERE Model = _ModelName;
+    	
+        elseif(_Shift = '2') then
+			
+		UPDATE `dataplc`.`ta_tbl_dataplanca2`
+		SET `TotalTime` = _TotalTime,`TimeStart` = _TimeFrom,`TimeEnd` = _TimeTo, `QuantityPerSec` = QuantityDay/_TotalTime
+		WHERE Model = _ModelName;
+    	
+        elseif(_Shift = '3') then
+			
+		UPDATE `dataplc`.`ta_tbl_dataplanca3`
+		SET `TotalTime` = _TotalTime,`TimeStart` = _TimeFrom,`TimeEnd` = _TimeTo, `QuantityPerSec` = QuantityDay/_TotalTime
+		WHERE Model = _ModelName;
+    	
+        else
+       
+		UPDATE `dataplc`.`ta_tbl_dataplan`
+		SET `TotalTime` = _TotalTime,`TimeStart` = _TimeFrom,`TimeEnd` = _TimeTo, `QuantityPerSec` = QuantityDay/_TotalTime
+		WHERE Model = _ModelName;
+        end if;
+        
+        
+    	
+
+END

@@ -510,7 +510,10 @@
                     }
 
                     var plan = data.TotalPlan;
-                    var target = DataLineChart.datasets[0].data[DataLineChart.datasets[0].data.length - 1];
+                    /*var target = DataLineChart.datasets[0].data[DataLineChart.datasets[0].data.length - 1];*/
+
+                    var target = Math.max(...DataLineChart.datasets[0].data);
+
                     var actual = DataLineChart.datasets[1].data[DataLineChart.datasets[1].data.length - 1];
 
                     $('#dataplan').html(`${plan}`);

@@ -301,9 +301,9 @@ namespace PAPVN
                 // Thêm dữ liệu Total vào bảng kế hoạch cả ngày
                 datahavequantity.Rows.Add("Total", QuantityTotalDay, QuantityTotalDay / secworkall, QuantityTotal2, QuantityTotal3, 0, secworkall, TimeStartall, TimeEndall, "2_12");
                 // Thêm dữ liệu Total vào bảng kế hoạch ca 1
-                datahavequantityca1.Rows.Add("Total", QuantityTotal2, QuantityTotal2 / 32400.0, 32400, DateTime.Now.ToString("yyyy-MM-dd") + " 10:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", "2_12");
+                datahavequantityca1.Rows.Add("Total", QuantityTotal2, QuantityTotal2 / 37200.0, 37200, DateTime.Now.ToString("yyyy-MM-dd") + " 10:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", "2_12");
                 // Thêm dữ liệu Total vào bảng kế hoạch ca 2
-                datahavequantityca2.Rows.Add("Total", QuantityTotal3, QuantityTotal3 / 31500.0, 31500, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 10:00:00", "2_12");
+                datahavequantityca2.Rows.Add("Total", QuantityTotal3, QuantityTotal3 / 36900.0, 36900, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 10:00:00", "2_12");
 
             }
             // 3 ca

@@ -952,7 +952,7 @@ namespace PAPVN
                 if (ds1.Tables[0].Rows.Count > 0)
                 {
                     TotalPlan = Int32.Parse(ds1.Tables[0].Rows[0]["QuantityDay"].ToString());
-                    TimeStartShift = DateTime.Parse(ds1.Tables[1].Rows[0]["TimeStart"].ToString());
+                    TimeStartShift = DateTime.Parse(ds.Tables[1].Rows[0]["TimeStart"].ToString());
                     DateTime TimeEndShift = DateTime.Parse(ds1.Tables[1].Rows[0]["TimeEnd"].ToString());
                     if (TimeEndShift < DateTime.Now)
                     {
