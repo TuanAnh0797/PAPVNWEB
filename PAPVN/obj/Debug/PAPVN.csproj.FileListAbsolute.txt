@@ -1158,3 +1158,4 @@ C:\Users\Admin\Desktop\project2024\PAPVNWEB\PAPVN\obj\Debug\PAPVN.csproj.CoreCom
 C:\Users\Admin\Desktop\project2024\PAPVNWEB\PAPVN\obj\Debug\PAPVN.csproj.CopyComplete
 C:\Users\Admin\Desktop\project2024\PAPVNWEB\PAPVN\obj\Debug\PAPVN.dll
 C:\Users\Admin\Desktop\project2024\PAPVNWEB\PAPVN\obj\Debug\PAPVN.pdb
+C:\Users\Admin\Desktop\project2024\PAPVNWEB\PAPVN\obj\Debug\PAPVN.csproj.AssemblyReference.cache

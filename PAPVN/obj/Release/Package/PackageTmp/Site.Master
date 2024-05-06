@@ -44,7 +44,7 @@
   <!-- Toastr -->
   <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-close sidebar-collapse layout-fixed">
     <div class="wrapper">
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- Left navbar links -->
@@ -63,7 +63,7 @@
             </ul>
         </nav>
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color:#0e2b7a">
             <!-- Brand Logo -->
             <a class="brand-link" style="padding: 15px 0px 10px 0px">
                 <img src="Image/panasonic-logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -400,10 +400,11 @@
         function showpopupfuture() {
             alert('Tính năng chờ phát triển');
         }
-        $(document).ready(function () {
-            $('#toggle-button').ControlSidebar('collapse')
-            //$('#toggle-button').on('expanded.lte.controlsidebar', handleExpandedEvent)
-        });
+        //$(document).ready(function () {
+        //    $('#toggle-button').ControlSidebar('collapse')
+        //    //$('#toggle-button').on('expanded.lte.controlsidebar', handleExpandedEvent)
+        //});
+        
     </script>
 </body>
 </html>
