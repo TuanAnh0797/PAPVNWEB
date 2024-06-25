@@ -47,7 +47,8 @@
                 <select runat="server" id="cmb_TypePlan" class="form-control" style="width: 250px;margin-top:5px">
                     <option>Kế hoạch 3 ca</option>
                     <option>Kế hoạch 2 ca 10 giờ</option>
-                    <option>Kế hoạch 2 ca 12 giờ</option>
+                    <option>Kế hoạch 2 ca 12 giờ(bắt đầu từ 10h)</option>
+                    <option>Kế hoạch 2 ca 12 giờ(bắt đầu từ 6h)</option>
                 </select>
             </div>
             <div class="col-sm-3" style="margin-top: 5px; margin-bottom: 5px">

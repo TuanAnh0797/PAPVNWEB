@@ -142,8 +142,8 @@ namespace PAPVN
                     TimeEndall = DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00";
                 }
             }
-            // 2 ca 12 tiếng
-            else if (cmb_TypePlan.Value == "Kế hoạch 2 ca 12 giờ")
+            // 2 ca 12 tiếng bắt đầu từ 10h
+            else if (cmb_TypePlan.Value == "Kế hoạch 2 ca 12 giờ(bắt đầu từ 10h)")
             {
                 if (QuantityTotal2 > 0)
                 {
@@ -160,6 +160,25 @@ namespace PAPVN
                 else
                 {
                     TimeEndall = DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00";
+                }
+            }
+            else if (cmb_TypePlan.Value == "Kế hoạch 2 ca 12 giờ(bắt đầu từ 6h)")
+            {
+                if (QuantityTotal2 > 0)
+                {
+                    TimeStartall = DateTime.Now.ToString("yyyy-MM-dd") + " 06:00:00";
+                }
+                else
+                {
+                    TimeStartall = DateTime.Now.ToString("yyyy-MM-dd") + " 18:00:00";
+                }
+                if (QuantityTotal3 > 0)
+                {
+                    TimeEndall = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 06:00:00";
+                }
+                else
+                {
+                    TimeEndall = DateTime.Now.ToString("yyyy-MM-dd") + " 18:00:00";
                 }
             }
             // 3 ca 8 tiếng
@@ -205,11 +224,18 @@ namespace PAPVN
                     secworkall = secworkall - Config.TimeRest2Ca[currentHour.Hour] * 60;
                 }
             }
-            else if (cmb_TypePlan.Value == "Kế hoạch 2 ca 12 giờ")
+            else if (cmb_TypePlan.Value == "Kế hoạch 2 ca 12 giờ(bắt đầu từ 10h)")
             {
                 for (DateTime currentHour = DateTime.Parse(TimeStartall); currentHour < DateTime.Parse(TimeEndall); currentHour = currentHour.AddHours(1))
                 {
                     secworkall = secworkall - Config.TimeRest2Ca12[currentHour.Hour] * 60;
+                }
+            }
+            else if (cmb_TypePlan.Value == "Kế hoạch 2 ca 12 giờ(bắt đầu từ 6h)")
+            {
+                for (DateTime currentHour = DateTime.Parse(TimeStartall); currentHour < DateTime.Parse(TimeEndall); currentHour = currentHour.AddHours(1))
+                {
+                    secworkall = secworkall - Config.TimeRest2Ca12_6h[currentHour.Hour] * 60;
                 }
             }
             else
@@ -285,7 +311,7 @@ namespace PAPVN
                 datahavequantityca2.Rows.Add("Total", QuantityTotal3, QuantityTotal3 / 31500.0, 31500, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 08:00:00", "2_10");
             }
             // 2 ca 12 giờ
-            else if (cmb_TypePlan.Value == "Kế hoạch 2 ca 12 giờ")
+            else if (cmb_TypePlan.Value == "Kế hoạch 2 ca 12 giờ(bắt đầu từ 10h)")
             {
                 // Duyệt từng dữ liệu trong file excel
                 foreach (var item in datarow)
@@ -304,6 +330,27 @@ namespace PAPVN
                 datahavequantityca1.Rows.Add("Total", QuantityTotal2, QuantityTotal2 / 37200.0, 37200, DateTime.Now.ToString("yyyy-MM-dd") + " 10:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", "2_12");
                 // Thêm dữ liệu Total vào bảng kế hoạch ca 2
                 datahavequantityca2.Rows.Add("Total", QuantityTotal3, QuantityTotal3 / 36900.0, 36900, DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 10:00:00", "2_12");
+
+            }
+            else if (cmb_TypePlan.Value == "Kế hoạch 2 ca 12 giờ(bắt đầu từ 6h)")
+            {
+                // Duyệt từng dữ liệu trong file excel
+                foreach (var item in datarow)
+                {
+
+                    // Thêm dữ liệu vào bảng kế hoạch cả ngày
+                    datahavequantity.Rows.Add(item.Model, item.Quantity2 + item.Quantity3, item.QuantityDay / secworkall, (item.Quantity2 > 0) ? item.Quantity2 : 0, (item.Quantity3 > 0) ? item.Quantity3 : 0, 0, secworkall, TimeStartall, TimeEndall, "2_12_6");
+                    // Thêm dữ liệu vào bảng kế hoạch ca 1
+                    datahavequantityca1.Rows.Add(item.Model, (item.Quantity2 > 0) ? item.Quantity2 : 0, (item.Quantity2 > 0) ? item.Quantity2 / 37800.0 : 0, 37800, DateTime.Now.ToString("yyyy-MM-dd") + " 06:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 18:00:00", "2_12_6");
+                    // Thêm dữ liệu vào bảng kế hoạch ca 2
+                    datahavequantityca2.Rows.Add(item.Model, (item.Quantity3 > 0) ? item.Quantity3 : 0, (item.Quantity3 > 0) ? item.Quantity3 / 36300.0 : 0, 36300, DateTime.Now.ToString("yyyy-MM-dd") + " 18:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 06:00:00", "2_12_6");
+                }
+                // Thêm dữ liệu Total vào bảng kế hoạch cả ngày
+                datahavequantity.Rows.Add("Total", QuantityTotalDay, QuantityTotalDay / secworkall, QuantityTotal2, QuantityTotal3, 0, secworkall, TimeStartall, TimeEndall, "2_12_6");
+                // Thêm dữ liệu Total vào bảng kế hoạch ca 1
+                datahavequantityca1.Rows.Add("Total", QuantityTotal2, QuantityTotal2 / 37800.0, 37800, DateTime.Now.ToString("yyyy-MM-dd") + " 06:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 18:00:00", "2_12_6");
+                // Thêm dữ liệu Total vào bảng kế hoạch ca 2
+                datahavequantityca2.Rows.Add("Total", QuantityTotal3, QuantityTotal3 / 36300.0, 36300, DateTime.Now.ToString("yyyy-MM-dd") + " 18:00:00", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 06:00:00", "2_12_6");
 
             }
             // 3 ca

@@ -16,6 +16,8 @@ namespace PAPVN
 
         public static int[] TimeRest2Ca12 = new int[] { 10, 0, 45, 0, 10, 0, 30, 0, 10, 0, 0, 30, 0, 10, 10, 0, 10, 0, 30, 0, 10, 0, 0, 0 };
 
+        public static int[] TimeRest2Ca12_6h = new int[] { 10, 0, 45, 0, 10, 0, 0, 0, 10, 0, 30, 0, 10, 0, 30, 0, 10, 0, 30, 0, 10, 0, 10, 0 };
+
 
     }
 }
