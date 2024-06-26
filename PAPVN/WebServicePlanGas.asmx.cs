@@ -521,6 +521,57 @@ namespace PAPVN
                                         }
                                     }
                                 }
+                                // 2 ca bắt đầu từ 6h
+                                else if (dt.Rows[i]["TypePlan"].ToString() == "2_12_6")
+                                {
+                                    if (datetimenow.Date == TimeStartPlan.Date)
+                                    {
+                                        for (int currentHour = TimeStart.Hour; currentHour <= datetimenow.Hour; currentHour++)
+                                        {
+                                            if (currentHour < datetimenow.Hour)
+                                            {
+                                                totalsec = totalsec - Config.TimeRest2Ca12_6h[currentHour] * 60;
+                                            }
+                                            else
+                                            {
+                                                if (datetimenow.Minute >= Config.TimeRest2Ca12_6h[currentHour])
+                                                {
+                                                    totalsec = totalsec - Config.TimeRest2Ca12_6h[currentHour] * 60;
+                                                }
+                                                else
+                                                {
+                                                    totalsec = totalsec - datetimenow.Minute * 60;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        for (int currentHour = TimeStart.Hour; currentHour <= 23; currentHour++)
+                                        {
+
+                                            totalsec = totalsec - Config.TimeRest2Ca12_6h[currentHour] * 60;
+                                        }
+                                        for (int j = 0; j <= datetimenow.Hour; j++)
+                                        {
+                                            if (j < datetimenow.Hour)
+                                            {
+                                                totalsec = totalsec - Config.TimeRest2Ca12_6h[j] * 60;
+                                            }
+                                            else
+                                            {
+                                                if (datetimenow.Minute >= Config.TimeRest2Ca12_6h[j])
+                                                {
+                                                    totalsec = totalsec - Config.TimeRest2Ca12_6h[j] * 60;
+                                                }
+                                                else
+                                                {
+                                                    totalsec = totalsec - datetimenow.Minute * 60;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                                 // Trường hợp 3 ca
                                 else
                                 {
@@ -691,7 +742,7 @@ namespace PAPVN
                                 double totalsec = subtimenow.TotalSeconds;
 
                                 // Trừ thời gian nghỉ
-                                // trường hợp 2 ca
+                                // trường hợp 2 ca 10
                                 if (dt.Rows[i]["TypePlan"].ToString() == "2_10")
                                 {
                                     if (datetimenow.Date == TimeStartPlan.Date)
@@ -742,6 +793,7 @@ namespace PAPVN
                                         }
                                     }
                                 }
+                                //2 ca 12 bát đầu từ 10h
                                 else if (dt.Rows[i]["TypePlan"].ToString() == "2_12")
                                 {
                                     if (datetimenow.Date == TimeStartPlan.Date)
@@ -783,6 +835,57 @@ namespace PAPVN
                                                 if (datetimenow.Minute >= Config.TimeRest2Ca12[j])
                                                 {
                                                     totalsec = totalsec - Config.TimeRest2Ca12[j] * 60;
+                                                }
+                                                else
+                                                {
+                                                    totalsec = totalsec - datetimenow.Minute * 60;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                // 2 ca 12 bắt đầy từ 6h
+                                else if (dt.Rows[i]["TypePlan"].ToString() == "2_12_6")
+                                {
+                                    if (datetimenow.Date == TimeStartPlan.Date)
+                                    {
+                                        for (int currentHour = TimeStart.Hour; currentHour <= datetimenow.Hour; currentHour++)
+                                        {
+                                            if (currentHour < datetimenow.Hour)
+                                            {
+                                                totalsec = totalsec - Config.TimeRest2Ca12_6h[currentHour] * 60;
+                                            }
+                                            else
+                                            {
+                                                if (datetimenow.Minute >= Config.TimeRest2Ca12_6h[currentHour])
+                                                {
+                                                    totalsec = totalsec - Config.TimeRest2Ca12_6h[currentHour] * 60;
+                                                }
+                                                else
+                                                {
+                                                    totalsec = totalsec - datetimenow.Minute * 60;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        for (int currentHour = TimeStart.Hour; currentHour <= 23; currentHour++)
+                                        {
+
+                                            totalsec = totalsec - Config.TimeRest2Ca12_6h[currentHour] * 60;
+                                        }
+                                        for (int j = 0; j <= datetimenow.Hour; j++)
+                                        {
+                                            if (j < datetimenow.Hour)
+                                            {
+                                                totalsec = totalsec - Config.TimeRest2Ca12_6h[j] * 60;
+                                            }
+                                            else
+                                            {
+                                                if (datetimenow.Minute >= Config.TimeRest2Ca12_6h[j])
+                                                {
+                                                    totalsec = totalsec - Config.TimeRest2Ca12_6h[j] * 60;
                                                 }
                                                 else
                                                 {
@@ -1060,6 +1163,7 @@ namespace PAPVN
                                     TotalTimeNow = 0;
                                 }
                             }
+                            //2 ca 12 bat dau 10h
                             else if (typeplan == "2_12")
                             {
                                 if (TotalTimeNow >= Config.TimeRest2Ca12[currentHour1.Hour] * 60)
@@ -1111,6 +1215,72 @@ namespace PAPVN
                                                 else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute >= Config.TimeRest2Ca12[currentHour1.Hour])
                                                 {
                                                     TotalTimeNow = TotalTimeNow - Config.TimeRest2Ca12[currentHour1.Hour] * 60;
+                                                }
+                                                else
+                                                {
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    TotalTimeNow = 0;
+                                }
+                            }
+                            // 2 ca 12 bắt đầu từ 6h
+                            else if (typeplan == "2_12")
+                            {
+                                if (TotalTimeNow >= Config.TimeRest2Ca12_6h[currentHour1.Hour] * 60)
+                                {
+                                    if (currentHour == TimeEnd)
+                                    {
+                                        if (currentHour1.Hour != TimeEnd.Hour)
+                                        {
+                                            TotalTimeNow = TotalTimeNow - Config.TimeRest2Ca12_6h[currentHour1.Hour] * 60;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (currentHour.Date == TimeStartShift.Date)
+                                        {
+                                            if (currentHour.Hour > currentHour1.Hour)
+                                            {
+                                                TotalTimeNow = TotalTimeNow - Config.TimeRest2Ca12_6h[currentHour1.Hour] * 60;
+                                            }
+                                            else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute < Config.TimeRest2Ca12_6h[currentHour1.Hour])
+                                            {
+                                                TotalTimeNow = TotalTimeNow - currentHour.Minute * 60;
+                                            }
+                                            else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute >= Config.TimeRest2Ca12_6h[currentHour1.Hour])
+                                            {
+                                                TotalTimeNow = TotalTimeNow - Config.TimeRest2Ca12_6h[currentHour1.Hour] * 60;
+                                            }
+                                            else
+                                            {
+                                                break;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (currentHour1.Date == TimeStartShift.Date)
+                                            {
+                                                TotalTimeNow = TotalTimeNow - Config.TimeRest2Ca12_6h[currentHour1.Hour] * 60;
+                                            }
+                                            else
+                                            {
+                                                if (currentHour.Hour > currentHour1.Hour)
+                                                {
+                                                    TotalTimeNow = TotalTimeNow - Config.TimeRest2Ca12_6h[currentHour1.Hour] * 60;
+                                                }
+                                                else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute < Config.TimeRest2Ca12_6h[currentHour1.Hour])
+                                                {
+                                                    TotalTimeNow = TotalTimeNow - currentHour.Minute * 60;
+                                                }
+                                                else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute >= Config.TimeRest2Ca12_6h[currentHour1.Hour])
+                                                {
+                                                    TotalTimeNow = TotalTimeNow - Config.TimeRest2Ca12_6h[currentHour1.Hour] * 60;
                                                 }
                                                 else
                                                 {
