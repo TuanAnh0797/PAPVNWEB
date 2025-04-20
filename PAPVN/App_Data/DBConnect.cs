@@ -37,7 +37,7 @@ namespace PAPVN
                 catch (Exception ex)
                 {
                     conn.Close();
-                    throw ex;
+                    return new DataTable();
                 }
             }
         }

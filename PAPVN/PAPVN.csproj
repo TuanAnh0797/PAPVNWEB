@@ -14,7 +14,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PAPVN</RootNamespace>
     <AssemblyName>PAPVN</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44355</IISExpressSSLPort>
@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -59,6 +60,12 @@
     <Reference Include="K4os.Hash.xxHash, Version=1.0.8.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
       <HintPath>..\packages\K4os.Hash.xxHash.1.0.8\lib\net462\K4os.Hash.xxHash.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.4.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.4.3\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.4.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.4.3\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -66,11 +73,23 @@
     <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=7.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.7.0.1\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Owin, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.2.2\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.2.2\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data, Version=8.2.0.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.8.2.0\lib\net462\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="MySqlConnector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d33d3e53aa5f8c92, processorArchitecture=MSIL">
       <HintPath>..\packages\MySqlConnector.2.3.3\lib\net471\MySqlConnector.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -81,7 +100,6 @@
       <HintPath>..\packages\System.Configuration.ConfigurationManager.4.4.1\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
     </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=7.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.7.0.2\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
@@ -100,12 +118,12 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Security" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
@@ -134,6 +152,7 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -231,16 +250,33 @@
     <Content Include="dist\js\pages\dashboard3.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Image\camera %281%29.png" />
+    <Content Include="Image\camera.png" />
+    <Content Include="Image\conveyor.png" />
+    <Content Include="Image\electrical-energy.png" />
+    <Content Include="Image\factory.png" />
+    <Content Include="Image\fridge.png" />
+    <Content Include="Image\inbox.png" />
+    <Content Include="Image\insulation.png" />
+    <Content Include="Image\internet-of-things.png" />
+    <Content Include="Image\monitoring.png" />
+    <Content Include="Image\oxygen-tank.png" />
     <Content Include="Image\panasonic-logo.jpg" />
     <Content Include="Image\panasonic-logo.png" />
+    <Content Include="Image\project-management.png" />
+    <Content Include="Image\vacuum-dryer.png" />
+    <Content Include="Image\visual-data.png" />
+    <Content Include="Image\voltmeter.png" />
     <Content Include="PartCard.html" />
+    <Content Include="Scripts\jquery.signalR-2.4.3.js" />
+    <Content Include="Scripts\jquery.signalR-2.4.3.min.js" />
     <Content Include="WebServiceModifyPlan.asmx" />
     <Content Include="Mycss\iconio.css" />
     <Content Include="Mycss\myicon.css" />
     <Content Include="WebServicePlanGas.asmx" />
-    <Content Include="UploadPlanCa1.aspx" />
-    <Content Include="UploadPlanCa2.aspx" />
-    <Content Include="UploadPlanCa3.aspx" />
+    <Content Include="UI_Plan\UploadPlanCa1.aspx" />
+    <Content Include="UI_Plan\UploadPlanCa2.aspx" />
+    <Content Include="UI_Plan\UploadPlanCa3.aspx" />
     <Content Include="wwwroot\Panasonic_logo_bl_posi_PNG.ico" />
     <Content Include="plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
     <Content Include="plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.min.css" />
@@ -2111,7 +2147,7 @@
     <Content Include="plugins\uplot\uPlot.iife.js" />
     <Content Include="plugins\uplot\uPlot.iife.min.js" />
     <Content Include="plugins\uplot\uPlot.min.css" />
-    <Content Include="PlanGAS.aspx" />
+    <Content Include="UI_GAS\PlanGAS.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -2272,8 +2308,8 @@
     <Content Include="plugins\summernote\summernote.js.map" />
     <Content Include="plugins\summernote\summernote.min.js.map" />
     <Content Include="plugins\toastr\toastr.js.map" />
-    <Content Include="AgingHistory.aspx" />
-    <Content Include="AgingRealTime.aspx" />
+    <Content Include="UI_Pan\AgingHistory.aspx" />
+    <Content Include="UI_Pan\AgingRealTime.aspx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -2303,7 +2339,7 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
-    <Content Include="UploadPlan.aspx" />
+    <Content Include="UI_Plan\UploadPlan.aspx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
     <Content Include="Site.Mobile.Master" />
@@ -2312,10 +2348,13 @@
     <Compile Include="App_Data\DBConnect.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="ChatHub.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="MethodLoadData\LoadDataVisualize.cs" />
+    <Compile Include="Startup.cs" />
     <Compile Include="WebServiceModifyPlan.asmx.cs">
       <DependentUpon>WebServiceModifyPlan.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -2325,11 +2364,11 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PlanGAS.aspx.cs">
+    <Compile Include="UI_GAS\PlanGAS.aspx.cs">
       <DependentUpon>PlanGAS.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="PlanGAS.aspx.designer.cs">
+    <Compile Include="UI_GAS\PlanGAS.aspx.designer.cs">
       <DependentUpon>PlanGAS.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
@@ -2346,46 +2385,46 @@
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
-    <Compile Include="AgingHistory.aspx.cs">
+    <Compile Include="UI_Pan\AgingHistory.aspx.cs">
       <DependentUpon>AgingHistory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AgingHistory.aspx.designer.cs">
+    <Compile Include="UI_Pan\AgingHistory.aspx.designer.cs">
       <DependentUpon>AgingHistory.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AgingRealTime.aspx.cs">
+    <Compile Include="UI_Pan\AgingRealTime.aspx.cs">
       <DependentUpon>AgingRealTime.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AgingRealTime.aspx.designer.cs">
+    <Compile Include="UI_Pan\AgingRealTime.aspx.designer.cs">
       <DependentUpon>AgingRealTime.aspx</DependentUpon>
     </Compile>
-    <Compile Include="UploadPlan.aspx.cs">
+    <Compile Include="UI_Plan\UploadPlan.aspx.cs">
       <DependentUpon>UploadPlan.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UploadPlan.aspx.designer.cs">
+    <Compile Include="UI_Plan\UploadPlan.aspx.designer.cs">
       <DependentUpon>UploadPlan.aspx</DependentUpon>
     </Compile>
-    <Compile Include="UploadPlanCa1.aspx.cs">
+    <Compile Include="UI_Plan\UploadPlanCa1.aspx.cs">
       <DependentUpon>UploadPlanCa1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UploadPlanCa1.aspx.designer.cs">
+    <Compile Include="UI_Plan\UploadPlanCa1.aspx.designer.cs">
       <DependentUpon>UploadPlanCa1.aspx</DependentUpon>
     </Compile>
-    <Compile Include="UploadPlanCa2.aspx.cs">
+    <Compile Include="UI_Plan\UploadPlanCa2.aspx.cs">
       <DependentUpon>UploadPlanCa2.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UploadPlanCa2.aspx.designer.cs">
+    <Compile Include="UI_Plan\UploadPlanCa2.aspx.designer.cs">
       <DependentUpon>UploadPlanCa2.aspx</DependentUpon>
     </Compile>
-    <Compile Include="UploadPlanCa3.aspx.cs">
+    <Compile Include="UI_Plan\UploadPlanCa3.aspx.cs">
       <DependentUpon>UploadPlanCa3.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UploadPlanCa3.aspx.designer.cs">
+    <Compile Include="UI_Plan\UploadPlanCa3.aspx.designer.cs">
       <DependentUpon>UploadPlanCa3.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
