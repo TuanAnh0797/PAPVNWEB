@@ -1,56 +1,60 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="PAPVN.SiteMaster" %>
-
 <!DOCTYPE html>
-
 <html lang="en">
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - My ASP.NET Application</title>
-              
-
-    <script src="../../plugins/jquery/jquery.min.js"></script>
-    <script src="../../plugins/chart.js/Chart.min.js"></script>
+    <title><%: Page.Title %>Panasonic Appliance Viet Nam</title>
+    <script src="/plugins/jquery/jquery.min.js"></script>
+    <script src="/plugins/chart.js/Chart.min.js"></script>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
     <!-- Tempusdominus Bootstrap 4 -->
-    <link rel="stylesheet" href="../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <link rel="stylesheet" href="/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <!-- iCheck -->
-    <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- JQVMap -->
-    <link rel="stylesheet" href="../../plugins/jqvmap/jqvmap.min.css">
+    <link rel="stylesheet" href="/plugins/jqvmap/jqvmap.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="/dist/css/adminlte.min.css">
     <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Daterange picker -->
-    <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
-    <link rel="stylesheet" href="../../plugins/summernote/summernote-bs4.min.css">
+    <link rel="stylesheet" href="/plugins/summernote/summernote-bs4.min.css">
     <!-- Select2 -->
-    <link rel="stylesheet" href="../../plugins/select2/css/select2.min.css">
-    <link rel="stylesheet" href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <link rel="stylesheet" href="/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     <!-- Bootstrap4 Duallistbox -->
-    <link rel="stylesheet" href="../../plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+    <link rel="stylesheet" href="/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
     <!-- BS Stepper -->
-    <link rel="stylesheet" href="../../plugins/bs-stepper/css/bs-stepper.min.css">
+    <link rel="stylesheet" href="/plugins/bs-stepper/css/bs-stepper.min.css">
     <!-- dropzonejs -->
-    <link rel="stylesheet" href="../../plugins/dropzone/min/dropzone.min.css">
+    <link rel="stylesheet" href="/plugins/dropzone/min/dropzone.min.css">
     <!-- DataTables -->
-    <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <link rel="icon" type="image/png" href="/wwwroot/Panasonic_logo_bl_posi_PNG.ico" sizes="64x64">
+    <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="/plugins/toastr/toastr.min.css">
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-close sidebar-collapse layout-fixed">
     <div class="wrapper">
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" data-auto-collapse-size="2000" href="#" role="button"><i class="fas fa-bars"></i></a>
+                    <a class="nav-link" data-widget="pushmenu"  role="button"><i class="fas fa-bars"></i></a>
                 </li>
+                 <li class="nav-item">
+                        <h2 class="mb-0" style="color: darkblue; font-weight: 900">Panasonic Appliance Viet Nam</h2>
+                    </li>
             </ul>
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
@@ -62,16 +66,13 @@
             </ul>
         </nav>
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar sidebar-light-info elevation-4">
             <!-- Brand Logo -->
-            <a class="brand-link" style="padding:15px 0px 10px 0px">
-
-                <img src="Image/panasonic-logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span style="font-size: 20px; font-weight: 600; margin: 0px 0px 0px 0px" class="brand-text">Panasonic Appliance
-                    
+            <a class="brand-link" style="padding: 15px 0px 10px 0px">
+                <img src="/Image/visual-data.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span style="font-size: 25px; font-weight: 600; margin: 0px 0px 0px 0px" class="brand-text">Visualization
                 </span>
             </a>
-
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar Menu -->
@@ -79,181 +80,173 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-
-
                         <li class="nav-item">
-                            <a class="nav-link" href="/UploadPlan.aspx">
-                                <i style="margin: 0px 0px 0px 5px" class="fas fa-calendar-day"></i>
-                                <p style="font-size: 15px; font-weight: 600">
+                            <a class="nav-link" href="/UI_Plan/UploadPlan">
+                                <img src="/Image/project-management.png" height="25px" width="25px" />
+                                <p style="font-size: 18px; font-weight: 600">
                                     Management Plan
                                      <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item ml-2">
-                                    <a class="nav-link" href="/UploadPlan.aspx">
-
-                                        <i style="margin: 0px 0px 0px 5px" class="fas fa-upload"></i>
-
-                                        <p>Upload Plan</p>
+                                    <a class="nav-link" href="/UI_Plan/UploadPlan" >
+                                       <img src="/Image/inbox.png" height="25px" width="25px" />
+                                        <p style="font-size: 18px; font-weight: 600">Upload Plan</p>
                                     </a>
                                 </li>
-                                <li class="nav-item ml-2">
-                                    <a class="nav-link" href="/PlanGAS.aspx">
+                               <%-- <li class="nav-item ml-2">
+                                    <a class="nav-link" href="#" onclick="showpopupfuture()">
                                         <i class="fas fa-chart-bar nav-icon"></i>
                                         <p>Real Time URT</p>
                                     </a>
                                 </li>
                                 <li class="nav-item ml-2">
-                                    <a class="nav-link" href="/PlanGAS.aspx">
+                                    <a class="nav-link" href="/UI_GAS/PlanGAS">
                                         <i class="fas fa-chart-bar nav-icon"></i>
                                         <p>Real Time GAS</p>
                                     </a>
                                 </li>
-                                <li class="nav-item ml-2">
-                                    <a class="nav-link" href="/PlanGAS.aspx">
+                                <li class="nav-item ml-2" onclick="showpopupfuture()">
+                                    <a class="nav-link" href="#">
                                         <i class="fas fa-chart-bar nav-icon"></i>
                                         <p>Real Time PAN</p>
                                     </a>
-                                </li>
+                                </li>--%>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i style="margin: 0px 0px 0px 5px" class="fas fa-fill"></i>
-                                <p style="font-size: 15px; font-weight: 600">
+                            <a class="nav-link" href="#" onclick="showpopupfuture()">
+                                <img src="/Image/insulation.png" height="25px" width="25px" />
+                                <p style="font-size: 18px; font-weight: 600">
                                     URT
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fa-brands fa-instalod"></i>
-                                <p style="font-size: 15px; font-weight: 600">
+                            <a class="nav-link" href="#" onclick="showpopupfuture()">
+                                <img src="/Image/factory.png" height="25px" width="25px" />
+                                <p style="font-size: 18px; font-weight: 600">
                                     Main Line
                                 </p>
                             </a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link">
                                 <%-- <ion-icon name="color-fill"></ion-icon>--%>
                                 <%--<i class="nav-icon fas fa-tree"></i>--%>
-                                <i class="nav-icon fas fa-wave-square"></i>
-                                <p style="font-size: 15px; font-weight: 600">
+                                <img src="/Image/conveyor.png" height="25px" width="25px" />
+                                <p style="font-size: 18px; font-weight: 600">
                                     Aiging
                                      <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item ml-2">
+ <%--                               <li class="nav-item ml-2">
                                     <a class="nav-link" href="/AgingRealTime.aspx">
-                                        <%--<ion-icon name="trending-up-outline"></ion-icon>--%>
+                                       
                                         <i class="fas fa-flag-checkered nav-icon"></i>
-
                                         <p>Final Check</p>
                                         <i class="right fas fa-angle-left"></i>
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item ml-2">
                                             <a class="nav-link" href="/AgingRealTime.aspx">
-
                                                 <i class="fas fa-chart-bar nav-icon"></i>
-
                                                 <p>Real Time</p>
                                             </a>
                                         </li>
                                         <li class="nav-item ml-2">
                                             <a class="nav-link" href="/AgingHistory.aspx">
                                                 <i class="fas fa-clock nav-icon"></i>
-
-
                                                 <p>History</p>
                                             </a>
                                         </li>
                                     </ul>
-                                </li>
-
+                                </li>--%>
                                 <li class="nav-item ml-2">
-                                    <a class="nav-link" href="#">
-                                        <%--<ion-icon name="trending-up-outline"></ion-icon>--%>
-                                        <i class="fas fa-slash nav-icon"></i>
-
-                                        <p>VP</p>
+                                    <a class="nav-link" href="#" onclick="showpopupfuture()">
+                                       
+                                       <img src="/Image/vacuum-dryer.png" height="25px" width="25px" />
+                                        <p style="font-size: 18px; font-weight: 600">VP</p>
                                     </a>
                                 </li>
                                 <li class="nav-item ml-2">
-                                    <a class="nav-link" href="#">
-                                        <%-- <ion-icon name="arrow-undo-circle-outline"></ion-icon>--%>
-                                        <i class="fas fa-gas-pump nav-icon"></i>
-                                        <p>GAS</p>
+                                    <a class="nav-link" href="#" onclick="showpopupfuture()">
+                                        
+                                        <img src="/Image/oxygen-tank.png" height="25px" width="25px" />
+                                        <p style="font-size: 18px; font-weight: 600">GAS</p>
                                     </a>
                                 </li>
                                 <li class="nav-item ml-2">
-                                    <a class="nav-link" href="#">
-                                        <i class="fas fa-bolt nav-icon"></i>
-                                        <p>WI1(With)</p>
+                                    <a class="nav-link" href="#" onclick="showpopupfuture()">
+                                        <img src="/Image/voltmeter.png" height="25px" width="25px" />
+                                        <p style="font-size: 18px; font-weight: 600">WI1(With)</p>
                                     </a>
                                 </li>
                                 <li class="nav-item ml-2">
-                                    <a class="nav-link" href="#">
-                                        <i class="fas fa-bolt nav-icon"></i>
-                                        <p>WI1(Start)</p>
+                                    <a class="nav-link" href="#" onclick="showpopupfuture()">
+                                        <img src="/Image/voltmeter.png" height="25px" width="25px" />
+                                        <p style="font-size: 18px; font-weight: 600">WI1(Start)</p>
                                     </a>
                                 </li>
                                 <li class="nav-item ml-2">
-                                    <a class="nav-link" href="#">
-                                        <i class="fas fa-plug nav-icon"></i>
-                                        <p>IP</p>
+                                    <a class="nav-link" href="#" onclick="showpopupfuture()">
+                                        <img src="/Image/electrical-energy.png" height="25px" width="25px" />
+                                        <p style="font-size: 18px; font-weight: 600">IP</p>
                                     </a>
                                 </li>
                                 <li class="nav-item ml-2">
-                                    <a class="nav-link" href="#">
-                                        <i class="fas fa-snowflake nav-icon"></i>
-                                        <p>DF</p>
+                                    <a class="nav-link" href="#" onclick="showpopupfuture()">
+                                        <img src="/Image/fridge.png" height="25px" width="25px" />
+                                        <p style="font-size: 18px; font-weight: 600">DF</p>
                                     </a>
                                 </li>
                                 <li class="nav-item ml-2">
-                                    <a class="nav-link" href="#">
-                                        <i class="fas fa-temperature-low nav-icon"></i>
-                                        <p>TEMP</p>
+                                    <a class="nav-link" href="#" onclick="showpopupfuture()">
+                                        <img src="/Image/monitoring.png" height="25px" width="25px" />
+                                        <p style="font-size: 18px; font-weight: 600">TEMP</p>
                                     </a>
                                 </li>
                                 <li class="nav-item ml-2">
-                                    <a class="nav-link" href="#">
-                                        <i class="fas fa-wifi nav-icon"></i>
-                                        <p>IOT</p>
+                                    <a class="nav-link" href="#" onclick="showpopupfuture()">
+                                           <img src="/Image/internet-of-things.png" height="25px" width="25px" />
+                                        <p style="font-size: 18px; font-weight: 600">IOT</p>
                                     </a>
                                 </li>
                                 <li class="nav-item ml-2">
-                                    <a class="nav-link" href="#">
-                                        <i class="fas fa-bolt nav-icon"></i>
-                                        <p>WI2</p>
+                                    <a class="nav-link" href="#" onclick="showpopupfuture()">
+                                         <img src="/Image/voltmeter.png" height="25px" width="25px" />
+                                        <p style="font-size: 18px; font-weight: 600">WI2</p>
                                     </a>
                                 </li>
                                 <li class="nav-item ml-2">
-                                    <a class="nav-link" href="#">
+                                    <a class="nav-link" href="#"onclick="showpopupfuture()">
                                         <i class="fas fa-box nav-icon"></i>
-                                        <p>PAN</p>
+                                        <p style="font-size: 18px; font-weight: 600">PAN</p>
                                     </a>
                                 </li>
                                 <li class="nav-item ml-2">
-                                    <a class="nav-link" href="#">
-                                        <i class="fas fa-camera nav-icon"></i>
-                                        <p>Cam Back</p>
+                                    <a class="nav-link" href="#" onclick="showpopupfuture()">
+                                        <img src="/Image/camera.png" height="25px" width="25px" />
+                                        <p style="font-size: 18px; font-weight: 600">Cam Back</p>
                                     </a>
                                 </li>
                                 <li class="nav-item ml-2">
-                                    <a class="nav-link" href="#">
-                                        <i class="fas fa-camera nav-icon"></i>
-                                        <p>Cam Front</p>
+                                    <a class="nav-link" href="#" onclick="showpopupfuture()">
+                                         <img src="/Image/camera (1).png" height="25px" width="25px" />
+                                        <p style="font-size: 18px; font-weight: 600">Cam Front</p>
                                     </a>
                                 </li>
+                                <li class="nav-item ml-2">
+                                    <a class="nav-link" href="/UI_FinalCheck/AgingRealTime">
+                                         <img src="/Image/checkmark.png" height="25px" width="25px" />
+                                        <p style="font-size: 18px; font-weight: 600">Final Check</p>
+                                    </a>
+                                </li>
+                                
                             </ul>
                         </li>
-
-
-
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -265,7 +258,6 @@
             </asp:ContentPlaceHolder>
         </form>
     </div>
-
     <script src="../../plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="../../plugins/jquery-ui/jquery-ui.min.js"></script>
@@ -323,23 +315,24 @@
     <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+     <script src="/Scripts/jquery.signalR-2.4.3.min.js"></script>
+     <script src="/signalr/hubs"></script>
     <script>
         $(function () {
+            //
+
             //Initialize Select2 Elements
             $('.select2').select2()
-
             //Initialize Select2 Elements
             $('.select2bs4').select2({
                 theme: 'bootstrap4'
             })
-
             //Datemask dd/mm/yyyy
             $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
             //Datemask2 mm/dd/yyyy
             $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
             //Money Euro
             $('[data-mask]').inputmask()
-
             //Date picker
             $('#reservationdate').datetimepicker({
                 format: 'yyyy-MM-DD'
@@ -347,7 +340,6 @@
             $('#reservationdate1').datetimepicker({
                 format: 'yyyy-MM-DD'
             });
-
             //Date and time picker
             $('#reservationdatetimefrom').datetimepicker({
                 format: 'YYYY-MM-DD HH:mm:ss',
@@ -355,6 +347,7 @@
             });
             $('#reservationdatetimefromplan').datetimepicker({
                 format: 'YYYY-MM-DD HH:mm',
+                stepping: 5,
                 icons: { time: 'far fa-clock' }
             });
             $('#reservationdatetimeto').datetimepicker({
@@ -363,9 +356,9 @@
             });
             $('#reservationdatetimetoplan').datetimepicker({
                 format: 'YYYY-MM-DD HH:mm',
+                stepping: 5,
                 icons: { time: 'far fa-clock' }
             });
-
             //Date range picker
             $('#reservation').daterangepicker()
             //Date range picker with time picker
@@ -394,31 +387,36 @@
                     $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
                 }
             )
-
             //Timepicker
             $('#timepicker').datetimepicker({
                 format: 'LT'
             })
-
             //Bootstrap Duallistbox
             $('.duallistbox').bootstrapDualListbox()
-
             //Colorpicker
             $('.my-colorpicker1').colorpicker()
             //color picker with addon
             $('.my-colorpicker2').colorpicker()
-
             $('.my-colorpicker2').on('colorpickerChange', function (event) {
                 $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
             })
             // Datatable
             $("#example1").DataTable({
-                "responsive": true, "lengthChange": true, "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "print"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-
+                "responsive": false, "lengthChange": false, "autoWidth": false, searching: false,
+                "scrollY": "800px", // Chiều cao thanh cuộn
+                "scrollCollapse": true,
+                "paging": false, // Tắt phân trang
+                "autoFill": true
+            });
         })
-
+        function showpopupfuture() {
+            alert('Tính năng chờ phát triển');
+        }
+        //$(document).ready(function () {
+        //    $('#toggle-button').ControlSidebar('collapse')
+        //    //$('#toggle-button').on('expanded.lte.controlsidebar', handleExpandedEvent)
+        //});
+        
     </script>
 </body>
 </html>

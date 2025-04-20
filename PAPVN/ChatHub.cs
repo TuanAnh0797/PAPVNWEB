@@ -19,6 +19,19 @@ namespace PAPVN
         {
             //private static List<DataItem> data = new List<DataItem>();
 
+
+
+            public override Task OnConnected()
+            {
+               
+                UpdateData();
+
+              
+
+                return base.OnConnected();
+            }
+
+
             public void GetInitialData(Data data)
             {
                 Clients.Caller.updateTable(data);
@@ -30,10 +43,20 @@ namespace PAPVN
                 //
                 string DatabarchartOKNGPENDING = LoadDataVisualize.barchartOKNGPENDING();
                 //
+                DataTable dt = LoadDataVisualize.LoadDataForTableHistory();
+                List<Product> pr = new List<Product>();
+                foreach(DataRow item in dt.Rows)
+                {
+                    pr.Add(new Product() { CodeBack = item["CodeBack"].ToString(), Judge = item["Judge_Total"].ToString(), TimeUpdate = ((DateTime)item["TimeUpdate"]).ToString("HH:mm:ss dd/MM/yyyy") });
+
+                }
+
+
                 var data = new Data()
                 {
                     DataLineChartQuantityPerTime = DataLineChartQuantityPerTime,
                     DatabarchartOKNGPENDING = DatabarchartOKNGPENDING,
+                    Datahistory = pr
                 };
                 
                 var hub = GlobalHost.ConnectionManager.GetHubContext<ChatHub>();
@@ -45,6 +68,13 @@ namespace PAPVN
         {
             public string DataLineChartQuantityPerTime { get; set; }
             public string DatabarchartOKNGPENDING { get; set; }
+            public List<Product> Datahistory { get; set; }
+    }
+        public class Product
+        {
+            public string CodeBack { get; set; }
+            public string Judge { get; set; }
+            public string TimeUpdate { get; set; }
         }
 
 

@@ -252,6 +252,7 @@
     <Content Include="Global.asax" />
     <Content Include="Image\camera %281%29.png" />
     <Content Include="Image\camera.png" />
+    <Content Include="Image\checkmark.png" />
     <Content Include="Image\conveyor.png" />
     <Content Include="Image\electrical-energy.png" />
     <Content Include="Image\factory.png" />
@@ -2308,8 +2309,8 @@
     <Content Include="plugins\summernote\summernote.js.map" />
     <Content Include="plugins\summernote\summernote.min.js.map" />
     <Content Include="plugins\toastr\toastr.js.map" />
-    <Content Include="UI_Pan\AgingHistory.aspx" />
-    <Content Include="UI_Pan\AgingRealTime.aspx" />
+    <Content Include="UI_FinalCheck\AgingHistory.aspx" />
+    <Content Include="UI_FinalCheck\AgingRealTime.aspx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -2385,18 +2386,18 @@
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
-    <Compile Include="UI_Pan\AgingHistory.aspx.cs">
+    <Compile Include="UI_FinalCheck\AgingHistory.aspx.cs">
       <DependentUpon>AgingHistory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UI_Pan\AgingHistory.aspx.designer.cs">
+    <Compile Include="UI_FinalCheck\AgingHistory.aspx.designer.cs">
       <DependentUpon>AgingHistory.aspx</DependentUpon>
     </Compile>
-    <Compile Include="UI_Pan\AgingRealTime.aspx.cs">
+    <Compile Include="UI_FinalCheck\AgingRealTime.aspx.cs">
       <DependentUpon>AgingRealTime.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UI_Pan\AgingRealTime.aspx.designer.cs">
+    <Compile Include="UI_FinalCheck\AgingRealTime.aspx.designer.cs">
       <DependentUpon>AgingRealTime.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI_Plan\UploadPlan.aspx.cs">
