@@ -6,19 +6,19 @@
     <style>
         .row-ok {
             background-color: #009900 !important; /* xanh nhạt */
-            color: white;
+            color: black;
             font-weight: bold;
         }
 
         .row-ng {
             background-color: #ff471a !important; /* đỏ nhạt */
-            color: white;
+            color: black;
             font-weight: bold;
         }
 
         .row-pending {
             background-color: yellow !important; /* vàng nhạt */
-            color: white;
+            color: black;
             font-weight: bold;
         }
 
@@ -30,55 +30,55 @@
 
 
     <div class="content" style="margin: 0px 0px 0px 0px;">
-        <h2 class="bg-gray text-center p-0 m-0">Đang kiểm tra: NR-ABCASDALSJDNCNKJS</h2>
-        <div class="row pl-2 pr-2">
-            <div class="col-sm-1 text-center cell-border fw-bold">VP</div>
-            <div class="col-sm-1 text-center cell-border fw-bold">GAS</div>
-            <div class="col-sm-1 text-center cell-border fw-bold">WI1 W</div>
-            <div class="col-sm-1 text-center cell-border fw-bold">WI1 S</div>
-            <div class="col-sm-1 text-center cell-border fw-bold">IP</div>
-            <div class="col-sm-1 text-center cell-border fw-bold">DF</div>
-            <div class="col-sm-1 text-center cell-border fw-bold">TEMP</div>
-            <div class="col-sm-1 text-center cell-border fw-bold">IOT</div>
-            <div class="col-sm-1 text-center cell-border fw-bold">WI2</div>
-            <div class="col-sm-1 text-center cell-border fw-bold">PAN</div>
-            <div class="col-sm-1 text-center cell-border fw-bold">CAM B</div>
-            <div class="col-sm-1 text-center cell-border fw-bold">CAM F</div>
+        <h1 class="bg-gray text-center p-0 m-0" style="font-weight: 600">Đang kiểm tra: NR-ABCASDALSJDNCNKJS</h1>
+        <div class="row ml-0 mr-0 bg-primary" style="font-size: 18px; font-weight: 600">
+            <div class="col-sm-1 text-center cell-border ">VP</div>
+            <div class="col-sm-1 text-center cell-border ">GAS</div>
+            <div class="col-sm-1 text-center cell-border ">WI1 W</div>
+            <div class="col-sm-1 text-center cell-border ">WI1 S</div>
+            <div class="col-sm-1 text-center cell-border ">IP</div>
+            <div class="col-sm-1 text-center cell-border ">DF</div>
+            <div class="col-sm-1 text-center cell-border ">TEMP</div>
+            <div class="col-sm-1 text-center cell-border ">IOT</div>
+            <div class="col-sm-1 text-center cell-border ">WI2</div>
+            <div class="col-sm-1 text-center cell-border ">PAN</div>
+            <div class="col-sm-1 text-center cell-border ">CAM B</div>
+            <div class="col-sm-1 text-center cell-border ">CAM F</div>
         </div>
-        <div class="row pl-2 pr-2">
-            <div id="rs_vp" class="col-sm-1 text-center cell-border bg-success fw-bold">OK</div>
-            <div id="rs_gas" class="col-sm-1 text-center cell-border bg-success fw-bold">OK</div>
-            <div id="rs_wi1w" class="col-sm-1 text-center cell-border bg-success fw-bold">OK</div>
-            <div id="rs_wi1s" class="col-sm-1 text-center cell-border bg-success fw-bold">OK</div>
-            <div id="rs_ip" class="col-sm-1 text-center cell-border bg-success fw-bold">OK</div>
-            <div id="rs_df" class="col-sm-1 text-center cell-border bg-success fw-bold">OK</div>
-            <div id="rs_temp" class="col-sm-1 text-center cell-border bg-success fw-bold">OK</div>
-            <div id="rs_iot" class="col-sm-1 text-center cell-border bg-success fw-bold">OK</div>
-            <div id="rs_wi2" class="col-sm-1 text-center cell-border bg-success fw-bold">OK</div>
-            <div id="rs_pan" class="col-sm-1 text-center cell-border bg-success fw-bold">OK</div>
-            <div id="rs_camb" class="col-sm-1 text-center cell-border bg-success fw-bold">OK</div>
-            <div id="rs_camf" class="col-sm-1 text-center cell-border bg-success fw-bold">OK</div>
+        <div class="row pl-2 pr-2" style="font-size: 18px; font-weight: 600">
+            <div id="rs_vp" class="col-sm-1 text-center cell-border bg-gray-light">NA</div>
+            <div id="rs_gas" class="col-sm-1 text-center cell-border bg-gray-light">NA</div>
+            <div id="rs_wi1w" class="col-sm-1 text-center cell-border bg-gray-light">NA</div>
+            <div id="rs_wi1s" class="col-sm-1 text-center cell-border bg-gray-lights">NA</div>
+            <div id="rs_ip" class="col-sm-1 text-center cell-border bg-gray-light">NA</div>
+            <div id="rs_df" class="col-sm-1 text-center cell-border bg-gray-light">NA</div>
+            <div id="rs_temp" class="col-sm-1 text-center cell-border bg-gray-light">NA</div>
+            <div id="rs_iot" class="col-sm-1 text-center cell-border bg-gray-light">NA</div>
+            <div id="rs_wi2" class="col-sm-1 text-center cell-border bg-gray-lights">NA</div>
+            <div id="rs_pan" class="col-sm-1 text-center cell-border bg-gray-light">NA</div>
+            <div id="rs_camb" class="col-sm-1 text-center cell-border bg-gray-light">NA</div>
+            <div id="rs_camf" class="col-sm-1 text-center cell-border bg-gray-light">NA</div>
         </div>
 
 
 
 
         <div class="row">
-            <div class="col-sm-4 " style="padding: 5px">
+            <div class="col-sm-3 " style="padding: 5px">
 
                 <div class="card" style="background-color: white">
 
-                    <h4 class="card-header bg-primary text-white p-1" style="color: white; background-color: #eb940a; text-align: center; font-weight: bold">Lịch sử 50 tủ gần nhất</h4>
+                    <h4 class="card-header bg-info  text-white p-0" style="color: white; background-color: #eb940a; text-align: center; font-weight: bold">Lịch sử 50 tủ gần nhất</h4>
                     <div class="card-body p-1">
                         <table style="padding-left: 5px; padding-right: 5px; padding-bottom: 10px; padding-top: 10px" id="dataTable" class="table table-striped table-bordered text-center">
-                            <thead style="background-color: #4A4A4A; color: white">
-                                <tr>
+                            <thead style="background-color: #b2bac2; color: black">
+                                <tr class="p-1">
                                     <th>Code Back</th>
                                     <th style="width: 50px">Judge</th>
                                     <th>Time Update</th>
                                 </tr>
                             </thead>
-                            <tbody id="tableBody" class="p-0">
+                            <tbody id="tableBody" class="p-0" style="font-size: 14px">
                             </tbody>
                         </table>
 
@@ -87,45 +87,75 @@
 
                 </div>
             </div>
-            <div class="col-sm-8">
-                <div class="row" style="padding-left: 3px">
-                    <div class="chart col-sm-4" style="padding: 5px;">
-                        <div class="card" style="background-color: white">
-                            <h4 class="card-header bg-warning text-dark text-center p-1" style="font-weight: 600">Biểu đồ tỉ lệ OK/NG</h4>
+            <div class="col-sm-9">
+                <div class="row">
+                    <div class="chart col-sm-4" style="padding: 5px; height: 285px">
+                        <div class="card">
+                            <h4 class="card-header bg-info text-white text-center p-0" style="font-weight: 600">Biểu đồ tỉ lệ OK/NG</h4>
                             <div class="chart-container">
-                                <canvas id="pieChart" style="min-height: 400px; height: 100%"></canvas>
+                                <canvas id="pieChart" style="min-height: 250px; height: 100%"></canvas>
                             </div>
                         </div>
                     </div>
-                    <div class="chart col" style="padding: 5px;">
+                    <div class=" chart col" style="padding: 5px; height: 285px">
                         <div class="card" style="background-color: white">
 
-                            <h4 class="card-header bg-success text-white text-center p-1" style="color: white; background-color: #198754; font-weight: 600">Biểu đồ số lượng tủ OK/NG/PENDING</h4>
+                            <h4 class="card-header bg-info text-black text-center p-0" style="font-weight: 600">Biểu đồ số lượng tủ OK/NG/PENDING</h4>
 
                             <div class="chart-container">
-                                <canvas id="stackedBarChart" style="min-height: 400px; height: 100%"></canvas>
+                                <canvas id="stackedBarChart" style="min-height: 250px; height: 100%"></canvas>
                             </div>
                         </div>
+
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="chart col" style="padding: 5px; height: 245px">
+                        <div class="card" style="background-color: white">
+
+                            <h4 class="card-header bg-danger text-black text-center p-0" style="font-weight: 600">Biểu đồ số lượng tủ PENDING</h4>
+
+                            <div class="chart-container">
+                                <canvas id="barChartpending" style="min-height: 200px; height: 100%"></canvas>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="chart col" style="padding: 5px; height: 245px">
+                        <div class="card" style="background-color: white">
+
+                            <h4 class="card-header bg-danger text-black text-center p-0" style="font-weight: 600">Biểu đồ số lượng tủ NG</h4>
+
+                            <div class="chart-container">
+                                <canvas id="barChartng" style="min-height: 200px; height: 100%"></canvas>
+                            </div>
+                        </div>
+
 
                     </div>
                 </div>
                 <div class="card" style="background-color: white;">
 
-                    <h3 class="card-header bg-secondary text-white text-center p-1" style="color: white; background-color: #6C757D; font-weight: 600">Biểu đồ sản lượng theo thời gian</h3>
+                    <h4 class="card-header bg-success text-white text-center p-0" style="color: white; background-color: #6C757D; font-weight: 600">Biểu đồ sản lượng theo thời gian</h4>
 
                     <div class="row ml-3">
                         <div class=" col">
-                            <h4 style="color: blue; font-weight: bold">Plan: <span id="dataplan"></span></h4>
+                            <h3 style="color: blue; font-weight: bold">Plan: <span id="dataplan"></span></h3>
                         </div>
                         <div class="col">
-                            <h4 style="color: #cc9900; font-weight: bold">Target: <span id="datatarget"></span></h4>
+                            <h3 style="color: #cc9900; font-weight: bold">Target: <span id="datatarget"></span></h3>
                         </div>
                         <div class=" col">
-                            <h4 style="color: green; font-weight: bold">Actual: <span id="dataactual"></span></h4>
+                            <h3 style="color: slateblue; font-weight: bold">Actual: <span id="dataactual"></span></h3>
+                        </div>
+                        <div class=" col">
+                            <h3 style="color: green; font-weight: bold">Diff: <span id="datadiff"></span></h3>
                         </div>
                     </div>
                     <div class="chart-container">
-                        <canvas id="linechart" style="min-height: 400px;"></canvas>
+                        <canvas id="linechart" style="min-height: 300px;"></canvas>
                     </div>
                 </div>
             </div>
@@ -163,14 +193,30 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
                 var data1 = JSON.parse(data.DatabarchartOKNGPENDING);
                 donutData.datasets[0].data = data1.Datapiechart;
 
                 dattachartOKNGPending.datasets[0].data = data1.dataok;
                 dattachartOKNGPending.datasets[1].data = data1.datang;
                 dattachartOKNGPending.datasets[2].data = data1.datapending;
-                charpie.update();
+                datachartPending.datasets[0].data = data1.datapending;
+                datachartNG.datasets[0].data = data1.datang;
 
+
+                charpie.update();
+                barchartpending.update();
+                barcharng.update();
                 stackchart.update();
 
                 var data2 = JSON.parse(data.DataLineChartQuantityPerTime);
@@ -297,7 +343,17 @@
                         }
                     });
                 }
-            }
+            },
+            legend: {
+                labels: {
+                    fontColor: 'black',     // 👈 Màu chữ
+                    fontSize: 20,           // 👈 Cỡ chữ
+                    fontStyle: 'bold',      // 👈 Độ đậm
+
+                },
+                display: true,
+                position: 'right'
+            },
         }
         var donutData = {
             labels: [
@@ -367,16 +423,197 @@
             scales: {
                 xAxes: [{
                     stacked: true,
+                    ticks: {
+                        fontSize: 15, // Tăng cỡ chữ tại đây,
+                        fontStyle: 'bold',
+                        fontColor: 'black'
+
+                    }
                 }],
                 yAxes: [{
-                    stacked: true
+                    stacked: true,
+                    ticks: {
+                        fontSize: 15, // Tăng cỡ chữ tại đây,
+                        fontStyle: 'bold',
+                        fontColor: 'black'
+
+                    }
                 }]
-            }
+            },
+            legend: {
+                labels: {
+                    fontColor: 'black',     // 👈 Màu chữ
+                    fontSize: 15,           // 👈 Cỡ chữ
+                    fontStyle: 'bold',      // 👈 Độ đậm
+
+                }
+            },
+
         }
         var stackchart = new Chart(stackedBarChartCanvas, {
             type: 'bar',
             data: dattachartOKNGPending,
             options: stackedBarChartOptions
+        })
+        //Barchar Pending
+        var barChartCanvas = $('#barChartpending').get(0).getContext('2d')
+        var datachartPending = {
+            labels: ['VP', 'GAS', 'WI1(W)', 'WI1(S)', 'IP', 'DF', 'TEMP', 'IOT', 'WI2', 'PAN', 'CAM B', 'CAM F'],
+            datasets: [
+                {
+                    label: 'PENDING',
+                    backgroundColor: '#FFD700',
+                    borderColor: 'rgba(60,141,188,0.8)',
+                    pointRadius: false,
+                    pointColor: '#3b8bba',
+                    pointStrokeColor: 'rgba(00,80,00,1)',
+                    pointHighlightFill: '#fff',
+                    pointHighlightStroke: 'rgba(60,141,188,1)',
+                    data: []
+                },
+
+            ]
+
+        }
+        var barChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            datasetFill: false,
+            animation: {
+                duration: 1,
+                onComplete: function () {
+
+                    var chartInstance = this.chart,
+                        ctx = chartInstance.ctx;
+                    ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'bottom';
+                    ctx.font = 'bold 13px Arial';
+                    this.data.datasets.forEach(function (dataset, i) {
+                        var meta = chartInstance.controller.getDatasetMeta(i);
+                        meta.data.forEach(function (bar, index) {
+                            var data = dataset.data[index];
+                            ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                        });
+                    });
+                }
+            },
+            scales: {
+                xAxes: [{
+                    stacked: true,
+                    ticks: {
+                        fontSize: 13, // Tăng cỡ chữ tại đây,
+                        fontStyle: 'bold',
+                        fontColor: 'black'
+
+                    }
+                }],
+                yAxes: [{
+                    stacked: true,
+                    ticks: {
+                        fontSize: 13, // Tăng cỡ chữ tại đây,
+                        fontStyle: 'bold',
+                        fontColor: 'black'
+
+                    }
+                }]
+            },
+            legend: {
+                labels: {
+                    fontColor: 'black',     // 👈 Màu chữ
+                    fontSize: 13,           // 👈 Cỡ chữ
+                    fontStyle: 'bold',      // 👈 Độ đậm
+
+                },
+                display: false
+            },
+
+        }
+        var barchartpending = new Chart(barChartCanvas, {
+            type: 'bar',
+            data: datachartPending,
+            options: barChartOptions
+        })
+        // Barchart NG
+        var barChartCanvas = $('#barChartng').get(0).getContext('2d')
+        var datachartNG = {
+            labels: ['VP', 'GAS', 'WI1(W)', 'WI1(S)', 'IP', 'DF', 'TEMP', 'IOT', 'WI2', 'PAN', 'CAM B', 'CAM F'],
+            datasets: [
+                {
+                    label: 'NG',
+                    backgroundColor: '#FF0000',
+                    borderColor: 'rgba(60,141,188,0.8)',
+                    pointRadius: false,
+                    pointColor: '#3b8bba',
+                    pointStrokeColor: 'rgba(00,80,00,1)',
+                    pointHighlightFill: '#fff',
+                    pointHighlightStroke: 'rgba(60,141,188,1)',
+                    data: []
+                },
+
+            ]
+
+        }
+        var barChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            datasetFill: false,
+            animation: {
+                duration: 1,
+                onComplete: function () {
+
+
+
+                    var chartInstance = this.chart,
+                        ctx = chartInstance.ctx;
+                    ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'bottom';
+                    ctx.font = 'bold 13px Arial';
+                    this.data.datasets.forEach(function (dataset, i) {
+                        var meta = chartInstance.controller.getDatasetMeta(i);
+                        meta.data.forEach(function (bar, index) {
+                            var data = dataset.data[index];
+                            ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                        });
+                    });
+                }
+            },
+            scales: {
+                xAxes: [{
+                    stacked: true,
+                    ticks: {
+                        fontSize: 13, // Tăng cỡ chữ tại đây,
+                        fontStyle: 'bold',
+                        fontColor: 'black'
+
+                    }
+                }],
+                yAxes: [{
+                    stacked: true,
+                    ticks: {
+                        fontSize: 13, // Tăng cỡ chữ tại đây,
+                        fontStyle: 'bold',
+                        fontColor: 'black'
+
+                    }
+                }]
+            },
+            legend: {
+                labels: {
+                    fontColor: 'black',     // 👈 Màu chữ
+                    fontSize: 13,           // 👈 Cỡ chữ
+                    fontStyle: 'bold',      // 👈 Độ đậm
+
+                },
+                display: false
+            },
+        }
+
+        var barcharng = new Chart(barChartCanvas, {
+            type: 'bar',
+            data: datachartNG,
+            options: barChartOptions
         })
         // quantitypertime
         var DataLineChart = {
@@ -427,7 +664,9 @@
                 //}],
                 x: {
                     ticks: {
-                        fontSize: 15
+                        fontSize: 15,
+                        fontColor: 'black',
+                        fontStyle: 'bold',
                     },
                     type: 'linear', // Sử dụng linear scale cho trục x
                     position: 'bottom',
@@ -440,6 +679,8 @@
                     ticks: {
                         fontSize: 15,
                         beginAtZero: true,
+                        fontColor: 'black',
+                        fontStyle: 'bold',
                     },
                 },
                 {
@@ -449,6 +690,8 @@
                     ticks: {
                         fontSize: 15,
                         beginAtZero: true,
+                        fontColor: 'black',
+                        fontStyle: 'bold',
                         //max: maxYAxisValuebarchartdiff,
                         //min: -maxYAxisValuebarchartdiff,
                     },
@@ -461,6 +704,8 @@
                 position: 'bottom',
                 labels: {
                     fontSize: 15,
+                    fontColor: 'black',
+                    fontStyle: 'bold',
                 },
             },
 
