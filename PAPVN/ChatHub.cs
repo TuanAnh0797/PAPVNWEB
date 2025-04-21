@@ -48,10 +48,7 @@ namespace PAPVN
                 foreach(DataRow item in dt.Rows)
                 {
                     pr.Add(new Product() { CodeBack = item["CodeBack"].ToString(), Judge = item["Judge_Total"].ToString(), TimeUpdate = ((DateTime)item["TimeUpdate"]).ToString("HH:mm:ss dd/MM/yyyy") });
-
                 }
-
-
                 var data = new Data()
                 {
                     DataLineChartQuantityPerTime = DataLineChartQuantityPerTime,
