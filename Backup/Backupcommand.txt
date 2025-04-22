@@ -1,0 +1,8 @@
+mysqldump -u root -p --all-databases > D:\Backup\backup.sql
+
+mysqldump -u root -p --all-databases --routines --events > D:\Backup\backup.sql (cả store)
+
+mysqldump -u root -p --no-data --routines --events --triggers --all-databases > D:\Backup\backup.sql
+
+
+mysql -u root -p < backup.sql (dựng lại db)
