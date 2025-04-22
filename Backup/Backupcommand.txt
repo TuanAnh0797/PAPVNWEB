@@ -6,3 +6,6 @@ mysqldump -u root -p --no-data --routines --events --triggers --all-databases > 
 
 
 mysql -u root -p < backup.sql (dựng lại db)
+
+
+SHOW CREATE TRIGGER after_pan_insert;

@@ -1,4 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="PAPVN.SiteMaster" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head runat="server">
@@ -40,9 +41,9 @@
     <link rel="stylesheet" href="/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <link rel="icon" type="image/png" href="/wwwroot/Panasonic_logo_bl_posi_PNG.ico" sizes="64x64">
     <!-- SweetAlert2 -->
-  <link rel="stylesheet" href="/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
-  <!-- Toastr -->
-  <link rel="stylesheet" href="/plugins/toastr/toastr.min.css">
+    <link rel="stylesheet" href="/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="/plugins/toastr/toastr.min.css">
 </head>
 <body class="hold-transition sidebar-close sidebar-collapse layout-fixed">
     <div class="wrapper">
@@ -50,14 +51,18 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu"  role="button"><i class="fas fa-bars"></i></a>
+                    <a class="nav-link" data-widget="pushmenu" role="button"><i class="fas fa-bars"></i></a>
                 </li>
-                 <li class="nav-item">
-                        <h2 class="mb-0" style="color: darkblue; font-weight: 900">Panasonic Appliance Viet Nam</h2>
-                    </li>
+                <li class="nav-item">
+                    <h2 class="mb-0" style="color: darkblue; font-weight: 900">Panasonic Appliance Viet Nam</h2>
+                </li>
             </ul>
+
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <span id="real-time-clock" class="nav-link" style="font-size: 25px; font-weight: bold; color: darkblue;"></span>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -90,12 +95,12 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item ml-2">
-                                    <a class="nav-link" href="/UI_Plan/UploadPlan" >
-                                       <img src="/Image/inbox.png" height="25px" width="25px" />
+                                    <a class="nav-link" href="/UI_Plan/UploadPlan">
+                                        <img src="/Image/inbox.png" height="25px" width="25px" />
                                         <p style="font-size: 18px; font-weight: 600">Upload Plan</p>
                                     </a>
                                 </li>
-                               <%-- <li class="nav-item ml-2">
+                                <%-- <li class="nav-item ml-2">
                                     <a class="nav-link" href="#" onclick="showpopupfuture()">
                                         <i class="fas fa-chart-bar nav-icon"></i>
                                         <p>Real Time URT</p>
@@ -142,7 +147,7 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
- <%--                               <li class="nav-item ml-2">
+                                <%--                               <li class="nav-item ml-2">
                                     <a class="nav-link" href="/AgingRealTime.aspx">
                                        
                                         <i class="fas fa-flag-checkered nav-icon"></i>
@@ -166,14 +171,14 @@
                                 </li>--%>
                                 <li class="nav-item ml-2">
                                     <a class="nav-link" href="#" onclick="showpopupfuture()">
-                                       
-                                       <img src="/Image/vacuum-dryer.png" height="25px" width="25px" />
+
+                                        <img src="/Image/vacuum-dryer.png" height="25px" width="25px" />
                                         <p style="font-size: 18px; font-weight: 600">VP</p>
                                     </a>
                                 </li>
                                 <li class="nav-item ml-2">
                                     <a class="nav-link" href="/UI_GAS/PlanGAS.aspx">
-                                        
+
                                         <img src="/Image/oxygen-tank.png" height="25px" width="25px" />
                                         <p style="font-size: 18px; font-weight: 600">GAS</p>
                                     </a>
@@ -210,18 +215,18 @@
                                 </li>
                                 <li class="nav-item ml-2">
                                     <a class="nav-link" href="#" onclick="showpopupfuture()">
-                                           <img src="/Image/internet-of-things.png" height="25px" width="25px" />
+                                        <img src="/Image/internet-of-things.png" height="25px" width="25px" />
                                         <p style="font-size: 18px; font-weight: 600">IOT</p>
                                     </a>
                                 </li>
                                 <li class="nav-item ml-2">
                                     <a class="nav-link" href="#" onclick="showpopupfuture()">
-                                         <img src="/Image/voltmeter.png" height="25px" width="25px" />
+                                        <img src="/Image/voltmeter.png" height="25px" width="25px" />
                                         <p style="font-size: 18px; font-weight: 600">WI2</p>
                                     </a>
                                 </li>
                                 <li class="nav-item ml-2">
-                                    <a class="nav-link" href="#"onclick="showpopupfuture()">
+                                    <a class="nav-link" href="#" onclick="showpopupfuture()">
                                         <i class="fas fa-box nav-icon"></i>
                                         <p style="font-size: 18px; font-weight: 600">PAN</p>
                                     </a>
@@ -234,17 +239,17 @@
                                 </li>
                                 <li class="nav-item ml-2">
                                     <a class="nav-link" href="#" onclick="showpopupfuture()">
-                                         <img src="/Image/camera (1).png" height="25px" width="25px" />
+                                        <img src="/Image/camera (1).png" height="25px" width="25px" />
                                         <p style="font-size: 18px; font-weight: 600">Cam Front</p>
                                     </a>
                                 </li>
                                 <li class="nav-item ml-2">
                                     <a class="nav-link" href="/UI_FinalCheck/AgingRealTime">
-                                         <img src="/Image/checkmark.png" height="25px" width="25px" />
+                                        <img src="/Image/checkmark.png" height="25px" width="25px" />
                                         <p style="font-size: 18px; font-weight: 600">Final Check</p>
                                     </a>
                                 </li>
-                                
+
                             </ul>
                         </li>
                     </ul>
@@ -315,8 +320,8 @@
     <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-     <script src="/Scripts/jquery.signalR-2.4.3.min.js"></script>
-     <script src="/signalr/hubs"></script>
+    <script src="/Scripts/jquery.signalR-2.4.3.min.js"></script>
+    <script src="/signalr/hubs"></script>
     <script>
         $(function () {
             //
@@ -412,11 +417,41 @@
         function showpopupfuture() {
             alert('Tính năng chờ phát triển');
         }
-        //$(document).ready(function () {
-        //    $('#toggle-button').ControlSidebar('collapse')
-        //    //$('#toggle-button').on('expanded.lte.controlsidebar', handleExpandedEvent)
-        //});
-        
+        $(document).ready(function () {
+            // Cập nhật mỗi giây
+            setInterval(displayRealTimeClock, 1000);
+            // Gọi ngay lần đầu
+            displayRealTimeClock();
+        });
+        function displayRealTimeClock() {
+            var clockElement = document.getElementById('real-time-clock');
+            var currentTime = new Date();
+
+            var day = currentTime.getDate();
+            var month = currentTime.getMonth() + 1; // Tháng bắt đầu từ 0, cộng 1
+            var year = currentTime.getFullYear();
+            var hours = currentTime.getHours();
+            var minutes = currentTime.getMinutes();
+            var seconds = currentTime.getSeconds();
+            var ampm = hours >= 12 ? 'PM' : 'AM';
+
+            // Chuyển đổi sang định dạng 12 giờ
+            hours = hours % 12 || 12;
+            hours = hours < 10 ? '0' + hours : hours;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+            day = day < 10 ? '0' + day : day;
+            month = month < 10 ? '0' + month : month;
+
+            // Tạo chuỗi thời gian
+            var timeString = `${day}/${month}/${year} ${hours}:${minutes}:${seconds} ${ampm}`;
+
+            // Cập nhật nội dung
+            if (clockElement) {
+                clockElement.textContent = timeString;
+            }
+        }
+
     </script>
 </body>
 </html>

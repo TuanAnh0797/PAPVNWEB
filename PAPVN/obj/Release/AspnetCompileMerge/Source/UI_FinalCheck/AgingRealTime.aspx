@@ -30,8 +30,8 @@
 
 
     <div class="content" style="margin: 0px 0px 0px 0px;">
-        <h1 id="title_bg" class="bg-gray text-center p-0 m-0" style="font-weight: 600">Đang kiểm tra: <span id="rs_codeback">NR-ABCASDALSJDNCNKJS</span></h1>
-        <div class="row ml-0 mr-0 bg-primary" style="font-size: 18px; font-weight: 600">
+        <h1 id="title_bg" class="bg-gray text-center p-0 m-0" style="font-weight: 600">Đang kiểm tra: <span id="rs_codeback"></span></h1>
+        <div class="row ml-0 mr-0 bg-purple" style="font-size: 18px; font-weight: 600">
             <div class="col-sm-1 text-center cell-border ">VP</div>
             <div class="col-sm-1 text-center cell-border ">GAS</div>
             <div class="col-sm-1 text-center cell-border ">WI1 W</div>
@@ -75,7 +75,7 @@
                                 <tr class="p-1">
                                     <th>Code Back</th>
                                     <th style="width: 50px">Judge</th>
-                                    <th>Time Update</th>
+                                    <th style="width: 150px">Time Update</th>
                                 </tr>
                             </thead>
                             <tbody id="tableBody" class="p-0" style="font-size: 14px">
@@ -89,7 +89,7 @@
             </div>
             <div class="col-sm-9">
                 <div class="row">
-                    <div class="chart col-sm-4" style="padding: 5px; height: 285px">
+                    <div class="chart col-sm-4" style="padding: 5px;">
                         <div class="card">
                             <h4 class="card-header bg-info text-white text-center p-0" style="font-weight: 600">Biểu đồ tỉ lệ OK/NG</h4>
                             <div class="chart-container">
@@ -97,7 +97,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class=" chart col" style="padding: 5px; height: 285px">
+                    <div class=" chart col" style="padding: 5px;">
                         <div class="card" style="background-color: white">
 
                             <h4 class="card-header bg-info text-black text-center p-0" style="font-weight: 600">Biểu đồ số lượng tủ OK/NG/PENDING</h4>
@@ -111,7 +111,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="chart col" style="padding: 5px; height: 245px">
+                    <div class="chart col" style="padding: 5px;">
                         <div class="card" style="background-color: white">
 
                             <h4 class="card-header bg-danger text-black text-center p-0" style="font-weight: 600">Biểu đồ số lượng tủ PENDING</h4>
@@ -123,7 +123,7 @@
 
 
                     </div>
-                    <div class="chart col" style="padding: 5px; height: 245px">
+                    <div class="chart col" style="padding: 5px;">
                         <div class="card" style="background-color: white">
 
                             <h4 class="card-header bg-danger text-black text-center p-0" style="font-weight: 600">Biểu đồ số lượng tủ NG</h4>
@@ -474,7 +474,10 @@
                     ticks: {
                         fontSize: 15, // Tăng cỡ chữ tại đây,
                         fontStyle: 'bold',
-                        fontColor: 'black'
+                        fontColor: 'black',
+                        max: 2500, // Đặt giá trị tối đa của trục y là 100
+                        min: 0,   // (Tùy chọn) Đặt giá trị tối thiểu nếu cần
+                        stepSize: 500 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
 
                     }
                 }]
@@ -487,6 +490,127 @@
 
                 }
             },
+            plugins: {
+                datalabels: {
+                    color: '#000',
+                    font: {
+                        weight: 'bold',
+                        size: 12
+                    },
+                    formatter: function (value, context) {
+                        return value > 0 ? value : ''; // Chỉ hiển thị khi giá trị > 0
+                    }
+                },
+                afterDatasetsDraw: function (chart) {
+                    var ctx = chart.ctx;
+
+                    // Lặp qua các cột
+                    chart.data.datasets[0].data.forEach(function (value, index) {
+                        // Tính tổng giá trị của mỗi cột
+                        var total = 0;
+                        chart.data.datasets.forEach(function (dataset) {
+                            total += dataset.data[index] || 0;
+                        });
+
+                        // Giá trị OK
+                        var okValue = chart.data.datasets[0].data[index] || 0;
+
+                        // Chỉ hiển thị khi tổng > 0
+                        if (total > 0) {
+                            var percentage = Math.round((okValue / total) * 100);
+
+                            // Lấy vị trí của cột
+                            var meta = chart.getDatasetMeta(0);
+                            var barElement = meta.data[index];
+
+                            // Tính toán vị trí hiển thị ở giữa cột
+                            var x = barElement._model.x; // Vị trí x giữa cột
+                            var y;
+
+                            // Tính vị trí y dựa trên tổng chiều cao của cột
+                            var chartArea = chart.chartArea;
+                            var yAxis = chart.scales['y-axis-0'];
+                            var yTop = yAxis.getPixelForValue(total); // Vị trí pixel của đỉnh cột
+                            var yBottom = yAxis.getPixelForValue(0); // Vị trí pixel của đáy cột
+                            y = (yTop + yBottom) / 2; // Vị trí y ở giữa cột
+
+                            // Vẽ % OK
+                            ctx.save();
+                            ctx.fillStyle = '#FFFFFF'; // Màu chữ
+                            ctx.font = 'bold 14px Arial';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+                            ctx.fillText(percentage + '%', x, y);
+                            ctx.restore();
+                        }
+                    });
+                }
+            },
+            animation: {
+                duration: 1,
+                onComplete: function () {
+                    var chartInstance = this.chart,
+                        ctx = chartInstance.ctx;
+
+                    // Thiết lập kiểu chữ
+                    ctx.font = 'bold 13px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle'; // Đặt baseline là middle để căn giữa theo chiều dọc
+                    ctx.fillStyle = '#FFFFFF'; // Màu chữ (trắng để nổi bật)
+
+                    // Lấy dataset OK (giả sử dataset OK là dataset đầu tiên, index 0)
+                    var okDataset = this.data.datasets[0]; // Dataset OK
+                    var meta = chartInstance.controller.getDatasetMeta(0); // Metadata của dataset OK
+
+                    // Lặp qua từng cột
+                    meta.data.forEach(function (bar, index) {
+                        // Tính tổng giá trị của cột (OK + NG + PENDING)
+                        var total = 0;
+                        this.data.datasets.forEach(function (dataset) {
+                            total += dataset.data[index] || 0; // Xử lý giá trị undefined
+                        }, this);
+
+                        // Giá trị OK
+                        var okValue = okDataset.data[index] || 0;
+
+                        // Tính % OK
+                        var percentage = total > 0 ? ((okValue / total) * 100).toFixed(1) : 0;
+
+                        // Tính vị trí hiển thị % OK ở giữa cột
+                        var x = bar._model.x; // Vị trí x giữa cột
+                        var yAxis = chartInstance.scales['y-axis-0'];
+                        var yTop = yAxis.getPixelForValue(total); // Đỉnh cột
+                        var yBottom = yAxis.getPixelForValue(0); // Đáy cột
+                        var y = (yTop + yBottom) / 2; // Vị trí y ở giữa cột
+
+                        // Vẽ % OK
+                        ctx.fillText(  percentage + '%', x, y);
+                    }, this);
+                }
+            },
+            tooltips: {
+                mode: 'index',
+                intersect: false,
+                callbacks: {
+                    label: function (tooltipItem, data) {
+                        var datasetIndex = tooltipItem.datasetIndex;
+                        var index = tooltipItem.index;
+                        var dataset = data.datasets[datasetIndex];
+                        var currentValue = dataset.data[index];
+
+                        // Tính tổng giá trị của tất cả datasets tại cột hiện tại (index)
+                        var total = 0;
+                        data.datasets.forEach(function (dataset) {
+                            total += dataset.data[index] || 0; // Thêm giá trị tại index, xử lý trường hợp undefined
+                        });
+
+                        // Tính phần trăm
+                        var percentage = total > 0 ? ((currentValue / total) * 100).toFixed(1) : 0;
+
+                        return dataset.label + ": " + currentValue + " (" + percentage + "%)";
+                    }
+                }
+            }
 
         }
         var stackchart = new Chart(stackedBarChartCanvas, {
@@ -552,7 +676,10 @@
                     ticks: {
                         fontSize: 13, // Tăng cỡ chữ tại đây,
                         fontStyle: 'bold',
-                        fontColor: 'black'
+                        fontColor: 'black',
+                        max: 150, // Đặt giá trị tối đa của trục y là 100
+                        min: 0,   // (Tùy chọn) Đặt giá trị tối thiểu nếu cần
+                        stepSize: 30 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
 
                     }
                 }]
@@ -633,7 +760,10 @@
                     ticks: {
                         fontSize: 13, // Tăng cỡ chữ tại đây,
                         fontStyle: 'bold',
-                        fontColor: 'black'
+                        fontColor: 'black',
+                        max: 150, // Đặt giá trị tối đa của trục y là 100
+                        min: 0,   // (Tùy chọn) Đặt giá trị tối thiểu nếu cần
+                        stepSize: 30 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
 
                     }
                 }]
@@ -720,6 +850,9 @@
                         beginAtZero: true,
                         fontColor: 'black',
                         fontStyle: 'bold',
+                        max: 3000, // Đặt giá trị tối đa của trục y là 100
+                        //min: 0,   // (Tùy chọn) Đặt giá trị tối thiểu nếu cần
+                        stepSize: 300 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
                     },
                 },
                 {
@@ -731,8 +864,9 @@
                         beginAtZero: true,
                         fontColor: 'black',
                         fontStyle: 'bold',
-                        //max: maxYAxisValuebarchartdiff,
-                        //min: -maxYAxisValuebarchartdiff,
+                        max: 300, // Đặt giá trị tối đa của trục y là 100
+                        min: -300,   // (Tùy chọn) Đặt giá trị tối thiểu nếu cần
+                        stepSize: 300 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
                     },
                     gridLines: {
                         display: false

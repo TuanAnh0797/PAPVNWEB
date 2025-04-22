@@ -9,7 +9,7 @@ namespace PAPVN
     {
         // Từ 0h00 -> 23H00
 
-        public static int[] TimeRest = new int[] { 10, 0, 45, 0, 10, 0, 5, 0, 10, 0, 30, 0, 10, 0, 5, 0, 10, 0, 30, 0, 10, 0, 10, 0 };
+        public static int[] TimeRest = new int[] { 10, 0, 45, 0, 10, 0, 5, 0, 10, 0, 30, 0, 10, 0, 20, 0, 10, 0, 30, 0, 10, 0, 10, 0 };
         // Từ 0h00 -> 23H00
 
         public static int[] TimeRest2Ca = new int[] { 10, 0, 45, 0, 10, 0, 10, 0, 0, 0, 0, 0, 0, 0, 10, 0, 10, 0, 30, 0, 10, 0, 0, 0 };

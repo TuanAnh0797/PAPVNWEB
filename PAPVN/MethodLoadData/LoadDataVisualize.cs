@@ -40,28 +40,28 @@ namespace PAPVN.MethodLoadData
                 {
                     selectshift = 1;
                     ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "1");
-                    ds = dBConnect.StoreFillDS("TA_sp_LoadDataForLineChartPlancheckfinalByTime", CommandType.StoredProcedure, parammysql, "1");
+                    ds = dBConnect.StoreFillDS("TA_sp_LoadDataForLineChartPlanPanByTime", CommandType.StoredProcedure, parammysql, "1");
                     dt1 = ds.Tables[0];
                 }
                 else if (SelectedShift == "Ca 2")
                 {
                     selectshift = 2;
                     ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "2");
-                    ds = dBConnect.StoreFillDS("TA_sp_LoadDataForLineChartPlancheckfinalByTime", CommandType.StoredProcedure, parammysql, "2");
+                    ds = dBConnect.StoreFillDS("TA_sp_TA_sp_LoadDataForLineChartPlanPanByTime", CommandType.StoredProcedure, parammysql, "2");
                     dt1 = ds.Tables[0];
                 }
                 else if (SelectedShift == "Ca 3")
                 {
                     selectshift = 3;
                     ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "3");
-                    ds = dBConnect.StoreFillDS("TA_sp_LoadDataForLineChartPlancheckfinalByTime", CommandType.StoredProcedure, parammysql, "3");
+                    ds = dBConnect.StoreFillDS("TA_sp_LoadDataForLineChartPlanPanByTime", CommandType.StoredProcedure, parammysql, "3");
                     dt1 = ds.Tables[0];
                 }
                 else
                 {
                     selectshift = 0;
                     ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "all");
-                    ds = dBConnect.StoreFillDS("TA_sp_LoadDataForLineChartPlancheckfinalByTime", CommandType.StoredProcedure, parammysql, "all");
+                    ds = dBConnect.StoreFillDS("TA_sp_LoadDataForLineChartPlanPanByTime", CommandType.StoredProcedure, parammysql, "all");
                     dt1 = ds.Tables[0];
                     //allday = true;
                 }
