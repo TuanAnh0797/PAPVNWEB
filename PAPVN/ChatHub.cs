@@ -54,23 +54,23 @@ namespace PAPVN
                 {
                     pr.Add(new Product() { CodeBack = item["CodeBack"].ToString(), Judge = item["Judge_Total"].ToString(), TimeUpdate = ((DateTime)item["TimeUpdate"]).ToString("HH:mm:ss dd/MM/yyyy") });
                 }
-
+                //CodeBack, Judge_VP, Judge_GAS, Judge_WI1WITH, Judge_WI1START, Judge_IP, Judge_DF, Judge_TEMP, Judge_IOT, Judge_WI2, Judge_PAN, Judge_CAMBACK, Judge_CAMFRONT, Judge_Total, ReasonError, PersonConfirm, TimeUpdate
                 productcurrent = new CurrentProduct()
                 {
-                    CodeBack = productitem[""].ToString(),
-                    JudgeVP = productitem[""].ToString(),
-                    JudgeGAS = productitem[""].ToString(),
-                    JudgeWI1W = productitem[""].ToString(),
-                    JudgeWI1S = productitem[""].ToString(),
-                    JudgeIP = productitem[""].ToString(),
-                    JudgeDF = productitem[""].ToString(),
-                    JudgeTEMP = productitem[""].ToString(),
-                    JudgeIOT = productitem[""].ToString(),
-                    JudgeWI2 = productitem[""].ToString(),
-                    JudgePAN = productitem[""].ToString(),
-                    JudgeCAMB = productitem[""].ToString(),
-                    JudgeCAMF = productitem[""].ToString(),
-                    JudgeTotal = productitem[""].ToString()
+                    CodeBack = productitem["CodeBack"].ToString(),
+                    JudgeVP = productitem["Judge_VP"].ToString(),
+                    JudgeGAS = productitem["Judge_GAS"].ToString(),
+                    JudgeWI1W = productitem["Judge_WI1WITH"].ToString(),
+                    JudgeWI1S = productitem["Judge_WI1START"].ToString(),
+                    JudgeIP = productitem["Judge_IP"].ToString(),
+                    JudgeDF = productitem["Judge_DF"].ToString(),
+                    JudgeTEMP = productitem["Judge_TEMP"].ToString(),
+                    JudgeIOT = productitem["Judge_IOT"].ToString(),
+                    JudgeWI2 = productitem["Judge_WI2"].ToString(),
+                    JudgePAN = productitem["Judge_PAN"].ToString(),
+                    JudgeCAMB = productitem["Judge_CAMBACK"].ToString(),
+                    JudgeCAMF = productitem["Judge_CAMFRONT"].ToString(),
+                    JudgeTotal = productitem["Judge_Total"].ToString()
                 };
 
 

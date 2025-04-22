@@ -618,7 +618,7 @@ namespace PAPVN.MethodLoadData
         public static DataSet LoadDataForTableHistory()
         {
                 DBConnect dBConnect = new DBConnect();
-                DataSet dt = dBConnect.StoreFillDS("LoadDataForTableHistoryFinalCheck", CommandType.StoredProcedure);
+                DataSet dt = dBConnect.StoreFillDS("LoadDataForTableHistoryFinalCheckNew", CommandType.StoredProcedure);
                 return dt;
         }
 

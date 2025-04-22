@@ -45,7 +45,7 @@
             <div class="col-sm-1 text-center cell-border ">CAM B</div>
             <div class="col-sm-1 text-center cell-border ">CAM F</div>
         </div>
-        <div class="row pl-2 pr-2" style="font-size: 18px; font-weight: 600">
+        <div class="row pl-2 pr-2 gr_rs" style="font-size: 18px; font-weight: 600">
             <div id="rs_vp" class="col-sm-1 text-center cell-border bg-gray-light">NA</div>
             <div id="rs_gas" class="col-sm-1 text-center cell-border bg-gray-light">NA</div>
             <div id="rs_wi1w" class="col-sm-1 text-center cell-border bg-gray-light">NA</div>
@@ -213,9 +213,17 @@
                 var shift = data2.shift;
                 var typeplan = data2.typeplan;
 
-
                 var datacurrent = data.CurrentData;
                 $('#rs_codeback').html(`${datacurrent.CodeBack}`);
+                $('#rs_codeback').removeClass('bg-gray bg-success bg-danger');
+                if (datacurrent.JudgeTotal == 'OK') {
+                    $('#rs_codeback').addClass('bg-success');
+                }
+                else {
+                    $('#rs_codeback').addClass('bg-danger');
+                }
+
+
                 $('#rs_vp').html(`${datacurrent.CodeBack}`);
                 $('#rs_gas').html(`${datacurrent.CodeBack}`);
                 $('#rs_wi1w').html(`${datacurrent.CodeBack}`);
@@ -228,6 +236,26 @@
                 $('#rs_pan').html(`${datacurrent.CodeBack}`);
                 $('#rs_camb').html(`${datacurrent.CodeBack}`);
                 $('#rs_camf').html(`${datacurrent.CodeBack}`);
+
+
+                $('.gr_rs').find('[id^="rs_"]').each(function () {
+                    var content = $(this).text().trim();
+                    // Xóa tất cả class màu cũ
+                    $(this).removeClass('bg-gray-light bg-gray-lights bg-success bg-danger bg-warning');
+                    // Thêm class mới theo nội dung
+                    if (content === 'NA') {
+                        $(this).addClass('bg-gray-light');
+                    } else if (content === 'OK') {
+                        $(this).addClass('bg-success');
+                    } else if (content === 'NG') {
+                        $(this).addClass('bg-danger');
+                    } else if (content === 'Pending') {
+                        $(this).addClass('bg-warning');
+                    } else {
+                        $(this).addClass('bg-gray-light'); // fallback
+                    }
+                });
+
 
 
 
