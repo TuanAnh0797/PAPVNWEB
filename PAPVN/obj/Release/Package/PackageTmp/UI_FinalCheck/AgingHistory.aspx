@@ -218,7 +218,8 @@
                            });
                        });
                    }
-               },
+            },
+           
         }
         var barchartpending = new Chart(barChartCanvas, {
             type: 'bar',

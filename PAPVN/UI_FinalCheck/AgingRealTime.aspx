@@ -215,27 +215,28 @@
 
                 var datacurrent = data.CurrentData;
                 $('#rs_codeback').html(`${datacurrent.CodeBack}`);
-                $('#rs_codeback').removeClass('bg-gray bg-success bg-danger');
+                $('#title_bg').removeClass('bg-gray bg-success bg-danger');
                 if (datacurrent.JudgeTotal == 'OK') {
-                    $('#rs_codeback').addClass('bg-success');
+                    $('#title_bg').addClass('bg-success');
                 }
                 else {
-                    $('#rs_codeback').addClass('bg-danger');
+                    $('#title_bg').addClass('bg-danger');
                 }
 
+              
 
-                $('#rs_vp').html(`${datacurrent.CodeBack}`);
-                $('#rs_gas').html(`${datacurrent.CodeBack}`);
-                $('#rs_wi1w').html(`${datacurrent.CodeBack}`);
-                $('#rs_wi1s').html(`${datacurrent.CodeBack}`);
-                $('#rs_ip').html(`${datacurrent.CodeBack}`);
-                $('#rs_df').html(`${datacurrent.CodeBack}`);
-                $('#rs_temp').html(`${datacurrent.CodeBack}`);
-                $('#rs_iot').html(`${datacurrent.CodeBack}`);
-                $('#rs_wi2').html(`${datacurrent.CodeBack}`);
-                $('#rs_pan').html(`${datacurrent.CodeBack}`);
-                $('#rs_camb').html(`${datacurrent.CodeBack}`);
-                $('#rs_camf').html(`${datacurrent.CodeBack}`);
+                $('#rs_vp').html(`${datacurrent.JudgeVP}`);
+                $('#rs_gas').html(`${datacurrent.JudgeGAS}`);
+                $('#rs_wi1w').html(`${datacurrent.JudgeWI1W}`);
+                $('#rs_wi1s').html(`${datacurrent.JudgeWI1S}`);
+                $('#rs_ip').html(`${datacurrent.JudgeIP}`);
+                $('#rs_df').html(`${datacurrent.JudgeDF}`);
+                $('#rs_temp').html(`${datacurrent.JudgeTEMP}`);
+                $('#rs_iot').html(`${datacurrent.JudgeIOT}`);
+                $('#rs_wi2').html(`${datacurrent.JudgeWI2}`);
+                $('#rs_pan').html(`${datacurrent.JudgePAN}`);
+                $('#rs_camb').html(`${datacurrent.JudgeCAMB}`);
+                $('#rs_camf').html(`${datacurrent.JudgeCAMF}`);
 
 
                 $('.gr_rs').find('[id^="rs_"]').each(function () {
@@ -290,6 +291,13 @@
                 $('#dataplan').html(`${plan}`);
                 $('#datatarget').html(`${target}`);
                 $('#dataactual').html(`${actual}`);
+                $('#datadiff').html(`${actual - target}`);
+                $('#datadiff').css('color', 'green');
+                if ((actual - target) < 0) {
+                    $('#datadiff').css('color', 'red');
+                }
+
+                
                 linechart.update();
 
 
@@ -365,7 +373,7 @@
                             }
                             var val = dataset.data[i];
                             //var percent = " (" + String(Math.round(val / total * 100)) + "%)";
-                            var percent = String(Math.round(val / total * 100)) + "%";
+                            var percent = (val / total * 100).toFixed(1) + "%";
                             if (val != 0) {
                                 //ctx.fillText(dataset.data[i] + percent, model.x + x, model.y + y);
 

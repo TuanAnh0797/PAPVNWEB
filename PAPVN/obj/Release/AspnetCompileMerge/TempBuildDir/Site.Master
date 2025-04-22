@@ -172,7 +172,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item ml-2">
-                                    <a class="nav-link" href="#" onclick="showpopupfuture()">
+                                    <a class="nav-link" href="/UI_GAS/PlanGAS.aspx">
                                         
                                         <img src="/Image/oxygen-tank.png" height="25px" width="25px" />
                                         <p style="font-size: 18px; font-weight: 600">GAS</p>
