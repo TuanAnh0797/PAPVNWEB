@@ -30,7 +30,7 @@
 
 
     <div class="content" style="margin: 0px 0px 0px 0px;">
-        <h1 class="bg-gray text-center p-0 m-0" style="font-weight: 600">Đang kiểm tra: NR-ABCASDALSJDNCNKJS</h1>
+        <h1 id="title_bg" class="bg-gray text-center p-0 m-0" style="font-weight: 600">Đang kiểm tra: <span id="rs_codeback">NR-ABCASDALSJDNCNKJS</span></h1>
         <div class="row ml-0 mr-0 bg-primary" style="font-size: 18px; font-weight: 600">
             <div class="col-sm-1 text-center cell-border ">VP</div>
             <div class="col-sm-1 text-center cell-border ">GAS</div>
@@ -192,18 +192,6 @@
                 if (!isUpdating) return;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
                 var data1 = JSON.parse(data.DatabarchartOKNGPENDING);
                 donutData.datasets[0].data = data1.Datapiechart;
 
@@ -213,21 +201,36 @@
                 datachartPending.datasets[0].data = data1.datapending;
                 datachartNG.datasets[0].data = data1.datang;
 
-
                 charpie.update();
                 barchartpending.update();
                 barcharng.update();
                 stackchart.update();
-
                 var data2 = JSON.parse(data.DataLineChartQuantityPerTime);
-
-
 
                 DataLineChart.datasets[0].data = data2.dataplan;
                 DataLineChart.datasets[1].data = data2.dataactual;
                 DataLineChart.datasets[2].data = data2.datadiff;
                 var shift = data2.shift;
                 var typeplan = data2.typeplan;
+
+
+                var datacurrent = data.CurrentData;
+                $('#rs_codeback').html(`${datacurrent.CodeBack}`);
+                $('#rs_vp').html(`${datacurrent.CodeBack}`);
+                $('#rs_gas').html(`${datacurrent.CodeBack}`);
+                $('#rs_wi1w').html(`${datacurrent.CodeBack}`);
+                $('#rs_wi1s').html(`${datacurrent.CodeBack}`);
+                $('#rs_ip').html(`${datacurrent.CodeBack}`);
+                $('#rs_df').html(`${datacurrent.CodeBack}`);
+                $('#rs_temp').html(`${datacurrent.CodeBack}`);
+                $('#rs_iot').html(`${datacurrent.CodeBack}`);
+                $('#rs_wi2').html(`${datacurrent.CodeBack}`);
+                $('#rs_pan').html(`${datacurrent.CodeBack}`);
+                $('#rs_camb').html(`${datacurrent.CodeBack}`);
+                $('#rs_camf').html(`${datacurrent.CodeBack}`);
+
+
+
                 if (typeplan == '2_10') {
 
 
@@ -627,8 +630,8 @@
                     data: [],
                     fill: false,
                     //tension: 0, // làm line đỡ mượt
-                    borderWidth: 1,
-                    pointRadius: 1, //
+                    borderWidth: 2,
+                    pointRadius: 2, //
                 },
                 {
                     type: 'line',
@@ -638,8 +641,8 @@
                     data: [],
                     fill: false,
                     //tension: 0, // làm line đỡ mượt
-                    borderWidth: 1,
-                    pointRadius: 1, //
+                    borderWidth: 2,
+                    pointRadius: 2, //
                 },
                 {
                     type: 'bar',

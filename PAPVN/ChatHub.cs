@@ -43,17 +43,43 @@ namespace PAPVN
                 //
                 string DatabarchartOKNGPENDING = LoadDataVisualize.barchartOKNGPENDING();
                 //
-                DataTable dt = LoadDataVisualize.LoadDataForTableHistory();
+                DataSet ds = LoadDataVisualize.LoadDataForTableHistory();
+
+                DataTable datahistory = ds.Tables[0];
+                DataRow productitem = ds.Tables[1].Rows[0];
+
                 List<Product> pr = new List<Product>();
-                foreach(DataRow item in dt.Rows)
+                CurrentProduct productcurrent;
+                foreach(DataRow item in datahistory.Rows)
                 {
                     pr.Add(new Product() { CodeBack = item["CodeBack"].ToString(), Judge = item["Judge_Total"].ToString(), TimeUpdate = ((DateTime)item["TimeUpdate"]).ToString("HH:mm:ss dd/MM/yyyy") });
                 }
+
+                productcurrent = new CurrentProduct()
+                {
+                    CodeBack = productitem[""].ToString(),
+                    JudgeVP = productitem[""].ToString(),
+                    JudgeGAS = productitem[""].ToString(),
+                    JudgeWI1W = productitem[""].ToString(),
+                    JudgeWI1S = productitem[""].ToString(),
+                    JudgeIP = productitem[""].ToString(),
+                    JudgeDF = productitem[""].ToString(),
+                    JudgeTEMP = productitem[""].ToString(),
+                    JudgeIOT = productitem[""].ToString(),
+                    JudgeWI2 = productitem[""].ToString(),
+                    JudgePAN = productitem[""].ToString(),
+                    JudgeCAMB = productitem[""].ToString(),
+                    JudgeCAMF = productitem[""].ToString(),
+                    JudgeTotal = productitem[""].ToString()
+                };
+
+
                 var data = new Data()
                 {
                     DataLineChartQuantityPerTime = DataLineChartQuantityPerTime,
                     DatabarchartOKNGPENDING = DatabarchartOKNGPENDING,
-                    Datahistory = pr
+                    Datahistory = pr,
+                    CurrentData = productcurrent,
                 };
                 
                 var hub = GlobalHost.ConnectionManager.GetHubContext<ChatHub>();
@@ -66,12 +92,33 @@ namespace PAPVN
             public string DataLineChartQuantityPerTime { get; set; }
             public string DatabarchartOKNGPENDING { get; set; }
             public List<Product> Datahistory { get; set; }
-    }
+            public CurrentProduct CurrentData { get; set; }
+
+        }
         public class Product
         {
             public string CodeBack { get; set; }
             public string Judge { get; set; }
             public string TimeUpdate { get; set; }
+        }
+        public class CurrentProduct
+        {
+            public string CodeBack { get; set; }
+            public string JudgeVP { get; set; }
+            public string JudgeGAS { get; set; }
+            public string JudgeWI1W { get; set; }
+            public string JudgeWI1S { get; set; }
+            public string JudgeIP { get; set; }
+            public string JudgeDF { get; set; }
+            public string JudgeTEMP { get; set; }
+            public string JudgeIOT { get; set; }
+            public string JudgeWI2 { get; set; }
+            public string JudgePAN { get; set; }
+            public string JudgeCAMB { get; set; }
+            public string JudgeCAMF { get; set; }
+            public string JudgeOK { get; set; }
+            public string JudgeTotal { get; set; }
+
         }
 
 
