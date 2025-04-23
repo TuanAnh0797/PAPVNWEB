@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>D:\ShareFolder\myweb</_PublishTargetUrl>
-    <History>True|2024-01-05T08:40:24.7332117Z;False|2024-01-05T15:39:17.7720553+07:00;</History>
+    <History>True|2025-04-23T08:08:15.4598902Z;True|2024-01-05T15:40:24.7332117+07:00;False|2024-01-05T15:39:17.7720553+07:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="AgingHistory.aspx">
@@ -21,10 +21,16 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/22/2025 16:00:08</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>04/23/2025 00:39:39</publishTime>
+      <publishTime>04/23/2025 15:20:51</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>04/23/2025 00:39:39</publishTime>
+      <publishTime>04/23/2025 15:20:46</publishTime>
+    </File>
+    <File Include="bin/App_GlobalResources.compiled">
+      <publishTime>04/23/2025 15:20:51</publishTime>
+    </File>
+    <File Include="bin/App_GlobalResources.dll">
+      <publishTime>04/23/2025 15:20:45</publishTime>
     </File>
     <File Include="bin/AspNet.ScriptManager.jQuery.dll">
       <publishTime>04/22/2025 16:00:08</publishTime>
@@ -105,10 +111,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/22/2025 16:00:10</publishTime>
     </File>
     <File Include="bin/PAPVN.dll">
-      <publishTime>04/23/2025 00:39:32</publishTime>
+      <publishTime>04/23/2025 15:20:32</publishTime>
     </File>
     <File Include="bin/PAPVN.pdb">
-      <publishTime>04/23/2025 00:39:32</publishTime>
+      <publishTime>04/23/2025 15:20:32</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>04/22/2025 16:00:09</publishTime>
@@ -284,6 +290,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/System.Web.Optimization.dll">
       <publishTime>04/22/2025 16:00:08</publishTime>
     </File>
+    <File Include="bin/vi-vn/App_GlobalResources.resources.dll">
+      <publishTime>04/23/2025 15:20:44</publishTime>
+    </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>04/22/2025 16:00:12</publishTime>
     </File>
@@ -291,385 +300,385 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/22/2025 16:00:12</publishTime>
     </File>
     <File Include="Bundle.config">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap-grid.css">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap-grid.css.map">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap-grid.min.css">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap-grid.min.css.map">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap-grid.rtl.css">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap-grid.rtl.css.map">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap-grid.rtl.min.css">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap-grid.rtl.min.css.map">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap-reboot.css">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap-reboot.css.map">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap-reboot.min.css">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap-reboot.min.css.map">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap-reboot.rtl.css">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap-reboot.rtl.css.map">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap-reboot.rtl.min.css">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap-reboot.rtl.min.css.map">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap-utilities.css">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap-utilities.css.map">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap-utilities.min.css">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap-utilities.min.css.map">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap-utilities.rtl.css">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap-utilities.rtl.css.map">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap-utilities.rtl.min.css">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap-utilities.rtl.min.css.map">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap.css">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap.css.map">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css.map">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap.rtl.css">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap.rtl.css.map">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap.rtl.min.css">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/bootstrap.rtl.min.css.map">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="dist/css/adminlte.css">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/css/adminlte.css.map">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/css/adminlte.min.css">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/css/adminlte.min.css.map">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/css/alt/adminlte.components.css">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/css/alt/adminlte.components.css.map">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/css/alt/adminlte.components.min.css">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/css/alt/adminlte.components.min.css.map">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/css/alt/adminlte.core.css">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/css/alt/adminlte.core.css.map">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/css/alt/adminlte.core.min.css">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/css/alt/adminlte.core.min.css.map">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/css/alt/adminlte.extra-components.css">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/css/alt/adminlte.extra-components.css.map">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/css/alt/adminlte.extra-components.min.css">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/css/alt/adminlte.extra-components.min.css.map">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/css/alt/adminlte.light.css">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/css/alt/adminlte.light.css.map">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/css/alt/adminlte.light.min.css">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/css/alt/adminlte.light.min.css.map">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/css/alt/adminlte.pages.css">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/css/alt/adminlte.pages.css.map">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/css/alt/adminlte.pages.min.css">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/css/alt/adminlte.pages.min.css.map">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/css/alt/adminlte.plugins.css">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/css/alt/adminlte.plugins.css.map">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/css/alt/adminlte.plugins.min.css">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/css/alt/adminlte.plugins.min.css.map">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/AdminLTELogo.png">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/avatar.png">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/avatar2.png">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/avatar3.png">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/avatar4.png">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/avatar5.png">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/boxed-bg.jpg">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/boxed-bg.png">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/credit/american-express.png">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/credit/cirrus.png">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/credit/mastercard.png">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/credit/paypal.png">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/credit/paypal2.png">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/credit/visa.png">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/default-150x150.png">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/icons.png">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/photo1.png">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/photo2.png">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/photo3.jpg">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/photo4.jpg">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/prod-1.jpg">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/prod-2.jpg">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/prod-3.jpg">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/prod-4.jpg">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/prod-5.jpg">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/user1-128x128.jpg">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/user2-160x160.jpg">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/user3-128x128.jpg">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/user4-128x128.jpg">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/user5-128x128.jpg">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/user6-128x128.jpg">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/user7-128x128.jpg">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/img/user8-128x128.jpg">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/js/.eslintrc.json">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/js/adminlte.js">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/js/adminlte.js.map">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/js/adminlte.min.js">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/js/adminlte.min.js.map">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/js/demo.js">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/js/pages/dashboard.js">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/js/pages/dashboard2.js">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="dist/js/pages/dashboard3.js">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="favicon.ico">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/22/2025 15:59:56</publishTime>
     </File>
     <File Include="Image/camera %281%29.png">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Image/camera.png">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Image/checkmark.png">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Image/conveyor.png">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Image/electrical-energy.png">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Image/factory.png">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Image/fridge.png">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Image/inbox.png">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Image/insulation.png">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Image/internet-of-things.png">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Image/monitoring.png">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Image/oxygen-tank.png">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Image/panasonic-logo.jpg">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Image/panasonic-logo.png">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Image/project-management.png">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Image/vacuum-dryer.png">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Image/visual-data.png">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Image/voltmeter.png">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Mycss/iconio.css">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Mycss/myicon.css">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="MyWebSercive.asmx">
       <publishTime>01/02/2024 09:01:48</publishTime>
     </File>
     <File Include="PartCard.html">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="PlanGas.aspx">
       <publishTime>01/05/2024 15:38:55</publishTime>
@@ -6627,172 +6636,172 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/22/2025 16:00:08</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>04/23/2025 00:39:33</publishTime>
+      <publishTime>04/23/2025 15:20:36</publishTime>
     </File>
     <File Include="Scripts/bootstrap.bundle.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/bootstrap.bundle.js.map">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/bootstrap.bundle.min.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/bootstrap.bundle.min.js.map">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/bootstrap.esm.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/bootstrap.esm.js.map">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/bootstrap.esm.min.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/bootstrap.esm.min.js.map">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js.map">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/bootstrap.min.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/bootstrap.min.js.map">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/jquery-3.4.1.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/jquery-3.4.1.min.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/jquery-3.4.1.min.map">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/jquery-3.4.1.slim.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/jquery-3.4.1.slim.min.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/jquery-3.4.1.slim.min.map">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/jquery.signalR-2.4.3.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/jquery.signalR-2.4.3.min.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/modernizr-2.8.3.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/WebForms/DetailsView.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/WebForms/Focus.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/WebForms/GridView.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/WebForms/Menu.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/WebForms/MenuStandards.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/WebForms/MSAjax/MicrosoftAjax.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxApplicationServices.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxComponentModel.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxCore.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxGlobalization.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxHistory.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxNetwork.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxSerialization.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxTimer.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxWebForms.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxWebServices.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/WebForms/SmartNav.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/WebForms/TreeView.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/WebForms/WebForms.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/WebForms/WebParts.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Scripts/WebForms/WebUIValidation.js">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Site.Master">
-      <publishTime>04/23/2025 00:30:46</publishTime>
+      <publishTime>04/23/2025 15:20:51</publishTime>
     </File>
     <File Include="Site.Mobile.Master">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/23/2025 15:20:51</publishTime>
     </File>
     <File Include="UI_FinalCheck/AgingHistory.aspx">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/23/2025 15:20:51</publishTime>
     </File>
     <File Include="UI_FinalCheck/AgingRealTime.aspx">
-      <publishTime>04/23/2025 00:30:46</publishTime>
+      <publishTime>04/23/2025 15:20:51</publishTime>
     </File>
     <File Include="UI_GAS/PlanGAS.aspx">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/23/2025 15:20:51</publishTime>
     </File>
     <File Include="UI_Plan/UploadPlan.aspx">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/23/2025 15:20:51</publishTime>
     </File>
     <File Include="UI_Plan/UploadPlanCa1.aspx">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/23/2025 15:20:51</publishTime>
     </File>
     <File Include="UI_Plan/UploadPlanCa2.aspx">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/23/2025 15:20:51</publishTime>
     </File>
     <File Include="UI_Plan/UploadPlanCa3.aspx">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/23/2025 15:20:51</publishTime>
     </File>
     <File Include="UploadPlan.aspx">
       <publishTime>01/02/2024 09:01:48</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/22/2025 15:59:59</publishTime>
+      <publishTime>04/23/2025 15:20:34</publishTime>
     </File>
     <File Include="WebServiceModifyPlan.asmx">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="WebServicePlanGas.asmx">
-      <publishTime>04/22/2025 15:59:58</publishTime>
+      <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="wwwroot/Panasonic_logo_bl_posi_PNG.ico">
       <publishTime>04/22/2025 16:00:08</publishTime>

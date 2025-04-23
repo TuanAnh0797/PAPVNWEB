@@ -198,6 +198,8 @@
 
                 maxy = data1.Datapiechart[1];
 
+                barchartpending.options.scales.yAxes[0].ticks.max = maxy;
+                barcharng.options.scales.yAxes[0].ticks.max = maxy;
 
                 dattachartOKNGPending.datasets[0].data = data1.dataok;
                 dattachartOKNGPending.datasets[1].data = data1.datang;
