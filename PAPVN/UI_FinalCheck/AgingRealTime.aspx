@@ -28,9 +28,10 @@
         }
     </style>
 
+    
 
     <div class="content" style="margin: 0px 0px 0px 0px;">
-        <h1 id="title_bg" class="bg-gray text-center p-0 m-0" style="font-weight: 600">Đang kiểm tra: <span id="rs_codeback"></span></h1>
+        <h1 id="title_bg" class="bg-gray text-center p-0 m-0" style="font-weight: 600"><asp:Literal runat="server" Text="<%$Resources:name.language, common_checking%>" /><span id="rs_codeback"></span></h1>
         <div class="row ml-0 mr-0 bg-purple" style="font-size: 18px; font-weight: 600">
             <div class="col-sm-1 text-center cell-border ">VP</div>
             <div class="col-sm-1 text-center cell-border ">GAS</div>
@@ -68,14 +69,14 @@
 
                 <div class="card" style="background-color: white">
 
-                    <h4 class="card-header bg-info  text-white p-0" style="color: white; background-color: #eb940a; text-align: center; font-weight: bold">Lịch sử 50 tủ gần nhất</h4>
+                    <h4 class="card-header bg-info  text-white p-0" style="color: white; background-color: #eb940a; text-align: center; font-weight: bold"><asp:Literal runat="server" Text="<%$Resources:name.language, common_history50cabinet%>" /> </h4>
                     <div class="card-body p-1">
                         <table style="padding-left: 5px; padding-right: 5px; padding-bottom: 10px; padding-top: 10px" id="dataTable" class="table table-striped table-bordered text-center">
                             <thead style="background-color: #b2bac2; color: black">
                                 <tr class="p-1">
-                                    <th>Code Back</th>
-                                    <th style="width: 50px">Judge</th>
-                                    <th style="width: 150px">Time Update</th>
+                                    <th> <asp:Literal runat="server" Text="<%$Resources:name.language, common_CodeBack%>" /> </th>
+                                    <th style="width: 50px"><asp:Literal runat="server" Text="<%$Resources:name.language, common_judge%>" /> </th>
+                                    <th style="width: 150px"><asp:Literal runat="server" Text="<%$Resources:name.language, common_TimeUpdate%>" /> </th>
                                 </tr>
                             </thead>
                             <tbody id="tableBody" class="p-0" style="font-size: 14px">
@@ -91,7 +92,7 @@
                 <div class="row">
                     <div class="chart col-sm-4" style="padding: 5px;">
                         <div class="card">
-                            <h4 class="card-header bg-info text-white text-center p-0" style="font-weight: 600">Biểu đồ tỉ lệ OK/NG</h4>
+                            <h4 class="card-header bg-info text-white text-center p-0" style="font-weight: 600"><asp:Literal runat="server" Text="<%$Resources:name.language, common_titlepiechart%>" />  </h4>
                             <div class="chart-container">
                                 <canvas id="pieChart" style="min-height: 250px; height: 100%"></canvas>
                             </div>
@@ -100,7 +101,7 @@
                     <div class=" chart col" style="padding: 5px;">
                         <div class="card" style="background-color: white">
 
-                            <h4 class="card-header bg-info text-black text-center p-0" style="font-weight: 600">Biểu đồ số lượng tủ OK/NG/PENDING</h4>
+                            <h4 class="card-header bg-info text-black text-center p-0" style="font-weight: 600"><asp:Literal runat="server" Text="<%$Resources:name.language, common_stackchart%>" /> </h4>
 
                             <div class="chart-container">
                                 <canvas id="stackedBarChart" style="min-height: 250px; height: 100%"></canvas>
@@ -114,7 +115,7 @@
                     <div class="chart col" style="padding: 5px;">
                         <div class="card" style="background-color: white">
 
-                            <h4 class="card-header bg-danger text-black text-center p-0" style="font-weight: 600">Biểu đồ số lượng tủ PENDING</h4>
+                            <h4 class="card-header bg-danger text-black text-center p-0" style="font-weight: 600"><asp:Literal runat="server" Text="<%$Resources:name.language, common_pendingchart%>" />  </h4>
 
                             <div class="chart-container">
                                 <canvas id="barChartpending" style="min-height: 200px; height: 100%"></canvas>
@@ -126,19 +127,17 @@
                     <div class="chart col" style="padding: 5px;">
                         <div class="card" style="background-color: white">
 
-                            <h4 class="card-header bg-danger text-black text-center p-0" style="font-weight: 600">Biểu đồ số lượng tủ NG</h4>
+                            <h4 class="card-header bg-danger text-black text-center p-0" style="font-weight: 600"><asp:Literal runat="server" Text="<%$Resources:name.language, common_ngchart%>" />  </h4>
 
                             <div class="chart-container">
                                 <canvas id="barChartng" style="min-height: 200px; height: 100%"></canvas>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
                 <div class="card" style="background-color: white;">
 
-                    <h4 class="card-header bg-success text-white text-center p-0" style="color: white; background-color: #6C757D; font-weight: 600">Biểu đồ sản lượng theo thời gian</h4>
+                    <h4 class="card-header bg-success text-white text-center p-0" style="color: white; background-color: #6C757D; font-weight: 600"><asp:Literal runat="server" Text="<%$Resources:name.language, common_multichart%>" /> </h4>
 
                     <div class="row ml-3">
                         <div class=" col">
@@ -167,6 +166,8 @@
     </div>
     <script>
 
+        var maxy = 100;
+
         $(document).ready(function () {
             // Khởi tạo DataTable
             var table = $('#dataTable').DataTable({
@@ -194,6 +195,9 @@
 
                 var data1 = JSON.parse(data.DatabarchartOKNGPENDING);
                 donutData.datasets[0].data = data1.Datapiechart;
+
+                maxy = data1.Datapiechart[1];
+
 
                 dattachartOKNGPending.datasets[0].data = data1.dataok;
                 dattachartOKNGPending.datasets[1].data = data1.datang;
@@ -475,9 +479,9 @@
                         fontSize: 15, // Tăng cỡ chữ tại đây,
                         fontStyle: 'bold',
                         fontColor: 'black',
-                        max: 2500, // Đặt giá trị tối đa của trục y là 100
+                        //max: 2500, // Đặt giá trị tối đa của trục y là 100
                         min: 0,   // (Tùy chọn) Đặt giá trị tối thiểu nếu cần
-                        stepSize: 500 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
+                        //stepSize: 500 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
 
                     }
                 }]
@@ -677,9 +681,9 @@
                         fontSize: 13, // Tăng cỡ chữ tại đây,
                         fontStyle: 'bold',
                         fontColor: 'black',
-                        max: 150, // Đặt giá trị tối đa của trục y là 100
+                        max: maxy, // Đặt giá trị tối đa của trục y là 100
                         min: 0,   // (Tùy chọn) Đặt giá trị tối thiểu nếu cần
-                        stepSize: 30 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
+                        //stepSize: 30 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
 
                     }
                 }]
@@ -761,9 +765,9 @@
                         fontSize: 13, // Tăng cỡ chữ tại đây,
                         fontStyle: 'bold',
                         fontColor: 'black',
-                        max: 150, // Đặt giá trị tối đa của trục y là 100
+                        max: maxy, // Đặt giá trị tối đa của trục y là 100
                         min: 0,   // (Tùy chọn) Đặt giá trị tối thiểu nếu cần
-                        stepSize: 30 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
+                        //stepSize: 30 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
 
                     }
                 }]
@@ -850,9 +854,9 @@
                         beginAtZero: true,
                         fontColor: 'black',
                         fontStyle: 'bold',
-                        max: 3000, // Đặt giá trị tối đa của trục y là 100
+                        //max: 3000, // Đặt giá trị tối đa của trục y là 100
                         //min: 0,   // (Tùy chọn) Đặt giá trị tối thiểu nếu cần
-                        stepSize: 300 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
+                        //stepSize: 300 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
                     },
                 },
                 {
@@ -864,9 +868,9 @@
                         beginAtZero: true,
                         fontColor: 'black',
                         fontStyle: 'bold',
-                        max: 300, // Đặt giá trị tối đa của trục y là 100
-                        min: -300,   // (Tùy chọn) Đặt giá trị tối thiểu nếu cần
-                        stepSize: 300 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
+                        //max: 300, // Đặt giá trị tối đa của trục y là 100
+                       // min: -300,   // (Tùy chọn) Đặt giá trị tối thiểu nếu cần
+                        //stepSize: 300 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
                     },
                     gridLines: {
                         display: false

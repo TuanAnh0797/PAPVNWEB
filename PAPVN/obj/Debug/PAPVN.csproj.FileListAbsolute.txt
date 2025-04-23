@@ -1297,4 +1297,4 @@ D:\2025\PAPVNWEB\PAPVN\obj\Debug\PAPVN.csproj.AssemblyReference.cache
 D:\2025\PAPVNWEB\PAPVN\obj\Debug\PAPVN.csproj.CoreCompileInputs.cache
 D:\2025\PAPVNWEB\PAPVN\obj\Debug\PAPVN.dll
 D:\2025\PAPVNWEB\PAPVN\obj\Debug\PAPVN.pdb
-D:\2025\PAPVNWEB\PAPVN\obj\Debug\PAPVN.csproj.CopyComplete
+D:\2025\PAPVNWEB\PAPVN\obj\Debug\PAPVN.csproj.Up2Date

@@ -44,6 +44,17 @@
     <link rel="stylesheet" href="/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <!-- Toastr -->
     <link rel="stylesheet" href="/plugins/toastr/toastr.min.css">
+    <style>
+        .sidebar-footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 10px;
+            background: #ddd;
+            text-align: center;
+            background-color:white
+        }
+    </style>
 </head>
 <body class="hold-transition sidebar-close sidebar-collapse layout-fixed">
     <div class="wrapper">
@@ -100,24 +111,6 @@
                                         <p style="font-size: 18px; font-weight: 600">Upload Plan</p>
                                     </a>
                                 </li>
-                                <%-- <li class="nav-item ml-2">
-                                    <a class="nav-link" href="#" onclick="showpopupfuture()">
-                                        <i class="fas fa-chart-bar nav-icon"></i>
-                                        <p>Real Time URT</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item ml-2">
-                                    <a class="nav-link" href="/UI_GAS/PlanGAS">
-                                        <i class="fas fa-chart-bar nav-icon"></i>
-                                        <p>Real Time GAS</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item ml-2" onclick="showpopupfuture()">
-                                    <a class="nav-link" href="#">
-                                        <i class="fas fa-chart-bar nav-icon"></i>
-                                        <p>Real Time PAN</p>
-                                    </a>
-                                </li>--%>
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -138,8 +131,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link">
-                                <%-- <ion-icon name="color-fill"></ion-icon>--%>
-                                <%--<i class="nav-icon fas fa-tree"></i>--%>
+
                                 <img src="/Image/conveyor.png" height="25px" width="25px" />
                                 <p style="font-size: 18px; font-weight: 600">
                                     Aiging
@@ -147,28 +139,7 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <%--                               <li class="nav-item ml-2">
-                                    <a class="nav-link" href="/AgingRealTime.aspx">
-                                       
-                                        <i class="fas fa-flag-checkered nav-icon"></i>
-                                        <p>Final Check</p>
-                                        <i class="right fas fa-angle-left"></i>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item ml-2">
-                                            <a class="nav-link" href="/AgingRealTime.aspx">
-                                                <i class="fas fa-chart-bar nav-icon"></i>
-                                                <p>Real Time</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item ml-2">
-                                            <a class="nav-link" href="/AgingHistory.aspx">
-                                                <i class="fas fa-clock nav-icon"></i>
-                                                <p>History</p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>--%>
+
                                 <li class="nav-item ml-2">
                                     <a class="nav-link" href="#" onclick="showpopupfuture()">
 
@@ -255,6 +226,16 @@
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
+                <div class="sidebar-footer">
+                    <a href="#" runat="server" id="linkEnglishLang" onserverclick="linkEnglishLang_ServerClick">
+                        <span class="fas fa-globe"></span>
+                        <asp:Literal runat="server" Text="<%$Resources:name.language, common_language%>" />
+                    </a>
+                    <a href="#" runat="server" id="linkVietnameseLang" onserverclick="linkVietnameseLang_ServerClick">
+                        <span class="fas fa-globe"></span>
+                        <asp:Literal runat="server" Text="<%$Resources:name.language, common_language%>" />
+                    </a>
+                </div>
             </div>
             <!-- /.sidebar -->
         </aside>

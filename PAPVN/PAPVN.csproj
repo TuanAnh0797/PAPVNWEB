@@ -2347,8 +2347,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Data\DBConnect.cs" />
+    <Compile Include="App_GlobalResources\name.language.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>name.language.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\name.language.vi-vn.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>name.language.vi-vn.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="BasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ChatHub.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Global.asax.cs">
@@ -2442,6 +2455,18 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\name.language.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>name.language.Designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\name.language.vi-vn.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>name.language.vi-vn.designer.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

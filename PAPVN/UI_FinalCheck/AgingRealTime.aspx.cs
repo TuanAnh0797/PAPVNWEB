@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace PAPVN
 {
-    public partial class UrtFormHis : System.Web.UI.Page
+    public partial class UrtFormHis : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

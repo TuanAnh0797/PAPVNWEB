@@ -45,6 +45,11 @@ namespace PAPVN
                 //
                 DataSet ds = LoadDataVisualize.LoadDataForTableHistory();
 
+                if (ds == null)
+                {
+                    return;
+                }
+
                 DataTable datahistory = ds.Tables[0];
                 DataRow productitem = ds.Tables[1].Rows[0];
 
