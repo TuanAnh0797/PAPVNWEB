@@ -8,27 +8,57 @@ namespace PAPVN
 {
     using Google.Protobuf.WellKnownTypes;
     using Microsoft.AspNet.SignalR;
+    using Microsoft.AspNet.SignalR.Hubs;
     using PAPVN.MethodLoadData;
     using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Data;
+    using System.Timers;
 
     namespace WebFormSignalR
     {
+        [HubName("chatHub")]
         public class ChatHub : Hub
         {
             //private static List<DataItem> data = new List<DataItem>();
+            // Lưu trữ option của từng client theo ConnectionId
+            private static readonly ConcurrentDictionary<string, string> ClientOptions = new ConcurrentDictionary<string, string>();
 
 
+            private static readonly Timer Timer = new Timer(10000);
+
+            static ChatHub()
+            {
+                Timer.Elapsed += async (sender, e) => await UpdateData();
+                Timer.AutoReset = true;
+                Timer.Start();
+            }
 
             public override Task OnConnected()
             {
-               
-                UpdateData();
-
-              
-
+                // Mặc định option khi client kết nối (ví dụ: "All Model")
+                ClientOptions.TryAdd(Context.ConnectionId, "ALL");
+                // Gửi dữ liệu ban đầu ngay khi kết nối
+                SendDataToClient(Context.ConnectionId, "ALL");
                 return base.OnConnected();
+            }
+
+            // Client gửi option mới
+            public void changeOption(string option)
+            {
+                // Cập nhật option cho client hiện tại
+                ClientOptions.AddOrUpdate(Context.ConnectionId, option, (key, oldValue) => option);
+            }
+            // Hàm gửi dữ liệu định kỳ
+            private static async Task UpdateData()
+            {
+                foreach (var client in ClientOptions)
+                {
+                    string connectionId = client.Key;
+                    string option = client.Value;
+                    SendDataToClient(connectionId, option);
+                }
             }
 
 
@@ -36,14 +66,14 @@ namespace PAPVN
             {
                 Clients.Caller.updateTable(data);
             }
-            public static void UpdateData()
+            public static void SendDataToClient(string connectionId,string Optiontable)
             {
                 //
                 string DataLineChartQuantityPerTime = LoadDataVisualize.LineChartQuantityPerTime("All Model", "All");
                 //
                 string DatabarchartOKNGPENDING = LoadDataVisualize.barchartOKNGPENDING();
                 //
-                DataSet ds = LoadDataVisualize.LoadDataForTableHistory();
+                DataSet ds = LoadDataVisualize.LoadDataForTableHistory(Optiontable);
 
                 if (ds == null)
                 {

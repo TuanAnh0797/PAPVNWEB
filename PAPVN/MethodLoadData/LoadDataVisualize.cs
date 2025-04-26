@@ -615,10 +615,10 @@ namespace PAPVN.MethodLoadData
                 return Newtonsoft.Json.JsonConvert.SerializeObject(data);
             }
         }
-        public static DataSet LoadDataForTableHistory()
+        public static DataSet LoadDataForTableHistory(string mode)
         {
                 DBConnect dBConnect = new DBConnect();
-                DataSet dt = dBConnect.StoreFillDS("LoadDataForTableHistoryFinalCheckNew", CommandType.StoredProcedure);
+                DataSet dt = dBConnect.StoreFillDS("LoadDataForTableHistoryFinalCheckNew", CommandType.StoredProcedure,mode);
                 return dt;
         }
 

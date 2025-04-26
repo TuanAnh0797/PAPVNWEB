@@ -28,10 +28,11 @@
         }
     </style>
 
-    
+
 
     <div class="content" style="margin: 0px 0px 0px 0px;">
-        <h1 id="title_bg" class="bg-gray text-center p-0 m-0" style="font-weight: 600"><asp:Literal runat="server" Text="<%$Resources:name.language, common_checking%>" /><span id="rs_codeback"></span></h1>
+        <h1 id="title_bg" class="bg-gray text-center p-0 m-0" style="font-weight: 600">
+            <asp:Literal runat="server" Text="<%$Resources:name.language, common_checking%>" /><span id="rs_codeback"></span></h1>
         <div class="row ml-0 mr-0 bg-purple" style="font-size: 18px; font-weight: 600">
             <div class="col-sm-1 text-center cell-border ">VP</div>
             <div class="col-sm-1 text-center cell-border ">GAS</div>
@@ -69,14 +70,31 @@
 
                 <div class="card" style="background-color: white">
 
-                    <h4 class="card-header bg-info  text-white p-0" style="color: white; background-color: #eb940a; text-align: center; font-weight: bold"><asp:Literal runat="server" Text="<%$Resources:name.language, common_history50cabinet%>" /> </h4>
+                    <h4 class="card-header bg-info  text-white p-0" style="color: white; background-color: #eb940a; text-align: center; font-weight: bold">
+                        <asp:Literal runat="server" Text="<%$Resources:name.language, common_history50cabinet%>" />
+                    </h4>
                     <div class="card-body p-1">
+                        <div>
+
+                            <select id="modeselect">
+                                <option value="ALL">ALL</option>
+                                <option value="OK">OK</option>
+                                <option value="NG">NG</option>
+                                
+                            </select>
+                        </div>
                         <table style="padding-left: 5px; padding-right: 5px; padding-bottom: 10px; padding-top: 10px" id="dataTable" class="table table-striped table-bordered text-center">
                             <thead style="background-color: #b2bac2; color: black">
                                 <tr class="p-1">
-                                    <th> <asp:Literal runat="server" Text="<%$Resources:name.language, common_CodeBack%>" /> </th>
-                                    <th style="width: 50px"><asp:Literal runat="server" Text="<%$Resources:name.language, common_judge%>" /> </th>
-                                    <th style="width: 150px"><asp:Literal runat="server" Text="<%$Resources:name.language, common_TimeUpdate%>" /> </th>
+                                    <th>
+                                        <asp:Literal runat="server" Text="<%$Resources:name.language, common_CodeBack%>" />
+                                    </th>
+                                    <th style="width: 50px">
+                                        <asp:Literal runat="server" Text="<%$Resources:name.language, common_judge%>" />
+                                    </th>
+                                    <th style="width: 150px">
+                                        <asp:Literal runat="server" Text="<%$Resources:name.language, common_TimeUpdate%>" />
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody id="tableBody" class="p-0" style="font-size: 14px">
@@ -92,7 +110,9 @@
                 <div class="row">
                     <div class="chart col-sm-4" style="padding: 5px;">
                         <div class="card">
-                            <h4 class="card-header bg-info text-white text-center p-0" style="font-weight: 600"><asp:Literal runat="server" Text="<%$Resources:name.language, common_titlepiechart%>" />  </h4>
+                            <h4 class="card-header bg-info text-white text-center p-0" style="font-weight: 600">
+                                <asp:Literal runat="server" Text="<%$Resources:name.language, common_titlepiechart%>" />
+                            </h4>
                             <div class="chart-container">
                                 <canvas id="pieChart" style="min-height: 250px; height: 100%"></canvas>
                             </div>
@@ -101,7 +121,9 @@
                     <div class=" chart col" style="padding: 5px;">
                         <div class="card" style="background-color: white">
 
-                            <h4 class="card-header bg-info text-black text-center p-0" style="font-weight: 600"><asp:Literal runat="server" Text="<%$Resources:name.language, common_stackchart%>" /> </h4>
+                            <h4 class="card-header bg-info text-black text-center p-0" style="font-weight: 600">
+                                <asp:Literal runat="server" Text="<%$Resources:name.language, common_stackchart%>" />
+                            </h4>
 
                             <div class="chart-container">
                                 <canvas id="stackedBarChart" style="min-height: 250px; height: 100%"></canvas>
@@ -115,7 +137,9 @@
                     <div class="chart col" style="padding: 5px;">
                         <div class="card" style="background-color: white">
 
-                            <h4 class="card-header bg-danger text-black text-center p-0" style="font-weight: 600"><asp:Literal runat="server" Text="<%$Resources:name.language, common_pendingchart%>" />  </h4>
+                            <h4 class="card-header bg-danger text-black text-center p-0" style="font-weight: 600">
+                                <asp:Literal runat="server" Text="<%$Resources:name.language, common_pendingchart%>" />
+                            </h4>
 
                             <div class="chart-container">
                                 <canvas id="barChartpending" style="min-height: 200px; height: 100%"></canvas>
@@ -127,7 +151,9 @@
                     <div class="chart col" style="padding: 5px;">
                         <div class="card" style="background-color: white">
 
-                            <h4 class="card-header bg-danger text-black text-center p-0" style="font-weight: 600"><asp:Literal runat="server" Text="<%$Resources:name.language, common_ngchart%>" />  </h4>
+                            <h4 class="card-header bg-danger text-black text-center p-0" style="font-weight: 600">
+                                <asp:Literal runat="server" Text="<%$Resources:name.language, common_ngchart%>" />
+                            </h4>
 
                             <div class="chart-container">
                                 <canvas id="barChartng" style="min-height: 200px; height: 100%"></canvas>
@@ -137,7 +163,9 @@
                 </div>
                 <div class="card" style="background-color: white;">
 
-                    <h4 class="card-header bg-success text-white text-center p-0" style="color: white; background-color: #6C757D; font-weight: 600"><asp:Literal runat="server" Text="<%$Resources:name.language, common_multichart%>" /> </h4>
+                    <h4 class="card-header bg-success text-white text-center p-0" style="color: white; background-color: #6C757D; font-weight: 600">
+                        <asp:Literal runat="server" Text="<%$Resources:name.language, common_multichart%>" />
+                    </h4>
 
                     <div class="row ml-3">
                         <div class=" col">
@@ -168,12 +196,21 @@
 
         var maxy = 100;
 
+
+       
+
+
         $(document).ready(function () {
+
+
+
+
+
             // Khởi tạo DataTable
             var table = $('#dataTable').DataTable({
                 pageLength: 15,
                 lengthMenu: [15, 20, 30, 40, 50],
-                lengthChange: true,
+                lengthChange: false,
                 paging: true,
                 searching: false,
                 ordering: false, // Tắt sắp xếp tự động để giữ thứ tự từ server
@@ -188,6 +225,19 @@
             var proxy = $.connection.chatHub;
             var isUpdating = true;
             var interactionTimeout;
+
+
+
+            // Hàm gửi option mới
+
+
+
+            $('#modeselect').on('change', function () {
+
+                var selectedOption = $("#modeselect").val();
+                proxy.server.changeOption(selectedOption);
+            });
+
             // Xử lý khi nhận dữ liệu mới
             proxy.client.updateTable = function (data) {
                 if (!isUpdating) return;
@@ -229,7 +279,7 @@
                     $('#title_bg').addClass('bg-danger');
                 }
 
-              
+
 
                 $('#rs_vp').html(`${datacurrent.JudgeVP}`);
                 $('#rs_gas').html(`${datacurrent.JudgeGAS}`);
@@ -264,7 +314,10 @@
                 });
 
 
+                
 
+
+               
 
                 if (typeplan == '2_10') {
 
@@ -303,7 +356,7 @@
                     $('#datadiff').css('color', 'red');
                 }
 
-                
+
                 linechart.update();
 
 
@@ -590,7 +643,7 @@
                         var y = (yTop + yBottom) / 2; // Vị trí y ở giữa cột
 
                         // Vẽ % OK
-                        ctx.fillText(  percentage + '%', x, y);
+                        ctx.fillText(percentage + '%', x, y);
                     }, this);
                 }
             },
@@ -871,7 +924,7 @@
                         fontColor: 'black',
                         fontStyle: 'bold',
                         //max: 300, // Đặt giá trị tối đa của trục y là 100
-                       // min: -300,   // (Tùy chọn) Đặt giá trị tối thiểu nếu cần
+                        // min: -300,   // (Tùy chọn) Đặt giá trị tối thiểu nếu cần
                         //stepSize: 300 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
                     },
                     gridLines: {
