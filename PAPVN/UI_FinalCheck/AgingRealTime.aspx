@@ -26,6 +26,10 @@
             border: 1px solid #ccc;
             padding: 0px; /* Tùy bạn */
         }
+
+        .table-responsive {
+            overflow-x: auto; /* Cho phép cu?n ngang n?u b?ng quá r?ng */
+        }
     </style>
 
 
@@ -67,20 +71,18 @@
 
         <div class="row">
             <div class="col-sm-3 " style="padding: 5px">
-
                 <div class="card" style="background-color: white">
-
                     <h4 class="card-header bg-info  text-white p-0" style="color: white; background-color: #eb940a; text-align: center; font-weight: bold">
                         <asp:Literal runat="server" Text="<%$Resources:name.language, common_history50cabinet%>" />
                     </h4>
-                    <div class="card-body p-1">
+                    <div class="card-body p-1 table-responsive">
                         <div>
 
                             <select id="modeselect">
                                 <option value="ALL">ALL</option>
                                 <option value="OK">OK</option>
                                 <option value="NG">NG</option>
-                                
+
                             </select>
                         </div>
                         <table style="padding-left: 5px; padding-right: 5px; padding-bottom: 10px; padding-top: 10px" id="dataTable" class="table table-striped table-bordered text-center">
@@ -89,11 +91,17 @@
                                     <th>
                                         <asp:Literal runat="server" Text="<%$Resources:name.language, common_CodeBack%>" />
                                     </th>
-                                    <th style="width: 50px">
+                                    <th>
                                         <asp:Literal runat="server" Text="<%$Resources:name.language, common_judge%>" />
                                     </th>
-                                    <th style="width: 150px">
+                                    <th>
                                         <asp:Literal runat="server" Text="<%$Resources:name.language, common_TimeUpdate%>" />
+                                    </th>
+                                    <th>
+                                        <asp:Literal runat="server" Text="<%$Resources:name.language, common_reasonerror%>" />
+                                    </th>
+                                    <th>
+                                        <asp:Literal runat="server" Text="<%$Resources:name.language, common_userconfirm%>" />
                                     </th>
                                 </tr>
                             </thead>
@@ -197,7 +205,7 @@
         var maxy = 100;
 
 
-       
+
 
 
         $(document).ready(function () {
@@ -208,13 +216,20 @@
 
             // Khởi tạo DataTable
             var table = $('#dataTable').DataTable({
-                pageLength: 15,
+                pageLength: 10,
                 lengthMenu: [15, 20, 30, 40, 50],
                 lengthChange: false,
                 paging: true,
                 searching: false,
                 ordering: false, // Tắt sắp xếp tự động để giữ thứ tự từ server
-                info: false
+                info: false,
+                //responsive: true,
+                //autoWidth: true,
+                //columnDefs: [
+                //    { "width": "20%", "targets": [0, 2, 3, 4] }, // Gi?i h?n d? r?ng cho các c?t
+                //    { "width": "10%", "targets": 1 }
+                //]
+
             });
             // Kiểm tra SignalR
             if (typeof $.connection === 'undefined') {
@@ -314,10 +329,10 @@
                 });
 
 
-                
 
 
-               
+
+
 
                 if (typeplan == '2_10') {
 
@@ -375,7 +390,9 @@
                     table.row.add([
                         item.CodeBack,
                         item.Judge,
-                        item.TimeUpdate
+                        item.TimeUpdate,
+                        item.ReasonError,
+                        item.PersonConfirm
                     ]).node().className = rowClass;
                 });
 

@@ -43,12 +43,19 @@ namespace PAPVN
                 SendDataToClient(Context.ConnectionId, "ALL");
                 return base.OnConnected();
             }
+            public override Task OnDisconnected(bool stopCalled)
+            {
+                // Xóa option khi client ng?t k?t n?i
+                ClientOptions.TryRemove(Context.ConnectionId, out _);
+                return base.OnDisconnected(stopCalled);
+            }
 
             // Client gửi option mới
             public void changeOption(string option)
             {
                 // Cập nhật option cho client hiện tại
                 ClientOptions.AddOrUpdate(Context.ConnectionId, option, (key, oldValue) => option);
+                SendDataToClient(Context.ConnectionId, option);
             }
             // Hàm gửi dữ liệu định kỳ
             private static async Task UpdateData()
@@ -87,7 +94,7 @@ namespace PAPVN
                 CurrentProduct productcurrent;
                 foreach(DataRow item in datahistory.Rows)
                 {
-                    pr.Add(new Product() { CodeBack = item["CodeBack"].ToString(), Judge = item["Judge_Total"].ToString(), TimeUpdate = ((DateTime)item["TimeUpdate"]).ToString("HH:mm:ss dd/MM/yyyy") });
+                    pr.Add(new Product() { CodeBack = item["CodeBack"].ToString(), Judge = item["Judge_Total"].ToString(), TimeUpdate = ((DateTime)item["TimeUpdate"]).ToString("HH:mm:ss dd/MM/yyyy"),ReasonError= item["ReasonError"].ToString(),PersonConfirm= item["PersonConfirm"].ToString() });
                 }
                 //CodeBack, Judge_VP, Judge_GAS, Judge_WI1WITH, Judge_WI1START, Judge_IP, Judge_DF, Judge_TEMP, Judge_IOT, Judge_WI2, Judge_PAN, Judge_CAMBACK, Judge_CAMFRONT, Judge_Total, ReasonError, PersonConfirm, TimeUpdate
                 productcurrent = new CurrentProduct()
@@ -135,6 +142,8 @@ namespace PAPVN
             public string CodeBack { get; set; }
             public string Judge { get; set; }
             public string TimeUpdate { get; set; }
+            public string ReasonError { get; set; }
+            public string PersonConfirm { get; set; }
         }
         public class CurrentProduct
         {

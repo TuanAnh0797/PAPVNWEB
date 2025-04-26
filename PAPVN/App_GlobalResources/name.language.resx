@@ -149,6 +149,10 @@
     <value>Pending cabinet count chart</value>
     <comment>Biểu đồ số lượng tủ PENDING</comment>
   </data>
+  <data name="common_reasonerror" xml:space="preserve">
+    <value>Reason NG</value>
+    <comment>Lỗi</comment>
+  </data>
   <data name="common_stackchart" xml:space="preserve">
     <value>OK/NG/PENDING Cabinet Count Chart</value>
     <comment>Biểu đồ số lượng tủ OK/NG/PENDING</comment>
@@ -160,5 +164,9 @@
   <data name="common_titlepiechart" xml:space="preserve">
     <value>OK/NG ratio chart</value>
     <comment>Biểu đồ tỉ lệ OK/NG</comment>
+  </data>
+  <data name="common_userconfirm" xml:space="preserve">
+    <value>UserID Confirm</value>
+    <comment>Người xác nhận</comment>
   </data>
 </root>
