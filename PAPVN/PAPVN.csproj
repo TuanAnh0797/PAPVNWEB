@@ -265,12 +265,21 @@
     <Content Include="Image\panasonic-logo.jpg" />
     <Content Include="Image\panasonic-logo.png" />
     <Content Include="Image\project-management.png" />
+    <Content Include="Image\roll.png" />
     <Content Include="Image\vacuum-dryer.png" />
     <Content Include="Image\visual-data.png" />
     <Content Include="Image\voltmeter.png" />
     <Content Include="PartCard.html" />
+    <Content Include="plugins\chart.js4\Chart.js" />
+    <Content Include="plugins\chart.js4\Chart.min.js" />
+    <Content Include="plugins\chart.js4\chartjs-adapter-date-fns.bundle.min.js" />
+    <Content Include="plugins\chart.js4\date-fns.js" />
+    <Content Include="plugins\chart.js4\date-fns.min.js">
+      <DependentUpon>date-fns.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\jquery.signalR-2.4.3.js" />
     <Content Include="Scripts\jquery.signalR-2.4.3.min.js" />
+    <Content Include="UI_PCM\CuttingRealTimeMachine.aspx" />
     <Content Include="WebServiceModifyPlan.asmx" />
     <Content Include="Mycss\iconio.css" />
     <Content Include="Mycss\myicon.css" />
@@ -2311,6 +2320,7 @@
     <Content Include="plugins\toastr\toastr.js.map" />
     <Content Include="UI_FinalCheck\AgingHistory.aspx" />
     <Content Include="UI_FinalCheck\AgingRealTime.aspx" />
+    <None Include="bundleconfig.json" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -2344,6 +2354,7 @@
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
     <Content Include="Site.Mobile.Master" />
+    <Content Include="wwwroot\config.ini" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Data\DBConnect.cs" />
@@ -2369,6 +2380,13 @@
     </Compile>
     <Compile Include="MethodLoadData\LoadDataVisualize.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="UI_PCM\CuttingRealTimeMachine.aspx.cs">
+      <DependentUpon>CuttingRealTimeMachine.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI_PCM\CuttingRealTimeMachine.aspx.designer.cs">
+      <DependentUpon>CuttingRealTimeMachine.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebServiceModifyPlan.asmx.cs">
       <DependentUpon>WebServiceModifyPlan.asmx</DependentUpon>
       <SubType>Component</SubType>

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace PAPVN.MethodLoadData
 {
@@ -11,6 +13,15 @@ namespace PAPVN.MethodLoadData
     {
         public static string LineChartQuantityPerTime(string ModelName, string SelectedShift)
         {
+
+            string path = HttpContext.Current.Server.MapPath("~/wwwroot/config.ini");
+
+            string[] config = File.ReadAllLines(path);
+
+
+            Config.TimeRest = config[0].Split(',').Select(int.Parse).ToArray();
+
+
             string typeplan = "3_8";
             try
             {

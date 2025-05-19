@@ -1,0 +1,14 @@
+[
+  {
+    "outputFileName": "plugins/chart.js4/Chart.min.js",
+    "inputFiles": [
+      "plugins/chart.js4/Chart.js"
+    ]
+  },
+  {
+    "outputFileName": "plugins/chart.js4/date-fns.min.js",
+    "inputFiles": [
+      "plugins/chart.js4/date-fns.js"
+    ]
+  }
+]
