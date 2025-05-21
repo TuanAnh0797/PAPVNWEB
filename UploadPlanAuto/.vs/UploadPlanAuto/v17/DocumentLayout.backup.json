@@ -1,0 +1,159 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\2025\\UploadPlanAuto\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{85DB7EA5-38E0-44F3-B4A3-B3F64A56D35E}|UploadPlanAuto\\UploadPlanAuto.csproj|d:\\2025\\uploadplanauto\\uploadplanauto\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85DB7EA5-38E0-44F3-B4A3-B3F64A56D35E}|UploadPlanAuto\\UploadPlanAuto.csproj|solutionrelative:uploadplanauto\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85DB7EA5-38E0-44F3-B4A3-B3F64A56D35E}|UploadPlanAuto\\UploadPlanAuto.csproj|d:\\2025\\uploadplanauto\\uploadplanauto\\config.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{85DB7EA5-38E0-44F3-B4A3-B3F64A56D35E}|UploadPlanAuto\\UploadPlanAuto.csproj|solutionrelative:uploadplanauto\\config.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85DB7EA5-38E0-44F3-B4A3-B3F64A56D35E}|UploadPlanAuto\\UploadPlanAuto.csproj|d:\\2025\\uploadplanauto\\uploadplanauto\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{85DB7EA5-38E0-44F3-B4A3-B3F64A56D35E}|UploadPlanAuto\\UploadPlanAuto.csproj|solutionrelative:uploadplanauto\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85DB7EA5-38E0-44F3-B4A3-B3F64A56D35E}|UploadPlanAuto\\UploadPlanAuto.csproj|d:\\2025\\uploadplanauto\\uploadplanauto\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85DB7EA5-38E0-44F3-B4A3-B3F64A56D35E}|UploadPlanAuto\\UploadPlanAuto.csproj|solutionrelative:uploadplanauto\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85DB7EA5-38E0-44F3-B4A3-B3F64A56D35E}|UploadPlanAuto\\UploadPlanAuto.csproj|d:\\2025\\uploadplanauto\\uploadplanauto\\dbconnect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85DB7EA5-38E0-44F3-B4A3-B3F64A56D35E}|UploadPlanAuto\\UploadPlanAuto.csproj|solutionrelative:uploadplanauto\\dbconnect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85DB7EA5-38E0-44F3-B4A3-B3F64A56D35E}|UploadPlanAuto\\UploadPlanAuto.csproj|d:\\2025\\uploadplanauto\\uploadplanauto\\staticdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85DB7EA5-38E0-44F3-B4A3-B3F64A56D35E}|UploadPlanAuto\\UploadPlanAuto.csproj|solutionrelative:uploadplanauto\\staticdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85DB7EA5-38E0-44F3-B4A3-B3F64A56D35E}|UploadPlanAuto\\UploadPlanAuto.csproj|d:\\2025\\uploadplanauto\\uploadplanauto\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{85DB7EA5-38E0-44F3-B4A3-B3F64A56D35E}|UploadPlanAuto\\UploadPlanAuto.csproj|solutionrelative:uploadplanauto\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85DB7EA5-38E0-44F3-B4A3-B3F64A56D35E}|UploadPlanAuto\\UploadPlanAuto.csproj|d:\\2025\\uploadplanauto\\uploadplanauto\\config.json||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{85DB7EA5-38E0-44F3-B4A3-B3F64A56D35E}|UploadPlanAuto\\UploadPlanAuto.csproj|solutionrelative:uploadplanauto\\config.json||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 7,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DBConnect.cs",
+              "DocumentMoniker": "D:\\2025\\UploadPlanAuto\\UploadPlanAuto\\DBConnect.cs",
+              "RelativeDocumentMoniker": "UploadPlanAuto\\DBConnect.cs",
+              "ToolTip": "D:\\2025\\UploadPlanAuto\\UploadPlanAuto\\DBConnect.cs",
+              "RelativeToolTip": "UploadPlanAuto\\DBConnect.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T17:06:37.197Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Config.json",
+              "DocumentMoniker": "D:\\2025\\UploadPlanAuto\\UploadPlanAuto\\Config.json",
+              "RelativeDocumentMoniker": "UploadPlanAuto\\Config.json",
+              "ToolTip": "D:\\2025\\UploadPlanAuto\\UploadPlanAuto\\Config.json",
+              "RelativeToolTip": "UploadPlanAuto\\Config.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-21T17:04:16.018Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "StaticData.cs",
+              "DocumentMoniker": "D:\\2025\\UploadPlanAuto\\UploadPlanAuto\\StaticData.cs",
+              "RelativeDocumentMoniker": "UploadPlanAuto\\StaticData.cs",
+              "ToolTip": "D:\\2025\\UploadPlanAuto\\UploadPlanAuto\\StaticData.cs",
+              "RelativeToolTip": "UploadPlanAuto\\StaticData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T17:03:18.028Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "App.config",
+              "DocumentMoniker": "D:\\2025\\UploadPlanAuto\\UploadPlanAuto\\App.config",
+              "RelativeDocumentMoniker": "UploadPlanAuto\\App.config",
+              "ToolTip": "D:\\2025\\UploadPlanAuto\\UploadPlanAuto\\App.config",
+              "RelativeToolTip": "UploadPlanAuto\\App.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-05-21T16:53:25.778Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Config.cs",
+              "DocumentMoniker": "D:\\2025\\UploadPlanAuto\\UploadPlanAuto\\Config.cs",
+              "RelativeDocumentMoniker": "UploadPlanAuto\\Config.cs",
+              "ToolTip": "D:\\2025\\UploadPlanAuto\\UploadPlanAuto\\Config.cs",
+              "RelativeToolTip": "UploadPlanAuto\\Config.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T16:43:47.163Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Config.json",
+              "DocumentMoniker": "D:\\2025\\UploadPlanAuto\\UploadPlanAuto\\Config.json",
+              "RelativeDocumentMoniker": "UploadPlanAuto\\Config.json",
+              "ToolTip": "D:\\2025\\UploadPlanAuto\\UploadPlanAuto\\Config.json",
+              "RelativeToolTip": "UploadPlanAuto\\Config.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-21T16:41:59.265Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "D:\\2025\\UploadPlanAuto\\UploadPlanAuto\\Form1.cs",
+              "RelativeDocumentMoniker": "UploadPlanAuto\\Form1.cs",
+              "ToolTip": "D:\\2025\\UploadPlanAuto\\UploadPlanAuto\\Form1.cs",
+              "RelativeToolTip": "UploadPlanAuto\\Form1.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAQwB8AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T16:41:31.506Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "D:\\2025\\UploadPlanAuto\\UploadPlanAuto\\Form1.cs",
+              "RelativeDocumentMoniker": "UploadPlanAuto\\Form1.cs",
+              "ToolTip": "D:\\2025\\UploadPlanAuto\\UploadPlanAuto\\Form1.cs [Design]",
+              "RelativeToolTip": "UploadPlanAuto\\Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T16:41:11.913Z",
+              "EditorCaption": " [Design]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
