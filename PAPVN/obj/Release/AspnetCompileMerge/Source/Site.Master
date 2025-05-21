@@ -52,7 +52,7 @@
             padding: 10px;
             background: #ddd;
             text-align: center;
-            background-color:white
+            background-color: white
         }
     </style>
 </head>
@@ -112,6 +112,14 @@
                                     </a>
                                 </li>
                             </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/UI_PCM/CuttingRealTimeMachine">
+                                <img src="/Image/roll.png" height="25px" width="25px" />
+                                <p style="font-size: 18px; font-weight: 600">
+                                    PCM
+                                </p>
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#" onclick="showpopupfuture()">
@@ -265,6 +273,13 @@
     <%--<script src="../../dist/js/pages/dashboard.js"></script>--%>
     <!-- ChartJS -->
     <script src="../../plugins/chart.js/Chart.min.js"></script>
+
+    <!-- ChartJS -->
+
+    <script src="../../plugins/chart.js4/Chart.min.js"></script>
+    <script src="../../plugins/chart.js4/date-fns.js"></script>
+    <script src="../../plugins/chart.js4/chartjs-adapter-date-fns.bundle.min.js"></script>
+
     <!-- FLOT CHARTS -->
     <script src="../../plugins/flot/jquery.flot.js"></script>
     <!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->

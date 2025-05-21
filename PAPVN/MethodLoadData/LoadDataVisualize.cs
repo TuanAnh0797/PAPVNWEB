@@ -14,12 +14,7 @@ namespace PAPVN.MethodLoadData
         public static string LineChartQuantityPerTime(string ModelName, string SelectedShift)
         {
 
-            string path = HttpContext.Current.Server.MapPath("~/wwwroot/config.ini");
-
-            string[] config = File.ReadAllLines(path);
-
-
-            Config.TimeRest = config[0].Split(',').Select(int.Parse).ToArray();
+           
 
 
             string typeplan = "3_8";

@@ -21,16 +21,16 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/22/2025 16:00:08</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>04/26/2025 15:15:14</publishTime>
+      <publishTime>05/19/2025 23:38:09</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>04/26/2025 15:15:11</publishTime>
+      <publishTime>05/19/2025 23:38:07</publishTime>
     </File>
     <File Include="bin/App_GlobalResources.compiled">
-      <publishTime>04/26/2025 15:15:14</publishTime>
+      <publishTime>05/19/2025 23:38:09</publishTime>
     </File>
     <File Include="bin/App_GlobalResources.dll">
-      <publishTime>04/26/2025 15:15:10</publishTime>
+      <publishTime>05/19/2025 23:38:06</publishTime>
     </File>
     <File Include="bin/AspNet.ScriptManager.jQuery.dll">
       <publishTime>04/22/2025 16:00:08</publishTime>
@@ -111,10 +111,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/22/2025 16:00:10</publishTime>
     </File>
     <File Include="bin/PAPVN.dll">
-      <publishTime>04/26/2025 15:14:59</publishTime>
+      <publishTime>05/19/2025 23:30:51</publishTime>
     </File>
     <File Include="bin/PAPVN.pdb">
-      <publishTime>04/26/2025 15:14:59</publishTime>
+      <publishTime>05/19/2025 23:30:51</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>04/22/2025 16:00:09</publishTime>
@@ -291,7 +291,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/22/2025 16:00:08</publishTime>
     </File>
     <File Include="bin/vi-vn/App_GlobalResources.resources.dll">
-      <publishTime>04/26/2025 15:15:09</publishTime>
+      <publishTime>05/19/2025 23:38:05</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>04/22/2025 16:00:12</publishTime>
@@ -659,6 +659,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Image/project-management.png">
       <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
+    <File Include="Image/roll.png">
+      <publishTime>05/19/2025 23:10:52</publishTime>
+    </File>
     <File Include="Image/vacuum-dryer.png">
       <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
@@ -826,6 +829,21 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="plugins/chart.js/Chart.min.js">
       <publishTime>04/22/2025 15:59:59</publishTime>
+    </File>
+    <File Include="plugins/chart.js4/Chart.js">
+      <publishTime>05/19/2025 23:10:52</publishTime>
+    </File>
+    <File Include="plugins/chart.js4/Chart.min.js">
+      <publishTime>05/19/2025 23:10:52</publishTime>
+    </File>
+    <File Include="plugins/chart.js4/chartjs-adapter-date-fns.bundle.min.js">
+      <publishTime>05/19/2025 23:10:52</publishTime>
+    </File>
+    <File Include="plugins/chart.js4/date-fns.js">
+      <publishTime>05/19/2025 23:10:52</publishTime>
+    </File>
+    <File Include="plugins/chart.js4/date-fns.min.js">
+      <publishTime>05/19/2025 23:10:52</publishTime>
     </File>
     <File Include="plugins/codemirror/addon/comment/comment.js">
       <publishTime>04/22/2025 15:59:59</publishTime>
@@ -6636,7 +6654,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/22/2025 16:00:08</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>04/26/2025 15:15:01</publishTime>
+      <publishTime>05/19/2025 23:38:02</publishTime>
     </File>
     <File Include="Scripts/bootstrap.bundle.js">
       <publishTime>04/22/2025 15:59:55</publishTime>
@@ -6765,31 +6783,34 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/22/2025 15:59:55</publishTime>
     </File>
     <File Include="Site.Master">
-      <publishTime>04/26/2025 15:15:14</publishTime>
+      <publishTime>05/19/2025 23:38:09</publishTime>
     </File>
     <File Include="Site.Mobile.Master">
-      <publishTime>04/26/2025 15:15:14</publishTime>
+      <publishTime>05/19/2025 23:38:09</publishTime>
     </File>
     <File Include="UI_FinalCheck/AgingHistory.aspx">
-      <publishTime>04/26/2025 15:15:14</publishTime>
+      <publishTime>05/19/2025 23:38:09</publishTime>
     </File>
     <File Include="UI_FinalCheck/AgingRealTime.aspx">
-      <publishTime>04/26/2025 15:15:14</publishTime>
+      <publishTime>05/19/2025 23:38:09</publishTime>
     </File>
     <File Include="UI_GAS/PlanGAS.aspx">
-      <publishTime>04/26/2025 15:15:14</publishTime>
+      <publishTime>05/19/2025 23:38:09</publishTime>
+    </File>
+    <File Include="UI_PCM/CuttingRealTimeMachine.aspx">
+      <publishTime>05/19/2025 23:38:09</publishTime>
     </File>
     <File Include="UI_Plan/UploadPlan.aspx">
-      <publishTime>04/26/2025 15:15:14</publishTime>
+      <publishTime>05/19/2025 23:38:09</publishTime>
     </File>
     <File Include="UI_Plan/UploadPlanCa1.aspx">
-      <publishTime>04/26/2025 15:15:14</publishTime>
+      <publishTime>05/19/2025 23:38:09</publishTime>
     </File>
     <File Include="UI_Plan/UploadPlanCa2.aspx">
-      <publishTime>04/26/2025 15:15:14</publishTime>
+      <publishTime>05/19/2025 23:38:09</publishTime>
     </File>
     <File Include="UI_Plan/UploadPlanCa3.aspx">
-      <publishTime>04/26/2025 15:15:14</publishTime>
+      <publishTime>05/19/2025 23:38:09</publishTime>
     </File>
     <File Include="UploadPlan.aspx">
       <publishTime>01/02/2024 09:01:48</publishTime>
@@ -6802,6 +6823,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="WebServicePlanGas.asmx">
       <publishTime>04/22/2025 15:59:55</publishTime>
+    </File>
+    <File Include="wwwroot/config.ini">
+      <publishTime>05/19/2025 23:12:24</publishTime>
     </File>
     <File Include="wwwroot/Panasonic_logo_bl_posi_PNG.ico">
       <publishTime>04/22/2025 16:00:08</publishTime>
