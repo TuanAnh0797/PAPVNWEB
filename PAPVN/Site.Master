@@ -114,7 +114,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/UI_PCM/CuttingRealTimeMachine">
+                            <a class="nav-link" href="/UI_PCM/PCM_RealTime">
                                 <img src="/Image/roll.png" height="25px" width="25px" />
                                 <p style="font-size: 18px; font-weight: 600">
                                     PCM

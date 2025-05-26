@@ -26,28 +26,18 @@ namespace PAPVN
             //private static List<DataItem> data = new List<DataItem>();
             // Lưu trữ option của từng client theo ConnectionId
             private static readonly ConcurrentDictionary<string, string> ClientOptions = new ConcurrentDictionary<string, string>();
-
-
             private static readonly Timer Timer = new Timer(10000);
-
             static ChatHub()
             {
                 Timer.Elapsed += async (sender, e) => await UpdateData();
                 Timer.AutoReset = true;
                 Timer.Start();
             }
-
             public override Task OnConnected()
             {
-
-
                 string path = HttpContext.Current.Server.MapPath("~/wwwroot/config.ini");
-
                 string[] config = File.ReadAllLines(path);
-
-
                 Config.TimeRest = config[0].Split(',').Select(int.Parse).ToArray();
-
                 // Mặc định option khi client kết nối (ví dụ: "All Model")
                 ClientOptions.TryAdd(Context.ConnectionId, "ALL");
                 // Gửi dữ liệu ban đầu ngay khi kết nối

@@ -279,7 +279,7 @@
     </Content>
     <Content Include="Scripts\jquery.signalR-2.4.3.js" />
     <Content Include="Scripts\jquery.signalR-2.4.3.min.js" />
-    <Content Include="UI_PCM\CuttingRealTimeMachine.aspx" />
+    <Content Include="UI_PCM\PCM_RealTime.aspx" />
     <Content Include="WebServiceModifyPlan.asmx" />
     <Content Include="Mycss\iconio.css" />
     <Content Include="Mycss\myicon.css" />
@@ -2379,13 +2379,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="MethodLoadData\LoadDataVisualize.cs" />
+    <Compile Include="SignalR\PCMHub.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="UI_PCM\CuttingRealTimeMachine.aspx.cs">
-      <DependentUpon>CuttingRealTimeMachine.aspx</DependentUpon>
+    <Compile Include="UI_PCM\PCM_RealTime.aspx.cs">
+      <DependentUpon>PCM_RealTime.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UI_PCM\CuttingRealTimeMachine.aspx.designer.cs">
-      <DependentUpon>CuttingRealTimeMachine.aspx</DependentUpon>
+    <Compile Include="UI_PCM\PCM_RealTime.aspx.designer.cs">
+      <DependentUpon>PCM_RealTime.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebServiceModifyPlan.asmx.cs">
       <DependentUpon>WebServiceModifyPlan.asmx</DependentUpon>
