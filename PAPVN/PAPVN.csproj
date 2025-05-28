@@ -269,6 +269,7 @@
     <Content Include="Image\vacuum-dryer.png" />
     <Content Include="Image\visual-data.png" />
     <Content Include="Image\voltmeter.png" />
+    <Content Include="z_demo\OEEDemo.html" />
     <Content Include="PartCard.html" />
     <Content Include="plugins\chart.js4\Chart.js" />
     <Content Include="plugins\chart.js4\Chart.min.js" />

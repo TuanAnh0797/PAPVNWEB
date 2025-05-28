@@ -263,12 +263,6 @@
                 // Render lại chart
                 ganttChart.update();
             }
-
-
-
-
-
-
             function generateMachineData(machineName, date = '2025-05-03') {
                 const states = ['Chạy', 'Dừng', 'Lỗi'];
                 const weights = { 'Chạy': 0.7, 'Dừng': 0.15, 'Lỗi': 0.15 }; // Chạy chiếm đa số
@@ -315,9 +309,6 @@
 
                     debugger; 
 
-                   
-
-
                 };
 
 
@@ -341,11 +332,6 @@
                 }).fail(function (error) {
                     console.error("SignalR connection failed: ", error);
                 });
-
-               
-
-
-               
 
 
                 //
@@ -515,46 +501,167 @@
                     borderColor: '#2196F3',
                     borderWidth: 1
                 }];
-                const oeeCtx = document.getElementById('oeeChart').getContext('2d');
-                new Chart(oeeCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: machines,
-                        datasets: oeeDatasets
+                //const oeeCtx = document.getElementById('oeeChart').getContext('2d');
+                //new Chart(oeeCtx, {
+                //    type: 'bar',
+                //    data: {
+                //        labels: machines,
+                //        datasets: oeeDatasets
+                //    },
+                //    options: {
+                //        scales: {
+                //            x: {
+                //                title: { display: false, text: 'Máy', font: { size: 14 } },
+                //                ticks: {
+                //                    color: 'black',  // màu chữ cho các mốc trục X
+                //                    font: { size: 12 } // kích thước chữ
+                //                },
+                //            },
+                //            y: {
+                //                title: { display: false, text: 'OEE (%)', font: { size: 14 } },
+                //                ticks: {
+                //                    color: 'black',  // màu chữ cho các mốc trục X
+                //                    font: { size: 12 } // kích thước chữ
+                //                },
+                //                beginAtZero: true,
+                //                max: 100
+                //            }
+                //        },
+                //        plugins: {
+                //            legend: { display: false },
+                //            tooltip: {
+                //                callbacks: {
+                //                    label: function (context) {
+                //                        return `${context.label}: ${context.raw}% OEE`;
+                //                    }
+                //                }
+                //            }
+                //        },
+                //        maintainAspectRatio: false,
+                //        barPercentage: 0.4
+                //    }
+                //});
+
+                // Biểu đồ OK/NG sản phẩm
+                // Dữ liệu OK và NG
+                //const data = {
+                //    labels: ['OK', 'NG'],
+                //    datasets: [{
+                //        data: [60, 40], // số lượng OK, NG
+                //        backgroundColor: ['#4caf50', '#f44336'], // màu sắc
+                //        borderWidth: 1
+                //    }]
+                //};
+
+                //// Cấu hình biểu đồ
+                //const config = {
+                //    type: 'pie',
+                //    data: data,
+                //    options: {
+                //        responsive: true,
+
+                //        plugins: {
+                //            legend: {
+                //                position: 'bottom',
+                //            },
+                //            //tooltip: {
+                //            //    callbacks: {
+                //            //        label: function (context) {
+                //            //            const label = context.label || '';
+                //            //            const value = context.parsed;
+                //            //            return `${label}: ${value}`;
+                //            //        }
+                //            //    }
+                //            //}
+                //        }
+                //    },
+                //    datalabels: {
+                //        color: '#fff',
+                //        formatter: (value, context) => {
+                //            const percent = ((value / total) * 100).toFixed(1) + '%';
+                //            return value + ' (' + percent + ')';
+                //        },
+                //        font: {
+                //            weight: 'bold',
+                //            size: 14
+                //        }
+                //    }
+                //};
+
+                // Khởi tạo biểu đồ
+                //const ctx_OKNG = document.getElementById('chart_scaleokng').getContext('2d');
+                //new Chart(ctx_OKNG, config);
+
+                var pieChartCanvas = $('#chart_scaleokng').get(0).getContext('2d')
+                var pieOptions = {
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    //events: false,
+                    animation: {
+                        duration: 500,
+                        easing: "easeOutQuart",
+                        onComplete: function () {
+                            const chart = this.chart;
+                            const { ctx, chartArea: { width, height } } = chart;
+
+                            const datasets = chart.data.datasets;
+                            const meta = chart.getDatasetMeta(0);
+                            const total = datasets[0].data.reduce((sum, val) => sum + val, 0);
+
+                            ctx.save();
+                            ctx.font = 'bold 16px Arial';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+
+                            meta.data.forEach((element, index) => {
+                                const dataValue = datasets[0].data[index];
+                                const percent = ((dataValue / total) * 100).toFixed(1) + '%';
+                                const { x, y } = element.tooltipPosition();
+
+                                ctx.fillStyle = '#fff';
+                                ctx.fillText(percent, x, y);
+                            });
+
+                            ctx.restore();
+                        }
                     },
-                    options: {
-                        scales: {
-                            x: {
-                                title: { display: false, text: 'Máy', font: { size: 14 } },
-                                ticks: {
-                                    color: 'black',  // màu chữ cho các mốc trục X
-                                    font: { size: 12 } // kích thước chữ
-                                },
-                            },
-                            y: {
-                                title: { display: false, text: 'OEE (%)', font: { size: 14 } },
-                                ticks: {
-                                    color: 'black',  // màu chữ cho các mốc trục X
-                                    font: { size: 12 } // kích thước chữ
-                                },
-                                beginAtZero: true,
-                                max: 100
-                            }
+                    legend: {
+                        labels: {
+                            fontColor: 'black',     // 👈 Màu chữ
+                            fontSize: 20,           // 👈 Cỡ chữ
+                            fontStyle: 'bold',      // 👈 Độ đậm
+
                         },
-                        plugins: {
-                            legend: { display: false },
-                            tooltip: {
-                                callbacks: {
-                                    label: function (context) {
-                                        return `${context.label}: ${context.raw}% OEE`;
-                                    }
-                                }
-                            }
-                        },
-                        maintainAspectRatio: false,
-                        barPercentage: 0.4
-                    }
-                });
+                        display: true,
+                        position: 'right'
+                    },
+                }
+                var donutData = {
+                    labels: [
+                        'OK',
+                        'NG'
+
+                    ],
+                    datasets: [
+                        {
+                            data: [60, 40],
+                            backgroundColor: ['#008000', '#FF0000'],
+                        }
+                    ]
+                }
+                var charpie = new Chart(pieChartCanvas, {
+                    type: 'pie',
+                    data: donutData,
+                    options: pieOptions
+                })
+
+
+
+
+
+
+
+
             });
         </script>
 </asp:Content>
