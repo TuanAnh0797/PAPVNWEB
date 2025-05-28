@@ -3,6 +3,22 @@
   "WorkspaceRootPath": "D:\\2025\\PAPVNWEB\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|D:\\2025\\PAPVNWEB\\papvn\\chathub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|solutionrelative:papvn\\chathub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|D:\\2025\\PAPVNWEB\\papvn\\ui_plan\\uploadplan.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|solutionrelative:papvn\\ui_plan\\uploadplan.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|D:\\2025\\PAPVNWEB\\papvn\\ui_plan\\uploadplan.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|solutionrelative:papvn\\ui_plan\\uploadplan.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|D:\\2025\\PAPVNWEB\\papvn\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|solutionrelative:papvn\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|d:\\2025\\papvnweb\\papvn\\signalr\\pcmhub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|solutionrelative:papvn\\signalr\\pcmhub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -11,28 +27,16 @@
       "RelativeMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|solutionrelative:papvn\\site.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|d:\\2025\\papvnweb\\papvn\\ui_pcm\\pcm_realtime.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "AbsoluteMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|D:\\2025\\PAPVNWEB\\papvn\\ui_pcm\\pcm_realtime.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|solutionrelative:papvn\\ui_pcm\\pcm_realtime.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|D:\\2025\\PAPVNWEB\\papvn\\chathub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|solutionrelative:papvn\\chathub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|D:\\2025\\PAPVNWEB\\papvn\\ui_finalcheck\\agingrealtime.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|solutionrelative:papvn\\ui_finalcheck\\agingrealtime.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|D:\\2025\\PAPVNWEB\\papvn\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|solutionrelative:papvn\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|D:\\2025\\PAPVNWEB\\papvn\\ui_finalcheck\\aginghistory.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|solutionrelative:papvn\\ui_finalcheck\\aginghistory.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|d:\\2025\\papvnweb\\papvn\\ui_plan\\uploadplan.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|solutionrelative:papvn\\ui_plan\\uploadplan.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|D:\\2025\\PAPVNWEB\\papvn\\methodloaddata\\loaddatavisualize.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -116,10 +120,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|D:\\2025\\PAPVNWEB\\papvn\\webserviceplangas.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|solutionrelative:papvn\\webserviceplangas.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|D:\\2025\\PAPVNWEB\\papvn\\ui_plan\\uploadplan.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|solutionrelative:papvn\\ui_plan\\uploadplan.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|D:\\2025\\PAPVNWEB\\papvn\\app_start\\routeconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -212,15 +212,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 6,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "AgingHistory.aspx",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\UI_FinalCheck\\AgingHistory.aspx",
               "RelativeDocumentMoniker": "PAPVN\\UI_FinalCheck\\AgingHistory.aspx",
@@ -228,12 +224,11 @@
               "RelativeToolTip": "PAPVN\\UI_FinalCheck\\AgingHistory.aspx",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2025-04-21T09:40:30.048Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-21T09:40:30.048Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "Chart.js",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\plugins\\chart.js4\\Chart.js",
               "RelativeDocumentMoniker": "PAPVN\\plugins\\chart.js4\\Chart.js",
@@ -245,20 +240,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 1,
               "Title": "UploadPlan.aspx.cs",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\UI_Plan\\UploadPlan.aspx.cs",
               "RelativeDocumentMoniker": "PAPVN\\UI_Plan\\UploadPlan.aspx.cs",
               "ToolTip": "D:\\2025\\PAPVNWEB\\PAPVN\\UI_Plan\\UploadPlan.aspx.cs",
               "RelativeToolTip": "PAPVN\\UI_Plan\\UploadPlan.aspx.cs",
-              "ViewState": "AgIAAHUAAAAAAAAAAAAUwJYAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAMwAAAAAAAAAAAAUwNgAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-26T14:42:42.223Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "Site.Master",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\Site.Master",
               "RelativeDocumentMoniker": "PAPVN\\Site.Master",
@@ -271,20 +266,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "Config.cs",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\Config.cs",
               "RelativeDocumentMoniker": "PAPVN\\Config.cs",
               "ToolTip": "D:\\2025\\PAPVNWEB\\PAPVN\\Config.cs",
               "RelativeToolTip": "PAPVN\\Config.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAXAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAACEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-19T01:28:33.748Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "LoadDataVisualize.cs",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\MethodLoadData\\LoadDataVisualize.cs",
               "RelativeDocumentMoniker": "PAPVN\\MethodLoadData\\LoadDataVisualize.cs",
@@ -296,20 +291,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "ChatHub.cs",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\ChatHub.cs",
               "RelativeDocumentMoniker": "PAPVN\\ChatHub.cs",
               "ToolTip": "D:\\2025\\PAPVNWEB\\PAPVN\\ChatHub.cs",
               "RelativeToolTip": "PAPVN\\ChatHub.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAiwEoAAAAqAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAACcAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-19T07:30:54.267Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "PCMHub.cs",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\SignalR\\PCMHub.cs",
               "RelativeDocumentMoniker": "PAPVN\\SignalR\\PCMHub.cs",
@@ -322,7 +317,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "AgingRealTime.aspx",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\UI_FinalCheck\\AgingRealTime.aspx",
               "RelativeDocumentMoniker": "PAPVN\\UI_FinalCheck\\AgingRealTime.aspx",
@@ -330,12 +325,28 @@
               "RelativeToolTip": "PAPVN\\UI_FinalCheck\\AgingRealTime.aspx",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2025-05-03T16:45:05.624Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-03T16:45:05.624Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "UploadPlan.aspx",
+              "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\UI_Plan\\UploadPlan.aspx",
+              "RelativeDocumentMoniker": "PAPVN\\UI_Plan\\UploadPlan.aspx",
+              "ToolTip": "D:\\2025\\PAPVNWEB\\PAPVN\\UI_Plan\\UploadPlan.aspx",
+              "RelativeToolTip": "PAPVN\\UI_Plan\\UploadPlan.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2025-04-19T01:28:32.872Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "PCM_RealTime.aspx",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\UI_PCM\\PCM_RealTime.aspx",
               "RelativeDocumentMoniker": "PAPVN\\UI_PCM\\PCM_RealTime.aspx",
@@ -343,12 +354,11 @@
               "RelativeToolTip": "PAPVN\\UI_PCM\\PCM_RealTime.aspx",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2025-05-26T15:26:06.218Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-26T15:26:06.218Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "Chart.min.js",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\plugins\\chart.js4\\Chart.min.js",
               "RelativeDocumentMoniker": "PAPVN\\plugins\\chart.js4\\Chart.min.js",
@@ -372,7 +382,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "config.ini",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\wwwroot\\config.ini",
               "RelativeDocumentMoniker": "PAPVN\\wwwroot\\config.ini",
@@ -408,7 +418,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "date-fns.js",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\plugins\\chart.js4\\date-fns.js",
               "RelativeDocumentMoniker": "PAPVN\\plugins\\chart.js4\\date-fns.js",
@@ -420,7 +430,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "date-fns.min.js",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\plugins\\chart.js4\\date-fns.min.js",
               "RelativeDocumentMoniker": "PAPVN\\plugins\\chart.js4\\date-fns.min.js",
@@ -432,7 +442,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "chartjs-adapter-date-fns.bundle.min.js",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\plugins\\chart.js4\\chartjs-adapter-date-fns.bundle.min.js",
               "RelativeDocumentMoniker": "PAPVN\\plugins\\chart.js4\\chartjs-adapter-date-fns.bundle.min.js",
@@ -480,7 +490,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 28,
               "Title": "AgingRealTime.aspx",
               "DocumentMoniker": "D:\\PAPVNWEB\\PAPVN\\UI_Pan\\AgingRealTime.aspx",
               "RelativeDocumentMoniker": "..\\..\\PAPVNWEB\\PAPVN\\UI_Pan\\AgingRealTime.aspx",
@@ -563,7 +573,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "Chart.min.js",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\plugins\\chart.js\\Chart.min.js",
               "RelativeDocumentMoniker": "PAPVN\\plugins\\chart.js\\Chart.min.js",
@@ -575,7 +585,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "Chart.js",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\plugins\\chart.js\\Chart.js",
               "RelativeDocumentMoniker": "PAPVN\\plugins\\chart.js\\Chart.js",
@@ -587,7 +597,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "Chart.min.css",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\plugins\\chart.js\\Chart.min.css",
               "RelativeDocumentMoniker": "PAPVN\\plugins\\chart.js\\Chart.min.css",
@@ -599,7 +609,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "WebServiceModifyPlan.asmx.cs",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\WebServiceModifyPlan.asmx.cs",
               "RelativeDocumentMoniker": "PAPVN\\WebServiceModifyPlan.asmx.cs",
@@ -611,7 +621,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "name.language.resx",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\App_GlobalResources\\name.language.resx",
               "RelativeDocumentMoniker": "PAPVN\\App_GlobalResources\\name.language.resx",
@@ -622,7 +632,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 27,
               "Title": "PlanGAS.aspx",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\UI_GAS\\PlanGAS.aspx",
               "RelativeDocumentMoniker": "PAPVN\\UI_GAS\\PlanGAS.aspx",
@@ -634,7 +644,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "AgingRealTime.aspx.cs",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\UI_FinalCheck\\AgingRealTime.aspx.cs",
               "RelativeDocumentMoniker": "PAPVN\\UI_FinalCheck\\AgingRealTime.aspx.cs",
@@ -646,7 +656,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "DBConnect.cs",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\App_Data\\DBConnect.cs",
               "RelativeDocumentMoniker": "PAPVN\\App_Data\\DBConnect.cs",
@@ -658,7 +668,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "name.language.vi-vn.resx",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\App_GlobalResources\\name.language.vi-vn.resx",
               "RelativeDocumentMoniker": "PAPVN\\App_GlobalResources\\name.language.vi-vn.resx",
@@ -669,7 +679,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "BasePage.cs",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\BasePage.cs",
               "RelativeDocumentMoniker": "PAPVN\\BasePage.cs",
@@ -681,7 +691,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "Site.Master.cs",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\Site.Master.cs",
               "RelativeDocumentMoniker": "PAPVN\\Site.Master.cs",
@@ -693,7 +703,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "Global.asax.cs",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\Global.asax.cs",
               "RelativeDocumentMoniker": "PAPVN\\Global.asax.cs",
@@ -705,7 +715,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 29,
               "Title": "WebServicePlanGas.asmx.cs",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\WebServicePlanGas.asmx.cs",
               "RelativeDocumentMoniker": "PAPVN\\WebServicePlanGas.asmx.cs",
@@ -726,18 +736,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-19T01:28:33.772Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 29,
-              "Title": "UploadPlan.aspx",
-              "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\UI_Plan\\UploadPlan.aspx",
-              "RelativeDocumentMoniker": "PAPVN\\UI_Plan\\UploadPlan.aspx",
-              "ToolTip": "D:\\2025\\PAPVNWEB\\PAPVN\\UI_Plan\\UploadPlan.aspx",
-              "RelativeToolTip": "PAPVN\\UI_Plan\\UploadPlan.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2025-04-19T01:28:32.872Z"
             },
             {
               "$type": "Document",

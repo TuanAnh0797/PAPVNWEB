@@ -114,7 +114,9 @@ namespace UploadPlanAuto
             //Tổng số lượng sản phẩm làm ca 3
             int QuantityTotal3 = datarow.Where(d => d.Quantity3 > 0).Sum(d => d.Quantity3);
 
-                if (QuantityTotal1 > 0)
+            QuantityTotalDay = QuantityTotal1 + QuantityTotal2 + QuantityTotal3;
+
+            if (QuantityTotal1 > 0)
                 {
                     TimeStartall = DateTime.Now.ToString("yyyy-MM-dd") + " 06:00:00";
                 }
