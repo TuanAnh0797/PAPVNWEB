@@ -151,24 +151,7 @@
                     });
                 }
             }
-            //animation: {
-            //    duration: 1,
-            //    onComplete: function () {
-            //        var chartInstance = this.chart,
-            //            ctx = chartInstance.ctx;
-            //        ctx.font = "500 18px Arial";
-            //        ctx.fillStyle = '#000000';
-            //        ctx.textAlign = 'center';
-            //        ctx.textBaseline = 'bottom';
-            //        var dataset = this.data.datasets[0]; // Truy cập vào dữ liệu của dòng đầu tiên
-            //        var meta = chartInstance.controller.getDatasetMeta(0);
-            //        meta.data.forEach(function (bar, index) {
-            //            var data = dataset.data[index];
-            //            ctx.fillText(data, bar._model.x, bar._model.y);
-            //        });
-            //    }
-            //}
-
+           
 
         }
         var barchartplan = new Chart(barChartCanvas, {

@@ -206,6 +206,7 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
+
         .oee-main-value {
             font-size: 2rem;
             font-weight: 800;
@@ -213,16 +214,17 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-           /* margin: 10px 0;*/
+            /* margin: 10px 0;*/
             text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-         .progress {
+
+        .progress {
             height: 12px;
             border-radius: 10px;
             background: rgba(102, 126, 234, 0.1);
             overflow: hidden;
         }
-        
+
         .progress-bar {
             border-radius: 10px;
             background: linear-gradient(90deg, #667eea, #764ba2);
@@ -233,23 +235,23 @@
             .oee-main-value {
                 font-size: 3rem;
             }
-            
+
             .metric-card,
             .production-card {
                 height: auto;
                 padding: 20px 15px;
             }
-            
+
             .metric-icon {
                 width: 50px;
                 height: 50px;
                 font-size: 1.3rem;
             }
-            
+
             .metric-value {
                 font-size: 1.8rem;
             }
-            
+
             .production-value {
                 font-size: 1.5rem;
             }
@@ -265,22 +267,22 @@
     <div class=" row p-0 ml-2 mr-2">
         <div class="oee-card bg-blue col m-2">
             <h2 style="font-weight: 600">Plan Quantity</h2>
-            <div class="value" id="availabilityValue">20000</div>
+            <div class="value" id="PlanQuantity"></div>
             <%-- <small>Thời gian hoạt động</small>--%>
         </div>
         <div class="oee-card bg-success col m-2">
             <h2 style="font-weight: 600">OK Quantity</h2>
-            <div class="value" id="performanceValue">10000 (98%)</div>
+            <div class="value" id="OkQuantity"></div>
             <%-- <small>Hiệu suất sản xuất</small>--%>
         </div>
         <div class="oee-card bg-danger col m-2">
             <h2 style="font-weight: 600">NG Quantity</h2>
-            <div class="value" id="qualityValue">200 (2%)</div>
+            <div class="value" id="NgQuantity"></div>
             <%-- <small>Chất lượng sản phẩm</small>--%>
         </div>
         <div class="oee-card bg-warning col m-2">
             <h2 style="font-weight: 600; color: white">Remaining Quantity</h2>
-            <div style="color: white" class="value" id="oeeValue">10000</div>
+            <div style="color: white" class="value" id="RemainQuantity"></div>
             <%-- <small>Hiệu quả tổng thể</small>--%>
         </div>
     </div>
@@ -292,38 +294,7 @@
             <div class="card-header p-2 bg-gradient-gray text-center">
                 <h5 class="mb-0">Status Machine</h5>
             </div>
-            <%--  <div class="card-body p-2">
 
-                <!-- Trạng thái máy -->
-                <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
-                    <i class="bi bi-cpu-fill text-primary me-2 fs-5"></i>
-                    <strong class="me-2">Status:</strong>
-                    <span id="txt_statusmachine" class="badge bg-success">Run</span>
-                </div>
-
-                <!-- Nguyên nhân dừng -->
-                <div id="stop-reason-container" class="d-flex align-items-start mb-3 pb-3 border-bottom">
-                    <i class="bi bi-exclamation-triangle-fill text-danger me-2 fs-5"></i>
-                    <div>
-                        <strong>Reason Stop:</strong>
-                        <p id="stop-reason" class="text-danger mb-0 ms-1"></p>
-                    </div>
-                </div>
-
-                <!-- Tổng số lần dừng -->
-                <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
-                    <i class="bi bi-x-circle-fill text-warning me-2 fs-5"></i>
-                    <strong class="me-2">Total number of stops:</strong>
-                    <span id="total-stops" class="text-dark fw-semibold">3</span>
-                </div>
-
-                <!-- Tổng thời gian dừng -->
-                <div class="d-flex align-items-center">
-                    <i class="bi bi-clock-history text-info me-2 fs-5"></i>
-                    <strong class="me-2">Total dwell time:</strong>
-                    <span id="total-stop-time" class="text-dark fw-semibold">02:35:00</span>
-                </div>
-            </div>--%>
             <div class="card-body p-1 pl-2 pr-2 pt-3">
                 <!-- Trạng thái máy -->
                 <div class="status-item status-running d-flex align-items-center">
@@ -334,8 +305,8 @@
                         <div class="status-label">Trạng thái máy</div>
                         <div class="status-value">
                             <span id="txt_statusmachine" class="badge bg-success pulse">
-                                <i class="fas fa-play me-1"></i>
-                                Running
+                               <%-- <i class="fas fa-play me-1"></i>--%>
+                               
                             </span>
                             <span class="status-indicator indicator-running pulse"></span>
                         </div>
@@ -350,7 +321,7 @@
                     <div class="status-content">
                         <div class="status-label">Nguyên nhân dừng máy</div>
                         <div id="stop-reason" class="stop-reason-text">
-                            Bảo trì
+                           
                         </div>
                     </div>
                 </div>
@@ -377,7 +348,7 @@
                     <div class="status-content">
                         <div class="status-label">Tổng thời gian dừng</div>
                         <div class="status-value">
-                            <span id="total-stop-time" class="metric-highlight">02:35:00</span>
+                            <span id="total-stop-time" class="metric-highlight"></span>
                             <small class="text-muted ms-1">giờ:phút:giây</small>
                         </div>
                     </div>
@@ -390,12 +361,8 @@
             <div class="card-header p-2 bg-gradient-gray text-center">
                 <h5 class="m-0">Machine state graph over time</h5>
             </div>
-            <div class="card-body p-2">
-                <%-- <div class="text-center p-0 mr-2 align-content-center">
-                    <div class="mb-2 p-2" style="background-color: #4CAF50;">Chạy</div>
-                    <div class="mb-2 p-2" style="background-color: #F44336;">Lỗi</div>
-                    <div class="mb-2 p-2" style="background-color: #9E9E9E;">Dừng</div>
-                </div>--%>
+            <div class="card-body p-2 ">
+
                 <div class="chart-container">
                     <canvas id="chart_statusmachine" style="min-height: 300px; height: 100%"></canvas>
                 </div>
@@ -405,8 +372,34 @@
                     <span class="badge" style="background-color: #9E9E9E; font-size: 15px">Dừng</span>
                 </div>
 
+
             </div>
         </div>
+
+
+        <div class="card shadow col-3 m-1 p-0">
+            <%-- <div class="card-header p-2 bg-orange text-center">--%>
+            <div class="card-header p-2 bg-gradient-gray text-center">
+                <h5 class="m-0">Error statistics chart</h5>
+            </div>
+            <div class="card-body p-2">
+                <table style="padding-left: 5px; padding-right: 5px; padding-bottom: 10px; padding-top: 10px" id="dataTable" class="table table-striped table-bordered text-center">
+                    <thead style="background-color: #b2bac2; color: black">
+                        <tr class="p-0">
+                            <th class="p-1">Time
+                            </th>
+                            <th class="p-1">Status
+                            </th>
+                            <th class="p-1">Reason
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody" class="p-0" style="font-size: 14px">
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
         <div class="card shadow col-3 m-1 p-0">
             <%-- <div class="card-header p-2 bg-orange text-center">--%>
             <div class="card-header p-2 bg-gradient-gray text-center">
@@ -419,8 +412,14 @@
 
             </div>
         </div>
+
+
+
+    </div>
+    <%-- Row 4 --%>
+    <div class="row  ml-1 mr-1">
         <div class="card shadow col-2 m-1 p-0">
-            <%-- <div class="card-header p-2 bg-orange text-center">--%>
+            <%-- OEE--%>
             <div class="card-header p-2 bg-gradient-gray text-center">
                 <h5 class="m-0">OEE</h5>
             </div>
@@ -428,7 +427,7 @@
                 <div class="oee-main-display">
                     <div class="oee-main-value text-center" id="oeeMainValue">85%</div>
 
-                    <div class= "mt-2 mb-2">
+                    <div class="mt-2 mb-2">
                         <div class="progress">
                             <div class="progress-bar" id="oeeProgressBar" style="width: 85%"></div>
                         </div>
@@ -439,8 +438,8 @@
                     <div class="metric-card availability" data-bs-toggle="tooltip"
                         data-bs-placement="top" title="Tỷ lệ thời gian thiết bị hoạt động">
                         <%--  <div class="metric-icon icon-availability">
-                            <i class="bi bi-clock-fill"></i>
-                        </div>--%>
+                      <i class="bi bi-clock-fill"></i>
+                  </div>--%>
                         <div class="metric-value">92%</div>
                         <div class="metric-label">Availability</div>
                     </div>
@@ -450,8 +449,8 @@
                     <div class="metric-card performance" data-bs-toggle="tooltip"
                         data-bs-placement="top" title="Tốc độ sản xuất thực tế so với kế hoạch">
                         <%--  <div class="metric-icon icon-performance">
-                            <i class="bi bi-speedometer2"></i>
-                        </div>--%>
+                      <i class="bi bi-speedometer2"></i>
+                  </div>--%>
                         <div class="metric-value">97%</div>
                         <div class="metric-label">Performance</div>
                     </div>
@@ -461,8 +460,8 @@
                     <div class="metric-card quality" data-bs-toggle="tooltip"
                         data-bs-placement="top" title="Tỷ lệ sản phẩm đạt chất lượng">
                         <%-- <div class="metric-icon icon-quality">
-                            <i class="bi bi-award-fill"></i>
-                        </div>--%>
+                      <i class="bi bi-award-fill"></i>
+                  </div>--%>
                         <div class="metric-value">90%</div>
                         <div class="metric-label">Quality</div>
                     </div>
@@ -470,12 +469,9 @@
 
             </div>
         </div>
-    </div>
-    <%-- Row 4 --%>
-    <div class="row  ml-1 mr-1">
 
         <!-- Biểu đồ sạn lượng theo model -->
-        <div class="card shadow col mt-0 m-1 p-0">
+        <div class="card shadow col-4 mt-0 m-1 p-0">
             <%--<div class="card-header p-2 bg-yellow text-center">--%>
             <div class="card-header p-2 bg-gradient-gray text-center">
                 <h5 class="m-0">Production Chart by Model</h5>
@@ -507,31 +503,31 @@
         ///
         // quantitypertime
         var DataLineChart = {
-            labels: ['06:00', '06:05', '06:10', '06:15', '06:20', '06:25', '06:30', '06:35', '06:40', '06:45','06:50', '06:55', '07:00', '07:05', '07:10', '07:15', '07:20', '07:25', '07:30', '07:35', '07:40', '07:45', '07:50', '07:55', '08:00', '08:05', '08:10', '08:15', '08:20', '08:25', '08:30', '08:35', '08:40', '08:45', '08:50', '08:55', '09:00', '09:05', '09:10', '09:15', '09:20', '09:25', '09:30', '09:35', '09:40', '09:45', '09:50', '09:55', '10:00', '10:05', '10:10', '10:15', '10:20', '10:25', '10:30', '10:35', '10:40', '10:45', '10:50', '10:55', '11:00', '11:05', '11:10', '11:15', '11:20', '11:25', '11:30', '11:35', '11:40', '11:45', '11:50', '11:55', '12:00', '12:05', '12:10', '12:15', '12:20', '12:25', '12:30', '12:35', '12:40', '12:45', '12:50', '12:55', '13:00', '13:05', '13:10', '13:15', '13:20', '13:25', '13:30', '13:35', '13:40', '13:45', '13:50', '13:55', '14:00', '14:05', '14:10', '14:15', '14:20', '14:25', '14:30', '14:35', '14:40', '14:45', '14:50', '14:55', '15:00', '15:05', '15:10', '15:15', '15:20', '15:25', '15:30', '15:35', '15:40', '15:45', '15:50', '15:55', '16:00', '16:05', '16:10', '16:15', '16:20', '16:25', '16:30', '16:35', '16:40', '16:45', '16:50', '16:55', '17:00', '17:05', '17:10', '17:15', '17:20', '17:25', '17:30', '17:35', '17:40', '17:45', '17:50', '17:55', '18:00', '18:05', '18:10', '18:15', '18:20', '18:25', '18:30', '18:35', '18:40', '18:45', '18:50', '18:55', '19:00', '19:05', '19:10', '19:15', '19:20', '19:25', '19:30', '19:35', '19:40', '19:45', '19:50', '19:55', '20:00', '20:05', '20:10', '20:15', '20:20', '20:25', '20:30', '20:35', '20:40', '20:45', '20:50', '20:55', '21:00', '21:05', '21:10', '21:15', '21:20', '21:25', '21:30', '21:35', '21:40', '21:45', '21:50', '21:55', '22:00', '22:05', '22:10', '22:15', '22:20', '22:25', '22:30', '22:35', '22:40', '22:45', '22:50', '22:55', '23:00', '23:05', '23:10', '23:15', '23:20', '23:25', '23:30', '23:35', '23:40', '23:45', '23:50', '23:55', '00:00', '00:05', '00:10', '00:15', '00:20', '00:25', '00:30', '00:35', '00:40', '00:45', '00:50', '00:55', '01:00', '01:05', '01:10', '01:15', '01:20', '01:25', '01:30', '01:35', '01:40', '01:45', '01:50', '01:55', '02:00', '02:05', '02:10', '02:15', '02:20', '02:25', '02:30', '02:35', '02:40', '02:45', '02:50', '02:55', '03:00', '03:05', '03:10', '03:15', '03:20', '03:25', '03:30', '03:35', '03:40', '03:45', '03:50', '03:55', '04:00', '04:05', '04:10', '04:15', '04:20', '04:25', '04:30', '04:35', '04:40', '04:45', '04:50', '04:55', '05:00', '05:05', '05:10', '05:15', '05:20', '05:25', '05:30', '05:35', '05:40', '05:45', '05:50', '05:55', '06:00'],
+            labels: ['06:00', '06:05', '06:10', '06:15', '06:20', '06:25', '06:30', '06:35', '06:40', '06:45', '06:50', '06:55', '07:00', '07:05', '07:10', '07:15', '07:20', '07:25', '07:30', '07:35', '07:40', '07:45', '07:50', '07:55', '08:00', '08:05', '08:10', '08:15', '08:20', '08:25', '08:30', '08:35', '08:40', '08:45', '08:50', '08:55', '09:00', '09:05', '09:10', '09:15', '09:20', '09:25', '09:30', '09:35', '09:40', '09:45', '09:50', '09:55', '10:00', '10:05', '10:10', '10:15', '10:20', '10:25', '10:30', '10:35', '10:40', '10:45', '10:50', '10:55', '11:00', '11:05', '11:10', '11:15', '11:20', '11:25', '11:30', '11:35', '11:40', '11:45', '11:50', '11:55', '12:00', '12:05', '12:10', '12:15', '12:20', '12:25', '12:30', '12:35', '12:40', '12:45', '12:50', '12:55', '13:00', '13:05', '13:10', '13:15', '13:20', '13:25', '13:30', '13:35', '13:40', '13:45', '13:50', '13:55', '14:00', '14:05', '14:10', '14:15', '14:20', '14:25', '14:30', '14:35', '14:40', '14:45', '14:50', '14:55', '15:00', '15:05', '15:10', '15:15', '15:20', '15:25', '15:30', '15:35', '15:40', '15:45', '15:50', '15:55', '16:00', '16:05', '16:10', '16:15', '16:20', '16:25', '16:30', '16:35', '16:40', '16:45', '16:50', '16:55', '17:00', '17:05', '17:10', '17:15', '17:20', '17:25', '17:30', '17:35', '17:40', '17:45', '17:50', '17:55', '18:00', '18:05', '18:10', '18:15', '18:20', '18:25', '18:30', '18:35', '18:40', '18:45', '18:50', '18:55', '19:00', '19:05', '19:10', '19:15', '19:20', '19:25', '19:30', '19:35', '19:40', '19:45', '19:50', '19:55', '20:00', '20:05', '20:10', '20:15', '20:20', '20:25', '20:30', '20:35', '20:40', '20:45', '20:50', '20:55', '21:00', '21:05', '21:10', '21:15', '21:20', '21:25', '21:30', '21:35', '21:40', '21:45', '21:50', '21:55', '22:00', '22:05', '22:10', '22:15', '22:20', '22:25', '22:30', '22:35', '22:40', '22:45', '22:50', '22:55', '23:00', '23:05', '23:10', '23:15', '23:20', '23:25', '23:30', '23:35', '23:40', '23:45', '23:50', '23:55', '00:00', '00:05', '00:10', '00:15', '00:20', '00:25', '00:30', '00:35', '00:40', '00:45', '00:50', '00:55', '01:00', '01:05', '01:10', '01:15', '01:20', '01:25', '01:30', '01:35', '01:40', '01:45', '01:50', '01:55', '02:00', '02:05', '02:10', '02:15', '02:20', '02:25', '02:30', '02:35', '02:40', '02:45', '02:50', '02:55', '03:00', '03:05', '03:10', '03:15', '03:20', '03:25', '03:30', '03:35', '03:40', '03:45', '03:50', '03:55', '04:00', '04:05', '04:10', '04:15', '04:20', '04:25', '04:30', '04:35', '04:40', '04:45', '04:50', '04:55', '05:00', '05:05', '05:10', '05:15', '05:20', '05:25', '05:30', '05:35', '05:40', '05:45', '05:50', '05:55', '06:00'],
             datasets: [
                 {
                     type: 'line',
                     yAxisID: 'y', // Thay đổi từ 'y-axis-1' thành 'y'
                     label: 'Plan',
                     borderColor: 'rgb(75, 192, 192)',
-                    data: [0,10,20,30,40,40,40,60,80,90,100,110],
+                    data: [0, 10, 20, 30, 40, 40, 40, 60, 80, 90, 100, 110],
                     fill: false,
                     //tension: 0, // làm line đỡ mượt
                     borderWidth: 2,
                     pointRadius: 2,
-                    
+
                 },
                 {
                     type: 'line',
                     yAxisID: 'y', // Thay đổi từ 'y-axis-1' thành 'y'
                     label: 'Actual',
                     borderColor: '#b38600',
-                    data: [0, 10, 20, 30, 40, 40, 40, 60, 80, 85,101,120],
+                    data: [0, 10, 20, 30, 40, 40, 40, 60, 80, 85, 101, 120],
                     fill: false,
                     //tension: 0, // làm line đỡ mượt
                     borderWidth: 2,
                     pointRadius: 2,
-                    
+
                 },
                 {
                     type: 'bar',
@@ -542,8 +538,8 @@
                     },
                     yAxisID: 'y1', // Thay đổi từ 'y-axis-2' thành 'y1'
                     order: 1,
-                    data: [0, 0, 0, 0, 0, 0, 0, 0, 0, -5,1,10],
-                   
+                    data: [0, 0, 0, 0, 0, 0, 0, 0, 0, -5, 1, 10],
+
                 }
             ]
         };
@@ -612,275 +608,109 @@
         };
         var lineChartCanvas = $('#chart_quantitybytime').get(0).getContext('2d');
 
-       
+
         ///
 
+
         var barChartCanvas = $('#chart_quantitymodel').get(0).getContext('2d');
+
         var databarchart = {
-            labels: ['BV', 'DZ', 'BA', 'BX'],
+            labels: ['Q1', 'Q2', 'Q3', 'Q4'], // Thêm labels - quan trọng!
             datasets: [
                 {
                     type: 'bar',
                     label: 'Plan',
-                    backgroundColor: '#1a53ff',
-                    //order: 2,
+                    backgroundColor: 'rgba(26, 83, 255, 0.7)',
+                    order: 2,
+
                     data: [100, 500, 200, 400]
                 },
                 {
                     type: 'bar',
                     label: 'Plan/Time',
-                    backgroundColor: '#f5e10c',
-                    //categoryPercentage: 0.6,
-                    //order: 1,
+                    backgroundColor: 'rgba(245, 225, 12, 0.8)',
+                    categoryPercentage: 0.6,
+                    categoryPercentage: 0.6,
+                    order: 1,
                     data: [80, 400, 150, 300]
                 },
                 {
                     type: 'bar',
                     label: 'Actual',
-                    backgroundColor: '#248f24',
-                    //order: 0,
-                    //categoryPercentage: 0.35,
+                    backgroundColor: 'rgba(36, 143, 36, 0.9)',
+                    order: 0,
+                    categoryPercentage: 0.35,
                     data: [60, 400, 130, 100]
-                },
+                }
             ]
-        }
+        };
+
         var barChartOptions = {
             responsive: true,
             maintainAspectRatio: false,
             datasetFill: false,
             scales: {
+                // Chart.js 3: Thay đổi từ xAxes/yAxes thành x/y
                 x: {
                     ticks: {
                         font: {
-                            size: 15,
-                            weight: 'bold'
-                        },
-                        color: 'black'
+                            size: 20 // Thay đổi từ fontSize thành font.size
+                        }
                     },
                     grid: {
-                        display: false
+                        display: false // Thay đổi từ gridLines thành grid
                     },
-                    position: 'bottom'
+                    stacked: true,
                 },
                 y: {
                     ticks: {
                         font: {
-                            size: 15,
-                            weight: 'bold'
+                            size: 15
                         },
-                        color: 'black'
+                        beginAtZero: true,
                     },
-                    max: 1000
                 }
             },
+            // Chart.js 3: legend được chuyển vào plugins
             plugins: {
                 legend: {
                     position: 'bottom',
                     labels: {
                         font: {
-                            size: 15,
-                            weight: 'bold'
-                        },
-                        color: 'black'
+                            size: 15 // Thay đổi từ fontSize thành font.size
+                        }
                     }
                 }
             },
-            // Chart.js 3 - Cách mới
             animation: {
-                duration: 1000,
-                onComplete: function (context) {
-                    const chart = context.chart;
-                    const ctx = chart.ctx;
+                duration: 1,
+                onComplete: function (context) { // Chart.js 3: thêm context parameter
+                    var chart = context.chart; // Thay đổi cách lấy chart instance
+                    var ctx = chart.ctx;
                     ctx.font = "500 18px Arial";
                     ctx.fillStyle = '#000000';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'bottom';
-                    chart.data.datasets.forEach(function (dataset, datasetIndex) {
-                        const meta = chart.getDatasetMeta(datasetIndex);
-                        meta.data.forEach(function (element, index) {
-                            const data = dataset.data[index];
-                            const position = element.getProps(['x', 'y'], true);
-                            ctx.fillText(data, position.x, position.y - 5);
+
+                    chart.data.datasets.forEach(function (dataset, i) {
+                        var meta = chart.getDatasetMeta(i); // Thay đổi cách lấy meta
+                        meta.data.forEach(function (bar, index) {
+                            var data = dataset.data[index];
+                            // Chart.js 3: Thay đổi cách lấy position
+                            var position = bar.getProps(['x', 'y'], true);
+                            ctx.fillText(data, position.x, position.y);
                         });
                     });
                 }
             }
         }
 
-        //var barChartCanvas = $('#chart_quantitymodel').get(0).getContext('2d');
-        //var databarchart = {
-        //    labels: ['BV', 'DZ', 'BA', 'BX'],
-        //    datasets: [
-        //        {
-        //            type: 'bar',
-        //            label: 'Plan',
-        //            backgroundColor: '#1a53ff',
-        //            order: 2,
-        //            barPercentage: 0.2, // Narrowest for highest order
-        //            data: [100, 500, 200, 400]
-        //        },
-        //        {
-        //            type: 'bar',
-        //            label: 'Plan/Time',
-        //            backgroundColor: '#f5e10c',
-        //            order: 1,
-        //            barPercentage: 0.4, // Medium width
-        //            data: [80, 400, 150, 300]
-        //        },
-        //        {
-        //            type: 'bar',
-        //            label: 'Actual',
-        //            backgroundColor: '#248f24',
-        //            order: 0,
-        //            barPercentage: 0.6, // Widest for lowest order
-        //            data: [60, 400, 130, 100]
-        //        }
-        //    ]
-        //};
 
-        //var barChartOptions = {
-        //    responsive: true,
-        //    maintainAspectRatio: false,
-        //    datasetFill: false,
-        //    scales: {
-        //        x: {
-        //            ticks: {
-        //                font: {
-        //                    size: 15,
-        //                    weight: 'bold'
-        //                },
-        //                color: 'black'
-        //            },
-        //            grid: {
-        //                display: false
-        //            },
-        //            offset: false // Disable offset to allow bars to overlap
-        //        },
-        //        y: {
-        //            ticks: {
-        //                font: {
-        //                    size: 15,
-        //                    weight: 'bold'
-        //                },
-        //                color: 'black'
-        //            },
-        //            beginAtZero: true // Ensure bars start from origin (y=0)
-        //        }
-        //    },
-        //    plugins: {
-        //        legend: {
-        //            position: 'bottom',
-        //            labels: {
-        //                font: {
-        //                    size: 15
-        //                }
-        //            }
-        //        }
-        //    },
-        //    animation: {
-        //        duration: 1000,
-        //        onComplete: function (context) {
-        //            const chart = context.chart;
-        //            const ctx = chart.ctx;
-        //            ctx.font = "500 18px Arial";
-        //            ctx.fillStyle = '#000000';
-        //            ctx.textAlign = 'center';
-        //            ctx.textBaseline = 'bottom';
-        //            chart.data.datasets.forEach(function (dataset, datasetIndex) {
-        //                const meta = chart.getDatasetMeta(datasetIndex);
-        //                meta.data.forEach(function (element, index) {
-        //                    const data = dataset.data[index];
-        //                    const position = element.getProps(['x', 'y'], true);
-        //                    ctx.fillText(data, position.x, position.y - 5);
-        //                });
-        //            });
-        //        }
-        //    }
-        //};
 
         //Biểu đồ trạng thái máy theo thời gian
         // Lưu reference của chart để có thể cập nhật sau
         let ganttChart;
-        // Khởi tạo chart ban đầu
-        //function initGanttChart(machineData) {
-        //    const ganttDatasets = [{
-        //        data: machineData.map(item => ({
-        //            x: [new Date(item.start), new Date(item.end)],
-        //            y: ''
-        //        })),
-        //        backgroundColor: machineData.map(item => {
-        //            return item.status === "Chạy" ? "#4CAF50" :
-        //                item.status === "Lỗi" ? "#F44336" : "#9E9E9E";
-        //        }),
-        //        borderColor: machineData.map(item => {
-        //            return item.status === "Chạy" ? "#4CAF50" :
-        //                item.status === "Lỗi" ? "#F44336" : "#9E9E9E";
-        //        }),
-        //        borderWidth: 1
-        //    }];
 
-        //    const ganttCtx = document.getElementById('chart_statusmachine').getContext('2d');
-        //    ganttChart = new Chart(ganttCtx, {
-        //        type: 'bar',
-        //        data: { datasets: ganttDatasets },
-        //        options: {
-        //            indexAxis: 'y',
-        //            categoryPercentage: 0.3,
-        //            barPercentage: 0.5,
-        //            scales: {
-        //                x: {
-        //                    type: 'time',
-        //                    time: { unit: 'hour', displayFormats: { hour: 'HH:mm' } },
-        //                    title: { display: false, text: 'Thời gian', font: { size: 14 }, color: 'black' },
-        //                    ticks: { color: 'black', font: { size: 12 } },
-        //                    min: '2025-05-03 08:00:00',
-        //                    max: '2025-05-03 24:00:00'
-        //                },
-        //                y: {
-        //                    ticks: { color: 'black', font: { size: 12 } },
-        //                    title: { display: false, text: 'Máy', font: { size: 14 }, color: 'black' }
-        //                }
-        //            },
-        //            plugins: {
-        //                legend: { display: false },
-        //                tooltip: {
-        //                    callbacks: {
-        //                        label: function (context) {
-        //                            const data = context.raw;
-        //                            const start = new Date(data.x[0]).toLocaleTimeString('vi-VN');
-        //                            const end = new Date(data.x[1]).toLocaleTimeString('vi-VN');
-        //                            return `${start} - ${end}`;
-        //                        }
-        //                    }
-        //                }
-        //            },
-        //            maintainAspectRatio: false
-        //        }
-        //    });
-        //}
-        //function updateGanttChart(newMachineData) {
-        //    if (!ganttChart) return;
-
-        //    // Cập nhật data
-        //    ganttChart.data.datasets[0].data = newMachineData.map(item => ({
-        //        x: [new Date(item.start), new Date(item.end)],
-        //        y: ''
-        //    }));
-
-        //    // Cập nhật màu sắc
-        //    ganttChart.data.datasets[0].backgroundColor = newMachineData.map(item => {
-        //        return item.status === "Chạy" ? "#4CAF50" :
-        //            item.status === "Lỗi" ? "#F44336" : "#9E9E9E";
-        //    });
-
-        //    ganttChart.data.datasets[0].borderColor = newMachineData.map(item => {
-        //        return item.status === "Chạy" ? "#4CAF50" :
-        //            item.status === "Lỗi" ? "#F44336" : "#9E9E9E";
-        //    });
-
-        //    // Render lại chart
-        //    ganttChart.update();
-        //}
         function generateMachineData(machineName, date = '2025-05-03') {
             const states = ['Chạy', 'Dừng', 'Lỗi'];
             const weights = { 'Chạy': 0.7, 'Dừng': 0.15, 'Lỗi': 0.15 }; // Chạy chiếm đa số
@@ -925,15 +755,24 @@
 
         $(document).ready(function () {
 
+            // Khởi tạo DataTable
+            var table = $('#dataTable').DataTable({
+                pageLength: 3,
+                lengthChange: false,
+                paging: true,
+                searching: false,
+                ordering: false, 
+                info: false,
+               
+
+            });
             ///
             var linechart = new Chart(lineChartCanvas, {
                 type: 'line',
                 data: DataLineChart,
                 options: LineChartOption
             })
-
             ///
-
             var barchartplan = new Chart(barChartCanvas, {
                 type: 'bar',
                 data: databarchart,
@@ -949,12 +788,59 @@
             var proxy = $.connection.PCMHub;
             var isUpdating = true;
             var interactionTimeout;
+            // Bắt đầu kết nối SignalR
+            $.connection.hub.start().done(function () {
+                console.log("SignalR connected");
+                //proxy.server.getInitialData();
+            }).fail(function (error) {
+                console.error("SignalR connection failed: ", error);
+            });
 
             // Xử lý khi nhận dữ liệu mới
-            proxy.client.UpdateData = function (data) {
+            proxy.client.updateData = function (data) {
                 if (!isUpdating) return;
 
-                debugger;
+                /*Row1*/
+                var data_quantityPCM = data.quantityPCM;
+                $('#PlanQuantity').html(data_quantityPCM.PlanQuantity);
+                $('#OkQuantity').html(data_quantityPCM.OkQuantity);
+                $('#NgQuantity').html(data_quantityPCM.NgQuantity);
+                $('#RemainQuantity').html(data_quantityPCM.PlanQuantity);
+                /*Row2_1*/
+                var data_statusMachine = data.statusMachine;
+                $('#txt_statusmachine').html(data_statusMachine.Status);
+                if (data_statusMachine.Status.toUpperCase() == 'RUNNING') {
+                    $('#txt_statusmachine').removeClass('bg-danger')
+                    $('#txt_statusmachine').addClass('bg-success')
+                }
+                else {
+                    $('#txt_statusmachine').removeClass('bg-success')
+                    $('#txt_statusmachine').addClass('bg-danger')
+                }
+                $('#stop - reason').html(data_statusMachine.ReasonStop);
+                $('#total-stops').html(data_statusMachine.TimeStop);
+                $('#total-stop-time').html(data_statusMachine.TotalTimeStop);
+                /*Row2_2*/
+                var data_dataGanttCharts = data.dataGanttCharts;
+                ganttchart.data.datasets = [data_dataGanttCharts];
+                ganttchart.update();
+                /*Row2_3*/
+                var data_statusMachineDetail = data.statusMachineDetail;
+                table.clear();
+                $.each(data_statusMachineDetail, function (index, item) {
+                    // Thêm dòng với class
+                    table.row.add([
+                        item.TimeInsert,
+                        item.Status,
+                        item.Reason,
+                       
+                    ]);
+                });
+                table.draw(false);
+                /*Row2_4*/
+                /*Row3_1*/
+                /*Row3_2*/
+                /*Row3_3*/
 
             };
 
@@ -970,50 +856,42 @@
                 }, 5000);
             }
             // Gắn sự kiện chuột trên table
-            /*$('#dataTable').on('mousemove click', handleMouseInteraction);*/
-
-            // Bắt đầu kết nối SignalR
-            $.connection.hub.start().done(function () {
-                console.log("SignalR connected");
-                proxy.server.getInitialData();
-            }).fail(function (error) {
-                console.error("SignalR connection failed: ", error);
-            });
+            $('#dataTable').on('mousemove click', handleMouseInteraction);
 
 
-            //
             // Dữ liệu Gantt
+
             const machineData = [
                 ...generateMachineData("Máy 1"),
                 /* ...generateMachineData("Máy 2")*/
             ];
 
             const ganttDatasets = [{
-                //label: 'Máy 1',
                 data: machineData.map(item => ({
                     x: [new Date(item.start), new Date(item.end)],
                     y: '' // Tất cả đều có cùng 1 tên để hiển thị trên 1 dòng
                 })),
                 backgroundColor: machineData.map(item => {
-                    return item.status === "Chạy" ? "#4CAF50" :
-                        item.status === "Lỗi" ? "#F44336" : "#9E9E9E";
+                    return item.status === "Run" ? "#4CAF50" :
+                        item.status === "Stop" ? "#F44336" : "#9E9E9E";
                 }),
                 borderColor: machineData.map(item => {
-                    return item.status === "Chạy" ? "#4CAF50" :
-                        item.status === "Lỗi" ? "#F44336" : "#9E9E9E";
+                    return item.status === "Run" ? "#4CAF50" :
+                        item.status === "Stop" ? "#F44336" : "#9E9E9E";
                 }),
                 borderWidth: 1
             }];
+
             const ganttCtx = document.getElementById('chart_statusmachine').getContext('2d');
-            new Chart(ganttCtx, {
+            var ganttchart = new Chart(ganttCtx, {
                 type: 'bar',
-                data: { datasets: ganttDatasets },
+                //data: { datasets: ganttDatasets },
                 options: {
                     indexAxis: 'y',
                     // Cách 1: Sử dụng barThickness để đặt độ dày cố định (pixel)
                     // barThickness: 20, // Độ dày cố định 20px cho mỗi thanh
                     // Điều chỉnh để hiển thị trên 1 dòng
-                    categoryPercentage: 0.3, // Sử dụng toàn bộ không gian category
+                    categoryPercentage: 0.5, // Sử dụng toàn bộ không gian category
                     barPercentage: 0.5,      // Các thanh chiếm 80% không gian
                     // Cách 3: Sử dụng maxBarThickness để giới hạn độ dày tối đa
                     // maxBarThickness: 50, // Độ dày tối đa 50px
@@ -1074,6 +952,10 @@
                     maintainAspectRatio: false
                 }
             });
+
+
+
+
             // --- Vẽ biểu đồ lỗi ---
             // Dữ liệu mẫu về các loại lỗi máy
             let errorData = {

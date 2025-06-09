@@ -2380,6 +2380,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="MethodLoadData\LoadDataVisualize.cs" />
+    <Compile Include="Model\Common\DataGanttChart.cs" />
+    <Compile Include="Model\Common\Quantity.cs" />
+    <Compile Include="Model\Common\StatusMachine.cs" />
+    <Compile Include="Model\Common\StatusMachineDetail.cs" />
     <Compile Include="SignalR\PCMHub.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="UI_PCM\PCM_RealTime.aspx.cs">

@@ -1,27 +1,69 @@
 ﻿using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
+using PAPVN.Model.Common;
 using PAPVN.WebFormSignalR;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Web;
 
 namespace PAPVN.SignalR
 {
     [HubName("PCMHub")]
-    public class PCMHub: Hub
+    public class PCMHub : Hub
     {
         // Lưu trữ option của từng client theo ConnectionId
         private static readonly ConcurrentDictionary<string, string> ClientOptions = new ConcurrentDictionary<string, string>();
+        private static readonly Timer Timer = new Timer(10000);
+        private static readonly List<DataGanttChart> dataGanttChart = new List<DataGanttChart>();
+
+
+        static PCMHub()
+        {
+            Timer.Elapsed += async (sender, e) => await UpdateData();
+            Timer.AutoReset = true;
+            Timer.Start();
+
+        }
+        // Hàm gửi dữ liệu định kỳ
+        private static async Task UpdateData()
+        {
+            Random rd = new Random();
+            string St = "";
+            int randomValue = rd.Next(1, 100);
+            if (randomValue < 80)
+            {
+                St = "Run";
+            }
+            
+            else
+            {
+                St = "Stop";
+            }
+            dataGanttChart.Add(new DataGanttChart()
+            {
+                Start = DateTime.Now.AddMinutes(-30),
+                End = DateTime.Now.AddMinutes(30),
+                Status = St,
+
+            });
+            foreach (var client in ClientOptions)
+            {
+                string connectionId = client.Key;
+                string option = client.Value;
+                SendDataToClient(connectionId, option);
+            }
+        }
 
         public override Task OnConnected()
         {
             // Mặc định option khi client kết nối (ví dụ: "All Model")
             ClientOptions.TryAdd(Context.ConnectionId, "ALL");
             // Gửi dữ liệu ban đầu ngay khi kết nối
-            SendChartData("ALL");
+            SendDataToClient(Context.ConnectionId, "ALL");
             return base.OnConnected();
         }
 
@@ -40,91 +82,72 @@ namespace PAPVN.SignalR
             SendDataToClient(Context.ConnectionId, option);
         }
 
-        private void SendDataToClient(string connectionId, string option)
-        {
-            // Logic to send data to the client based on the option
-            // This is a placeholder for actual implementation
-        }
-
-
-        //
-        public void GetInitialData(Data data)
-        {
-            Clients.Caller.UpdateData(data);
-        }
-
-
-        // Thêm phương thức này vào PCMHub class
-        public async Task SendChartData(string option = "ALL")
+        public static void SendDataToClient(string connectionId, string Optiontable)
         {
             try
             {
-                var chartData = GenerateChartData(option);
-                // Gửi dữ liệu đến client gọi phương thức này
-                await Clients.Caller.SendAsync("UpdateData", chartData);
-            }
-            catch (Exception)
-            {
-               
-            }
-        }
-
-        // Phương thức tạo dữ liệu cho chart
-        private List<object> GenerateChartData(string option = "ALL")
-        {
-            var chartData = new List<object>();
-            var random = new Random();
-            var statuses = new[] { "Chạy", "Lỗi", "Dừng" };
-
-            // Thời gian bắt đầu và kết thúc trong ngày
-            var baseDate = DateTime.Today;
-            var startTime = baseDate.AddHours(8); // 8:00 AM
-            var endTime = baseDate.AddHours(24);  // 12:00 AM
-
-            var currentTime = startTime;
-            var id = 1;
-
-            // Tạo dữ liệu mẫu
-            while (currentTime < endTime)
-            {
-                // Thời gian hoạt động ngẫu nhiên từ 15 phút đến 2 giờ
-                var durationMinutes = random.Next(15, 120);
-                var taskEndTime = currentTime.AddMinutes(durationMinutes);
-
-                // Đảm bảo không vượt quá thời gian kết thúc
-                if (taskEndTime > endTime)
-                    taskEndTime = endTime;
-
-                // Chọn trạng thái ngẫu nhiên
-                var status = statuses[random.Next(statuses.Length)];
-
-                // Tạo object dữ liệu cho chart
-                var dataPoint = new
+                Random random = new Random();
+                Quantity quantityPCM = new Quantity()
                 {
-                    id = id++,
-                    start = currentTime.ToString("yyyy-MM-ddTHH:mm:ss"),
-                    end = taskEndTime.ToString("yyyy-MM-ddTHH:mm:ss"),
-                    status = status,
-                    duration = (int)(taskEndTime - currentTime).TotalMinutes,
-                    machine = "Máy 1"
+                    PlanQuantity = random.Next(1000, 3000).ToString(),
+                    OkQuantity = random.Next(1000, 2000).ToString(),
+                    NgQuantity = random.Next(500, 2000).ToString(),
+                    RemainQuantity = random.Next(500, 2000).ToString()
                 };
 
-                chartData.Add(dataPoint);
 
-                // Chuyển sang thời gian tiếp theo
-                currentTime = taskEndTime;
 
-                // Thêm khoảng nghỉ ngẫu nhiên (0-15 phút)
-                if (currentTime < endTime)
+
+                StatusMachine statusMachine = new StatusMachine()
                 {
-                    var breakMinutes = random.Next(0, 16);
-                    currentTime = currentTime.AddMinutes(breakMinutes);
-                }
-            }
+                    Status = "Stop",
+                    ReasonStop = "No issues",
+                    TimeStop = "2",
+                    TotalTimeStop = "00:00:00"
+                };
 
-            return chartData;
+
+                var data = new DataSend()
+                {
+                    quantityPCM = quantityPCM,
+                    statusMachine = statusMachine,
+                    statusMachineDetail = new List<StatusMachineDetail>
+                    {
+                        new StatusMachineDetail { TimeInsert = "2023-10-01 10:00:00", Status = "Running", Reason = "No issues" },
+                        new StatusMachineDetail { TimeInsert = "2023-10-01 11:00:00", Status = "Stop", Reason = "Maintenance" },
+                        new StatusMachineDetail { TimeInsert = "2023-10-01 12:00:00", Status = "Running", Reason = "No issues" },
+                         new StatusMachineDetail { TimeInsert = "2023-10-01 11:00:00", Status = "Stop", Reason = "Maintenance" },
+                        new StatusMachineDetail { TimeInsert = "2023-10-01 12:00:00", Status = "Running", Reason = "No issues" },
+                         new StatusMachineDetail { TimeInsert = "2023-10-01 11:00:00", Status = "Stop", Reason = "Maintenance" },
+                        new StatusMachineDetail { TimeInsert = "2023-10-01 12:00:00", Status = "Running", Reason = "No issues" },
+                         new StatusMachineDetail { TimeInsert = "2023-10-01 11:00:00", Status = "Stop", Reason = "Maintenance" },
+                        new StatusMachineDetail { TimeInsert = "2023-10-01 12:00:00", Status = "Running", Reason = "No issues" }
+                    },
+                    dataGanttCharts = dataGanttChart
+                    
+                };
+
+
+
+                var hub = GlobalHost.ConnectionManager.GetHubContext<PCMHub>();
+                hub.Clients.All.updateData(data);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error in SendDataToClient: {ex.Message}");
+            }
         }
 
+    }
+    public class DataSend
+    {
+        public Quantity quantityPCM { get; set; }
+
+        public StatusMachine statusMachine { get; set; }
+
+        public List<StatusMachineDetail> statusMachineDetail { get; set; }
+
+        public List<DataGanttChart> dataGanttCharts { get; set; }
 
     }
 }
