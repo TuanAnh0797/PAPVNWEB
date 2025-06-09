@@ -2381,7 +2381,10 @@
     </Compile>
     <Compile Include="MethodLoadData\LoadDataVisualize.cs" />
     <Compile Include="Model\Common\DataGanttChart.cs" />
+    <Compile Include="Model\Common\ErrorChartData.cs" />
+    <Compile Include="Model\Common\OEEData.cs" />
     <Compile Include="Model\Common\Quantity.cs" />
+    <Compile Include="Model\Common\QuantitybyModel.cs" />
     <Compile Include="Model\Common\StatusMachine.cs" />
     <Compile Include="Model\Common\StatusMachineDetail.cs" />
     <Compile Include="SignalR\PCMHub.cs" />

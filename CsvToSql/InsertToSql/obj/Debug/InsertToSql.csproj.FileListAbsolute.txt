@@ -1,0 +1,111 @@
+D:\InsertToSql\InsertToSql\bin\Debug\InsertToSql.exe.config
+D:\InsertToSql\InsertToSql\bin\Debug\InsertToSql.exe
+D:\InsertToSql\InsertToSql\bin\Debug\InsertToSql.pdb
+D:\InsertToSql\InsertToSql\obj\Debug\InsertToSql.csproj.AssemblyReference.cache
+D:\InsertToSql\InsertToSql\obj\Debug\InsertToSql.Form1.resources
+D:\InsertToSql\InsertToSql\obj\Debug\InsertToSql.Properties.Resources.resources
+D:\InsertToSql\InsertToSql\obj\Debug\InsertToSql.csproj.GenerateResource.cache
+D:\InsertToSql\InsertToSql\obj\Debug\InsertToSql.csproj.CoreCompileInputs.cache
+D:\InsertToSql\InsertToSql\obj\Debug\InsertToSql.exe
+D:\InsertToSql\InsertToSql\obj\Debug\InsertToSql.pdb
+C:\Users\PC\Desktop\New folder (4)\CsvToSql\InsertToSql\bin\Debug\InsertToSql.exe.config
+C:\Users\PC\Desktop\New folder (4)\CsvToSql\InsertToSql\bin\Debug\InsertToSql.exe
+C:\Users\PC\Desktop\New folder (4)\CsvToSql\InsertToSql\bin\Debug\InsertToSql.pdb
+C:\Users\PC\Desktop\New folder (4)\CsvToSql\InsertToSql\bin\Debug\Newtonsoft.Json.dll
+C:\Users\PC\Desktop\New folder (4)\CsvToSql\InsertToSql\bin\Debug\Newtonsoft.Json.xml
+C:\Users\PC\Desktop\New folder (4)\CsvToSql\InsertToSql\obj\Debug\InsertToSql.csproj.AssemblyReference.cache
+C:\Users\PC\Desktop\New folder (4)\CsvToSql\InsertToSql\obj\Debug\InsertToSql.Form1.resources
+C:\Users\PC\Desktop\New folder (4)\CsvToSql\InsertToSql\obj\Debug\InsertToSql.Properties.Resources.resources
+C:\Users\PC\Desktop\New folder (4)\CsvToSql\InsertToSql\obj\Debug\InsertToSql.csproj.GenerateResource.cache
+C:\Users\PC\Desktop\New folder (4)\CsvToSql\InsertToSql\obj\Debug\InsertToSql.csproj.CoreCompileInputs.cache
+C:\Users\PC\Desktop\New folder (4)\CsvToSql\InsertToSql\obj\Debug\InsertToSql.csproj.CopyComplete
+C:\Users\PC\Desktop\New folder (4)\CsvToSql\InsertToSql\obj\Debug\InsertToSql.exe
+C:\Users\PC\Desktop\New folder (4)\CsvToSql\InsertToSql\obj\Debug\InsertToSql.pdb
+C:\Users\PC\Desktop\New folder (4)\CsvToSql\InsertToSql\bin\Debug\config.json
+C:\Users\70P7970\Desktop\InsertToSql\CsvToSql\InsertToSql\bin\Debug\config.json
+C:\Users\70P7970\Desktop\InsertToSql\CsvToSql\InsertToSql\bin\Debug\InsertToSql.exe.config
+C:\Users\70P7970\Desktop\InsertToSql\CsvToSql\InsertToSql\bin\Debug\InsertToSql.exe
+C:\Users\70P7970\Desktop\InsertToSql\CsvToSql\InsertToSql\bin\Debug\InsertToSql.pdb
+C:\Users\70P7970\Desktop\InsertToSql\CsvToSql\InsertToSql\bin\Debug\Newtonsoft.Json.dll
+C:\Users\70P7970\Desktop\InsertToSql\CsvToSql\InsertToSql\bin\Debug\Newtonsoft.Json.xml
+C:\Users\70P7970\Desktop\InsertToSql\CsvToSql\InsertToSql\obj\Debug\InsertToSql.csprojResolveAssemblyReference.cache
+C:\Users\70P7970\Desktop\InsertToSql\CsvToSql\InsertToSql\obj\Debug\InsertToSql.Form1.resources
+C:\Users\70P7970\Desktop\InsertToSql\CsvToSql\InsertToSql\obj\Debug\InsertToSql.Properties.Resources.resources
+C:\Users\70P7970\Desktop\InsertToSql\CsvToSql\InsertToSql\obj\Debug\InsertToSql.csproj.GenerateResource.Cache
+C:\Users\70P7970\Desktop\InsertToSql\CsvToSql\InsertToSql\obj\Debug\InsertToSql.exe
+C:\Users\70P7970\Desktop\InsertToSql\CsvToSql\InsertToSql\obj\Debug\InsertToSql.pdb
+C:\Users\PC\Desktop\CsvToSql\InsertToSql\bin\Debug\config.json
+C:\Users\PC\Desktop\CsvToSql\InsertToSql\bin\Debug\InsertToSql.exe.config
+C:\Users\PC\Desktop\CsvToSql\InsertToSql\bin\Debug\InsertToSql.exe
+C:\Users\PC\Desktop\CsvToSql\InsertToSql\bin\Debug\InsertToSql.pdb
+C:\Users\PC\Desktop\CsvToSql\InsertToSql\bin\Debug\Newtonsoft.Json.dll
+C:\Users\PC\Desktop\CsvToSql\InsertToSql\bin\Debug\Newtonsoft.Json.xml
+C:\Users\PC\Desktop\CsvToSql\InsertToSql\obj\Debug\InsertToSql.csproj.AssemblyReference.cache
+C:\Users\PC\Desktop\CsvToSql\InsertToSql\obj\Debug\InsertToSql.Form1.resources
+C:\Users\PC\Desktop\CsvToSql\InsertToSql\obj\Debug\InsertToSql.Properties.Resources.resources
+C:\Users\PC\Desktop\CsvToSql\InsertToSql\obj\Debug\InsertToSql.csproj.GenerateResource.cache
+C:\Users\PC\Desktop\CsvToSql\InsertToSql\obj\Debug\InsertToSql.csproj.CoreCompileInputs.cache
+C:\Users\PC\Desktop\CsvToSql\InsertToSql\obj\Debug\InsertToSql.csproj.CopyComplete
+C:\Users\PC\Desktop\CsvToSql\InsertToSql\obj\Debug\InsertToSql.exe
+C:\Users\PC\Desktop\CsvToSql\InsertToSql\obj\Debug\InsertToSql.pdb
+C:\Users\70P7970\Desktop\CsvToSql\InsertToSql\bin\Debug\config.json
+C:\Users\70P7970\Desktop\CsvToSql\InsertToSql\bin\Debug\InsertToSql.exe.config
+C:\Users\70P7970\Desktop\CsvToSql\InsertToSql\bin\Debug\InsertToSql.exe
+C:\Users\70P7970\Desktop\CsvToSql\InsertToSql\bin\Debug\InsertToSql.pdb
+C:\Users\70P7970\Desktop\CsvToSql\InsertToSql\bin\Debug\Newtonsoft.Json.dll
+C:\Users\70P7970\Desktop\CsvToSql\InsertToSql\bin\Debug\Newtonsoft.Json.xml
+C:\Users\70P7970\Desktop\CsvToSql\InsertToSql\obj\Debug\InsertToSql.csprojResolveAssemblyReference.cache
+C:\Users\70P7970\Desktop\CsvToSql\InsertToSql\obj\Debug\InsertToSql.Form1.resources
+C:\Users\70P7970\Desktop\CsvToSql\InsertToSql\obj\Debug\InsertToSql.Properties.Resources.resources
+C:\Users\70P7970\Desktop\CsvToSql\InsertToSql\obj\Debug\InsertToSql.csproj.GenerateResource.Cache
+C:\Users\70P7970\Desktop\CsvToSql\InsertToSql\obj\Debug\InsertToSql.exe
+C:\Users\70P7970\Desktop\CsvToSql\InsertToSql\obj\Debug\InsertToSql.pdb
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\obj\Debug\InsertToSql.csproj.AssemblyReference.cache
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\obj\Debug\InsertToSql.Form1.resources
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\obj\Debug\InsertToSql.Properties.Resources.resources
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\obj\Debug\InsertToSql.csproj.GenerateResource.cache
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\obj\Debug\InsertToSql.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\config.json
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\InsertToSql.exe.config
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\InsertToSql.exe
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\InsertToSql.pdb
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\BouncyCastle.Cryptography.dll
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\Google.Protobuf.dll
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\K4os.Compression.LZ4.dll
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\K4os.Compression.LZ4.Streams.dll
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\K4os.Hash.xxHash.dll
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\MySql.Data.dll
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\MySqlConnector.dll
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\System.Buffers.dll
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\System.Configuration.ConfigurationManager.dll
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\System.IO.Pipelines.dll
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\System.Memory.dll
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\ZstdSharp.dll
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\BouncyCastle.Cryptography.xml
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\Google.Protobuf.pdb
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\Google.Protobuf.xml
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\K4os.Compression.LZ4.xml
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\K4os.Compression.LZ4.Streams.xml
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\K4os.Hash.xxHash.xml
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\MySql.Data.xml
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\MySqlConnector.xml
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\System.Buffers.xml
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\System.IO.Pipelines.xml
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\System.Memory.xml
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\obj\Debug\InsertToSql.csproj.CopyComplete
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\obj\Debug\InsertToSql.exe
+C:\Users\Admin\Desktop\New folder\CsvToSql\InsertToSql\obj\Debug\InsertToSql.pdb

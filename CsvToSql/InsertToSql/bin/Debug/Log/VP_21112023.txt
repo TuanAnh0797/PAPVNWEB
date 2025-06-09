@@ -1,0 +1,9 @@
+﻿22:09:50 21/11/2023: C:\Users\PC\Desktop\test\New Text Document.csv: Cannot access destination table 'VP'.
+22:09:55 21/11/2023: C:\Users\PC\Desktop\test\New Text Document.csv: Cannot access destination table 'VP'.
+22:10:00 21/11/2023: C:\Users\PC\Desktop\test\New Text Document.csv: Cannot access destination table 'VP'.
+22:10:05 21/11/2023: C:\Users\PC\Desktop\test\New Text Document.csv: Cannot access destination table 'VP'.
+22:10:10 21/11/2023: C:\Users\PC\Desktop\test\New Text Document.csv: Cannot access destination table 'VP'.
+22:10:15 21/11/2023: C:\Users\PC\Desktop\test\New Text Document.csv: Cannot access destination table 'VP'.
+22:10:20 21/11/2023: C:\Users\PC\Desktop\test\New Text Document.csv: Cannot access destination table 'VP'.
+22:10:25 21/11/2023: C:\Users\PC\Desktop\test\New Text Document.csv: Cannot access destination table 'VP'.
+22:10:30 21/11/2023: C:\Users\PC\Desktop\test\New Text Document.csv: Cannot access destination table 'VP'.

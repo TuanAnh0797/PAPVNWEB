@@ -1,0 +1,140 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\CsvToSql\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B3E3F7F4-4E26-42F5-A42E-6EAE0A180C11}|InsertToSql\\InsertToSql.csproj|d:\\csvtosql\\inserttosql\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B3E3F7F4-4E26-42F5-A42E-6EAE0A180C11}|InsertToSql\\InsertToSql.csproj|solutionrelative:inserttosql\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B3E3F7F4-4E26-42F5-A42E-6EAE0A180C11}|InsertToSql\\InsertToSql.csproj|d:\\csvtosql\\inserttosql\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{B3E3F7F4-4E26-42F5-A42E-6EAE0A180C11}|InsertToSql\\InsertToSql.csproj|solutionrelative:inserttosql\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B3E3F7F4-4E26-42F5-A42E-6EAE0A180C11}|InsertToSql\\InsertToSql.csproj|D:\\CsvToSql\\inserttosql\\config.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{B3E3F7F4-4E26-42F5-A42E-6EAE0A180C11}|InsertToSql\\InsertToSql.csproj|solutionrelative:inserttosql\\config.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B3E3F7F4-4E26-42F5-A42E-6EAE0A180C11}|InsertToSql\\InsertToSql.csproj|D:\\CsvToSql\\inserttosql\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B3E3F7F4-4E26-42F5-A42E-6EAE0A180C11}|InsertToSql\\InsertToSql.csproj|solutionrelative:inserttosql\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B3E3F7F4-4E26-42F5-A42E-6EAE0A180C11}|InsertToSql\\InsertToSql.csproj|D:\\CsvToSql\\inserttosql\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B3E3F7F4-4E26-42F5-A42E-6EAE0A180C11}|InsertToSql\\InsertToSql.csproj|solutionrelative:inserttosql\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B3E3F7F4-4E26-42F5-A42E-6EAE0A180C11}|InsertToSql\\InsertToSql.csproj|D:\\CsvToSql\\inserttosql\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B3E3F7F4-4E26-42F5-A42E-6EAE0A180C11}|InsertToSql\\InsertToSql.csproj|solutionrelative:inserttosql\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B3E3F7F4-4E26-42F5-A42E-6EAE0A180C11}|InsertToSql\\InsertToSql.csproj|D:\\CsvToSql\\inserttosql\\readwritecsv.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B3E3F7F4-4E26-42F5-A42E-6EAE0A180C11}|InsertToSql\\InsertToSql.csproj|solutionrelative:inserttosql\\readwritecsv.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "D:\\CsvToSql\\InsertToSql\\Form1.cs",
+              "RelativeDocumentMoniker": "InsertToSql\\Form1.cs",
+              "ToolTip": "D:\\CsvToSql\\InsertToSql\\Form1.cs [Design]",
+              "RelativeToolTip": "InsertToSql\\Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T17:12:39.072Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "config.json",
+              "DocumentMoniker": "D:\\CsvToSql\\InsertToSql\\config.json",
+              "RelativeDocumentMoniker": "InsertToSql\\config.json",
+              "ToolTip": "D:\\CsvToSql\\InsertToSql\\config.json",
+              "RelativeToolTip": "InsertToSql\\config.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEMAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-09T17:11:42.143Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "D:\\CsvToSql\\InsertToSql\\Form1.cs",
+              "RelativeDocumentMoniker": "InsertToSql\\Form1.cs",
+              "ToolTip": "D:\\CsvToSql\\InsertToSql\\Form1.cs",
+              "RelativeToolTip": "InsertToSql\\Form1.cs",
+              "ViewState": "AgIAAO0CAAAAAAAAAAAkwO0CAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T17:11:42.349Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Config.cs",
+              "DocumentMoniker": "D:\\CsvToSql\\InsertToSql\\Config.cs",
+              "RelativeDocumentMoniker": "InsertToSql\\Config.cs",
+              "ToolTip": "D:\\CsvToSql\\InsertToSql\\Config.cs",
+              "RelativeToolTip": "InsertToSql\\Config.cs",
+              "ViewState": "AgIAAE4AAAAAAAAAAAA5wGMAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T17:11:42.429Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\CsvToSql\\InsertToSql\\Program.cs",
+              "RelativeDocumentMoniker": "InsertToSql\\Program.cs",
+              "ToolTip": "D:\\CsvToSql\\InsertToSql\\Program.cs",
+              "RelativeToolTip": "InsertToSql\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T17:11:42.431Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Form1.Designer.cs",
+              "DocumentMoniker": "D:\\CsvToSql\\InsertToSql\\Form1.Designer.cs",
+              "RelativeDocumentMoniker": "InsertToSql\\Form1.Designer.cs",
+              "ToolTip": "D:\\CsvToSql\\InsertToSql\\Form1.Designer.cs",
+              "RelativeToolTip": "InsertToSql\\Form1.Designer.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAawC0AAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T17:11:42.433Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ReadWriteCsv.cs",
+              "DocumentMoniker": "D:\\CsvToSql\\InsertToSql\\ReadWriteCsv.cs",
+              "RelativeDocumentMoniker": "InsertToSql\\ReadWriteCsv.cs",
+              "ToolTip": "D:\\CsvToSql\\InsertToSql\\ReadWriteCsv.cs",
+              "RelativeToolTip": "InsertToSql\\ReadWriteCsv.cs",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAAEUAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T17:11:42.435Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

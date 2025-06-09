@@ -305,7 +305,7 @@
                         <div class="status-label">Trạng thái máy</div>
                         <div class="status-value">
                             <span id="txt_statusmachine" class="badge bg-success pulse">
-                               <%-- <i class="fas fa-play me-1"></i>--%>
+                                <%-- <i class="fas fa-play me-1"></i>--%>
                                
                             </span>
                             <span class="status-indicator indicator-running pulse"></span>
@@ -321,7 +321,6 @@
                     <div class="status-content">
                         <div class="status-label">Nguyên nhân dừng máy</div>
                         <div id="stop-reason" class="stop-reason-text">
-                           
                         </div>
                     </div>
                 </div>
@@ -390,7 +389,8 @@
                             </th>
                             <th class="p-1">Status
                             </th>
-                            <th class="p-1">Reason
+                            <th class="p-1">
+                            Reason
                         </tr>
                     </thead>
                     <tbody id="tableBody" class="p-0" style="font-size: 14px">
@@ -440,7 +440,7 @@
                         <%--  <div class="metric-icon icon-availability">
                       <i class="bi bi-clock-fill"></i>
                   </div>--%>
-                        <div class="metric-value">92%</div>
+                        <div class="metric-value" id="oee_availability">92%</div>
                         <div class="metric-label">Availability</div>
                     </div>
                 </div>
@@ -451,7 +451,7 @@
                         <%--  <div class="metric-icon icon-performance">
                       <i class="bi bi-speedometer2"></i>
                   </div>--%>
-                        <div class="metric-value">97%</div>
+                        <div class="metric-value" id="oee_performance">97%</div>
                         <div class="metric-label">Performance</div>
                     </div>
                 </div>
@@ -462,7 +462,7 @@
                         <%-- <div class="metric-icon icon-quality">
                       <i class="bi bi-award-fill"></i>
                   </div>--%>
-                        <div class="metric-value">90%</div>
+                        <div class="metric-value" id="oee_quality">90%</div>
                         <div class="metric-label">Quality</div>
                     </div>
                 </div>
@@ -613,9 +613,8 @@
 
 
         var barChartCanvas = $('#chart_quantitymodel').get(0).getContext('2d');
-
         var databarchart = {
-            labels: ['Q1', 'Q2', 'Q3', 'Q4'], // Thêm labels - quan trọng!
+            //labels: ['Q1', 'Q2', 'Q3', 'Q4'], // Thêm labels - quan trọng!
             datasets: [
                 {
                     type: 'bar',
@@ -623,7 +622,7 @@
                     backgroundColor: 'rgba(26, 83, 255, 0.7)',
                     order: 2,
 
-                    data: [100, 500, 200, 400]
+                    //data: [100, 500, 200, 400]
                 },
                 {
                     type: 'bar',
@@ -632,7 +631,7 @@
                     categoryPercentage: 0.6,
                     categoryPercentage: 0.6,
                     order: 1,
-                    data: [80, 400, 150, 300]
+                    // data: [80, 400, 150, 300]
                 },
                 {
                     type: 'bar',
@@ -640,11 +639,10 @@
                     backgroundColor: 'rgba(36, 143, 36, 0.9)',
                     order: 0,
                     categoryPercentage: 0.35,
-                    data: [60, 400, 130, 100]
+                    // data: [60, 400, 130, 100]
                 }
             ]
         };
-
         var barChartOptions = {
             responsive: true,
             maintainAspectRatio: false,
@@ -654,8 +652,10 @@
                 x: {
                     ticks: {
                         font: {
-                            size: 20 // Thay đổi từ fontSize thành font.size
-                        }
+                            size: 15,
+                            weight: 'bold'
+                        },
+                        color: 'black',
                     },
                     grid: {
                         display: false // Thay đổi từ gridLines thành grid
@@ -665,9 +665,12 @@
                 y: {
                     ticks: {
                         font: {
-                            size: 15
+                            size: 15,
+                            weight: 'bold'
                         },
+                        color: 'black',
                         beginAtZero: true,
+
                     },
                 }
             },
@@ -705,40 +708,8 @@
             }
         }
 
-
-
         //Biểu đồ trạng thái máy theo thời gian
         // Lưu reference của chart để có thể cập nhật sau
-        let ganttChart;
-
-        function generateMachineData(machineName, date = '2025-05-03') {
-            const states = ['Chạy', 'Dừng', 'Lỗi'];
-            const weights = { 'Chạy': 0.7, 'Dừng': 0.15, 'Lỗi': 0.15 }; // Chạy chiếm đa số
-            const getRandomState = () => {
-                const r = Math.random();
-                if (r < weights['Chạy']) return 'Chạy';
-                if (r < weights['Chạy'] + weights['Dừng']) return 'Dừng';
-                return 'Lỗi';
-            };
-            const result = [];
-            let currentTime = new Date(`${date}T00:00:00`);
-            const endTime = new Date(`${date}T23:59:59`);
-            while (currentTime < endTime) {
-                const status = getRandomState();
-                const duration = Math.floor(Math.random() * 60) + 30; // từ 30 đến 90 phút
-                const start = new Date(currentTime);
-                const end = new Date(start.getTime() + duration * 60000);
-                if (end > endTime) end.setTime(endTime.getTime());
-                result.push({
-                    machine: machineName,
-                    status: status,
-                    start: start.toISOString(),
-                    end: end.toISOString()
-                });
-                currentTime = new Date(end.getTime());
-            }
-            return result;
-        }
 
         function generateColors(count) {
             const colors = [];
@@ -761,9 +732,9 @@
                 lengthChange: false,
                 paging: true,
                 searching: false,
-                ordering: false, 
+                ordering: false,
                 info: false,
-               
+
 
             });
             ///
@@ -822,7 +793,24 @@
                 $('#total-stop-time').html(data_statusMachine.TotalTimeStop);
                 /*Row2_2*/
                 var data_dataGanttCharts = data.dataGanttCharts;
-                ganttchart.data.datasets = [data_dataGanttCharts];
+                var ganttDatasets = [{
+                    data: data_dataGanttCharts.dataChart.map(item => ({
+                        x: [new Date(item.Start), new Date(item.End)],
+                        y: '' // Tất cả đều có cùng 1 tên để hiển thị trên 1 dòng
+                    })),
+                    backgroundColor: data_dataGanttCharts.dataChart.map(item => {
+                        return item.Status === "Run" ? "#4CAF50" :
+                            item.Status === "Stop" ? "#F44336" : "#9E9E9E";
+                    }),
+                    borderColor: data_dataGanttCharts.dataChart.map(item => {
+                        return item.Status === "Run" ? "#4CAF50" :
+                            item.Status === "Stop" ? "#F44336" : "#9E9E9E";
+                    }),
+                    borderWidth: 1
+                }];
+                ganttchart.data.datasets = ganttDatasets;
+                ganttchart.options.scales.x.min = data_dataGanttCharts.min;
+                ganttchart.options.scales.x.max = data_dataGanttCharts.max;
                 ganttchart.update();
                 /*Row2_3*/
                 var data_statusMachineDetail = data.statusMachineDetail;
@@ -833,13 +821,33 @@
                         item.TimeInsert,
                         item.Status,
                         item.Reason,
-                       
+
                     ]);
                 });
                 table.draw(false);
                 /*Row2_4*/
+                var data_errorChart = data.errorChartData;
+                errorchart.data.labels = data_errorChart.labels;
+                errorchart.data.datasets[0].data = data_errorChart.data;
+                var colorcharts = generateColors(data_errorChart.labels.length);
+                errorchart.data.datasets[0].backgroundColor = colorcharts.map(color => color.replace('hsl', 'hsla').replace(')', ', 0.7)'));
+                errorchart.data.datasets[0].borderColor = colorcharts;
+                errorchart.update();
                 /*Row3_1*/
+                var data_oee = data.oeedata;
+                $('#oeeMainValue').html(data_oee.TotalOEE);
+                $('#oee_availability').html(data_oee.Availability);
+                $('#oee_performance').html(data_oee.Performance);
+                $('#oee_quality').html(data_oee.Quality);
+                $('#oeeProgressBar').css('width', data_oee.TotalOEE)
                 /*Row3_2*/
+                var data_quantitybyModel = data.quantitybyModel;
+                databarchart.labels = data_errorChart.labels;
+                databarchart.datasets[0].data = data_quantitybyModel.Plan;
+                databarchart.datasets[1].data = data_quantitybyModel.Target;
+                databarchart.datasets[2].data = data_quantitybyModel.Actual;
+                barChartOptions.scales.y.ticks.max = data_quantitybyModel.maxy + 50;
+                barchartplan.update();
                 /*Row3_3*/
 
             };
@@ -852,35 +860,12 @@
 
                 interactionTimeout = setTimeout(function () {
                     isUpdating = true;
-                    proxy.server.getInitialData();
+                    //proxy.server.getInitialData();
                 }, 5000);
             }
             // Gắn sự kiện chuột trên table
             $('#dataTable').on('mousemove click', handleMouseInteraction);
 
-
-            // Dữ liệu Gantt
-
-            const machineData = [
-                ...generateMachineData("Máy 1"),
-                /* ...generateMachineData("Máy 2")*/
-            ];
-
-            const ganttDatasets = [{
-                data: machineData.map(item => ({
-                    x: [new Date(item.start), new Date(item.end)],
-                    y: '' // Tất cả đều có cùng 1 tên để hiển thị trên 1 dòng
-                })),
-                backgroundColor: machineData.map(item => {
-                    return item.status === "Run" ? "#4CAF50" :
-                        item.status === "Stop" ? "#F44336" : "#9E9E9E";
-                }),
-                borderColor: machineData.map(item => {
-                    return item.status === "Run" ? "#4CAF50" :
-                        item.status === "Stop" ? "#F44336" : "#9E9E9E";
-                }),
-                borderWidth: 1
-            }];
 
             const ganttCtx = document.getElementById('chart_statusmachine').getContext('2d');
             var ganttchart = new Chart(ganttCtx, {
@@ -912,8 +897,8 @@
                                 },
                                 color: 'black'
                             },
-                            min: '2025-05-03 08:00:00',
-                            max: '2025-05-03 24:00:00'
+                            //min: '2025-06-09 08:00:00',
+                            //max: '2025-06-09 24:00:00'
                         },
                         y: {
                             ticks: {
@@ -953,34 +938,17 @@
                 }
             });
 
-
-
-
             // --- Vẽ biểu đồ lỗi ---
-            // Dữ liệu mẫu về các loại lỗi máy
-            let errorData = {
-                labels: [
-                    'Lỗi cơ khí',
-                    'Lỗi điện',
-                    'Lỗi cảm biến',
-                    'Lỗi phần mềm'
-                ],
-                data: [45, 32, 28, 15]
-            };
-
-            // Tự động tạo màu sắc dựa trên số lượng labels
-            errorData.colors = generateColors(errorData.labels.length);
-
             const errorCtx = document.getElementById('chart_sumary_error').getContext('2d');
-            new Chart(errorCtx, {
+            var errorchart = new Chart(errorCtx, {
                 type: 'bar',
                 data: {
-                    labels: errorData.labels,
+                    //labels: errorData.labels,
                     datasets: [{
-                        label: 'Số lượng lỗi',
-                        data: errorData.data,
-                        backgroundColor: errorData.colors.map(color => color.replace('hsl', 'hsla').replace(')', ', 0.7)')),
-                        borderColor: errorData.colors,
+                        label: 'Quantity Error',
+                        //data: errorData.data,
+                        //backgroundColor: errorData.colors.map(color => color.replace('hsl', 'hsla').replace(')', ', 0.7)')),
+                        //borderColor: errorData.colors,
                         //borderWidth: 2,
                         //borderRadius: 8,
                         //borderSkipped: false,

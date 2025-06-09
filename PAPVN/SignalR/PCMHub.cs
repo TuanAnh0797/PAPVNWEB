@@ -18,7 +18,7 @@ namespace PAPVN.SignalR
         // Lưu trữ option của từng client theo ConnectionId
         private static readonly ConcurrentDictionary<string, string> ClientOptions = new ConcurrentDictionary<string, string>();
         private static readonly Timer Timer = new Timer(10000);
-        private static readonly List<DataGanttChart> dataGanttChart = new List<DataGanttChart>();
+        private static DataGanttChart dataGanttChart;
 
 
         static PCMHub()
@@ -38,18 +38,30 @@ namespace PAPVN.SignalR
             {
                 St = "Run";
             }
-            
+
             else
             {
                 St = "Stop";
             }
-            dataGanttChart.Add(new DataGanttChart()
+            dataGanttChart = new DataGanttChart()
             {
-                Start = DateTime.Now.AddMinutes(-30),
-                End = DateTime.Now.AddMinutes(30),
-                Status = St,
+                dataChart = new List<DataChart>()
+            {
+                new DataChart()
+                {
+                    Start = DateTime.Now.AddMinutes(-30),
+                    End = DateTime.Now.AddMinutes(30),
+                    Status = St,
+                    MachineName = "PCM"
+                }
+            },
+                min = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 6, 0, 0),
+                max = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59),
 
-            });
+            };
+
+
+
             foreach (var client in ClientOptions)
             {
                 string connectionId = client.Key;
@@ -123,12 +135,30 @@ namespace PAPVN.SignalR
                          new StatusMachineDetail { TimeInsert = "2023-10-01 11:00:00", Status = "Stop", Reason = "Maintenance" },
                         new StatusMachineDetail { TimeInsert = "2023-10-01 12:00:00", Status = "Running", Reason = "No issues" }
                     },
-                    dataGanttCharts = dataGanttChart
-                    
+                    dataGanttCharts = dataGanttChart,
+                    errorChartData = new ErrorChartData
+                    {
+                        labels = new List<string> { "Error 1", "Error 2", "Error 3" },
+                        data = new List<int> { random.Next(1, 10), random.Next(1, 10), random.Next(1, 10) }
+                    },
+                    oeedata = new OEEData()
+                    {
+                        TotalOEE = random.Next(60, 90).ToString() + "%",
+                        Availability = random.Next(60, 90).ToString() + "%",
+                        Performance = random.Next(60, 90).ToString() + "%",
+                        Quality = random.Next(60, 90).ToString() + "%",
+                    },
+
+                    quantitybyModel = new QuantitybyModel()
+                    {
+                        Actual = new List<int> { random.Next(100, 500), random.Next(100, 500), random.Next(100, 500) },
+                        Plan = new List<int> { random.Next(100, 500), random.Next(100, 500), random.Next(100, 500) },
+                        Target = new List<int> { random.Next(100, 500), random.Next(100, 500), random.Next(100, 500) },
+                        labels = new List<string> { "Model A", "Model B", "Model C" },
+                        maxy = 500
+
+                    }
                 };
-
-
-
                 var hub = GlobalHost.ConnectionManager.GetHubContext<PCMHub>();
                 hub.Clients.All.updateData(data);
             }
@@ -147,7 +177,13 @@ namespace PAPVN.SignalR
 
         public List<StatusMachineDetail> statusMachineDetail { get; set; }
 
-        public List<DataGanttChart> dataGanttCharts { get; set; }
+        public DataGanttChart dataGanttCharts { get; set; }
+
+        public ErrorChartData errorChartData { get; set; }
+
+        public OEEData oeedata { get; set; }
+
+        public QuantitybyModel quantitybyModel { get; set; }
 
     }
 }

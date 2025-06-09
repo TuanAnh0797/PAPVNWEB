@@ -1,0 +1,91 @@
+﻿{
+  "ConnectionString": "Server=192.168.3.178;Port=3306;Database=dataplc;User=TA;Password=123456;AllowLoadLocalInfile=true;",
+  "StartCheck": "START",
+  "NameTable": {
+    "VP": "VP",
+    "GAS": "GAS",
+    "WI1WITH": "WI1WITH",
+    "WI1START": "WI1START",
+    "IP": "IP",
+    "DF": "DF",
+    "TEMP": "TEMP",
+    "IOT": "IOT",
+    "WI2": "WI2",
+    "PAN": "PAN",
+    "CAMBACK": "CAMBACK",
+    "CAMFRONT": "CAMFRONT",
+    "PCM": "",
+    "StatusPCM": ""
+  },
+  "QuantityColumn": {
+    "VP": 8,
+    "GAS": 16,
+    "WI1WITH": 11,
+    "WI1START": 9,
+    "IP": 12,
+    "DF": 12,
+    "TEMP": 0,
+    "IOT": 17,
+    "WI2": 12,
+    "PAN": 9,
+    "CAMBACK": 27,
+    "CAMFRONT": 26,
+    "PCM": "",
+    "StatusPCM": ""
+  },
+  "WatchFolder": {
+    "VP": "D:\\DataPLC\\H_LOGVP",
+    "GAS1": "D:\\DataPLC\\H_LOGGASS3S5",
+    "GAS2": "D:\\DataPLC\\H_LOGGASS5",
+    "WI1WITH": "D:\\DataPLC\\H_LOGWI1",
+    "WI1START": "D:\\DataPLC\\H_LOGWI1(Starting)",
+    "IP": "D:\\DataPLC\\H_LOGIP",
+    "DF": "D:\\DataPLC\\H_LOGDF",
+    "TEMP": "*",
+    "IOT": "*",
+    "WI2": "D:\\DataPLC\\H_LOGWI2",
+    "PAN": "D:\\DataPLC\\H_LOGPAN",
+    "CAMBACK": "\\\\192.168.3.248\\LogOneByOne",
+    "CAMFRONT": "\\\\192.168.3.249\\LogOneByOne",
+    "PCM": "",
+    "StatusPCM": ""
+  },
+  "HistoryFolder": {
+    "VP": "VP",
+    "GAS1": "GAS1",
+    "GAS2": "GAS2",
+    "WI1WITH": "WI1WITH",
+    "WI1START": "WI1START",
+    "IP": "IP",
+    "DF": "DF",
+    "TEMP": "TEMP",
+    "IOT": "IOT",
+    "WI2": "WI2",
+    "PAN": "PAN",
+    "CAMBACK": "CAMBACK",
+    "CAMFRONT": "CAMFRONT",
+    "PCM": "",
+    "StatusPCM": ""
+  },
+  "ShareFile": {
+    "TEMP": {
+      "UserName": "",
+      "PassWord": ""
+    },
+    "IOT": {
+      "UserName": "",
+      "PassWord": ""
+    },
+    "CAMBACK": {
+      "UserName": "CAMBACK",
+      "PassWord": "123456"
+    },
+    "CAMFRONT": {
+      "UserName": "",
+      "PassWord": ""
+    }
+  }
+
+
+
+}
