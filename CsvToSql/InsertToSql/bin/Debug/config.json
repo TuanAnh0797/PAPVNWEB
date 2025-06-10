@@ -13,7 +13,9 @@
     "WI2": "WI2",
     "PAN": "PAN",
     "CAMBACK": "CAMBACK",
-    "CAMFRONT": "CAMFRONT"
+    "CAMFRONT": "CAMFRONT",
+    "PCM": "pcm",
+    "StatusPCM": "statusmachine_pcm"
   },
   "QuantityColumn": {
     "VP": 8,
@@ -27,7 +29,9 @@
     "WI2": 12,
     "PAN": 9,
     "CAMBACK": 27,
-    "CAMFRONT": 26
+    "CAMFRONT": 26,
+    "PCM": 4,
+    "StatusPCM": 4
   },
   "WatchFolder": {
     "VP": "D:\\DataPLC\\H_LOGVP",
@@ -42,7 +46,9 @@
     "WI2": "D:\\DataPLC\\H_LOGWI2",
     "PAN": "D:\\DataPLC\\H_LOGPAN",
     "CAMBACK": "\\\\192.168.3.248\\LogOneByOne",
-    "CAMFRONT": "\\\\192.168.3.249\\LogOneByOne"
+    "CAMFRONT": "\\\\192.168.3.249\\LogOneByOne",
+    "PCM": "D:\\DataPLC\\H_LOGVISUALIZE",
+    "StatusPCM": "D:\\DataPLC\\H_LOGStatusMes"
   },
   "HistoryFolder": {
     "VP": "VP",
@@ -57,7 +63,9 @@
     "WI2": "WI2",
     "PAN": "PAN",
     "CAMBACK": "CAMBACK",
-    "CAMFRONT": "CAMFRONT"
+    "CAMFRONT": "CAMFRONT",
+    "PCM": "PCM",
+    "StatusPCM": "StatusPCM"
   },
   "ShareFile": {
     "TEMP": {

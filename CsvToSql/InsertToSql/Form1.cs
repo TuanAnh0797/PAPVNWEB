@@ -787,6 +787,88 @@ namespace InsertToSql
                 }));
             }
         }
+        public async Task GetAllFileV3(string pathfolder, string nametable, string HistoryFoler, string FileLog, int numbercolumn)
+        {
+            try
+            {
+                await Task.Factory.StartNew(() =>
+                {
+                    foreach (string filePath in Directory.EnumerateFiles(pathfolder, "*.csv", SearchOption.AllDirectories))
+                    {
+                        try
+                        {
+                            List<string> datacsv = ReadFile(filePath, 3);
+                            DataTable data = ConvertListToDatatableV3(datacsv, numbercolumn, FileLog);
+                            SaveMySql(nametable, data);
+                            CoppyFile(HistoryFoler, filePath, Path.GetFileName(filePath));
+                            File.Delete(filePath);
+                        }
+                        catch (Exception ex)
+                        {
+                            SaveLog(currentdirec + $"\\Log\\{FileLog}", filePath + ": " + ex.Message);
+                        }
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                SaveLog(currentdirec + $"\\Log\\{FileLog}", ex.Message);
+            }
+        }
+        public DataTable ConvertListToDatatableV3(List<string> datacsv, int numbercolumn, string FileLog)
+        {
+            DataTable dt = new DataTable();
+            if (datacsv.Count > 0)
+            {
+                //int numbercolumn = datacsv[0].Split(',').Length;
+                for (int i = 0; i < numbercolumn; i++)
+                {
+                    dt.Columns.Add();
+                }
+                foreach (string datacsvrow in datacsv)
+                {
+                    try
+                    {
+                        DataRow dr = dt.NewRow();
+                        string[] datarowarray = datacsvrow.Split(',');
+                        List<string> datarow = new List<string>();
+                        datarow.AddRange(datarowarray);
+                        if (datarow.Count < numbercolumn)
+                        {
+                            for (int i = 0; i < numbercolumn - datarow.Count; i++)
+                            {
+                                datarow.Add(" ");
+                            }
+                        }
+                        for (int i = 0; i < numbercolumn; i++)
+                        {
+                            if (i == 0)
+                            {
+                                dr[i] = datarow[i].Replace('/', '-').Trim();
+                            }
+                            else if (i == 1)
+                            {
+                                dr[i] = "PCM";
+                               
+                            }
+                           
+                            else
+                            {
+                                dr[i] = datarow[i].Trim();
+                            }
+
+                        }
+                        dt.Rows.Add(dr);
+                    }
+                    catch (Exception ex)
+                    {
+                        SaveLog(currentdirec + $"\\Log\\{FileLog}", datacsvrow + ": " + ex.Message);
+                        continue;
+                    }
+                }
+            }
+            return dt;
+        }
 
         private void Timer_StatusPCM_Tick(object sender, EventArgs e)
         {
