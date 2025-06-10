@@ -379,7 +379,7 @@
         <div class="card shadow col-3 m-1 p-0">
             <%-- <div class="card-header p-2 bg-orange text-center">--%>
             <div class="card-header p-2 bg-gradient-gray text-center">
-                <h5 class="m-0">Error statistics chart</h5>
+                <h5 class="m-0">Status Machine Detail</h5>
             </div>
             <div class="card-body p-2">
                 <table style="padding-left: 5px; padding-right: 5px; padding-bottom: 10px; padding-top: 10px" id="dataTable" class="table table-striped table-bordered text-center">
@@ -510,7 +510,7 @@
                     yAxisID: 'y', // Thay đổi từ 'y-axis-1' thành 'y'
                     label: 'Plan',
                     borderColor: 'rgb(75, 192, 192)',
-                    data: [0, 10, 20, 30, 40, 40, 40, 60, 80, 90, 100, 110],
+                    //data: [0, 10, 20, 30, 40, 40, 40, 60, 80, 90, 100, 110],
                     fill: false,
                     //tension: 0, // làm line đỡ mượt
                     borderWidth: 2,
@@ -522,7 +522,7 @@
                     yAxisID: 'y', // Thay đổi từ 'y-axis-1' thành 'y'
                     label: 'Actual',
                     borderColor: '#b38600',
-                    data: [0, 10, 20, 30, 40, 40, 40, 60, 80, 85, 101, 120],
+                    //data: [0, 10, 20, 30, 40, 40, 40, 60, 80, 85, 101, 120],
                     fill: false,
                     //tension: 0, // làm line đỡ mượt
                     borderWidth: 2,
@@ -538,7 +538,7 @@
                     },
                     yAxisID: 'y1', // Thay đổi từ 'y-axis-2' thành 'y1'
                     order: 1,
-                    data: [0, 0, 0, 0, 0, 0, 0, 0, 0, -5, 1, 10],
+                    //data: [0, 0, 0, 0, 0, 0, 0, 0, 0, -5, 1, 10],
 
                 }
             ]
@@ -849,7 +849,11 @@
                 barChartOptions.scales.y.ticks.max = data_quantitybyModel.maxy + 50;
                 barchartplan.update();
                 /*Row3_3*/
-
+                var data_DataLineChartQuantityPerTime = JSON.parse(data.DataLineChartQuantityPerTime);
+                DataLineChart.datasets[0].data = data_DataLineChartQuantityPerTime.dataplan;
+                DataLineChart.datasets[1].data = data_DataLineChartQuantityPerTime.dataactual;
+                DataLineChart.datasets[2].data = data_DataLineChartQuantityPerTime.datadiff;
+                linechart.update();
             };
 
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
+using PAPVN.MethodLoadData;
 using PAPVN.Model.Common;
 using PAPVN.WebFormSignalR;
 using System;
@@ -118,6 +119,8 @@ namespace PAPVN.SignalR
                     TotalTimeStop = "00:00:00"
                 };
 
+                string DataLineChartQuantityPerTime = LoadDataVisualize.LineChartQuantityPerTime("All Model", "All");
+
 
                 var data = new DataSend()
                 {
@@ -157,7 +160,8 @@ namespace PAPVN.SignalR
                         labels = new List<string> { "Model A", "Model B", "Model C" },
                         maxy = 500
 
-                    }
+                    },
+                    DataLineChartQuantityPerTime = DataLineChartQuantityPerTime
                 };
                 var hub = GlobalHost.ConnectionManager.GetHubContext<PCMHub>();
                 hub.Clients.All.updateData(data);
@@ -184,6 +188,8 @@ namespace PAPVN.SignalR
         public OEEData oeedata { get; set; }
 
         public QuantitybyModel quantitybyModel { get; set; }
+
+        public string DataLineChartQuantityPerTime { get; set; }
 
     }
 }

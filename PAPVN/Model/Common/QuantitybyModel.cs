@@ -7,19 +7,12 @@ namespace PAPVN.Model.Common
 {
     public class QuantitybyModel
     {
-        public List<string> labels { get; set; }
-        public List<int> Plan { get; set; }
-        public List<int> Target { get; set; }
-        public List<int> Actual { get; set; }
-
+        public List<string> labels { get; set; } = new List<string>();
+        public List<int> Plan { get; set; } = new List<int>();
+        public List<int> Target { get; set; } = new List<int>();
+        public List<int> Actual { get; set; } = new List<int>();
         public int maxy { get; set; }
 
-        public void getmax()
-        {
-            int maxplan = Plan.Max();
-            int maxactual = Actual.Max();
-            maxy = maxplan > maxactual ? maxplan : maxactual;
-
-        }
+        
     }
 }
