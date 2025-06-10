@@ -247,60 +247,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "QuantitybyModel.cs",
-              "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\Model\\Common\\QuantitybyModel.cs",
-              "RelativeDocumentMoniker": "PAPVN\\Model\\Common\\QuantitybyModel.cs",
-              "ToolTip": "D:\\2025\\PAPVNWEB\\PAPVN\\Model\\Common\\QuantitybyModel.cs",
-              "RelativeToolTip": "PAPVN\\Model\\Common\\QuantitybyModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-09T16:26:23.087Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AgingRealTime.aspx",
-              "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\UI_FinalCheck\\AgingRealTime.aspx",
-              "RelativeDocumentMoniker": "PAPVN\\UI_FinalCheck\\AgingRealTime.aspx",
-              "ToolTip": "D:\\2025\\PAPVNWEB\\PAPVN\\UI_FinalCheck\\AgingRealTime.aspx",
-              "RelativeToolTip": "PAPVN\\UI_FinalCheck\\AgingRealTime.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2025-05-03T16:45:05.624Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "OEEData.cs",
-              "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\Model\\Common\\OEEData.cs",
-              "RelativeDocumentMoniker": "PAPVN\\Model\\Common\\OEEData.cs",
-              "ToolTip": "D:\\2025\\PAPVNWEB\\PAPVN\\Model\\Common\\OEEData.cs",
-              "RelativeToolTip": "PAPVN\\Model\\Common\\OEEData.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-09T16:16:13.487Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ChatHub.cs",
-              "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\ChatHub.cs",
-              "RelativeDocumentMoniker": "PAPVN\\ChatHub.cs",
-              "ToolTip": "D:\\2025\\PAPVNWEB\\PAPVN\\ChatHub.cs",
-              "RelativeToolTip": "PAPVN\\ChatHub.cs",
-              "ViewState": "AgIAAEwAAAAAAAAAAAAuwHsAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-19T07:30:54.267Z",
-              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -310,7 +261,7 @@
               "RelativeDocumentMoniker": "PAPVN\\SignalR\\PCMHub.cs",
               "ToolTip": "D:\\2025\\PAPVNWEB\\PAPVN\\SignalR\\PCMHub.cs",
               "RelativeToolTip": "PAPVN\\SignalR\\PCMHub.cs",
-              "ViewState": "AgIAAIQAAAAAAAAAAAAgwJQAAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAAJwAAAAAAAAAAAAgwK4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-26T17:55:00.094Z",
               "EditorCaption": ""
@@ -326,18 +277,6 @@
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
               "WhenOpened": "2025-04-19T01:28:33.751Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ErrorChartData.cs",
-              "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\Model\\Common\\ErrorChartData.cs",
-              "RelativeDocumentMoniker": "PAPVN\\Model\\Common\\ErrorChartData.cs",
-              "ToolTip": "D:\\2025\\PAPVNWEB\\PAPVN\\Model\\Common\\ErrorChartData.cs",
-              "RelativeToolTip": "PAPVN\\Model\\Common\\ErrorChartData.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-09T16:00:31.817Z"
             },
             {
               "$type": "Document",
@@ -374,18 +313,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-19T01:28:33.754Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "DataGanttChart.cs",
-              "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\Model\\Common\\DataGanttChart.cs",
-              "RelativeDocumentMoniker": "PAPVN\\Model\\Common\\DataGanttChart.cs",
-              "ToolTip": "D:\\2025\\PAPVNWEB\\PAPVN\\Model\\Common\\DataGanttChart.cs",
-              "RelativeToolTip": "PAPVN\\Model\\Common\\DataGanttChart.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAwAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-08T17:35:25.979Z"
             },
             {
               "$type": "Document",
@@ -504,6 +431,79 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-19T01:28:33.759Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "QuantitybyModel.cs",
+              "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\Model\\Common\\QuantitybyModel.cs",
+              "RelativeDocumentMoniker": "PAPVN\\Model\\Common\\QuantitybyModel.cs",
+              "ToolTip": "D:\\2025\\PAPVNWEB\\PAPVN\\Model\\Common\\QuantitybyModel.cs",
+              "RelativeToolTip": "PAPVN\\Model\\Common\\QuantitybyModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T16:26:23.087Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AgingRealTime.aspx",
+              "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\UI_FinalCheck\\AgingRealTime.aspx",
+              "RelativeDocumentMoniker": "PAPVN\\UI_FinalCheck\\AgingRealTime.aspx",
+              "ToolTip": "D:\\2025\\PAPVNWEB\\PAPVN\\UI_FinalCheck\\AgingRealTime.aspx",
+              "RelativeToolTip": "PAPVN\\UI_FinalCheck\\AgingRealTime.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2025-05-03T16:45:05.624Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "OEEData.cs",
+              "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\Model\\Common\\OEEData.cs",
+              "RelativeDocumentMoniker": "PAPVN\\Model\\Common\\OEEData.cs",
+              "ToolTip": "D:\\2025\\PAPVNWEB\\PAPVN\\Model\\Common\\OEEData.cs",
+              "RelativeToolTip": "PAPVN\\Model\\Common\\OEEData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T16:16:13.487Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ChatHub.cs",
+              "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\ChatHub.cs",
+              "RelativeDocumentMoniker": "PAPVN\\ChatHub.cs",
+              "ToolTip": "D:\\2025\\PAPVNWEB\\PAPVN\\ChatHub.cs",
+              "RelativeToolTip": "PAPVN\\ChatHub.cs",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAuwHsAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T07:30:54.267Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ErrorChartData.cs",
+              "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\Model\\Common\\ErrorChartData.cs",
+              "RelativeDocumentMoniker": "PAPVN\\Model\\Common\\ErrorChartData.cs",
+              "ToolTip": "D:\\2025\\PAPVNWEB\\PAPVN\\Model\\Common\\ErrorChartData.cs",
+              "RelativeToolTip": "PAPVN\\Model\\Common\\ErrorChartData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T16:00:31.817Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DataGanttChart.cs",
+              "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\Model\\Common\\DataGanttChart.cs",
+              "RelativeDocumentMoniker": "PAPVN\\Model\\Common\\DataGanttChart.cs",
+              "ToolTip": "D:\\2025\\PAPVNWEB\\PAPVN\\Model\\Common\\DataGanttChart.cs",
+              "RelativeToolTip": "PAPVN\\Model\\Common\\DataGanttChart.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAwAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T17:35:25.979Z"
             },
             {
               "$type": "Document",

@@ -2471,6 +2471,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DataPlan\" />
+    <Folder Include="Service\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
