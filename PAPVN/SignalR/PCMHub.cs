@@ -2,10 +2,12 @@
 using Microsoft.AspNet.SignalR.Hubs;
 using PAPVN.MethodLoadData;
 using PAPVN.Model.Common;
+using PAPVN.Service;
 using PAPVN.WebFormSignalR;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
@@ -18,15 +20,18 @@ namespace PAPVN.SignalR
     {
         // Lưu trữ option của từng client theo ConnectionId
         private static readonly ConcurrentDictionary<string, string> ClientOptions = new ConcurrentDictionary<string, string>();
-        private static readonly Timer Timer = new Timer(10000);
+        private static readonly Timer Timer_PCM = new Timer(5000);
         private static DataGanttChart dataGanttChart;
 
+        static int actual1 = 500;
+        static int actual2 = 700;
+        static int actual3 = 550;
 
         static PCMHub()
         {
-            Timer.Elapsed += async (sender, e) => await UpdateData();
-            Timer.AutoReset = true;
-            Timer.Start();
+            Timer_PCM.Elapsed += async (sender, e) => await UpdateData();
+            Timer_PCM.AutoReset = true;
+            Timer_PCM.Start();
 
         }
         // Hàm gửi dữ liệu định kỳ
@@ -50,8 +55,8 @@ namespace PAPVN.SignalR
             {
                 new DataChart()
                 {
-                    Start = DateTime.Now.AddMinutes(-30),
-                    End = DateTime.Now.AddMinutes(30),
+                    Start = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 6, 0, 0),
+                    End = DateTime.Now,
                     Status = St,
                     MachineName = "PCM"
                 }
@@ -73,6 +78,9 @@ namespace PAPVN.SignalR
 
         public override Task OnConnected()
         {
+            string path = HttpContext.Current.Server.MapPath("~/wwwroot/config.ini");
+            string[] config = File.ReadAllLines(path);
+            Config.TimeRest = config[0].Split(',').Select(int.Parse).ToArray();
             // Mặc định option khi client kết nối (ví dụ: "All Model")
             ClientOptions.TryAdd(Context.ConnectionId, "ALL");
             // Gửi dữ liệu ban đầu ngay khi kết nối
@@ -100,24 +108,9 @@ namespace PAPVN.SignalR
             try
             {
                 Random random = new Random();
-                Quantity quantityPCM = new Quantity()
-                {
-                    PlanQuantity = random.Next(1000, 3000).ToString(),
-                    OkQuantity = random.Next(1000, 2000).ToString(),
-                    NgQuantity = random.Next(500, 2000).ToString(),
-                    RemainQuantity = random.Next(500, 2000).ToString()
-                };
-
-
-
-
-                StatusMachine statusMachine = new StatusMachine()
-                {
-                    Status = "Stop",
-                    ReasonStop = "No issues",
-                    TimeStop = "2",
-                    TotalTimeStop = "00:00:00"
-                };
+                Quantity quantityPCM = PCM_DashBoard_Service.GetQuantity_PCM("All");
+                StatusMachine statusMachine = PCM_DashBoard_Service.GetStatusMachine_PCM();
+                List<StatusMachineDetail> StatusMachineDetails = PCM_DashBoard_Service.GetStatusMachineDetail_PCM("All");
 
                 string DataLineChartQuantityPerTime = LoadDataVisualize.LineChartQuantityPerTime("All Model", "All");
 
@@ -126,19 +119,9 @@ namespace PAPVN.SignalR
                 {
                     quantityPCM = quantityPCM,
                     statusMachine = statusMachine,
-                    statusMachineDetail = new List<StatusMachineDetail>
-                    {
-                        new StatusMachineDetail { TimeInsert = "2023-10-01 10:00:00", Status = "Running", Reason = "No issues" },
-                        new StatusMachineDetail { TimeInsert = "2023-10-01 11:00:00", Status = "Stop", Reason = "Maintenance" },
-                        new StatusMachineDetail { TimeInsert = "2023-10-01 12:00:00", Status = "Running", Reason = "No issues" },
-                         new StatusMachineDetail { TimeInsert = "2023-10-01 11:00:00", Status = "Stop", Reason = "Maintenance" },
-                        new StatusMachineDetail { TimeInsert = "2023-10-01 12:00:00", Status = "Running", Reason = "No issues" },
-                         new StatusMachineDetail { TimeInsert = "2023-10-01 11:00:00", Status = "Stop", Reason = "Maintenance" },
-                        new StatusMachineDetail { TimeInsert = "2023-10-01 12:00:00", Status = "Running", Reason = "No issues" },
-                         new StatusMachineDetail { TimeInsert = "2023-10-01 11:00:00", Status = "Stop", Reason = "Maintenance" },
-                        new StatusMachineDetail { TimeInsert = "2023-10-01 12:00:00", Status = "Running", Reason = "No issues" }
-                    },
+                    statusMachineDetail = StatusMachineDetails,
                     dataGanttCharts = dataGanttChart,
+
                     errorChartData = new ErrorChartData
                     {
                         labels = new List<string> { "Error 1", "Error 2", "Error 3" },
@@ -146,19 +129,19 @@ namespace PAPVN.SignalR
                     },
                     oeedata = new OEEData()
                     {
-                        TotalOEE = random.Next(60, 90).ToString() + "%",
-                        Availability = random.Next(60, 90).ToString() + "%",
-                        Performance = random.Next(60, 90).ToString() + "%",
-                        Quality = random.Next(60, 90).ToString() + "%",
+                        TotalOEE = random.Next(80, 90).ToString() + "%",
+                        Availability = random.Next(80, 90).ToString() + "%",
+                        Performance = random.Next(80, 90).ToString() + "%",
+                        Quality = random.Next(80, 90).ToString() + "%",
                     },
 
                     quantitybyModel = new QuantitybyModel()
                     {
-                        Actual = new List<int> { random.Next(100, 500), random.Next(100, 500), random.Next(100, 500) },
-                        Plan = new List<int> { random.Next(100, 500), random.Next(100, 500), random.Next(100, 500) },
-                        Target = new List<int> { random.Next(100, 500), random.Next(100, 500), random.Next(100, 500) },
+                        Actual = new List<int> { actual1++, actual2++, actual3++ },
+                        Plan = new List<int> { 1000, 2000, 800 } ,
+                        Target = new List<int> { actual1 + 2, actual2 + 5, actual3 + 1 },
                         labels = new List<string> { "Model A", "Model B", "Model C" },
-                        maxy = 500
+                        maxy = 2200
 
                     },
                     DataLineChartQuantityPerTime = DataLineChartQuantityPerTime

@@ -452,7 +452,6 @@
                             var percent = (val / total * 100).toFixed(1) + "%";
                             if (val != 0) {
                                 //ctx.fillText(dataset.data[i] + percent, model.x + x, model.y + y);
-
                                 ctx.fillText(percent, model.x + x, model.y + y);
                             }
                         }

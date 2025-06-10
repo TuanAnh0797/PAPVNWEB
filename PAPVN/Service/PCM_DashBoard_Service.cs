@@ -45,12 +45,17 @@ namespace PAPVN.Service
             DataTable dt = DBConnectStatic.StoreFillDT("GetStatusMachineDetail_PCM", System.Data.CommandType.StoredProcedure, option);
             if (dt.Rows.Count > 0)
             {
-                statusMachineDetails.Add(new StatusMachineDetail()
+                foreach (DataRow item in dt.Rows)
                 {
-                    Status = dt.Rows[0]["Status"].ToString(),
-                    Reason = dt.Rows[0]["Reason"].ToString(),
-                    TimeInsert = dt.Rows[0]["TimeInsert"].ToString()
-                });
+                    statusMachineDetails.Add(new StatusMachineDetail()
+                    {
+                        Status = item["Status"].ToString(),
+                        Reason = item["Reason"].ToString(),
+                        TimeInsert = item["TimeInsert"].ToString()
+                    });
+                }
+
+               
             }
             return statusMachineDetails;
         }

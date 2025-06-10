@@ -846,11 +846,6 @@ namespace InsertToSql
                             {
                                 dr[i] = datarow[i].Replace('/', '-').Trim();
                             }
-                            else if (i == 1)
-                            {
-                                dr[i] = "PCM";
-                               
-                            }
                            
                             else
                             {
@@ -870,9 +865,23 @@ namespace InsertToSql
             return dt;
         }
 
-        private void Timer_StatusPCM_Tick(object sender, EventArgs e)
+        private async void Timer_StatusPCM_Tick(object sender, EventArgs e)
         {
-
+            if (!is_StatusPCM_run)
+            {
+                lbl_StatusMachinePCM?.Invoke(new Action(() =>
+                {
+                    lbl_StatusMachinePCM.Text = "Đang đẩy dữ liệu";
+                }));
+                is_StatusPCM_run = true;
+                string logfile = "PCM_" + DateTime.Now.ToString("ddMMyyyy") + ".txt";
+                await GetAllFileV3(myconfig.WatchFolder.StatusPCM, myconfig.NameTable.StatusPCM, currentdirec + "\\History\\" + myconfig.HistoryFolder.StatusPCM, logfile, myconfig.QuantityColumn.StatusPCM);
+                is_StatusPCM_run = false;
+                lbl_StatusMachinePCM?.Invoke(new Action(() =>
+                {
+                    lbl_StatusMachinePCM.Text = "Đang chờ dữ liệu";
+                }));
+            }
         }
     }
 }
