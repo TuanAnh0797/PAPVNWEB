@@ -256,6 +256,7 @@
     <Content Include="Image\conveyor.png" />
     <Content Include="Image\electrical-energy.png" />
     <Content Include="Image\factory.png" />
+    <Content Include="Image\folder-error.png" />
     <Content Include="Image\fridge.png" />
     <Content Include="Image\inbox.png" />
     <Content Include="Image\insulation.png" />
@@ -269,6 +270,9 @@
     <Content Include="Image\vacuum-dryer.png" />
     <Content Include="Image\visual-data.png" />
     <Content Include="Image\voltmeter.png" />
+    <Content Include="Image\wire-connection.png" />
+    <Content Include="Management\Management_logerror.aspx" />
+    <Content Include="UI_inner\Inner_RealTime.aspx" />
     <Content Include="z_demo\OEEDemo.html" />
     <Content Include="PartCard.html" />
     <Content Include="plugins\chart.js4\Chart.js" />
@@ -2380,6 +2384,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Management\Management_logerror.aspx.cs">
+      <DependentUpon>Management_logerror.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Management\Management_logerror.aspx.designer.cs">
+      <DependentUpon>Management_logerror.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MethodLoadData\LoadDataVisualize.cs" />
     <Compile Include="Model\Common\DataGanttChart.cs" />
     <Compile Include="Model\Common\ErrorChartData.cs" />
@@ -2391,6 +2402,13 @@
     <Compile Include="Service\PCM_DashBoard_Service.cs" />
     <Compile Include="SignalR\PCMHub.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="UI_inner\Inner_RealTime.aspx.cs">
+      <DependentUpon>Inner_RealTime.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI_inner\Inner_RealTime.aspx.designer.cs">
+      <DependentUpon>Inner_RealTime.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UI_PCM\PCM_RealTime.aspx.cs">
       <DependentUpon>PCM_RealTime.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

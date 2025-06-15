@@ -1,4 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="PAPVN.SiteMaster" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head runat="server">
@@ -99,7 +100,7 @@
                             <a class="nav-link" href="/UI_Plan/UploadPlan">
                                 <img src="/Image/project-management.png" height="25px" width="25px" />
                                 <p style="font-size: 18px; font-weight: 600">
-                                    Management Plan
+                                    Management
                                      <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -108,6 +109,14 @@
                                     <a class="nav-link" href="/UI_Plan/UploadPlan">
                                         <img src="/Image/inbox.png" height="25px" width="25px" />
                                         <p style="font-size: 18px; font-weight: 600">Upload Plan</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item ml-2">
+                                    <a class="nav-link" href="/Management/Management_logerror">
+                                        <img src="/Image/folder-error.png" height="25px" width="25px" />
+                                        <p style="font-size: 18px; font-weight: 600">Log error code</p>
                                     </a>
                                 </li>
                             </ul>
@@ -120,6 +129,15 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/UI_inner/Inner_RealTime">
+                                <img src="/Image/wire-connection.png" height="25px" width="25px" />
+                                <p style="font-size: 18px; font-weight: 600">
+                                    Inner & Linner
+                                </p>
+                            </a>
+                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="#" onclick="showpopupfuture()">
                                 <img src="/Image/insulation.png" height="25px" width="25px" />
