@@ -2400,6 +2400,7 @@
     <Compile Include="Model\Common\StatusMachine.cs" />
     <Compile Include="Model\Common\StatusMachineDetail.cs" />
     <Compile Include="Service\PCM_DashBoard_Service.cs" />
+    <Compile Include="SignalR\InnerLinerHub.cs" />
     <Compile Include="SignalR\PCMHub.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="UI_inner\Inner_RealTime.aspx.cs">
