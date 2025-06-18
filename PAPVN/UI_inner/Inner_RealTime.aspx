@@ -577,6 +577,7 @@
 
         function renderStationCards() {
             const stations = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2'];
+            const workers = ['Nguyễn Văn A', 'Trần Thị B', 'Lê Văn C', 'Phạm Thị D', 'Hoàng Văn E', 'Đỗ Văn G', 'Lý Thị H', 'Nguyễn Thị F'];
             const stationContainer = $('#stationCards');
             stationContainer.empty();
 
@@ -586,7 +587,7 @@
                 const completedToday = stationTasks.filter(task => task.status === 'completed').length;
                 const totalTime = stationTasks.reduce((sum, task) => sum + task.operationTime, 0);
                 const avgTime = stationTasks.length > 0 ? Math.round(totalTime / stationTasks.length) : 0;
-
+                const worker = currentTask ? currentTask.worker : workers[Math.floor(Math.random() * workers.length)];
 
 
                 let stationStatus = 'maintenance';
@@ -615,6 +616,10 @@
                                     <i class="${statusIcon}"></i> ${statusText}
                                 </span>
                             </div>
+                            <div class="d-flex align-items-center mb-2">
+                               
+                                <span class="worker-name">${worker}</span>
+                                </div>
                             <div class="station-info">
                                 <div class="station-metric">
                                     <span class="metric-label">Average time:</span>
@@ -641,7 +646,7 @@
                                         <strong>${currentTask.model}</strong>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center mt-1">
-                                        <small class="text-muted">Thời gian:</small>
+                                        <small class="text-muted">Cycle Time:</small>
                                         <strong>${currentTask.operationTime}s</strong>
                                     </div>
                                 </div>
@@ -667,34 +672,6 @@
 
 
 
-        // Generate more sample data for demonstration
-        function generateMoreData() {
-            const stations = ['A1', 'A2', 'B1', 'B2', 'C1', 'D1', 'D2'];
-            const models = ['Model-X1', 'Model-X2', 'Model-Y1', 'Model-Z1'];
-            const workers = ['Nguyễn Văn A', 'Trần Thị B', 'Lê Văn C', 'Phạm Thị D', 'Hoàng Văn E'];
-            const statuses = ['active', 'completed', 'delayed'];
-
-            for (let i = 6; i <= 50; i++) {
-                const randomDate = new Date();
-                randomDate.setHours(randomDate.getHours() - Math.floor(Math.random() * 24));
-
-                productionData.push({
-                    id: i,
-                    time: randomDate.toISOString().slice(0, 19).replace('T', ' '),
-                    station: stations[Math.floor(Math.random() * stations.length)],
-                    model: models[Math.floor(Math.random() * models.length)],
-                    serial: `SN${String(i).padStart(6, '0')}`,
-                    operationTime: Math.floor(Math.random() * 400) + 120,
-                    worker1: workers[Math.floor(Math.random() * workers.length)],
-                    worker2: workers[Math.floor(Math.random() * workers.length)],
-                    status: statuses[Math.floor(Math.random() * statuses.length)]
-                });
-            }
-        }
-
-        // Generate more sample data
-        generateMoreData();
-        filteredData = [...productionData];
     </script>
 
 </asp:Content>

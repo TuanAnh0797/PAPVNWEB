@@ -75,7 +75,7 @@ namespace PAPVN.SignalR
                     quantityPCM = quantityPCM,
                     DataLineChartQuantityPerTime = DataLineChartQuantityPerTime
                 };
-                var hub = GlobalHost.ConnectionManager.GetHubContext<PCMHub>();
+                var hub = GlobalHost.ConnectionManager.GetHubContext<InnerLinerHub>();
                 hub.Clients.All.updateData(data);
             }
             catch (Exception ex)

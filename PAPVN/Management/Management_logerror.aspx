@@ -1,72 +1,31 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Management_logerror.aspx.cs" Inherits="PAPVN.Management.Management_logerror" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+      <div class="m-2">
+      <div class="row" style="background-color: #fffefe; border-radius: 8px;">
+          <div class="col" style="margin-top: 5px; margin-bottom: 5px">
+             <asp:FileUpload ID="FileUpload1" runat="server" Font-Size="20px" />
+          </div>
+          
+          <div class="col-sm-3" style="margin-top: 5px; margin-bottom: 5px">
+              <asp:Button type="button" Text="Upload" OnClick="btnImport_Click" runat="server" name="btn_Import" Style="font-size: 20px; font-weight: 600; padding: 5px" class="btn btn-outline-primary btn-block "></asp:Button>
+          </div>
+
+      </div>
+
+  </div>
     <table style="padding-left: 5px; padding-right: 5px; padding-bottom: 10px; padding-top: 10px" id="dataTable" class="table table-striped table-bordered text-center">
         <thead style="background-color: #b2bac2; color: black">
             <tr class="p-0">
                 <th class="p-1">Name Machine </th>
-                <th class="p-1">Code Errer</th>
-                <th class="p-1">Name Eror </th>
+                <th class="p-1">Code Error</th>
+                <th class="p-1">Name Error </th>
                 <th class="p-1">Time Update </th>
-                <th class="p-1">Action </th>
-
             </tr>
         </thead>
-        <tbody id="tableBody" class="p-0" style="font-size: 14px">
+        <tbody id="tableBody" class="p-0" style="font-size: 14px" runat="server">
         </tbody>
     </table>
-    <!-- Edit Modal -->
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Sửa thông tin lỗi</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="editForm">
-                        <input type="hidden" id="editId">
-                        <div class="mb-3">
-                            <label for="editMachineName" class="form-label">Tên máy</label>
-                            <input type="text" class="form-control" id="editMachineName" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editErrorCode" class="form-label">Mã lỗi</label>
-                            <input type="text" class="form-control" id="editErrorCode" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editErrorName" class="form-label">Tên lỗi</label>
-                            <input type="text" class="form-control" id="editErrorName" required>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-primary" id="saveEdit">Lưu thay đổi</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Delete Confirmation Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Bạn có chắc chắn muốn xóa mục này không?</p>
-                    <div id="deleteInfo"></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-danger" id="confirmDelete">Xóa</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <script>
         $(document).ready(function () {
             // Khởi tạo DataTable

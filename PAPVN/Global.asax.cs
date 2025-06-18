@@ -13,19 +13,14 @@ namespace PAPVN
 {
     public class Global : HttpApplication
     {
-        private static Timer timer;
         void Application_Start(object sender, EventArgs e)
         {
-
-            
             // Code that runs on application startup
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            //timer = new Timer(10000); // Cập nhật mỗi 5 giây
-            //timer.Elapsed += (s, args) => ChatHub.UpdateData();
-            //timer.AutoReset = true;
-            //timer.Start();
-            
+           
+                                        
+
         }
     }
 }

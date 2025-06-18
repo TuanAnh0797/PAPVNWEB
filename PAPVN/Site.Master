@@ -3,6 +3,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head runat="server">
+   <%-- <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">--%>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %>Panasonic Appliance Viet Nam</title>
@@ -335,6 +338,7 @@
     <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <script src="/Scripts/jquery.signalR-2.4.3.min.js"></script>
     <script src="/signalr/hubs"></script>
+    <script src="/signalr/hubs?_=<%: DateTime.Now.Ticks %>"></script>
     <script>
         $(function () {
             //
