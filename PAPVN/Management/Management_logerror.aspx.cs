@@ -17,7 +17,7 @@ namespace PAPVN.Management
         {
             if (!IsPostBack)
             {
-                //loaddata();
+                loaddata();
             }
         }
 
@@ -106,21 +106,16 @@ namespace PAPVN.Management
         {
             string HTML = "";
             DBConnect dBConnect = new DBConnect();
-            DataTable dt = dBConnect.StoreFillDT("TA_sp_LoadDataPlan", CommandType.StoredProcedure);
+            DataTable dt = dBConnect.StoreFillDT("TA_sp_LoadDataError", CommandType.StoredProcedure);
             for (int i = 0; i < dt.Rows.Count; i++)
             {
               
                     
                         HTML += $"<tr> " +
-                        $"<td> {dt.Rows[i]["Model"]} </td>" +
-                        $"<td> {dt.Rows[i]["QuantityDay"]} </td>" +
-                         $"<td> {dt.Rows[i]["Quantity1"]} </td>" +
-                          $"<td> {dt.Rows[i]["Quantity2"]} </td>" +
-                           $"<td> {dt.Rows[i]["Quantity3"]} </td>" +
-                        $"<td> {dt.Rows[i]["TimeStart"]} </td>" +
-                         $"<td> {dt.Rows[i]["TimeEnd"]} </td>" +
-                          $"<td> <button style=\"width:120px\" type=\"button\" Class=\"btn-success\" onclick=\"MonitorSpecial(this)\"> <i class=\"fas fa-plus\"></i> Add </button> </td>" +
-                        $"<td> <button style=\"width:120px\" type=\"button\" class=\"btn btn-danger\" data-toggle=\"modal\" data-target=\"#modal-default\" onclick=\"showPopup(this)\"><i class=\"fas fa-edit\"></i>Edit</button> </td>" +
+                        $"<td> {dt.Rows[i]["NameMachine"].ToString()} </td>" +
+                        $"<td> {dt.Rows[i]["CodeError"].ToString()} </td>" +
+                        $"<td> {dt.Rows[i]["NameError"].ToString()} </td>" +
+                        $"<td> {dt.Rows[i]["TimeUpdate"].ToString()} </td>" +
                         $"</tr>";
                    
                   
