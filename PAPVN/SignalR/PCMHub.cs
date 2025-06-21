@@ -87,6 +87,11 @@ namespace PAPVN.SignalR
             SendDataToClient(Context.ConnectionId, "ALL");
             return base.OnConnected();
         }
+        public void GetInitialData()
+        {
+            // Call the same code that updates data
+            SendDataToClient(Context.ConnectionId, "ALL");
+        }
 
         public override Task OnDisconnected(bool stopCalled)
         {
@@ -111,7 +116,7 @@ namespace PAPVN.SignalR
                 Quantity quantityPCM = PCM_DashBoard_Service.GetQuantity_PCM("All");
                 StatusMachine statusMachine = PCM_DashBoard_Service.GetStatusMachine_PCM();
                 List<StatusMachineDetail> StatusMachineDetails = PCM_DashBoard_Service.GetStatusMachineDetail_PCM("All");
-
+                QuantitybyModel quantitybyModel = PCM_DashBoard_Service.GetQuantitybyModel_PCM("All");
                 string DataLineChartQuantityPerTime = LoadDataVisualize.LineChartQuantityPerTime("All Model", "All");
 
 
@@ -134,16 +139,7 @@ namespace PAPVN.SignalR
                         Performance = random.Next(80, 90).ToString() + "%",
                         Quality = random.Next(80, 90).ToString() + "%",
                     },
-
-                    quantitybyModel = new QuantitybyModel()
-                    {
-                        Actual = new List<int> { actual1++, actual2++, actual3++ },
-                        Plan = new List<int> { 1000, 2000, 800 } ,
-                        Target = new List<int> { actual1 + 2, actual2 + 5, actual3 + 1 },
-                        labels = new List<string> { "Model A", "Model B", "Model C" },
-                        maxy = 2200
-
-                    },
+                    quantitybyModel = quantitybyModel,
                     DataLineChartQuantityPerTime = DataLineChartQuantityPerTime
                 };
                 var hub = GlobalHost.ConnectionManager.GetHubContext<PCMHub>();

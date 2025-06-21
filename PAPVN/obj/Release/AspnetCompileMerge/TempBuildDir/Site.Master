@@ -1,7 +1,11 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="PAPVN.SiteMaster" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head runat="server">
+   <%-- <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">--%>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %>Panasonic Appliance Viet Nam</title>
@@ -99,7 +103,7 @@
                             <a class="nav-link" href="/UI_Plan/UploadPlan">
                                 <img src="/Image/project-management.png" height="25px" width="25px" />
                                 <p style="font-size: 18px; font-weight: 600">
-                                    Management Plan
+                                    Management
                                      <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -108,6 +112,14 @@
                                     <a class="nav-link" href="/UI_Plan/UploadPlan">
                                         <img src="/Image/inbox.png" height="25px" width="25px" />
                                         <p style="font-size: 18px; font-weight: 600">Upload Plan</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item ml-2">
+                                    <a class="nav-link" href="/Management/Management_logerror">
+                                        <img src="/Image/folder-error.png" height="25px" width="25px" />
+                                        <p style="font-size: 18px; font-weight: 600">Log error code</p>
                                     </a>
                                 </li>
                             </ul>
@@ -120,6 +132,15 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/UI_inner/Inner_RealTime">
+                                <img src="/Image/wire-connection.png" height="25px" width="25px" />
+                                <p style="font-size: 18px; font-weight: 600">
+                                    Inner & Linner
+                                </p>
+                            </a>
+                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="#" onclick="showpopupfuture()">
                                 <img src="/Image/insulation.png" height="25px" width="25px" />
@@ -317,6 +338,7 @@
     <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <script src="/Scripts/jquery.signalR-2.4.3.min.js"></script>
     <script src="/signalr/hubs"></script>
+    <script src="/signalr/hubs?_=<%: DateTime.Now.Ticks %>"></script>
     <script>
         $(function () {
             //

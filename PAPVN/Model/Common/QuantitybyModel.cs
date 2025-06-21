@@ -8,9 +8,9 @@ namespace PAPVN.Model.Common
     public class QuantitybyModel
     {
         public List<string> labels { get; set; } = new List<string>();
-        public List<int> Plan { get; set; } = new List<int>();
-        public List<int> Target { get; set; } = new List<int>();
-        public List<int> Actual { get; set; } = new List<int>();
+        public List<double> Plan { get; set; } = new List<double>();
+        public List<double> Target { get; set; } = new List<double>();
+        public List<double> Actual { get; set; } = new List<double>();
         public int maxy { get; set; }
 
         

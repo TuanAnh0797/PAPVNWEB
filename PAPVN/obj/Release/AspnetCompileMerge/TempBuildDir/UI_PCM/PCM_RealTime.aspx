@@ -371,8 +371,7 @@
             </div>
         </div>
         <!-- Biểu đồ Gantt -->
-        <div class="card shadow col m-1 p-0">
-            <%--   <div class="card-header p-2 bg-blue text-center">--%>
+       <%-- <div class="card shadow col m-1 p-0">
             <div class="card-header p-2 bg-gradient-gray text-center">
                 <h5 class="m-0">Machine state graph over time</h5>
             </div>
@@ -389,10 +388,10 @@
 
 
             </div>
-        </div>
+        </div>--%>
 
 
-        <div class="card shadow col-3 m-1 p-0">
+        <div class="card shadow col m-1 p-0">
             <%-- <div class="card-header p-2 bg-orange text-center">--%>
             <div class="card-header p-2 bg-gradient-gray text-center">
                 <h5 class="m-0">Status Machine Detail</h5>
@@ -416,7 +415,7 @@
             </div>
         </div>
 
-        <div class="card shadow col-3 m-1 p-0">
+        <div class="card shadow col-4 m-1 p-0">
             <%-- <div class="card-header p-2 bg-orange text-center">--%>
             <div class="card-header p-2 bg-gradient-gray text-center">
                 <h5 class="m-0">Error statistics chart</h5>
@@ -428,14 +427,8 @@
 
             </div>
         </div>
-
-
-
-    </div>
-    <%-- Row 4 --%>
-    <div class="row  ml-1 mr-1">
-        <div class="card shadow col-2 m-1 p-0">
-            <%-- OEE--%>
+         <div class="card shadow col-2 m-1 p-0">
+           
             <div class="card-header p-2 bg-gradient-gray text-center">
                 <h5 class="m-0">OEE</h5>
             </div>
@@ -453,9 +446,7 @@
                 <div class=" mb-2">
                     <div class="metric-card availability" data-bs-toggle="tooltip"
                         data-bs-placement="top" title="Tỷ lệ thời gian thiết bị hoạt động">
-                        <%--  <div class="metric-icon icon-availability">
-                      <i class="bi bi-clock-fill"></i>
-                  </div>--%>
+                      
                         <div class="metric-value" id="oee_availability">92%</div>
                         <div class="metric-label">Availability</div>
                     </div>
@@ -464,9 +455,7 @@
                 <div class=" mb-2">
                     <div class="metric-card performance" data-bs-toggle="tooltip"
                         data-bs-placement="top" title="Tốc độ sản xuất thực tế so với kế hoạch">
-                        <%--  <div class="metric-icon icon-performance">
-                      <i class="bi bi-speedometer2"></i>
-                  </div>--%>
+                       
                         <div class="metric-value" id="oee_performance">97%</div>
                         <div class="metric-label">Performance</div>
                     </div>
@@ -475,9 +464,7 @@
                 <div class=" mb-2">
                     <div class="metric-card quality" data-bs-toggle="tooltip"
                         data-bs-placement="top" title="Tỷ lệ sản phẩm đạt chất lượng">
-                        <%-- <div class="metric-icon icon-quality">
-                      <i class="bi bi-award-fill"></i>
-                  </div>--%>
+                       
                         <div class="metric-value" id="oee_quality">90%</div>
                         <div class="metric-label">Quality</div>
                     </div>
@@ -486,8 +473,60 @@
             </div>
         </div>
 
+
+
+    </div>
+    <%-- Row 4 --%>
+    <div class="row  ml-1 mr-1">
+         <%-- OEE--%>
+       <%-- <div class="card shadow col-2 m-1 p-0">
+           
+            <div class="card-header p-2 bg-gradient-gray text-center">
+                <h5 class="m-0">OEE</h5>
+            </div>
+            <div class="card-body p-2">
+                <div class="oee-main-display">
+                    <div class="oee-main-value text-center" id="oeeMainValue">85%</div>
+
+                    <div class="mt-2 mb-2">
+                        <div class="progress">
+                            <div class="progress-bar" id="oeeProgressBar" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class=" mb-2">
+                    <div class="metric-card availability" data-bs-toggle="tooltip"
+                        data-bs-placement="top" title="Tỷ lệ thời gian thiết bị hoạt động">
+                      
+                        <div class="metric-value" id="oee_availability">92%</div>
+                        <div class="metric-label">Availability</div>
+                    </div>
+                </div>
+
+                <div class=" mb-2">
+                    <div class="metric-card performance" data-bs-toggle="tooltip"
+                        data-bs-placement="top" title="Tốc độ sản xuất thực tế so với kế hoạch">
+                       
+                        <div class="metric-value" id="oee_performance">97%</div>
+                        <div class="metric-label">Performance</div>
+                    </div>
+                </div>
+
+                <div class=" mb-2">
+                    <div class="metric-card quality" data-bs-toggle="tooltip"
+                        data-bs-placement="top" title="Tỷ lệ sản phẩm đạt chất lượng">
+                       
+                        <div class="metric-value" id="oee_quality">90%</div>
+                        <div class="metric-label">Quality</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>--%>
+
         <!-- Biểu đồ sạn lượng theo model -->
-        <div class="card shadow col-4 mt-0 m-1 p-0">
+        <div class="card shadow col-6 mt-0 m-1 p-0">
             <%--<div class="card-header p-2 bg-yellow text-center">--%>
             <div class="card-header p-2 bg-gradient-gray text-center">
                 <h5 class="m-0">Production Chart by Model</h5>
@@ -778,7 +817,7 @@
             // Bắt đầu kết nối SignalR
             $.connection.hub.start().done(function () {
                 console.log("SignalR connected");
-                //proxy.server.getInitialData();
+                proxy.server.getInitialData();
             }).fail(function (error) {
                 console.error("SignalR connection failed: ", error);
             });
@@ -811,30 +850,30 @@
                     $('#txt_statusmachine').removeClass('bg-success')
                     $('#txt_statusmachine').addClass('bg-danger')
                 }
-                $('#stop - reason').html(data_statusMachine.ReasonStop);
+                $('#stop-reason').html(data_statusMachine.ReasonStop);
                 $('#total-stops').html(data_statusMachine.TimeStop);
                 $('#total-stop-time').html(data_statusMachine.TotalTimeStop);
                 /*Row2_2*/
-                var data_dataGanttCharts = data.dataGanttCharts;
-                var ganttDatasets = [{
-                    data: data_dataGanttCharts.dataChart.map(item => ({
-                        x: [new Date(item.Start), new Date(item.End)],
-                        y: '' // Tất cả đều có cùng 1 tên để hiển thị trên 1 dòng
-                    })),
-                    backgroundColor: data_dataGanttCharts.dataChart.map(item => {
-                        return item.Status === "Run" ? "#4CAF50" :
-                            item.Status === "Stop" ? "#F44336" : "#9E9E9E";
-                    }),
-                    borderColor: data_dataGanttCharts.dataChart.map(item => {
-                        return item.Status === "Run" ? "#4CAF50" :
-                            item.Status === "Stop" ? "#F44336" : "#9E9E9E";
-                    }),
-                    borderWidth: 1
-                }];
-                ganttchart.data.datasets = ganttDatasets;
-                ganttchart.options.scales.x.min = data_dataGanttCharts.min;
-                ganttchart.options.scales.x.max = data_dataGanttCharts.max;
-                ganttchart.update();
+                //var data_dataGanttCharts = data.dataGanttCharts;
+                //var ganttDatasets = [{
+                //    data: data_dataGanttCharts.dataChart.map(item => ({
+                //        x: [new Date(item.Start), new Date(item.End)],
+                //        y: '' // Tất cả đều có cùng 1 tên để hiển thị trên 1 dòng
+                //    })),
+                //    backgroundColor: data_dataGanttCharts.dataChart.map(item => {
+                //        return item.Status === "Run" ? "#4CAF50" :
+                //            item.Status === "Stop" ? "#F44336" : "#9E9E9E";
+                //    }),
+                //    borderColor: data_dataGanttCharts.dataChart.map(item => {
+                //        return item.Status === "Run" ? "#4CAF50" :
+                //            item.Status === "Stop" ? "#F44336" : "#9E9E9E";
+                //    }),
+                //    borderWidth: 1
+                //}];
+                //ganttchart.data.datasets = ganttDatasets;
+                //ganttchart.options.scales.x.min = data_dataGanttCharts.min;
+                //ganttchart.options.scales.x.max = data_dataGanttCharts.max;
+                //ganttchart.update();
                 /*Row2_3*/
                 var data_statusMachineDetail = data.statusMachineDetail;
                 table.clear();
@@ -909,76 +948,76 @@
             $('#dataTable').on('mousemove click', handleMouseInteraction);
 
 
-            const ganttCtx = document.getElementById('chart_statusmachine').getContext('2d');
-            var ganttchart = new Chart(ganttCtx, {
-                type: 'bar',
-                //data: { datasets: ganttDatasets },
-                options: {
-                    indexAxis: 'y',
-                    // Cách 1: Sử dụng barThickness để đặt độ dày cố định (pixel)
-                    // barThickness: 20, // Độ dày cố định 20px cho mỗi thanh
-                    // Điều chỉnh để hiển thị trên 1 dòng
-                    categoryPercentage: 0.5, // Sử dụng toàn bộ không gian category
-                    barPercentage: 0.5,      // Các thanh chiếm 80% không gian
-                    // Cách 3: Sử dụng maxBarThickness để giới hạn độ dày tối đa
-                    // maxBarThickness: 50, // Độ dày tối đa 50px
-                    // Cách 4: Sử dụng minBarLength để đặt độ dài tối thiểu
-                    // minBarLength: 10, // Độ dài tối thiểu 10px
-                    scales: {
-                        x: {
-                            type: 'time',
-                            time: { unit: 'hour', displayFormats: { hour: 'HH:mm' } },
-                            title: {
-                                /*display: true, text: 'Thời gian', font: { size: 14 }, color: 'black' // màu chữ cho tiêu đề trục X*/
-                                display: false, text: 'Thời gian', font: { size: 14 }, color: 'black' // màu chữ cho tiêu đề trục X
-                            },
-                            ticks: {
-                                font: {
-                                    size: 15,
-                                    weight: 'bold'
-                                },
-                                color: 'black'
-                            },
-                            //min: '2025-06-09 08:00:00',
-                            //max: '2025-06-09 24:00:00'
-                        },
-                        y: {
-                            ticks: {
-                                font: {
-                                    size: 15,
-                                    weight: 'bold'
-                                },
-                                color: 'black'
-                            },
-                            /* title: { display: true, text: 'Máy', font: { size: 14 }, color: 'black' }*/
-                            title: { display: false, text: 'Máy', font: { size: 14 }, color: 'black' }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: false, labels: {
-                                color: 'black', // nếu có legend, đổi màu chữ
-                                font: { size: 15 }
-                            }
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function (context) {
-                                    const data = context.raw;
-                                    const start = new Date(data.x[0]).toLocaleTimeString('vi-VN');
-                                    const end = new Date(data.x[1]).toLocaleTimeString('vi-VN');
-                                    return `${context.dataset.label}: ${start} - ${end}`;
-                                }
-                            },
-                            //titleFont: { size: 14 },
-                            //bodyFont: { size: 12 },
-                            //titleColor: 'black',
-                            //bodyColor: 'black'
-                        }
-                    },
-                    maintainAspectRatio: false
-                }
-            });
+            //const ganttCtx = document.getElementById('chart_statusmachine').getContext('2d');
+            //var ganttchart = new Chart(ganttCtx, {
+            //    type: 'bar',
+            //    //data: { datasets: ganttDatasets },
+            //    options: {
+            //        indexAxis: 'y',
+            //        // Cách 1: Sử dụng barThickness để đặt độ dày cố định (pixel)
+            //        // barThickness: 20, // Độ dày cố định 20px cho mỗi thanh
+            //        // Điều chỉnh để hiển thị trên 1 dòng
+            //        categoryPercentage: 0.5, // Sử dụng toàn bộ không gian category
+            //        barPercentage: 0.5,      // Các thanh chiếm 80% không gian
+            //        // Cách 3: Sử dụng maxBarThickness để giới hạn độ dày tối đa
+            //        // maxBarThickness: 50, // Độ dày tối đa 50px
+            //        // Cách 4: Sử dụng minBarLength để đặt độ dài tối thiểu
+            //        // minBarLength: 10, // Độ dài tối thiểu 10px
+            //        scales: {
+            //            x: {
+            //                type: 'time',
+            //                time: { unit: 'hour', displayFormats: { hour: 'HH:mm' } },
+            //                title: {
+            //                    /*display: true, text: 'Thời gian', font: { size: 14 }, color: 'black' // màu chữ cho tiêu đề trục X*/
+            //                    display: false, text: 'Thời gian', font: { size: 14 }, color: 'black' // màu chữ cho tiêu đề trục X
+            //                },
+            //                ticks: {
+            //                    font: {
+            //                        size: 15,
+            //                        weight: 'bold'
+            //                    },
+            //                    color: 'black'
+            //                },
+            //                //min: '2025-06-09 08:00:00',
+            //                //max: '2025-06-09 24:00:00'
+            //            },
+            //            y: {
+            //                ticks: {
+            //                    font: {
+            //                        size: 15,
+            //                        weight: 'bold'
+            //                    },
+            //                    color: 'black'
+            //                },
+            //                /* title: { display: true, text: 'Máy', font: { size: 14 }, color: 'black' }*/
+            //                title: { display: false, text: 'Máy', font: { size: 14 }, color: 'black' }
+            //            }
+            //        },
+            //        plugins: {
+            //            legend: {
+            //                display: false, labels: {
+            //                    color: 'black', // nếu có legend, đổi màu chữ
+            //                    font: { size: 15 }
+            //                }
+            //            },
+            //            tooltip: {
+            //                callbacks: {
+            //                    label: function (context) {
+            //                        const data = context.raw;
+            //                        const start = new Date(data.x[0]).toLocaleTimeString('vi-VN');
+            //                        const end = new Date(data.x[1]).toLocaleTimeString('vi-VN');
+            //                        return `${context.dataset.label}: ${start} - ${end}`;
+            //                    }
+            //                },
+            //                //titleFont: { size: 14 },
+            //                //bodyFont: { size: 12 },
+            //                //titleColor: 'black',
+            //                //bodyColor: 'black'
+            //            }
+            //        },
+            //        maintainAspectRatio: false
+            //    }
+            //});
 
             // --- Vẽ biểu đồ lỗi ---
             const errorCtx = document.getElementById('chart_sumary_error').getContext('2d');

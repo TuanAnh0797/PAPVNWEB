@@ -121,9 +121,10 @@ namespace PAPVN.Service
                 foreach (DataRow item in dt.Rows)
                 {
                     quantitybyModel.labels.Add(item["Model"].ToString());
-                    quantitybyModel.Plan.Add((int)item["Plan"]);
-                    quantitybyModel.Target.Add((int)item["Target"]);
-                    quantitybyModel.Actual.Add((int)item["Actual"]);
+                    quantitybyModel.Plan.Add(double.Parse(item["Plan"].ToString()));
+                    quantitybyModel.Plan.Add(double.Parse(item["Target"].ToString()));
+                    quantitybyModel.Plan.Add(double.Parse(item["Actual"].ToString()));
+                   
                 }
             }
             return quantitybyModel;

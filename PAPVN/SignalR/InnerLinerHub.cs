@@ -27,6 +27,11 @@ namespace PAPVN.SignalR
             Timer_Inner.Start();
 
         }
+        public void GetInitialData()
+        {
+            // Call the same code that updates data
+            SendDataToClient(Context.ConnectionId, "ALL");
+        }
         private static async Task UpdateData()
         {
 

@@ -743,7 +743,19 @@ namespace InsertToSql
                             }
                             else if (i == 1)
                             {
-                                dr[i] = datarow[i].Split('-')[2];
+                                string input = datarow[i].Trim();
+
+                                string[] inputarray = input.Split('-');
+
+                                int lastDashIndex = input.LastIndexOf('-');
+                                if (lastDashIndex >= 0 & inputarray.Count() > 2)
+                                {
+                                    input = input.Substring(0, lastDashIndex);
+                                }
+
+                                dr[i] = input.Replace("L-","").Replace("R-","");
+
+
                                 dr[i+1] = datarow[i].Trim();
                             }
                             else if (i == 2)
