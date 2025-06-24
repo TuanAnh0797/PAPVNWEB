@@ -524,6 +524,11 @@
                 data: DataLineChart,
                 options: LineChartOption
             })
+            // Kiểm tra SignalR
+            if (typeof $.connection === 'undefined') {
+                console.error("SignalR not loaded. Check jQuery and signalr/hubs scripts.");
+                return;
+            }
             // Kết nối tới SignalR Hub
             var proxy = $.connection.InnerLinerHub;
             var isUpdating = true;
