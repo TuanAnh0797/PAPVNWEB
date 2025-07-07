@@ -51,7 +51,7 @@ namespace PAPVN.Management
                     DataTable dtSheet = connection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
                     if (dtSheet != null)
                     {
-                        string query = $"SELECT * FROM ErrorCode";
+                        string query = $"SELECT * FROM [ErrorCode$]";
                         using (OleDbDataAdapter adapter = new OleDbDataAdapter(query, connection))
                         {
                             DataTable dt = new DataTable();

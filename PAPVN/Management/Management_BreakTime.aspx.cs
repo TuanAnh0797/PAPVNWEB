@@ -50,7 +50,7 @@ namespace PAPVN.Management
                     DataTable dtSheet = connection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
                     if (dtSheet != null)
                     {
-                        string query = $"SELECT top 24 * FROM RestTime";
+                        string query = $"SELECT top 24 * FROM [RestTime$]";
                         using (OleDbDataAdapter adapter = new OleDbDataAdapter(query, connection))
                         {
                             DataTable dt = new DataTable();

@@ -35,9 +35,9 @@ namespace PAPVN
             }
             public override Task OnConnected()
             {
-                string path = HttpContext.Current.Server.MapPath("~/wwwroot/config.ini");
-                string[] config = File.ReadAllLines(path);
-                Config.TimeRest = config[0].Split(',').Select(int.Parse).ToArray();
+                //string path = HttpContext.Current.Server.MapPath("~/wwwroot/config.ini");
+                //string[] config = File.ReadAllLines(path);
+                //Config.TimeRest = config[0].Split(',').Select(int.Parse).ToArray();
                 // Mặc định option khi client kết nối (ví dụ: "All Model")
                 ClientOptions.TryAdd(Context.ConnectionId, "ALL");
                 // Gửi dữ liệu ban đầu ngay khi kết nối

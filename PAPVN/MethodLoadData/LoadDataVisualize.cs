@@ -11,6 +11,21 @@ namespace PAPVN.MethodLoadData
 {
     public class LoadDataVisualize
     {
+
+        public static void LoadRestTime(DBConnect dBConnect)
+        {
+            DataTable dt = dBConnect.StoreFillDT("TA_sp_LoadDataRestTime", CommandType.StoredProcedure);
+            if (dt.Rows.Count == 24)
+            {
+                for (int i = 0; i < 24; i++)
+                {
+                    Config.TimeRest[i] = (int)dt.Rows[i]["time"];
+                }
+            }
+          
+            
+        }
+
         public static string LineChartQuantityPerTime(string ModelName, string SelectedShift)
         {
 
@@ -21,6 +36,13 @@ namespace PAPVN.MethodLoadData
             try
             {
                 DBConnect dBConnect = new DBConnect();
+
+                LoadRestTime(dBConnect);
+
+
+
+
+
 
                 string parammysql;
 
