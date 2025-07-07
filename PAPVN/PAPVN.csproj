@@ -266,12 +266,14 @@
     <Content Include="Image\panasonic-logo.jpg" />
     <Content Include="Image\panasonic-logo.png" />
     <Content Include="Image\project-management.png" />
+    <Content Include="Image\rest-time.png" />
     <Content Include="Image\roll.png" />
     <Content Include="Image\vacuum-dryer.png" />
     <Content Include="Image\visual-data.png" />
     <Content Include="Image\voltmeter.png" />
     <Content Include="Image\wire-connection.png" />
     <Content Include="Management\Management_logerror.aspx" />
+    <Content Include="Management\Management_BreakTime.aspx" />
     <Content Include="UI_inner\Inner_RealTime.aspx" />
     <Content Include="z_demo\OEEDemo.html" />
     <Content Include="PartCard.html" />
@@ -2390,6 +2392,13 @@
     </Compile>
     <Compile Include="Management\Management_logerror.aspx.designer.cs">
       <DependentUpon>Management_logerror.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Management_BreakTime.aspx.cs">
+      <DependentUpon>Management_BreakTime.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Management\Management_BreakTime.aspx.designer.cs">
+      <DependentUpon>Management_BreakTime.aspx</DependentUpon>
     </Compile>
     <Compile Include="MethodLoadData\LoadDataVisualize.cs" />
     <Compile Include="Model\Common\DataGanttChart.cs" />

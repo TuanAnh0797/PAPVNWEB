@@ -1,19 +1,19 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Management_logerror.aspx.cs" Inherits="PAPVN.Management.Management_logerror" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-      <div class="m-2">
-      <div class="row" style="background-color: #fffefe; border-radius: 8px;">
-          <div class="col" style="margin-top: 5px; margin-bottom: 5px">
-             <asp:FileUpload ID="FileUpload1" runat="server" Font-Size="20px" />
-          </div>
-          
-          <div class="col-sm-3" style="margin-top: 5px; margin-bottom: 5px">
-              <asp:Button type="button" Text="Upload" OnClick="btnImport_Click" runat="server" name="btn_Import" Style="font-size: 20px; font-weight: 600; padding: 5px" class="btn btn-outline-primary btn-block "></asp:Button>
-          </div>
+    <div class="m-2">
+        <div class="row" style="background-color: #fffefe; border-radius: 8px;">
+            <div class="col" style="margin-top: 5px; margin-bottom: 5px">
+                <asp:FileUpload ID="FileUpload1" runat="server" Font-Size="20px" />
+            </div>
 
-      </div>
+            <div class="col-sm-3" style="margin-top: 5px; margin-bottom: 5px">
+                <asp:Button type="button" Text="Upload" OnClick="btnImport_Click" runat="server" name="btn_Import" Style="font-size: 20px; font-weight: 600; padding: 5px" class="btn btn-outline-primary btn-block "></asp:Button>
+            </div>
 
-  </div>
+        </div>
+
+    </div>
     <table style="padding-left: 5px; padding-right: 5px; padding-bottom: 10px; padding-top: 10px" id="dataTable" class="table table-striped table-bordered text-center">
         <thead style="background-color: #b2bac2; color: black">
             <tr class="p-0">
@@ -36,10 +36,8 @@
                 searching: false,
                 ordering: false,
                 info: false,
-
-
             });
-           
+
         });
     </script>
 </asp:Content>
