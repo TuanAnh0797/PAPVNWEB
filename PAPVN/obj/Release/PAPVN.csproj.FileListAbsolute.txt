@@ -118,3 +118,4 @@ D:\2025\PAPVNWEB\PAPVN\obj\Release\PAPVN.csproj.CoreCompileInputs.cache
 D:\2025\PAPVNWEB\PAPVN\obj\Release\PAPVN.csproj.CopyComplete
 D:\2025\PAPVNWEB\PAPVN\obj\Release\PAPVN.dll
 D:\2025\PAPVNWEB\PAPVN\obj\Release\PAPVN.pdb
+D:\2025\PAPVNWEB\PAPVN\obj\Release\PAPVN.csproj.AssemblyReference.cache

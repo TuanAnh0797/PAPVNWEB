@@ -1084,15 +1084,7 @@ namespace PAPVN.MethodLoadData
                         dataactual[i] = listdataactual[i];
                         datadiff[i] = listdatadatadiff[i];
                     }
-                    var data = new
-                    {
-                        dataplan,
-                        dataactual,
-                        datadiff,
-                        shift = selectshift,
-                        TotalPlan,
-                        typeplan = typeplan,
-                    };
+                   
                     QuantityPerTimechartCanvas quantityPerTimechartCanvas = new QuantityPerTimechartCanvas();
                     quantityPerTimechartCanvas.dataplan = dataplan;
                     quantityPerTimechartCanvas.dataactual = dataactual;
@@ -1175,19 +1167,19 @@ namespace PAPVN.MethodLoadData
                 else if (SelectedShift == "Ca 2")
                 {
                     //dt = dBConnect.StoreFillDT("TA_sp_LoadDataForBarChartPlanGas", CommandType.StoredProcedure, "2");
-                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "1");
+                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "2");
 
                 }
                 else if (SelectedShift == "Ca 3")
                 {
                     //dt = dBConnect.StoreFillDT("TA_sp_LoadDataForBarChartPlanGas", CommandType.StoredProcedure, "3");
-                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "1");
+                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "3");
 
                 }
                 else
                 {
                     //dt = dBConnect.StoreFillDT("TA_sp_LoadDataForBarChartPlanGas", CommandType.StoredProcedure, "all");
-                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "1");
+                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "all");
 
                 }
                 if (dt.Rows.Count > 0)
@@ -1513,19 +1505,19 @@ namespace PAPVN.MethodLoadData
                 else if (SelectedShift == "Ca 2")
                 {
                     //dt = dBConnect.StoreFillDT("TA_sp_LoadDataForBarChartPlanGasMonitor", CommandType.StoredProcedure, "2");
-                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "1");
+                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "2");
 
                 }
                 else if (SelectedShift == "Ca 3")
                 {
                     //dt = dBConnect.StoreFillDT("TA_sp_LoadDataForBarChartPlanGasMonitor", CommandType.StoredProcedure, "3");
-                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "1");
+                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "3");
 
                 }
                 else
                 {
                     //dt = dBConnect.StoreFillDT("TA_sp_LoadDataForBarChartPlanGasMonitor", CommandType.StoredProcedure, "all");
-                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "1");
+                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "all");
 
                 }
                 if (dt.Rows.Count > 0)

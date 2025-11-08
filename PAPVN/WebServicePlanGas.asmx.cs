@@ -354,6 +354,9 @@ namespace PAPVN
         [WebMethod]
         public string DataForBarChart(string SelectedShift)
         {
+
+           
+
             try
             {
                 DBConnect dBConnect = new DBConnect();
