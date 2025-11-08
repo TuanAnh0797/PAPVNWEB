@@ -1812,5 +1812,388 @@ namespace PAPVN.MethodLoadData
             }
         }
 
+        public static QuantityByModel QuantityByGroupModel(string SelectedShift, string storeprocedure)
+        {
+            try
+            {
+
+                if (storeprocedure == "Test")
+                {
+                    QuantityByModel quantityByModel = new QuantityByModel();
+                    quantityByModel.dataplan = new[] { 100, 500, 300 };
+                    quantityByModel.dataplanpertime = new[] { 60, 300, 250 };
+                    quantityByModel.dataactual = new[] { 40, 305, 250 };
+                    quantityByModel.labels = new[] { "A", "D", "C" };
+                    return quantityByModel;
+                }
+
+
+                DBConnect dBConnect = new DBConnect();
+                DataTable dt;
+                DateTime datetimenow = DateTime.Now;
+                if (SelectedShift == "Ca 1")
+                {
+                    //dt = dBConnect.StoreFillDT("TA_sp_LoadDataForBarChartPlanGas", CommandType.StoredProcedure, "1");
+                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "1");
+
+                }
+                else if (SelectedShift == "Ca 2")
+                {
+                    //dt = dBConnect.StoreFillDT("TA_sp_LoadDataForBarChartPlanGas", CommandType.StoredProcedure, "2");
+                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "2");
+
+                }
+                else if (SelectedShift == "Ca 3")
+                {
+                    //dt = dBConnect.StoreFillDT("TA_sp_LoadDataForBarChartPlanGas", CommandType.StoredProcedure, "3");
+                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "3");
+
+                }
+                else
+                {
+                    //dt = dBConnect.StoreFillDT("TA_sp_LoadDataForBarChartPlanGas", CommandType.StoredProcedure, "all");
+                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "all");
+
+                }
+                if (dt.Rows.Count > 0)
+                {
+                    int[] dataplan = new int[dt.Rows.Count];
+                    int[] dataplanpertime = new int[dt.Rows.Count];
+                    int[] dataactual = new int[dt.Rows.Count];
+                    string[] labels = new string[dt.Rows.Count];
+
+                    DataTable dt2 = dBConnect.StoreFillDT("TA_sp_GetStartTime", CommandType.StoredProcedure);
+                    DateTime TimeStartPlan = DateTime.Parse(dt2.Rows[0]["TimeStart"].ToString());
+
+
+                    DateTime TimeEndPlan = DateTime.Parse(dt2.Rows[0]["TimeEnd"].ToString());
+
+                    if (TimeEndPlan < datetimenow)
+                    {
+
+                        QuantityByModel quantityByModel = new QuantityByModel();
+                        quantityByModel.dataplan = new[] { 0 };
+                        quantityByModel.dataplanpertime = new[] { 0 };
+                        quantityByModel.dataactual = new[] { 0 };
+                        quantityByModel.labels = new[] { "" };
+                        return quantityByModel;
+
+                    }
+                    else
+                    {
+                        for (int i = 0; i < dt.Rows.Count; i++)
+                        {
+                            labels[i] = dt.Rows[i]["Model"].ToString();
+                            dataplan[i] = Int32.Parse(dt.Rows[i]["QuantityDay"].ToString());
+                            dataactual[i] = Int32.Parse(dt.Rows[i]["QuantityActual"].ToString());
+                            DateTime TimeStart = DateTime.Parse(dt.Rows[i]["TimeStart"].ToString());
+                            DateTime TimeEnd = DateTime.Parse(dt.Rows[i]["TimeEnd"].ToString());
+                            TimeSpan subtimenow = datetimenow - TimeStart;
+                            TimeSpan subtimemaster = TimeEnd - TimeStart;
+                            if (subtimenow.TotalSeconds <= 0)
+                            {
+                                dataplanpertime[i] = 0;
+                            }
+                            else if (subtimemaster <= subtimenow)
+                            {
+                                dataplanpertime[i] = dataplan[i];
+                            }
+                            else
+                            {
+                                double totalsec = subtimenow.TotalSeconds;
+
+                                // Trừ thời gian nghỉ
+                                // trường hợp 2 ca
+                                if (dt.Rows[i]["TypePlan"].ToString() == "2_10")
+                                {
+                                    if (datetimenow.Date == TimeStartPlan.Date)
+                                    {
+                                        for (int currentHour = TimeStart.Hour; currentHour <= datetimenow.Hour; currentHour++)
+                                        {
+                                            if (currentHour < datetimenow.Hour)
+                                            {
+                                                totalsec = totalsec - Config.TimeRest2Ca[currentHour] * 60;
+                                            }
+                                            else
+                                            {
+                                                if (datetimenow.Minute >= Config.TimeRest2Ca[currentHour])
+                                                {
+                                                    totalsec = totalsec - Config.TimeRest2Ca[currentHour] * 60;
+                                                }
+                                                else
+                                                {
+                                                    totalsec = totalsec - datetimenow.Minute * 60;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        for (int currentHour = TimeStart.Hour; currentHour <= 23; currentHour++)
+                                        {
+
+                                            totalsec = totalsec - Config.TimeRest2Ca[currentHour] * 60;
+                                        }
+                                        for (int j = 0; j <= datetimenow.Hour; j++)
+                                        {
+                                            if (j < datetimenow.Hour)
+                                            {
+                                                totalsec = totalsec - Config.TimeRest2Ca[j] * 60;
+                                            }
+                                            else
+                                            {
+                                                if (datetimenow.Minute >= Config.TimeRest2Ca[j])
+                                                {
+                                                    totalsec = totalsec - Config.TimeRest2Ca[j] * 60;
+                                                }
+                                                else
+                                                {
+                                                    totalsec = totalsec - datetimenow.Minute * 60;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                //2 ca 12
+                                else if (dt.Rows[i]["TypePlan"].ToString() == "2_12")
+                                {
+                                    if (datetimenow.Date == TimeStartPlan.Date)
+                                    {
+                                        for (int currentHour = TimeStart.Hour; currentHour <= datetimenow.Hour; currentHour++)
+                                        {
+                                            if (currentHour < datetimenow.Hour)
+                                            {
+                                                totalsec = totalsec - Config.TimeRest2Ca12[currentHour] * 60;
+                                            }
+                                            else
+                                            {
+                                                if (datetimenow.Minute >= Config.TimeRest2Ca12[currentHour])
+                                                {
+                                                    totalsec = totalsec - Config.TimeRest2Ca12[currentHour] * 60;
+                                                }
+                                                else
+                                                {
+                                                    totalsec = totalsec - datetimenow.Minute * 60;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        for (int currentHour = TimeStart.Hour; currentHour <= 23; currentHour++)
+                                        {
+
+                                            totalsec = totalsec - Config.TimeRest2Ca12[currentHour] * 60;
+                                        }
+                                        for (int j = 0; j <= datetimenow.Hour; j++)
+                                        {
+                                            if (j < datetimenow.Hour)
+                                            {
+                                                totalsec = totalsec - Config.TimeRest2Ca12[j] * 60;
+                                            }
+                                            else
+                                            {
+                                                if (datetimenow.Minute >= Config.TimeRest2Ca12[j])
+                                                {
+                                                    totalsec = totalsec - Config.TimeRest2Ca12[j] * 60;
+                                                }
+                                                else
+                                                {
+                                                    totalsec = totalsec - datetimenow.Minute * 60;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                // 2 ca bắt đầu từ 6h
+                                else if (dt.Rows[i]["TypePlan"].ToString() == "2_12_6")
+                                {
+                                    if (datetimenow.Date == TimeStartPlan.Date)
+                                    {
+                                        for (int currentHour = TimeStart.Hour; currentHour <= datetimenow.Hour; currentHour++)
+                                        {
+                                            if (currentHour < datetimenow.Hour)
+                                            {
+                                                totalsec = totalsec - Config.TimeRest2Ca12_6h[currentHour] * 60;
+                                            }
+                                            else
+                                            {
+                                                if (datetimenow.Minute >= Config.TimeRest2Ca12_6h[currentHour])
+                                                {
+                                                    totalsec = totalsec - Config.TimeRest2Ca12_6h[currentHour] * 60;
+                                                }
+                                                else
+                                                {
+                                                    totalsec = totalsec - datetimenow.Minute * 60;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        for (int currentHour = TimeStart.Hour; currentHour <= 23; currentHour++)
+                                        {
+
+                                            totalsec = totalsec - Config.TimeRest2Ca12_6h[currentHour] * 60;
+                                        }
+                                        for (int j = 0; j <= datetimenow.Hour; j++)
+                                        {
+                                            if (j < datetimenow.Hour)
+                                            {
+                                                totalsec = totalsec - Config.TimeRest2Ca12_6h[j] * 60;
+                                            }
+                                            else
+                                            {
+                                                if (datetimenow.Minute >= Config.TimeRest2Ca12_6h[j])
+                                                {
+                                                    totalsec = totalsec - Config.TimeRest2Ca12_6h[j] * 60;
+                                                }
+                                                else
+                                                {
+                                                    totalsec = totalsec - datetimenow.Minute * 60;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                // Trường hợp 3 ca
+                                else
+                                {
+
+                                    if (datetimenow.Date == TimeStartPlan.Date)
+                                    {
+                                        for (int currentHour = TimeStart.Hour; currentHour <= datetimenow.Hour; currentHour++)
+                                        {
+                                            if (currentHour < datetimenow.Hour)
+                                            {
+                                                totalsec = totalsec - Config.TimeRest[currentHour] * 60;
+                                            }
+                                            else
+                                            {
+                                                if (datetimenow.Minute >= Config.TimeRest[currentHour])
+                                                {
+                                                    totalsec = totalsec - Config.TimeRest[currentHour] * 60;
+                                                }
+                                                else
+                                                {
+                                                    totalsec = totalsec - datetimenow.Minute * 60;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        for (int currentHour = TimeStart.Hour; currentHour <= 23; currentHour++)
+                                        {
+
+                                            totalsec = totalsec - Config.TimeRest[currentHour] * 60;
+                                        }
+                                        for (int j = 0; j <= datetimenow.Hour; j++)
+                                        {
+                                            if (j < datetimenow.Hour)
+                                            {
+                                                totalsec = totalsec - Config.TimeRest[j] * 60;
+                                            }
+                                            else
+                                            {
+                                                if (datetimenow.Minute >= Config.TimeRest[j])
+                                                {
+                                                    totalsec = totalsec - Config.TimeRest[j] * 60;
+                                                }
+                                                else
+                                                {
+                                                    totalsec = totalsec - datetimenow.Minute * 60;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                int QuantityPlan = (int)Math.Round(totalsec * float.Parse(dt.Rows[i]["QuantityPerSec"].ToString()));
+                                if (QuantityPlan >= dataplan[i])
+                                {
+                                    dataplanpertime[i] = dataplan[i];
+                                }
+                                else
+                                {
+                                    dataplanpertime[i] = QuantityPlan;
+                                }
+                            }
+                        }
+                       
+
+
+                        DataTable groupmodel = dBConnect.StoreFillDT("GetGroupModel", CommandType.StoredProcedure);
+                        var groupname = groupmodel.AsEnumerable().Select(row => row.Field<string>("Type1")).Distinct().ToList();
+                        string[] labelstemp = groupname.ToArray();
+                        int[] dataplantemp = new int[labelstemp.Length];
+                        int[] dataplanpertimetemp = new int[labelstemp.Length];
+                        int[] dataactualtemp = new int[labelstemp.Length];
+
+                        int index = 0;
+
+                        foreach (var item in groupname)
+                        {
+                            int plan = 0;
+                            int planpertime = 0;
+                            int actual = 0;
+                            var model = groupmodel.AsEnumerable().Where(row => row.Field<string>("Type1") == item).Select(r=> r.Field<string>("CodeModel")).ToArray();
+                            for (int i = 0; i < model.Count(); i++)
+                            {
+                              
+
+                                for (int j = 0; j < labels.Length; j++)
+                                {
+                                    if (model[i] == labels[j])
+                                    {
+                                        plan += dataplan[j];
+                                        planpertime += dataplanpertime[j];
+                                        actual += dataactual[j];
+                                    }
+                                }
+                               
+                            }
+                            dataplantemp[index] = plan;
+                            dataplanpertimetemp[index] = planpertime;
+                            dataactualtemp[index] = actual;
+                            index++;
+                        }
+                        QuantityByModel quantityByModel = new QuantityByModel();
+                        quantityByModel.dataplan = dataplantemp;
+                        quantityByModel.dataplanpertime = dataplanpertimetemp;
+                        quantityByModel.dataactual = dataactualtemp;
+                        quantityByModel.labels = labelstemp;
+
+                        return quantityByModel;
+
+
+
+
+                    }
+
+
+                }
+                else
+                {
+                    QuantityByModel quantityByModel = new QuantityByModel();
+                    quantityByModel.dataplan = new[] { 0 };
+                    quantityByModel.dataplanpertime = new[] { 0 };
+                    quantityByModel.dataactual = new[] { 0 };
+                    quantityByModel.labels = new[] { "" };
+                    return quantityByModel;
+                }
+            }
+            catch (Exception ex)
+            {
+                QuantityByModel quantityByModel = new QuantityByModel();
+                quantityByModel.dataplan = new[] { 0 };
+                quantityByModel.dataplanpertime = new[] { 0 };
+                quantityByModel.dataactual = new[] { 0 };
+                quantityByModel.labels = new[] { "" };
+                return quantityByModel;
+            }
+        }
+
+
     }
 }

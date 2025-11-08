@@ -314,7 +314,7 @@
             scales: {
                 xAxes: [{
                     ticks: {
-                        fontSize: 20
+                      
                     },
                     gridLines: {
                         display: false
@@ -405,7 +405,7 @@
             scales: {
                 xAxes: [{
                     ticks: {
-                        fontSize: 20
+                        
                     },
                     gridLines: {
                         display: false
@@ -490,10 +490,65 @@
                 },
             ]
         }
+        var QuantityByModelGroupChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            datasetFill: false,
+            scales: {
+                xAxes: [{
+                    ticks: {
+                       
+                    },
+                    gridLines: {
+                        display: false
+                    },
+                    stacked: true,
+                }],
+                yAxes: [{
+                    ticks: {
+                        fontSize: 15,
+                        beginAtZero: true,
+                        fontColor: 'black',
+                        fontStyle: 'bold',
+                        //max: 3000, // Đặt giá trị tối đa của trục y là 100
+                        //min: 0,   // (Tùy chọn) Đặt giá trị tối thiểu nếu cần
+                        //stepSize: 300 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
+                    },
+                }],
+            },
+            legend: {
+                position: 'bottom',
+                labels: {
+                    fontSize: 15,
+                    fontColor: 'black',
+                    fontStyle: 'bold',
+                },
+            },
+            animation: {
+                duration: 1,
+                onComplete: function () {
+                    var chartInstance = this.chart,
+                        ctx = chartInstance.ctx;
+                    ctx.font = "500 18px Arial";
+                    ctx.fillStyle = '#000000';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'bottom';
+                    this.data.datasets.forEach(function (dataset, i) {
+                        var meta = chartInstance.controller.getDatasetMeta(i);
+                        meta.data.forEach(function (bar, index) {
+                            var data = dataset.data[index];
+                            ctx.fillText(data, bar._model.x, bar._model.y);
+                        });
+                    });
+                }
+            }
+
+
+        }
         var QuantityByGroupModelChart = new Chart(QuantityByGroupModelChartCanvas, {
             type: 'bar',
             data: dataquantitybygroupmodel,
-            options: QuantityByModelChartOptions
+            options: QuantityByModelGroupChartOptions
         })
         //
 
@@ -541,7 +596,11 @@
             dataquantitybymodel.datasets[1].data = data.dataplanpertime;
             dataquantitybymodel.datasets[2].data = data.dataactual;
             dataquantitybymodel.labels = data.labels;
-            QuantityByModelChartOptions.scales.yAxes[0].ticks.max = Math.max(...data.dataplan) + 30;
+            var max = Math.max(...data.dataplan);
+
+
+
+            QuantityByModelChart.options.scales.yAxes[0].ticks.max = max + Math.ceil(max / 4);
             //barchartplan.options = barChartOptions;
             var data1 = data.dataactual;
             var data2 = data.dataplanpertime;
@@ -563,7 +622,11 @@
             dataquantitybymodelmonitor.datasets[1].data = data.dataplanpertime;
             dataquantitybymodelmonitor.datasets[2].data = data.dataactual;
             dataquantitybymodelmonitor.labels = data.labels;
-            QuantityByModelMonitorChartOptions.scales.yAxes[0].ticks.max = Math.max(...data.dataplan) + 30;
+            var max = Math.max(...data.dataplan);
+
+
+
+            QuantityByModelChartMonitor.options.scales.yAxes[0].ticks.max = max + Math.ceil(max / 4);
             //barchartplan.options = barChartOptions;
             var data1 = data.dataactual;
             var data2 = data.dataplanpertime;
@@ -581,6 +644,34 @@
             QuantityByModelChartMonitor.update();
         }
 
+        function UpdateChartQuantityByModelGroup(data) {
+            dataquantitybygroupmodel.datasets[0].data = data.dataplan;
+            dataquantitybygroupmodel.datasets[1].data = data.dataplanpertime;
+            dataquantitybygroupmodel.datasets[2].data = data.dataactual;
+            dataquantitybygroupmodel.labels = data.labels;
+
+            var max = Math.max(...data.dataplan);
+            QuantityByGroupModelChart.options.scales.yAxes[0].ticks.max = max + Math.ceil(max / 4);
+
+
+          
+
+            //barchartplan.options = barChartOptions;
+            var data1 = data.dataactual;
+            var data2 = data.dataplanpertime;
+            var bgr = [];
+            data1.forEach(function (value1, index) {
+                var value2 = data2[index];
+                if (value1 < value2) {
+                    bgr.push('red')
+                }
+                else {
+                    bgr.push('green')
+                }
+            });
+            dataquantitybygroupmodel.datasets[2].backgroundColor = bgr;
+            QuantityByGroupModelChart.update();
+        }
 
         $(document).ready(function () {
 
@@ -604,6 +695,7 @@
                 UpdateChartQuantityPerTime(data.QuantityPerTimechartCanvas);
                 UpdateChartQuantityByModel(data.quantityByModel);
                 UpdateChartQuantityByModelMonitor(data.quantityByModelMonitor)
+                UpdateChartQuantityByModelGroup(data.quantityByModelgroup)
 
                 //datachartquantitybyminute.datasets[0].data = data.QuantityPerMinute.data;
                 //datachartquantitybyminute.labels = data.QuantityPerMinute.label;
