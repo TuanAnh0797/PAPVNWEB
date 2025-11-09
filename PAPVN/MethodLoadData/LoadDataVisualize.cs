@@ -1812,5 +1812,197 @@ namespace PAPVN.MethodLoadData
             }
         }
 
+
+        public static QuantityPerHour LineChartQuantityPerHour(string ModelName, string SelectedShift, string storeprocedure)
+        {
+
+            if (storeprocedure == "Test")
+            {
+                QuantityPerHour quantityPerTimechartCanvas = new QuantityPerHour();
+                quantityPerTimechartCanvas.dataplan = new[] { 100, 110, 120 };
+                quantityPerTimechartCanvas.dataactual = new[] { 90, 120, 120 };
+                quantityPerTimechartCanvas.datadiff = new[] { -10, 10, 0 };
+                quantityPerTimechartCanvas.datadifftotal = new[] { -10, 20, 30 };
+                quantityPerTimechartCanvas.shift = 0;
+                return quantityPerTimechartCanvas;
+            }
+            string typeplan = "3_8";
+            try
+            {
+                DBConnect dBConnect = new DBConnect();
+                LoadRestTime(dBConnect);
+                string parammysql;
+
+                //bool allday = false;
+
+                if (ModelName.Contains("All Model"))
+                {
+                    parammysql = "all";
+                }
+                else
+                {
+                    parammysql = ModelName.Trim();
+                }
+                // Thời gian bắt đầu ca lấy từ database
+                DateTime TimeStartShift = new DateTime();
+
+                int selectshift = 0;
+                int TotalPlan = 0;
+                DataSet ds1;
+                DataSet ds;
+                DataTable dt1;
+                if (SelectedShift == "Ca 1")
+                {
+                    selectshift = 1;
+                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "1");
+                    ds = dBConnect.StoreFillDS(storeprocedure, CommandType.StoredProcedure, parammysql, "1");
+                    dt1 = ds.Tables[0];
+                }
+                else if (SelectedShift == "Ca 2")
+                {
+                    selectshift = 2;
+                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "2");
+                    ds = dBConnect.StoreFillDS(storeprocedure, CommandType.StoredProcedure, parammysql, "2");
+                    dt1 = ds.Tables[0];
+                }
+                else if (SelectedShift == "Ca 3")
+                {
+                    selectshift = 3;
+                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "3");
+                    ds = dBConnect.StoreFillDS(storeprocedure, CommandType.StoredProcedure, parammysql, "3");
+                    dt1 = ds.Tables[0];
+                }
+                else
+                {
+                    selectshift = 0;
+                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "all");
+                    ds = dBConnect.StoreFillDS(storeprocedure, CommandType.StoredProcedure, parammysql, "all");
+                    dt1 = ds.Tables[0];
+                    //allday = true;
+                }
+                if (ds1.Tables[0].Rows.Count > 0)
+                {
+                    TotalPlan = Int32.Parse(ds1.Tables[0].Rows[0]["QuantityDay"].ToString());
+                    TimeStartShift = DateTime.Parse(ds.Tables[1].Rows[0]["TimeStart"].ToString());
+                    DateTime TimeEndShift = DateTime.Parse(ds1.Tables[1].Rows[0]["TimeEnd"].ToString());
+                    if (TimeEndShift < DateTime.Now)
+                    {
+                        int TotalPlan1 = 0;
+
+                        QuantityPerHour quantityPerTimechartCanvas = new QuantityPerHour();
+
+                        quantityPerTimechartCanvas.dataplan = new[] { 0 };
+                        quantityPerTimechartCanvas.dataactual = new[] { 0 };
+                        quantityPerTimechartCanvas.datadiff = new[] { 0 };
+                        quantityPerTimechartCanvas.shift = 0;
+                        quantityPerTimechartCanvas.datadifftotal = new[] { 0 };
+
+                        return quantityPerTimechartCanvas;
+                    }
+
+                }
+                Dictionary<string, int> listdataplan = new Dictionary<string, int>();
+                List<int> listdataactual = new List<int>();
+                List<int> listdatadatadiff = new List<int>();
+                List<int> listdatadatadiffall = new List<int>();
+
+                List<int> listdataplanactual = new List<int>();
+                if (ds.Tables[1].Rows.Count > 0)
+                {
+
+                    DateTime TimeStart = DateTime.Parse(ds.Tables[1].Rows[0]["TimeStart"].ToString());
+                    DateTime TimeEnd = DateTime.Parse(ds.Tables[1].Rows[0]["TimeEnd"].ToString());
+                    float quantityPerSec = float.Parse(ds.Tables[1].Rows[0]["QuantityPerSec"].ToString());
+
+                    typeplan = ds.Tables[1].Rows[0]["TypePlan"].ToString();
+                    int index = 1;
+
+
+                    //DateTime EndDateTime = DateTime.Now;
+
+                    for (DateTime currentHour = TimeStart; currentHour <= TimeEnd; currentHour = currentHour.AddHours(1))
+                    {
+                        int TotalTimeNow = index * 3600 - Config.TimeRest[currentHour.Hour];
+                        listdataplan.Add(currentHour.ToString("yyyy-MM-dd HH:mm:ss"), (int)Math.Round(TotalTimeNow * quantityPerSec));
+                        index++;
+                    }
+
+                    for (DateTime currentHour = TimeStartShift; currentHour <= DateTime.Now; currentHour = currentHour.AddHours(1))
+                    {
+                        if (listdataplan.Keys.Contains(currentHour.ToString("yyyy-MM-dd HH:mm:ss")))
+                        {
+                            listdataplanactual.Add(listdataplan[currentHour.ToString("yyyy-MM-dd HH:mm:ss")]);
+                            int sumquantityactual = dt1.AsEnumerable()
+                                                     .Where(row => DateTime.Parse(row["TimeDataActual"].ToString()) == currentHour)
+                                                     .Sum(row => Int32.Parse(row["mycount"].ToString()));
+                            listdataactual.Add(sumquantityactual);
+                            listdatadatadiff.Add(sumquantityactual - listdataplan[currentHour.ToString("yyyy-MM-dd HH:mm:ss")]);
+                            listdatadatadiffall.Add(listdatadatadiff.Sum());
+                        }
+                        else
+                        {
+                            listdataplanactual.Add(0);
+                            int sumquantityactual = dt1.AsEnumerable()
+                                                     .Where(row => DateTime.Parse(row["TimeDataActual"].ToString()) == currentHour)
+                                                     .Sum(row => Int32.Parse(row["mycount"].ToString()));
+                            listdataactual.Add(sumquantityactual);
+                            listdatadatadiff.Add(sumquantityactual);
+                            listdatadatadiffall.Add(listdatadatadiff.Sum());
+                        }
+                    }
+
+                    //}
+                    int[] dataplan = new int[listdataplanactual.Count];
+                    int[] dataactual = new int[listdataplanactual.Count];
+                    int[] datadiff = new int[listdataplanactual.Count];
+                    int[] datadiffall = new int[listdataplanactual.Count];
+                    for (int i = 0; i < listdataplanactual.Count; i++)
+                    {
+                        dataplan[i] = listdataplanactual[i];
+                        dataactual[i] = listdataactual[i];
+                        datadiff[i] = listdatadatadiff[i];
+                        datadiffall[i] = listdatadatadiffall[i];
+                    }
+
+                    QuantityPerHour quantityPerTimechartCanvas = new QuantityPerHour();
+                    quantityPerTimechartCanvas.dataactual = dataactual;
+                    quantityPerTimechartCanvas.datadiff = datadiff;
+                    quantityPerTimechartCanvas.datadifftotal = datadiffall;
+                    quantityPerTimechartCanvas.shift = selectshift;
+                    quantityPerTimechartCanvas.typeplan = typeplan;
+
+
+
+                    return quantityPerTimechartCanvas;
+                }
+                else
+                {
+                    QuantityPerHour quantityPerTimechartCanvas = new QuantityPerHour();
+
+                    quantityPerTimechartCanvas.dataplan = new[] { 0 };
+                    quantityPerTimechartCanvas.dataactual = new[] { 0 };
+                    quantityPerTimechartCanvas.datadiff = new[] { 0 };
+                    quantityPerTimechartCanvas.shift = 0;
+                    quantityPerTimechartCanvas.datadifftotal = new[] { 0 };
+
+                    return quantityPerTimechartCanvas;
+                }
+            }
+            catch (Exception ex)
+            {
+                int TotalPlan = 0;
+                QuantityPerHour quantityPerTimechartCanvas = new QuantityPerHour();
+
+                quantityPerTimechartCanvas.dataplan = new[] { 0 };
+                quantityPerTimechartCanvas.dataactual = new[] { 0 };
+                quantityPerTimechartCanvas.datadiff = new[] { 0 };
+                quantityPerTimechartCanvas.shift = 0;
+                quantityPerTimechartCanvas.datadifftotal = new[] { 0 };
+
+                return quantityPerTimechartCanvas;
+            }
+        }
+
+
     }
 }

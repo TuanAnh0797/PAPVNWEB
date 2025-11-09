@@ -70,9 +70,17 @@ namespace PAPVN.SignalRHub
             try
             {
                 DataUrethan dataUrethan = new DataUrethan();
-                dataUrethan.QuantityPerTimechartCanvas = LoadDataVisualize.LineChartQuantityPerTimeObject(Optiontable, "All", "TA_sp_LoadDataForLineChartPlanUrethanByTime");
-                dataUrethan.quantityByModel = LoadDataVisualize.QuantityByModel("All", "TA_sp_LoadDataForBarChartPlanurethan_unique");
-                dataUrethan.quantityByModelMonitor = LoadDataVisualize.QuantityByModelMonitor("All", "TA_sp_LoadDataForBarChartPlanurethan_uniqueMonitor");
+                //dataUrethan.QuantityPerTimechartCanvas = LoadDataVisualize.LineChartQuantityPerTimeObject(Optiontable, "All", "TA_sp_LoadDataForLineChartPlanUrethanByTime");
+                //dataUrethan.quantityByModel = LoadDataVisualize.QuantityByModel("All", "TA_sp_LoadDataForBarChartPlanurethan_unique");
+                //dataUrethan.quantityByModelMonitor = LoadDataVisualize.QuantityByModelMonitor("All", "TA_sp_LoadDataForBarChartPlanurethan_uniqueMonitor");
+                //dataUrethan.quantityPerHour = LoadDataVisualize.LineChartQuantityPerHour(Optiontable, "All", "TA_sp_LoadDataForLineChartPlanUrethanByHour");
+                dataUrethan.QuantityPerTimechartCanvas = LoadDataVisualize.LineChartQuantityPerTimeObject(Optiontable, "All", "Test");
+                dataUrethan.quantityByModel = LoadDataVisualize.QuantityByModel("All", "Test");
+                dataUrethan.quantityByModelMonitor = LoadDataVisualize.QuantityByModelMonitor("All", "Test");
+                dataUrethan.quantityPerHour = LoadDataVisualize.LineChartQuantityPerHour(Optiontable, "All", "Test");
+
+
+
                 var hub = GlobalHost.ConnectionManager.GetHubContext<UrethanHub>();
                 hub.Clients.Client(connectionId).updateData(dataUrethan);
             }
@@ -87,6 +95,7 @@ namespace PAPVN.SignalRHub
         public QuantityPerTimechartCanvas QuantityPerTimechartCanvas = new QuantityPerTimechartCanvas();
         public QuantityByModel quantityByModel = new QuantityByModel();
         public QuantityByModel quantityByModelMonitor = new QuantityByModel();
+        public QuantityPerHour  quantityPerHour = new QuantityPerHour();
     }
 
 }

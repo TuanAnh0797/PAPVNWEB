@@ -68,69 +68,7 @@
         </div>
 
         <div class="row">
-            <%-- <div class="col-5">
-                <div class="card " style="background-color: white">
-                    <h4 class="card-header bg-info text-black text-center p-0" style="font-weight: 600">
-                        <asp:Literal runat="server" Text="Tỉ lệ chạy" />
-                    </h4>
-                    <div class="chart-container">
-                        <canvas id="chart_quantity_perminute" style="min-height: 50px; height: 100%; max-height: 80px"></canvas>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="chart_quantity_perminute2" style="min-height: 50px; height: 100%; max-height: 80px"></canvas>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="chart_quantity_perminute3" style="min-height: 50px; height: 100%; max-height: 80px"></canvas>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="chart_quantity_perminute4" style="min-height: 50px; height: 100%; max-height: 80px"></canvas>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="chart_quantity_perminute5" style="min-height: 50px; height: 100%; max-height: 80px"></canvas>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="chart_quantity_perminute6" style="min-height: 50px; height: 100%; max-height: 80px"></canvas>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="chart_quantity_perminute7" style="min-height: 50px; height: 100%; max-height: 80px"></canvas>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="chart_quantity_perminute8" style="min-height: 50px; height: 100%; max-height: 80px"></canvas>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="chart_quantity_perminute9" style="min-height: 50px; height: 100%; max-height: 80px"></canvas>
-                    </div>
-
-
-                </div>
-            </div>--%>
-            <%-- <div class="col-7">
-
-                <div class="card mb-2 " style="background-color: white">
-                    <h4 class="card-header bg-info text-black text-center p-0" style="font-weight: 600">
-                        <asp:Literal runat="server" Text="Sản lượng theo giờ" />
-                    </h4>
-                    <div class="chart-container">
-                        <canvas id="chart_quantity_byhour" style="min-height: 210px; height: 100%"></canvas>
-                    </div>
-                </div>
-                <div class="card mb-2  " style="background-color: white">
-                    <h4 class="card-header bg-info text-black text-center p-0" style="font-weight: 600">
-                        <asp:Literal runat="server" Text="<%$Resources:name.language, common_stackchart%>" />
-                    </h4>
-                    <div class="chart-container">
-                        <canvas style="min-height: 210px; height: 100%"></canvas>
-                    </div>
-                </div>
-                <div class="card mb-2 " style="background-color: white">
-                    <h4 class="card-header bg-info text-black text-center p-0" style="font-weight: 600">
-                        <asp:Literal runat="server" Text="<%$Resources:name.language, common_stackchart%>" />
-                    </h4>
-                    <div class="chart-container">
-                        <canvas style="min-height: 210px; height: 100%"></canvas>
-                    </div>
-                </div>
-            </div>--%>
+            
             <div class="card m-0 mb-2 col p-0 mr-2 ml-2" style="background-color: white">
                 <h4 class="card-header bg-secondary text-black text-center p-0" style="font-weight: 600">
                     <asp:Literal runat="server" Text="Sản lượpng theo Model" />
@@ -163,7 +101,7 @@
                     <asp:Literal runat="server" Text="Sản lượng theo giờ" />
                 </h4>
                 <div class="chart-container">
-                    <canvas style="min-height: 250px; height: 100%"></canvas>
+                    <canvas id="QuantityPerHourchart" style="min-height: 250px; height: 100%"></canvas>
                 </div>
             </div>
         </div>
@@ -453,7 +391,6 @@
 
 
         }
-
         var QuantityByModelChartMonitor = new Chart(QuantityByModelMonitorChartCanvas, {
             type: 'bar',
             data: dataquantitybymodelmonitor,
@@ -496,6 +433,125 @@
             options: QuantityByModelChartOptions
         })
         //
+        //
+        var DataQuantityPerHourchart = {
+            labels: [],
+            datasets: [
+                {
+                    type: 'bar',
+                    yAxisID: 'y-axis-1',
+                    label: 'Plan',
+                    borderColor: 'rgb(75, 192, 192)',
+                    data: [],
+                    fill: false,
+                    //tension: 0, // làm line đỡ mượt
+                    borderWidth: 2,
+                    pointRadius: 2, //
+                },
+                {
+                    type: 'bar',
+                    yAxisID: 'y-axis-1',
+                    label: 'Actual',
+                    borderColor: '#b38600',
+                    data: [],
+                    fill: false,
+                    //tension: 0, // làm line đỡ mượt
+                    borderWidth: 2,
+                    pointRadius: 2, //
+                },
+                {
+                    type: 'line',
+                    label: 'Diff',
+                    backgroundColor: function (context) {
+                        var value = context.dataset.data[context.dataIndex];
+                        return value < 0 ? 'red' : 'green';
+                    },
+                    yAxisID: 'y-axis-2',
+                    order: 1,
+                    data: []
+                },
+                {
+                    type: 'line',
+                    label: 'DiffAll',
+                    backgroundColor: function (context) {
+                        var value = context.dataset.data[context.dataIndex];
+                        return value < 0 ? 'red' : 'green';
+                    },
+                    yAxisID: 'y-axis-2',
+                    order: 1,
+                    data: []
+                },
+            ]
+        };
+        var QuantityPerHourChartOption =
+        {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                //xAxes: [{
+                //    type: 'linear',
+                //}],
+                x: {
+                    ticks: {
+                        fontSize: 15,
+                        fontColor: 'black',
+                        fontStyle: 'bold',
+                    },
+                    type: 'linear', // Sử dụng linear scale cho trục x
+                    position: 'bottom',
+                },
+                yAxes: [{
+                    beginAtZero: true,
+                    id: 'y-axis-1', // ID của trục y thứ nhất
+                    type: 'linear',
+                    position: 'left', // Vị trí của trục y thứ nhất
+                    ticks: {
+                        fontSize: 15,
+                        beginAtZero: true,
+                        fontColor: 'black',
+                        fontStyle: 'bold',
+                        //max: 3000, // Đặt giá trị tối đa của trục y là 100
+                        //min: 0,   // (Tùy chọn) Đặt giá trị tối thiểu nếu cần
+                        //stepSize: 300 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
+                    },
+                },
+                {
+                    id: 'y-axis-2', // ID của trục y thứ hai
+                    type: 'linear',
+                    position: 'right', // Vị trí của trục y thứ hai
+                    ticks: {
+                        fontSize: 15,
+                        beginAtZero: true,
+                        fontColor: 'black',
+                        fontStyle: 'bold',
+                        //max: 300, // Đặt giá trị tối đa của trục y là 100
+                        // min: -300,   // (Tùy chọn) Đặt giá trị tối thiểu nếu cần
+                        //stepSize: 300 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
+                    },
+                    gridLines: {
+                        display: false
+                    },
+                }]
+            },
+            legend: {
+                position: 'bottom',
+                labels: {
+                    fontSize: 15,
+                    fontColor: 'black',
+                    fontStyle: 'bold',
+                },
+            },
+
+        };
+        var QuantityPerHourchart = $('#QuantityPerHourchart').get(0).getContext('2d')
+        var QuantityPerHourchartCanvas = new Chart(QuantityPerHourchart, {
+            type: 'line',
+            data: DataQuantityPerHourchart,
+            options: QuantityPerHourChartOption
+        })
+        //
+
+
 
         function UpdateDashboard(data) {
             $('#plan').html(data.TotalPlan);
@@ -504,7 +560,6 @@
             $('#diff').html(data.Diff);
             $('#remain').html(data.Remain);
         }
-
         function UpdateChartQuantityPerTime(data) {
             DataQuantityPerTimechart.datasets[0].data = data.dataplan;
             DataQuantityPerTimechart.datasets[1].data = data.dataactual;
@@ -581,6 +636,39 @@
             QuantityByModelChartMonitor.update();
         }
 
+        function UpdateChartQuantityPerHour(data) {
+            DataQuantityPerHourchart.datasets[0].data = data.dataplan;
+            DataQuantityPerHourchart.datasets[1].data = data.dataactual;
+            DataQuantityPerHourchart.datasets[2].data = data.datadiff;
+            DataQuantityPerHourchart.datasets[3].data = data.datadifftotal;
+            var shift = data.shift;
+            var typeplan = data.typeplan;
+            if (typeplan == '2_10') {
+
+                DataQuantityPerHourchart.labels = ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '0:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00'];
+
+            }
+            else if (typeplan == '2_12') {
+
+                DataQuantityPerHourchart.labels = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '0:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00', '10:00'];
+
+
+            }
+            else if (typeplan == '2_12_6') {
+
+                DataQuantityPerHourchart.labels = ['6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '0:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00']    
+
+
+            }
+            else {
+
+                DataQuantityPerHourchart.labels = ['6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '0:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00'];
+            }
+            QuantityPerHourchartCanvas.update();
+        }
+
+
+
 
         $(document).ready(function () {
 
@@ -604,6 +692,7 @@
                 UpdateChartQuantityPerTime(data.QuantityPerTimechartCanvas);
                 UpdateChartQuantityByModel(data.quantityByModel);
                 UpdateChartQuantityByModelMonitor(data.quantityByModelMonitor)
+                UpdateChartQuantityPerHour(data.quantityPerHour);
 
                 //datachartquantitybyminute.datasets[0].data = data.QuantityPerMinute.data;
                 //datachartquantitybyminute.labels = data.QuantityPerMinute.label;

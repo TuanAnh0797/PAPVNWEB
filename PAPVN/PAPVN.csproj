@@ -2403,6 +2403,7 @@
     </Compile>
     <Compile Include="MethodLoadData\LoadDataVisualize.cs" />
     <Compile Include="Model\ChartData\QuantityByModel.cs" />
+    <Compile Include="Model\ChartData\QuantityPerHour.cs" />
     <Compile Include="Model\ChartData\QuantityPerTimechartCanvas.cs" />
     <Compile Include="Model\Common\DataGanttChart.cs" />
     <Compile Include="Model\Common\ErrorChartData.cs" />
