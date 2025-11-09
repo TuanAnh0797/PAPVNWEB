@@ -237,7 +237,11 @@
                 return;
             }
             // Kết nối tới SignalR Hub
+           // $.connection.hub.qs = { page: "finalcheck" };
             var proxy = $.connection.chatHub;
+
+          
+
             var isUpdating = true;
             var interactionTimeout;
 

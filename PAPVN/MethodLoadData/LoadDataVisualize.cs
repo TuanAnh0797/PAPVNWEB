@@ -1915,16 +1915,15 @@ namespace PAPVN.MethodLoadData
                     float quantityPerSec = float.Parse(ds.Tables[1].Rows[0]["QuantityPerSec"].ToString());
 
                     typeplan = ds.Tables[1].Rows[0]["TypePlan"].ToString();
-                    int index = 1;
 
 
                     //DateTime EndDateTime = DateTime.Now;
 
                     for (DateTime currentHour = TimeStart; currentHour <= TimeEnd; currentHour = currentHour.AddHours(1))
                     {
-                        int TotalTimeNow = index * 3600 - Config.TimeRest[currentHour.Hour];
+                        int TotalTimeNow =  3600 - Config.TimeRest[currentHour.Hour];
                         listdataplan.Add(currentHour.ToString("yyyy-MM-dd HH:mm:ss"), (int)Math.Round(TotalTimeNow * quantityPerSec));
-                        index++;
+                       
                     }
 
                     for (DateTime currentHour = TimeStartShift; currentHour <= DateTime.Now; currentHour = currentHour.AddHours(1))
@@ -1965,6 +1964,7 @@ namespace PAPVN.MethodLoadData
                     }
 
                     QuantityPerHour quantityPerTimechartCanvas = new QuantityPerHour();
+                    quantityPerTimechartCanvas.dataplan = dataplan;
                     quantityPerTimechartCanvas.dataactual = dataactual;
                     quantityPerTimechartCanvas.datadiff = datadiff;
                     quantityPerTimechartCanvas.datadifftotal = datadiffall;

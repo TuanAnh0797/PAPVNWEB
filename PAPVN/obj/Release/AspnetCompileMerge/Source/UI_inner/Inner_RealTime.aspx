@@ -533,13 +533,7 @@
             var proxy = $.connection.InnerLinerHub;
             var isUpdating = true;
             var interactionTimeout;
-            // Bắt đầu kết nối SignalR
-            $.connection.hub.start().done(function () {
-                console.log("SignalR connected");
-                proxy.server.getInitialData();
-            }).fail(function (error) {
-                console.error("SignalR connection failed: ", error);
-            });
+            
 
             // Xử lý khi nhận dữ liệu mới
             proxy.client.updateData = function (data) {
@@ -559,7 +553,13 @@
                 linechart.update();
             };
 
-
+            // Bắt đầu kết nối SignalR
+            $.connection.hub.start().done(function () {
+                console.log("SignalR connected");
+                proxy.server.getInitialData();
+            }).fail(function (error) {
+                console.error("SignalR connection failed: ", error);
+            });
             // Hàm xử lý tương tác chuột
             function handleMouseInteraction() {
                 isUpdating = false;

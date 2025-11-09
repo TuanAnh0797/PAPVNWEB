@@ -361,7 +361,6 @@ D:\Project\PAPVNWEB\PAPVN\obj\Debug\PAPVN.csproj.CoreCompileInputs.cache
 D:\Project\PAPVNWEB\PAPVN\obj\Debug\PAPVN.csproj.Up2Date
 D:\Project\PAPVNWEB\PAPVN\obj\Debug\PAPVN.dll
 D:\Project\PAPVNWEB\PAPVN\obj\Debug\PAPVN.pdb
-D:\2025\PAPVNWEB\PAPVN\obj\Debug\PAPVN.csproj.CoreCompileInputs.cache
 D:\2025\PAPVNWEB\PAPVN\bin\PAPVN.dll.config
 D:\2025\PAPVNWEB\PAPVN\bin\PAPVN.dll
 D:\2025\PAPVNWEB\PAPVN\bin\PAPVN.pdb
@@ -478,6 +477,8 @@ D:\2025\PAPVNWEB\PAPVN\bin\Newtonsoft.Json.xml
 D:\2025\PAPVNWEB\PAPVN\bin\Antlr3.Runtime.pdb
 D:\2025\PAPVNWEB\PAPVN\bin\Microsoft.AspNet.FriendlyUrls.xml
 D:\2025\PAPVNWEB\PAPVN\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\2025\PAPVNWEB\PAPVN\obj\Debug\PAPVN.csproj.CoreCompileInputs.cache
 D:\2025\PAPVNWEB\PAPVN\obj\Debug\PAPVN.csproj.CopyComplete
 D:\2025\PAPVNWEB\PAPVN\obj\Debug\PAPVN.dll
 D:\2025\PAPVNWEB\PAPVN\obj\Debug\PAPVN.pdb
+D:\2025\PAPVNWEB\PAPVN\obj\Debug\PAPVN.csproj.AssemblyReference.cache
