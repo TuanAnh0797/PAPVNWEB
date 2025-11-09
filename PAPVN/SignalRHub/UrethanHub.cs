@@ -70,6 +70,11 @@ namespace PAPVN.SignalRHub
             try
             {
                 DataUrethan dataUrethan = new DataUrethan();
+                dataUrethan.QuantityPerTimechartCanvas = LoadDataVisualize.LineChartQuantityPerTimeObject(Optiontable, "All", "TA_sp_LoadDataForLineChartPlanUrethanByTime");
+                dataUrethan.quantityByModel = LoadDataVisualize.QuantityByModel("All", "TA_sp_LoadDataForBarChartPlanurethan_unique");
+                dataUrethan.quantityByModelMonitor = LoadDataVisualize.QuantityByModelMonitor("All", "TA_sp_LoadDataForBarChartPlanurethan_uniqueMonitor");
+                dataUrethan.quantityByModelgroup = LoadDataVisualize.QuantityByGroupModel("All", "TA_sp_LoadDataForBarChartPlanurethan_unique");
+
                 //dataUrethan.QuantityPerTimechartCanvas = LoadDataVisualize.LineChartQuantityPerTimeObject(Optiontable, "All", "TA_sp_LoadDataForLineChartPlanUrethanByTime");
                 //dataUrethan.quantityByModel = LoadDataVisualize.QuantityByModel("All", "TA_sp_LoadDataForBarChartPlanurethan_unique");
                 //dataUrethan.quantityByModelMonitor = LoadDataVisualize.QuantityByModelMonitor("All", "TA_sp_LoadDataForBarChartPlanurethan_uniqueMonitor");
@@ -96,6 +101,7 @@ namespace PAPVN.SignalRHub
         public QuantityByModel quantityByModel = new QuantityByModel();
         public QuantityByModel quantityByModelMonitor = new QuantityByModel();
         public QuantityPerHour  quantityPerHour = new QuantityPerHour();
+        public QuantityByModel quantityByModelgroup = new QuantityByModel();
     }
 
 }
