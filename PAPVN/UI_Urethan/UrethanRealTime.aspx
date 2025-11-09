@@ -29,7 +29,7 @@
     </style>
     <div class="m-2">
 
-<%--        <h1 class="text-center mb-0" style="font-weight: 600; color: darkblue">Dash board URT</h1>--%>
+        <%--        <h1 class="text-center mb-0" style="font-weight: 600; color: darkblue">Dash board URT</h1>--%>
         <div class=" row p-0 ml-2 mr-2">
 
             <div class="oee-card bg-blue col m-2">
@@ -60,7 +60,7 @@
         </div>
         <div class="card m-0 mb-2" style="background-color: white">
             <h4 class="card-header bg-secondary text-black text-center p-0" style="font-weight: 600">
-                <asp:Literal runat="server" Text="<%$Resources:name.language, common_multichart%>" />
+                <asp:Literal runat="server" Text="Sản lượng theo giờ" />
             </h4>
             <div class="chart-container">
                 <canvas id="QuantityPerTimechart" style="min-height: 250px; height: 100%"></canvas>
@@ -68,10 +68,10 @@
         </div>
 
         <div class="row">
-            
+
             <div class="card m-0 mb-2 col p-0 mr-2 ml-2" style="background-color: white">
                 <h4 class="card-header bg-secondary text-black text-center p-0" style="font-weight: 600">
-                    <asp:Literal runat="server" Text="Sản lượpng theo Model" />
+                    <asp:Literal runat="server" Text="Sản lượng theo Model" />
                 </h4>
                 <div class="chart-container">
                     <canvas id="quantitybymodel" style="min-height: 250px; height: 100%"></canvas>
@@ -492,32 +492,36 @@
         var DataQuantityPerHourchart = {
             labels: [],
             datasets: [
+                
                 {
                     type: 'bar',
                     yAxisID: 'y-axis-1',
                     label: 'Plan',
-                    borderColor: 'rgb(75, 192, 192)',
+                     backgroundColor: 'Blue',
                     data: [],
-                    fill: false,
+                    
                     //tension: 0, // làm line đỡ mượt
                     borderWidth: 2,
                     pointRadius: 2, //
+                    order: 2,
                 },
                 {
                     type: 'bar',
                     yAxisID: 'y-axis-1',
                     label: 'Actual',
-                    borderColor: '#b38600',
+                    backgroundColor: 'orange',
                     data: [],
-                    fill: false,
+                  
                     //tension: 0, // làm line đỡ mượt
                     borderWidth: 2,
                     pointRadius: 2, //
+                    order: 2,
                 },
                 {
                     type: 'line',
                     label: 'Diff',
-                    backgroundColor: function (context) {
+                    fill: false,
+                    borderColor: function (context) {
                         var value = context.dataset.data[context.dataIndex];
                         return value < 0 ? 'red' : 'green';
                     },
@@ -528,7 +532,8 @@
                 {
                     type: 'line',
                     label: 'DiffAll',
-                    backgroundColor: function (context) {
+                    fill: false,
+                    borderColor: function (context) {
                         var value = context.dataset.data[context.dataIndex];
                         return value < 0 ? 'red' : 'green';
                     },
@@ -536,6 +541,7 @@
                     order: 1,
                     data: []
                 },
+               
             ]
         };
         var QuantityPerHourChartOption =
@@ -600,7 +606,7 @@
         };
         var QuantityPerHourchart = $('#QuantityPerHourchart').get(0).getContext('2d')
         var QuantityPerHourchartCanvas = new Chart(QuantityPerHourchart, {
-            type: 'line',
+            type: 'bar',
             data: DataQuantityPerHourchart,
             options: QuantityPerHourChartOption
         })
