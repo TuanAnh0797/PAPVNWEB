@@ -275,6 +275,7 @@
     <Content Include="Management\Management_logerror.aspx" />
     <Content Include="Management\Management_BreakTime.aspx" />
     <Content Include="UI_inner\Inner_RealTime.aspx" />
+    <Content Include="UI_Urethan\UrethanRealTime.aspx" />
     <Content Include="z_demo\OEEDemo.html" />
     <Content Include="PartCard.html" />
     <Content Include="plugins\chart.js4\Chart.js" />
@@ -2401,6 +2402,8 @@
       <DependentUpon>Management_BreakTime.aspx</DependentUpon>
     </Compile>
     <Compile Include="MethodLoadData\LoadDataVisualize.cs" />
+    <Compile Include="Model\ChartData\QuantityByModel.cs" />
+    <Compile Include="Model\ChartData\QuantityPerTimechartCanvas.cs" />
     <Compile Include="Model\Common\DataGanttChart.cs" />
     <Compile Include="Model\Common\ErrorChartData.cs" />
     <Compile Include="Model\Common\OEEData.cs" />
@@ -2409,8 +2412,9 @@
     <Compile Include="Model\Common\StatusMachine.cs" />
     <Compile Include="Model\Common\StatusMachineDetail.cs" />
     <Compile Include="Service\PCM_DashBoard_Service.cs" />
-    <Compile Include="SignalR\InnerLinerHub.cs" />
-    <Compile Include="SignalR\PCMHub.cs" />
+    <Compile Include="SignalRHub\InnerLinerHub.cs" />
+    <Compile Include="SignalRHub\PCMHub.cs" />
+    <Compile Include="SignalRHub\UrethanHub.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="UI_inner\Inner_RealTime.aspx.cs">
       <DependentUpon>Inner_RealTime.aspx</DependentUpon>
@@ -2425,6 +2429,13 @@
     </Compile>
     <Compile Include="UI_PCM\PCM_RealTime.aspx.designer.cs">
       <DependentUpon>PCM_RealTime.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI_Urethan\UrethanRealTime.aspx.cs">
+      <DependentUpon>UrethanRealTime.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI_Urethan\UrethanRealTime.aspx.designer.cs">
+      <DependentUpon>UrethanRealTime.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebServiceModifyPlan.asmx.cs">
       <DependentUpon>WebServiceModifyPlan.asmx</DependentUpon>

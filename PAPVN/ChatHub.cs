@@ -39,6 +39,12 @@ namespace PAPVN
                 //string[] config = File.ReadAllLines(path);
                 //Config.TimeRest = config[0].Split(',').Select(int.Parse).ToArray();
                 // Mặc định option khi client kết nối (ví dụ: "All Model")
+
+
+                //string page = Context.QueryString["page"];
+                //Groups.Add(Context.ConnectionId, page);
+
+
                 ClientOptions.TryAdd(Context.ConnectionId, "ALL");
                 // Gửi dữ liệu ban đầu ngay khi kết nối
                 SendDataToClient(Context.ConnectionId, "ALL");
@@ -77,7 +83,7 @@ namespace PAPVN
             public static void SendDataToClient(string connectionId,string Optiontable)
             {
                 //
-                string DataLineChartQuantityPerTime = LoadDataVisualize.LineChartQuantityPerTime("All Model", "All");
+                string DataLineChartQuantityPerTime = LoadDataVisualize.LineChartQuantityPerTime("All Model", "All", "TA_sp_LoadDataForLineChartPlanPanByTime");
                 //
                 string DatabarchartOKNGPENDING = LoadDataVisualize.barchartOKNGPENDING();
                 //
@@ -126,7 +132,7 @@ namespace PAPVN
                 };
                 
                 var hub = GlobalHost.ConnectionManager.GetHubContext<ChatHub>();
-                hub.Clients.All.updateTable(data);
+                hub.Clients.Client(connectionId).updateTable(data);
             }
         }
 

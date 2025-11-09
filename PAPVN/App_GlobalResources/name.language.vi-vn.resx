@@ -169,4 +169,7 @@
     <value>Người xác nhận</value>
     <comment>UserID Confirm</comment>
   </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
 </root>

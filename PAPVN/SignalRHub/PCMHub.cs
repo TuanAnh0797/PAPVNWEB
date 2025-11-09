@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Web;
 
-namespace PAPVN.SignalR
+namespace PAPVN.SignalRHub
 {
     [HubName("PCMHub")]
     public class PCMHub : Hub
@@ -78,9 +78,9 @@ namespace PAPVN.SignalR
 
         public override Task OnConnected()
         {
-            string path = HttpContext.Current.Server.MapPath("~/wwwroot/config.ini");
-            string[] config = File.ReadAllLines(path);
-            Config.TimeRest = config[0].Split(',').Select(int.Parse).ToArray();
+            //string path = HttpContext.Current.Server.MapPath("~/wwwroot/config.ini");
+            //string[] config = File.ReadAllLines(path);
+            //Config.TimeRest = config[0].Split(',').Select(int.Parse).ToArray();
             // Mặc định option khi client kết nối (ví dụ: "All Model")
             ClientOptions.TryAdd(Context.ConnectionId, "ALL");
             // Gửi dữ liệu ban đầu ngay khi kết nối
@@ -117,7 +117,7 @@ namespace PAPVN.SignalR
                 StatusMachine statusMachine = PCM_DashBoard_Service.GetStatusMachine_PCM();
                 List<StatusMachineDetail> StatusMachineDetails = PCM_DashBoard_Service.GetStatusMachineDetail_PCM("All");
                 QuantitybyModel quantitybyModel = PCM_DashBoard_Service.GetQuantitybyModel_PCM("All");
-                string DataLineChartQuantityPerTime = LoadDataVisualize.LineChartQuantityPerTime("All Model", "All");
+                string DataLineChartQuantityPerTime = LoadDataVisualize.LineChartQuantityPerTime("All Model", "All", "TA_sp_LoadDataForLineChartPlanPanByTime");
 
 
                 var data = new DataSend()
@@ -143,7 +143,7 @@ namespace PAPVN.SignalR
                     DataLineChartQuantityPerTime = DataLineChartQuantityPerTime
                 };
                 var hub = GlobalHost.ConnectionManager.GetHubContext<PCMHub>();
-                hub.Clients.All.updateData(data);
+                hub.Clients.Client(connectionId).updateData(data);
             }
             catch (Exception ex)
             {

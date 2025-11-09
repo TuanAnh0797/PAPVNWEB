@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Web;
 
-namespace PAPVN.SignalR
+namespace PAPVN.SignalRHub
 {
     [HubName("InnerLinerHub")]
     public class InnerLinerHub : Hub
@@ -104,9 +104,9 @@ namespace PAPVN.SignalR
                 // Ensure timer is running
                 EnsureTimerStarted();
 
-                string path = HttpContext.Current.Server.MapPath("~/wwwroot/config.ini");
-                string[] config = File.ReadAllLines(path);
-                Config.TimeRest = config[0].Split(',').Select(int.Parse).ToArray();
+                //string path = HttpContext.Current.Server.MapPath("~/wwwroot/config.ini");
+                //string[] config = File.ReadAllLines(path);
+                //Config.TimeRest = config[0].Split(',').Select(int.Parse).ToArray();
                 
                 // Mặc định option khi client kết nối (ví dụ: "All Model")
                 ClientOptions.TryAdd(Context.ConnectionId, "ALL");
@@ -145,14 +145,14 @@ namespace PAPVN.SignalR
             try
             {
                 Quantity quantityPCM = PCM_DashBoard_Service.GetQuantity_PCM("All");
-                string DataLineChartQuantityPerTime = LoadDataVisualize.LineChartQuantityPerTime("All Model", "All");
+                string DataLineChartQuantityPerTime = LoadDataVisualize.LineChartQuantityPerTime("All Model", "All", "TA_sp_LoadDataForLineChartPlanPanByTime");
                 var data = new DataSend()
                 {
                     quantityPCM = quantityPCM,
                     DataLineChartQuantityPerTime = DataLineChartQuantityPerTime
                 };
                 var hub = GlobalHost.ConnectionManager.GetHubContext<InnerLinerHub>();
-                hub.Clients.All.updateData(data);
+                hub.Clients.Client(connectionId).updateData(data);
                 Debug.WriteLine($"Data sent to clients at: {DateTime.Now}");
             }
             catch (Exception ex)
