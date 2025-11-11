@@ -1921,7 +1921,7 @@ namespace PAPVN.MethodLoadData
 
                     for (DateTime currentHour = TimeStart; currentHour <= TimeEnd; currentHour = currentHour.AddHours(1))
                     {
-                        int TotalTimeNow =  3600 - Config.TimeRest[currentHour.Hour];
+                        int TotalTimeNow =  3600 - Config.TimeRest[currentHour.Hour]*60;
                         listdataplan.Add(currentHour.ToString("yyyy-MM-dd HH:mm:ss"), (int)Math.Round(TotalTimeNow * quantityPerSec));
                        
                     }

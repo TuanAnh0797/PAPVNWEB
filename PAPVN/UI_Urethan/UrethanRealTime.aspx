@@ -29,7 +29,9 @@
     </style>
     <div class="m-2">
 
-        <%--        <h1 class="text-center mb-0" style="font-weight: 600; color: darkblue">Dash board URT</h1>--%>
+        <h1 class="text-center"
+            style="font-weight: 700; color: #0d47a1; text-transform: uppercase; letter-spacing: 2px; text-shadow: 1px 1px 3px rgba(0,0,0,0.1);">DASHBOARD SẢN LƯỢNG CÔNG ĐOẠN URT
+        </h1>
         <div class=" row p-0 ml-2 mr-2">
 
             <div class="oee-card bg-blue col m-2">
@@ -58,15 +60,38 @@
                 <%-- <small>Hiệu quả tổng thể</small>--%>
             </div>
         </div>
-        <div class="card m-0 mb-2" style="background-color: white">
-            <h4 class="card-header bg-secondary text-black text-center p-0" style="font-weight: 600">
-                <asp:Literal runat="server" Text="Sản lượng theo giờ" />
-            </h4>
-            <div class="chart-container">
-                <canvas id="QuantityPerTimechart" style="min-height: 250px; height: 100%"></canvas>
-            </div>
-        </div>
 
+        <div class="row">
+
+
+
+            <div class="card ml-2 mr-2 mb-2 col p-0" style="background-color: white">
+                <h4 class="card-header bg-secondary text-black text-center p-0" style="font-weight: 600">
+                    <asp:Literal runat="server" Text="Sản lượng theo phút" />
+                </h4>
+                <div class="chart-container">
+                    <canvas id="QuantityPerTimechart" style="min-height: 350px; height: 100%;max-height:400px"></canvas>
+                </div>
+            </div>
+
+            <div class="card m-0 mb-2 col p-0 mr-2" style="background-color: white">
+                <h4 class="card-header bg-secondary text-black text-center p-0" style="font-weight: 600">
+                    <asp:Literal runat="server" Text="Sản lượng theo giờ" />
+                </h4>
+                <div class="chart-container">
+                    <canvas id="QuantityPerHourchart" style="min-height: 350px; height: 100%;max-height:400px"></canvas>
+                </div>
+            </div>
+
+            <%-- <div class="card m-0 mb-2 col-sm-4 p-0 mr-2" style="background-color: white">
+                <h4 class="card-header bg-secondary text-black text-center p-0" style="font-weight: 600">
+                    <asp:Literal runat="server" Text="Model theo dõi đặc biệt" />
+                </h4>
+                <div class="chart-container">
+                    <canvas id="quantitybymodelmonitor" style="min-height: 250px; height: 100%"></canvas>
+                </div>
+            </div>--%>
+        </div>
         <div class="row">
 
             <div class="card m-0 mb-2 col p-0 mr-2 ml-2" style="background-color: white">
@@ -74,36 +99,19 @@
                     <asp:Literal runat="server" Text="Sản lượng theo Model" />
                 </h4>
                 <div class="chart-container">
-                    <canvas id="quantitybymodel" style="min-height: 250px; height: 100%"></canvas>
+                    <canvas id="quantitybymodel" style="min-height: 350px; height: 100%;max-height:400px"></canvas>
                 </div>
             </div>
-            <div class="card m-0 mb-2 col-sm-4 p-0 mr-2" style="background-color: white">
-                <h4 class="card-header bg-secondary text-black text-center p-0" style="font-weight: 600">
-                    <asp:Literal runat="server" Text="Model theo dõi đặc biệt" />
-                </h4>
-                <div class="chart-container">
-                    <canvas id="quantitybymodelmonitor" style="min-height: 250px; height: 100%"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="row">
 
-            <div class="card m-0 mb-2 col p-0 mr-2 ml-2" style="background-color: white">
+            <div class="card m-0 mb-2 col p-0 mr-2" style="background-color: white">
                 <h4 class="card-header bg-secondary text-black text-center p-0" style="font-weight: 600">
                     <asp:Literal runat="server" Text="Sản lượng theo nhóm Model" />
                 </h4>
                 <div class="chart-container">
-                    <canvas id="quantitybygroupmodel" style="min-height: 250px; height: 100%"></canvas>
+                    <canvas id="quantitybygroupmodel" style="min-height: 350px; height: 100%;max-height:400px"></canvas>
                 </div>
             </div>
-            <div class="card m-0 mb-2 col p-0 mr-2" style="background-color: white">
-                <h4 class="card-header bg-secondary text-black text-center p-0" style="font-weight: 600">
-                    <asp:Literal runat="server" Text="Sản lượng theo giờ" />
-                </h4>
-                <div class="chart-container">
-                    <canvas id="QuantityPerHourchart" style="min-height: 250px; height: 100%"></canvas>
-                </div>
-            </div>
+
         </div>
 
     </div>
@@ -252,7 +260,7 @@
             scales: {
                 xAxes: [{
                     ticks: {
-                      
+                        padding:15
                     },
                     gridLines: {
                         display: false
@@ -284,16 +292,38 @@
                 onComplete: function () {
                     var chartInstance = this.chart,
                         ctx = chartInstance.ctx;
+
                     ctx.font = "500 18px Arial";
                     ctx.fillStyle = '#000000';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'bottom';
+
+                    // 🟦 PHẦN 1: Vẽ giá trị trên đầu mỗi cột
                     this.data.datasets.forEach(function (dataset, i) {
                         var meta = chartInstance.controller.getDatasetMeta(i);
                         meta.data.forEach(function (bar, index) {
                             var data = dataset.data[index];
                             ctx.fillText(data, bar._model.x, bar._model.y);
                         });
+                    });
+
+                    // 🟥 PHẦN 2: Vẽ độ lệch (diff) dưới chân cột
+                    var datasets = this.data.datasets;
+
+                    // Giả sử dataset[1] = Plan, dataset[2] = Actual
+                    var planData = datasets[1].data;
+                    var actualData = datasets[2].data;
+                    var metaActual = chartInstance.getDatasetMeta(2); // ⚠️ bạn nên lấy meta của "Actual" (index = 2)
+
+                    metaActual.data.forEach(function (bar, index) {
+                        var diff = actualData[index] - planData[index];
+                        var baseY = bar._model.base;
+                        var x = bar._model.x;
+                        var y = baseY + 5; // dịch xuống 15px để không chồng chữ
+
+                        ctx.fillStyle = diff >= 0 ? 'green' : 'red';
+                        ctx.textBaseline = 'top'; // 🟩 vẽ dưới chân thì nên để “top”
+                        ctx.fillText(diff, x, y);
                     });
                 }
             }
@@ -307,95 +337,118 @@
         })
         //
         //
-        var QuantityByModelMonitorChartCanvas = $('#quantitybymodelmonitor').get(0).getContext('2d')
-        var dataquantitybymodelmonitor = {
-            labels: [],
-            datasets: [
-                {
-                    type: 'bar',
-                    label: 'Plan',
-                    backgroundColor: '#1a53ff',
-                    order: 2,
-                    data: []
-                },
-                {
-                    type: 'bar',
-                    label: 'Plan/Time',
-                    backgroundColor: '#f5e10c',
-                    categoryPercentage: 0.6,
-                    order: 1,
-                    data: []
-                },
-                {
-                    type: 'bar',
-                    label: 'Actual',
-                    //backgroundColor: '#248f24',
-                    order: 0,
-                    categoryPercentage: 0.35,
-                    data: []
-                },
-            ]
-        }
-        var QuantityByModelMonitorChartOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-            datasetFill: false,
-            scales: {
-                xAxes: [{
-                    ticks: {
-                        
-                    },
-                    gridLines: {
-                        display: false
-                    },
-                    stacked: true,
-                }],
-                yAxes: [{
-                    ticks: {
-                        fontSize: 15,
-                        beginAtZero: true,
-                        fontColor: 'black',
-                        fontStyle: 'bold',
-                        //max: 3000, // Đặt giá trị tối đa của trục y là 100
-                        //min: 0,   // (Tùy chọn) Đặt giá trị tối thiểu nếu cần
-                        //stepSize: 300 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
-                    },
-                }],
-            },
-            legend: {
-                position: 'bottom',
-                labels: {
-                    fontSize: 15,
-                    fontColor: 'black',
-                    fontStyle: 'bold',
-                },
-            },
-            animation: {
-                duration: 1,
-                onComplete: function () {
-                    var chartInstance = this.chart,
-                        ctx = chartInstance.ctx;
-                    ctx.font = "500 18px Arial";
-                    ctx.fillStyle = '#000000';
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'bottom';
-                    this.data.datasets.forEach(function (dataset, i) {
-                        var meta = chartInstance.controller.getDatasetMeta(i);
-                        meta.data.forEach(function (bar, index) {
-                            var data = dataset.data[index];
-                            ctx.fillText(data, bar._model.x, bar._model.y);
-                        });
-                    });
-                }
-            }
+        //var QuantityByModelMonitorChartCanvas = $('#quantitybymodelmonitor').get(0).getContext('2d')
+        //var dataquantitybymodelmonitor = {
+        //    labels: [],
+        //    datasets: [
+        //        {
+        //            type: 'bar',
+        //            label: 'Plan',
+        //            backgroundColor: '#1a53ff',
+        //            order: 2,
+        //            data: []
+        //        },
+        //        {
+        //            type: 'bar',
+        //            label: 'Plan/Time',
+        //            backgroundColor: '#f5e10c',
+        //            categoryPercentage: 0.6,
+        //            order: 1,
+        //            data: []
+        //        },
+        //        {
+        //            type: 'bar',
+        //            label: 'Actual',
+        //            //backgroundColor: '#248f24',
+        //            order: 0,
+        //            categoryPercentage: 0.35,
+        //            data: []
+        //        },
+        //    ]
+        //}
+        //var QuantityByModelMonitorChartOptions = {
+        //    responsive: true,
+        //    maintainAspectRatio: false,
+        //    datasetFill: false,
+        //    scales: {
+        //        xAxes: [{
+        //            ticks: {
+        //                padding: 15,
+        //            },
+        //            gridLines: {
+        //                display: false
+        //            },
+        //            stacked: true,
+        //        }],
+        //        yAxes: [{
+        //            ticks: {
+        //                fontSize: 15,
+        //                beginAtZero: true,
+        //                fontColor: 'black',
+        //                fontStyle: 'bold',
+        //                //max: 3000, // Đặt giá trị tối đa của trục y là 100
+        //                //min: 0,   // (Tùy chọn) Đặt giá trị tối thiểu nếu cần
+        //                //stepSize: 300 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
+        //            },
+        //        }],
+        //    },
+        //    legend: {
+        //        position: 'bottom',
+        //        labels: {
+        //            fontSize: 15,
+        //            fontColor: 'black',
+        //            fontStyle: 'bold',
+        //        },
+        //    },
+        //    animation: {
+        //        duration: 1,
+        //        onComplete: function () {
+        //            var chartInstance = this.chart,
+        //                ctx = chartInstance.ctx;
+
+        //            ctx.font = "500 18px Arial";
+        //            ctx.fillStyle = '#000000';
+        //            ctx.textAlign = 'center';
+        //            ctx.textBaseline = 'bottom';
+
+        //            // 🟦 PHẦN 1: Vẽ giá trị trên đầu mỗi cột
+        //            this.data.datasets.forEach(function (dataset, i) {
+        //                var meta = chartInstance.controller.getDatasetMeta(i);
+        //                meta.data.forEach(function (bar, index) {
+        //                    var data = dataset.data[index];
+        //                    ctx.fillText(data, bar._model.x, bar._model.y);
+        //                });
+        //            });
+
+        //            // 🟥 PHẦN 2: Vẽ độ lệch (diff) dưới chân cột
+        //            var datasets = this.data.datasets;
+
+        //            // Giả sử dataset[1] = Plan, dataset[2] = Actual
+        //            var planData = datasets[1].data;
+        //            var actualData = datasets[2].data;
+        //            var metaActual = chartInstance.getDatasetMeta(2); // ⚠️ bạn nên lấy meta của "Actual" (index = 2)
+
+        //            metaActual.data.forEach(function (bar, index) {
+        //                var diff = actualData[index] - planData[index];
+        //                var baseY = bar._model.base;
+        //                var x = bar._model.x;
+        //                var y = baseY + 5; // dịch xuống 15px để không chồng chữ
+
+        //                ctx.fillStyle = diff >= 0 ? 'green' : 'red';
+        //                ctx.textBaseline = 'top'; // 🟩 vẽ dưới chân thì nên để “top”
+        //                ctx.fillText(diff, x, y);
+        //            });
+        //        }
+
+        //    }
 
 
-        }
-        var QuantityByModelChartMonitor = new Chart(QuantityByModelMonitorChartCanvas, {
-            type: 'bar',
-            data: dataquantitybymodelmonitor,
-            options: QuantityByModelMonitorChartOptions
-        })
+        //}
+        //var QuantityByModelChartMonitor = new Chart(QuantityByModelMonitorChartCanvas, {
+        //    type: 'bar',
+        //    data: dataquantitybymodelmonitor,
+        //    options: QuantityByModelMonitorChartOptions
+        //})
         //
         //
         var QuantityByGroupModelChartCanvas = $('#quantitybygroupmodel').get(0).getContext('2d')
@@ -434,7 +487,7 @@
             scales: {
                 xAxes: [{
                     ticks: {
-                       
+                        padding: 15,
                     },
                     gridLines: {
                         display: false
@@ -466,16 +519,38 @@
                 onComplete: function () {
                     var chartInstance = this.chart,
                         ctx = chartInstance.ctx;
+
                     ctx.font = "500 18px Arial";
                     ctx.fillStyle = '#000000';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'bottom';
+
+                    // 🟦 PHẦN 1: Vẽ giá trị trên đầu mỗi cột
                     this.data.datasets.forEach(function (dataset, i) {
                         var meta = chartInstance.controller.getDatasetMeta(i);
                         meta.data.forEach(function (bar, index) {
                             var data = dataset.data[index];
                             ctx.fillText(data, bar._model.x, bar._model.y);
                         });
+                    });
+
+                    // 🟥 PHẦN 2: Vẽ độ lệch (diff) dưới chân cột
+                    var datasets = this.data.datasets;
+
+                    // Giả sử dataset[1] = Plan, dataset[2] = Actual
+                    var planData = datasets[1].data;
+                    var actualData = datasets[2].data;
+                    var metaActual = chartInstance.getDatasetMeta(2); // ⚠️ bạn nên lấy meta của "Actual" (index = 2)
+
+                    metaActual.data.forEach(function (bar, index) {
+                        var diff = actualData[index] - planData[index];
+                        var baseY = bar._model.base;
+                        var x = bar._model.x;
+                        var y = baseY + 5; // dịch xuống 15px để không chồng chữ
+
+                        ctx.fillStyle = diff >= 0 ? 'green' : 'red';
+                        ctx.textBaseline = 'top'; // 🟩 vẽ dưới chân thì nên để “top”
+                        ctx.fillText(diff, x, y);
                     });
                 }
             }
@@ -492,14 +567,14 @@
         var DataQuantityPerHourchart = {
             labels: [],
             datasets: [
-                
+
                 {
                     type: 'bar',
                     yAxisID: 'y-axis-1',
                     label: 'Plan',
-                     backgroundColor: 'Blue',
+                    backgroundColor: 'Blue',
                     data: [],
-                    order: 4,
+                    order: 3,
                 },
                 {
                     type: 'bar',
@@ -507,39 +582,40 @@
                     label: 'Actual',
                     backgroundColor: 'orange',
                     data: [],
-                  
-                   
-                    order: 3,
+
+
+                    order: 4,
                 },
                 {
                     type: 'line',
                     label: 'Diff',
                     fill: false,
                     borderColor: 'red',
-                   backgroundColor:'transparent',
-                    yAxisID: 'y-axis-2',
-                    order: 2,
-                    borderWidth: 2,
-                    pointRadius: 2, //
-                    data: []
-                },
-                {
-                    borderColor: 'orange',
-                    type: 'line',
-                    label: 'DiffAll',
-                    fill: false,
-                    //borderColor: function (context) {
-                    //    var value = context.dataset.data[context.dataIndex];
-                    //    return value < 0 ? 'red' : 'green';
-                    //},
                     backgroundColor: 'transparent',
                     yAxisID: 'y-axis-2',
-                    order: 1,
+                    order: 2,
+                    tension: 0, // làm line đỡ mượt
                     borderWidth: 2,
                     pointRadius: 2, //
                     data: []
                 },
-               
+                //{
+                //    borderColor: 'orange',
+                //    type: 'line',
+                //    label: 'DiffAll',
+                //    fill: false,
+                //    //borderColor: function (context) {
+                //    //    var value = context.dataset.data[context.dataIndex];
+                //    //    return value < 0 ? 'red' : 'green';
+                //    //},
+                //    backgroundColor: 'transparent',
+                //    yAxisID: 'y-axis-2',
+                //    order: 1,
+                //    borderWidth: 2,
+                //    pointRadius: 2, //
+                //    data: []
+                //},
+
             ]
         };
         var QuantityPerHourChartOption =
@@ -550,15 +626,16 @@
                 //xAxes: [{
                 //    type: 'linear',
                 //}],
-                x: {
+                xAxes: [{
                     ticks: {
-                        fontSize: 15,
-                        fontColor: 'black',
-                        fontStyle: 'bold',
+                      
+                      
+                      
+                        padding: 15
                     },
-                    type: 'linear', // Sử dụng linear scale cho trục x
-                    position: 'bottom',
-                },
+                  
+                }],
+
                 yAxes: [{
                     beginAtZero: true,
                     id: 'y-axis-1', // ID của trục y thứ nhất
@@ -600,6 +677,50 @@
                     fontStyle: 'bold',
                 },
             },
+            animation: {
+                duration: 1,
+                onComplete: function () {
+                    var chartInstance = this.chart,
+                        ctx = chartInstance.ctx;
+
+                    ctx.font = "500 18px Arial";
+                    ctx.fillStyle = '#000000';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'bottom';
+
+                    // 🟦 PHẦN 1: Vẽ giá trị trên đầu mỗi cột
+                    this.data.datasets.forEach(function (dataset, i) {
+                        if (i < 2) {
+                            var meta = chartInstance.controller.getDatasetMeta(i);
+                            meta.data.forEach(function (bar, index) {
+                                var data = dataset.data[index];
+                                ctx.fillText(data, bar._model.x, bar._model.y);
+                            });
+                        }
+
+                      
+                    });
+
+                    // 🟥 PHẦN 2: Vẽ độ lệch (diff) dưới chân cột
+                    var datasets = this.data.datasets;
+
+                    // Giả sử dataset[1] = Plan, dataset[2] = Actual
+                    var planData = datasets[0].data;
+                    var actualData = datasets[1].data;
+                    var metaActual = chartInstance.getDatasetMeta(1); // ⚠️ bạn nên lấy meta của "Actual" (index = 2)
+
+                    metaActual.data.forEach(function (bar, index) {
+                        var diff = actualData[index] - planData[index];
+                        var baseY = bar._model.base;
+                        var x = bar._model.x;
+                        var y = baseY + 5; // dịch xuống 15px để không chồng chữ
+
+                        ctx.fillStyle = diff >= 0 ? 'green' : 'red';
+                        ctx.textBaseline = 'top'; // 🟩 vẽ dưới chân thì nên để “top”
+                        ctx.fillText(diff, x, y);
+                    });
+                }
+            }
 
         };
         var QuantityPerHourchart = $('#QuantityPerHourchart').get(0).getContext('2d')
@@ -609,9 +730,6 @@
             options: QuantityPerHourChartOption
         })
         //
-
-
-
         function UpdateDashboard(data) {
             $('#plan').html(data.TotalPlan);
             $('#plantime').html(data.TimePlan);
@@ -676,38 +794,37 @@
             dataquantitybymodel.datasets[2].backgroundColor = bgr;
             QuantityByModelChart.update();
         }
-        function UpdateChartQuantityByModelMonitor(data) {
-            dataquantitybymodelmonitor.datasets[0].data = data.dataplan;
-            dataquantitybymodelmonitor.datasets[1].data = data.dataplanpertime;
-            dataquantitybymodelmonitor.datasets[2].data = data.dataactual;
-            dataquantitybymodelmonitor.labels = data.labels;
-            var max = Math.max(...data.dataplan);
+        //function UpdateChartQuantityByModelMonitor(data) {
+        //    dataquantitybymodelmonitor.datasets[0].data = data.dataplan;
+        //    dataquantitybymodelmonitor.datasets[1].data = data.dataplanpertime;
+        //    dataquantitybymodelmonitor.datasets[2].data = data.dataactual;
+        //    dataquantitybymodelmonitor.labels = data.labels;
+        //    var max = Math.max(...data.dataplan);
 
 
 
-            QuantityByModelChartMonitor.options.scales.yAxes[0].ticks.max = max + Math.ceil(max / 4);
-            //barchartplan.options = barChartOptions;
-            var data1 = data.dataactual;
-            var data2 = data.dataplanpertime;
-            var bgr = [];
-            data1.forEach(function (value1, index) {
-                var value2 = data2[index];
-                if (value1 < value2) {
-                    bgr.push('red')
-                }
-                else {
-                    bgr.push('green')
-                }
-            });
-            dataquantitybymodelmonitor.datasets[2].backgroundColor = bgr;
-            QuantityByModelChartMonitor.update();
-        }
-
+        //    QuantityByModelChartMonitor.options.scales.yAxes[0].ticks.max = max + Math.ceil(max / 4);
+        //    //barchartplan.options = barChartOptions;
+        //    var data1 = data.dataactual;
+        //    var data2 = data.dataplanpertime;
+        //    var bgr = [];
+        //    data1.forEach(function (value1, index) {
+        //        var value2 = data2[index];
+        //        if (value1 < value2) {
+        //            bgr.push('red')
+        //        }
+        //        else {
+        //            bgr.push('green')
+        //        }
+        //    });
+        //    dataquantitybymodelmonitor.datasets[2].backgroundColor = bgr;
+        //    QuantityByModelChartMonitor.update();
+        //}
         function UpdateChartQuantityPerHour(data) {
             DataQuantityPerHourchart.datasets[0].data = data.dataplan;
             DataQuantityPerHourchart.datasets[1].data = data.dataactual;
             DataQuantityPerHourchart.datasets[2].data = data.datadiff;
-            DataQuantityPerHourchart.datasets[3].data = data.datadifftotal;
+            //DataQuantityPerHourchart.datasets[3].data = data.datadifftotal;
             var shift = data.shift;
             var typeplan = data.typeplan;
             if (typeplan == '2_10') {
@@ -723,7 +840,7 @@
             }
             else if (typeplan == '2_12_6') {
 
-                DataQuantityPerHourchart.labels = ['6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '0:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00']    
+                DataQuantityPerHourchart.labels = ['6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '0:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00']
 
 
             }
@@ -732,11 +849,18 @@
                 DataQuantityPerHourchart.labels = ['6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '0:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00'];
             }
 
+
+            var max = Math.max(...data.dataplan);
+
+
+
+            QuantityPerHourchartCanvas.options.scales.yAxes[0].ticks.max = max + Math.ceil(max / 4);
+
             //var data1 = data.datadiff;
             //var data2 = data.datadifftotal;
             //var bgr = [];
             //data1.forEach(function (value1, index) {
-               
+
             //    if (value1 < 0) {
             //        bgr.push('red')
             //    }
@@ -760,7 +884,6 @@
 
             QuantityPerHourchartCanvas.update();
         }
-
         function UpdateChartQuantityByModelGroup(data) {
             dataquantitybygroupmodel.datasets[0].data = data.dataplan;
             dataquantitybygroupmodel.datasets[1].data = data.dataplanpertime;
@@ -771,7 +894,7 @@
             QuantityByGroupModelChart.options.scales.yAxes[0].ticks.max = max + Math.ceil(max / 4);
 
 
-          
+
 
             //barchartplan.options = barChartOptions;
             var data1 = data.dataactual;
@@ -789,7 +912,6 @@
             dataquantitybygroupmodel.datasets[2].backgroundColor = bgr;
             QuantityByGroupModelChart.update();
         }
-
         $(document).ready(function () {
 
             // Kiểm tra SignalR
@@ -811,11 +933,11 @@
                 UpdateDashboard(data.QuantityPerTimechartCanvas);
                 UpdateChartQuantityPerTime(data.QuantityPerTimechartCanvas);
                 UpdateChartQuantityByModel(data.quantityByModel);
-                UpdateChartQuantityByModelMonitor(data.quantityByModelMonitor)
+               /* UpdateChartQuantityByModelMonitor(data.quantityByModelMonitor)*/
                 UpdateChartQuantityPerHour(data.quantityPerHour);
                 UpdateChartQuantityByModelGroup(data.quantityByModelgroup)
 
-               
+
 
             };
             // Bắt đầu kết nối SignalR
