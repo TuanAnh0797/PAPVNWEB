@@ -15,5 +15,7 @@ namespace PAPVN.Model.ChartData
 
         public int shift { get; set; }
         public string typeplan { get; set; }
+
+        public string[] labels { get; set; }
     }
 }

@@ -19,6 +19,9 @@ namespace PAPVN.Model.ChartData
         public int Actual { get; set; }
         public int Diff { get; set; }
         public int Remain { get; set; }
-        
+
+        public string[] labels { get; set; }
+
+
     }
 }

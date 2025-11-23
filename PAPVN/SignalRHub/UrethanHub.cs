@@ -38,18 +38,11 @@ namespace PAPVN.SignalRHub
         }
         public override Task OnConnected()
         {
-           
             ClientOptions.TryAdd(Context.ConnectionId, "ALL");
             // Gửi dữ liệu ban đầu ngay khi kết nối
             SendDataToClient(Context.ConnectionId, "ALL");
             return base.OnConnected();
         }
-        public void GetInitialData()
-        {
-            // Call the same code that updates data
-            SendDataToClient(Context.ConnectionId, "ALL");
-        }
-
         public override Task OnDisconnected(bool stopCalled)
         {
             // Xóa option khi client ngắt kết nối
@@ -57,34 +50,24 @@ namespace PAPVN.SignalRHub
             return base.OnDisconnected(stopCalled);
         }
 
-        // Client gửi option mới
-        public void ChangeOption(string option)
-        {
-            // Cập nhật option cho client hiện tại
-            ClientOptions.AddOrUpdate(Context.ConnectionId, option, (key, oldValue) => option);
-            SendDataToClient(Context.ConnectionId, option);
-        }
-
         public static void SendDataToClient(string connectionId, string Optiontable)
         {
             try
             {
+                string[] optionParts = Optiontable.Split(';');
+                string shift = optionParts.Length > 1 ? optionParts[1] : "All";
+                string model = optionParts.Length > 1 ? optionParts[2] : "All Model";
                 DataUrethan dataUrethan = new DataUrethan();
-
-
-                dataUrethan.QuantityPerTimechartCanvas = LoadDataVisualize.LineChartQuantityPerTimeObject(Optiontable, "All", "TA_sp_LoadDataForLineChartPlanUrethanByTime");
-                dataUrethan.quantityByModel = LoadDataVisualize.QuantityByModel("All", "TA_sp_LoadDataForBarChartPlanurethan_unique");
+                dataUrethan.QuantityPerTimechartCanvas = LoadDataVisualize.LineChartQuantityPerTimeObject(model, shift, "TA_sp_LoadDataForLineChartPlanUrethanByTime");
+                dataUrethan.quantityByModel = LoadDataVisualize.QuantityByModel(shift, "TA_sp_LoadDataForBarChartPlanurethan_unique");
                 //dataUrethan.quantityByModelMonitor = LoadDataVisualize.QuantityByModelMonitor("All", "TA_sp_LoadDataForBarChartPlanurethan_uniqueMonitor");
-                dataUrethan.quantityByModelgroup = LoadDataVisualize.QuantityByGroupModel("All", "TA_sp_LoadDataForBarChartPlanurethan_unique");
-                dataUrethan.quantityPerHour = LoadDataVisualize.LineChartQuantityPerHour(Optiontable, "All", "TA_sp_LoadDataForLineChartPlanUrethanByHour");
-                //dataUrethan.QuantityPerTimechartCanvas = LoadDataVisualize.LineChartQuantityPerTimeObject(Optiontable, "All", "Test");
+                dataUrethan.quantityByModelgroup = LoadDataVisualize.QuantityByGroupModel(shift, "TA_sp_LoadDataForBarChartPlanurethan_unique");
+                dataUrethan.quantityPerHour = LoadDataVisualize.LineChartQuantityPerHour(model, shift, "TA_sp_LoadDataForLineChartPlanUrethanByHour");
+                // dataUrethan.QuantityPerTimechartCanvas = LoadDataVisualize.LineChartQuantityPerTimeObject(Optiontable, "All", "Test");
                 //dataUrethan.quantityByModel = LoadDataVisualize.QuantityByModel("All", "Test");
                 //dataUrethan.quantityByModelMonitor = LoadDataVisualize.QuantityByModelMonitor("All", "Test");
-                //dataUrethan.quantityByModelgroup = LoadDataVisualize.QuantityByGroupModel("All", "Test");
+                // dataUrethan.quantityByModelgroup = LoadDataVisualize.QuantityByGroupModel("All", "Test");
                 //dataUrethan.quantityPerHour = LoadDataVisualize.LineChartQuantityPerHour(Optiontable, "All", "Test");
-
-
-
                 var hub = GlobalHost.ConnectionManager.GetHubContext<UrethanHub>();
                 hub.Clients.Client(connectionId).updateData(dataUrethan);
             }
@@ -93,14 +76,24 @@ namespace PAPVN.SignalRHub
                 System.Diagnostics.Debug.WriteLine($"Error in SendDataToClient: {ex.Message}");
             }
         }
+
+        public void UpdateFilter(string date, string model, string shift)
+        {
+            if (ClientOptions.ContainsKey(Context.ConnectionId))
+            {
+                ClientOptions[Context.ConnectionId] = date + ";" + shift + ";" + model;
+            }
+        }
+
     }
     class DataUrethan
     {
         public QuantityPerTimechartCanvas QuantityPerTimechartCanvas = new QuantityPerTimechartCanvas();
         public QuantityByModel quantityByModel = new QuantityByModel();
         public QuantityByModel quantityByModelMonitor = new QuantityByModel();
-        public QuantityPerHour  quantityPerHour = new QuantityPerHour();
+        public QuantityPerHour quantityPerHour = new QuantityPerHour();
         public QuantityByModel quantityByModelgroup = new QuantityByModel();
+
     }
 
 }

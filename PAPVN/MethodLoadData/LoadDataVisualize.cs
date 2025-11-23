@@ -643,6 +643,7 @@ namespace PAPVN.MethodLoadData
 
         public static QuantityPerTimechartCanvas LineChartQuantityPerTimeObject(string ModelName, string SelectedShift, string storeprocedure)
         {
+            List<string> labels = new List<string>();
 
             if (storeprocedure == "Test")
             {
@@ -657,10 +658,10 @@ namespace PAPVN.MethodLoadData
                 quantityPerTimechartCanvas.Actual = 200;
                 quantityPerTimechartCanvas.Diff = 100;
                 quantityPerTimechartCanvas.Remain = 200;
+                quantityPerTimechartCanvas.labels = labels.ToArray();
 
                 return quantityPerTimechartCanvas;
             }
-
 
             string typeplan = "3_8";
             try
@@ -734,10 +735,7 @@ namespace PAPVN.MethodLoadData
                             TotalPlan1,
                             typeplan = typeplan,
                         };
-
-
                         QuantityPerTimechartCanvas quantityPerTimechartCanvas = new QuantityPerTimechartCanvas();
-
                         quantityPerTimechartCanvas.dataplan = new[] { 0 };
                         quantityPerTimechartCanvas.dataactual = new[] { 0 };
                         quantityPerTimechartCanvas.datadiff = new[] { 0 };
@@ -748,6 +746,7 @@ namespace PAPVN.MethodLoadData
                         quantityPerTimechartCanvas.Actual = 0;
                         quantityPerTimechartCanvas.Diff = 0;
                         quantityPerTimechartCanvas.Remain = 0;
+                        quantityPerTimechartCanvas.labels = labels.ToArray();
 
                         return quantityPerTimechartCanvas;
                     }
@@ -763,11 +762,8 @@ namespace PAPVN.MethodLoadData
                     DateTime TimeStart = DateTime.Parse(ds.Tables[1].Rows[0]["TimeStart"].ToString());
                     DateTime TimeEnd = DateTime.Parse(ds.Tables[1].Rows[0]["TimeEnd"].ToString());
                     float quantityPerSec = float.Parse(ds.Tables[1].Rows[0]["QuantityPerSec"].ToString());
-
                     typeplan = ds.Tables[1].Rows[0]["TypePlan"].ToString();
                     int index = 0;
-
-
                     //DateTime EndDateTime = DateTime.Now;
 
                     for (DateTime currentHour = TimeStart; currentHour <= TimeEnd; currentHour = currentHour.AddMinutes(5))
@@ -776,207 +772,6 @@ namespace PAPVN.MethodLoadData
 
                         for (DateTime currentHour1 = TimeStart; currentHour1 <= currentHour; currentHour1 = currentHour1.AddHours(1))
                         {
-
-                            // 2 ca 10
-                            if (typeplan == "2_10")
-                            {
-                                if (TotalTimeNow >= Config.TimeRest2Ca[currentHour1.Hour] * 60)
-                                {
-                                    if (currentHour == TimeEnd)
-                                    {
-                                        if (currentHour1.Hour != TimeEnd.Hour)
-                                        {
-                                            TotalTimeNow = TotalTimeNow - Config.TimeRest2Ca[currentHour1.Hour] * 60;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (currentHour.Date == TimeStartShift.Date)
-                                        {
-                                            if (currentHour.Hour > currentHour1.Hour)
-                                            {
-                                                TotalTimeNow = TotalTimeNow - Config.TimeRest2Ca[currentHour1.Hour] * 60;
-                                            }
-                                            else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute < Config.TimeRest2Ca[currentHour1.Hour])
-                                            {
-                                                TotalTimeNow = TotalTimeNow - currentHour.Minute * 60;
-                                            }
-                                            else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute >= Config.TimeRest2Ca[currentHour1.Hour])
-                                            {
-                                                TotalTimeNow = TotalTimeNow - Config.TimeRest2Ca[currentHour1.Hour] * 60;
-                                            }
-                                            else
-                                            {
-                                                break;
-                                            }
-                                        }
-                                        else
-                                        {
-                                            if (currentHour1.Date == TimeStartShift.Date)
-                                            {
-                                                TotalTimeNow = TotalTimeNow - Config.TimeRest2Ca[currentHour1.Hour] * 60;
-                                            }
-                                            else
-                                            {
-                                                if (currentHour.Hour > currentHour1.Hour)
-                                                {
-                                                    TotalTimeNow = TotalTimeNow - Config.TimeRest2Ca[currentHour1.Hour] * 60;
-                                                }
-                                                else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute < Config.TimeRest2Ca[currentHour1.Hour])
-                                                {
-                                                    TotalTimeNow = TotalTimeNow - currentHour.Minute * 60;
-                                                }
-                                                else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute >= Config.TimeRest2Ca[currentHour1.Hour])
-                                                {
-                                                    TotalTimeNow = TotalTimeNow - Config.TimeRest2Ca[currentHour1.Hour] * 60;
-                                                }
-                                                else
-                                                {
-                                                    break;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    TotalTimeNow = 0;
-                                }
-                            }
-                            //2 ca 12 bat dau 10h
-                            else if (typeplan == "2_12")
-                            {
-                                if (TotalTimeNow >= Config.TimeRest2Ca12[currentHour1.Hour] * 60)
-                                {
-                                    if (currentHour == TimeEnd)
-                                    {
-                                        if (currentHour1.Hour != TimeEnd.Hour)
-                                        {
-                                            TotalTimeNow = TotalTimeNow - Config.TimeRest2Ca12[currentHour1.Hour] * 60;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (currentHour.Date == TimeStartShift.Date)
-                                        {
-                                            if (currentHour.Hour > currentHour1.Hour)
-                                            {
-                                                TotalTimeNow = TotalTimeNow - Config.TimeRest2Ca12[currentHour1.Hour] * 60;
-                                            }
-                                            else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute < Config.TimeRest2Ca12[currentHour1.Hour])
-                                            {
-                                                TotalTimeNow = TotalTimeNow - currentHour.Minute * 60;
-                                            }
-                                            else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute >= Config.TimeRest2Ca12[currentHour1.Hour])
-                                            {
-                                                TotalTimeNow = TotalTimeNow - Config.TimeRest2Ca12[currentHour1.Hour] * 60;
-                                            }
-                                            else
-                                            {
-                                                break;
-                                            }
-                                        }
-                                        else
-                                        {
-                                            if (currentHour1.Date == TimeStartShift.Date)
-                                            {
-                                                TotalTimeNow = TotalTimeNow - Config.TimeRest2Ca12[currentHour1.Hour] * 60;
-                                            }
-                                            else
-                                            {
-                                                if (currentHour.Hour > currentHour1.Hour)
-                                                {
-                                                    TotalTimeNow = TotalTimeNow - Config.TimeRest2Ca12[currentHour1.Hour] * 60;
-                                                }
-                                                else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute < Config.TimeRest2Ca12[currentHour1.Hour])
-                                                {
-                                                    TotalTimeNow = TotalTimeNow - currentHour.Minute * 60;
-                                                }
-                                                else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute >= Config.TimeRest2Ca12[currentHour1.Hour])
-                                                {
-                                                    TotalTimeNow = TotalTimeNow - Config.TimeRest2Ca12[currentHour1.Hour] * 60;
-                                                }
-                                                else
-                                                {
-                                                    break;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    TotalTimeNow = 0;
-                                }
-                            }
-                            // 2 ca 12 bắt đầu từ 6h
-                            else if (typeplan == "2_12")
-                            {
-                                if (TotalTimeNow >= Config.TimeRest2Ca12_6h[currentHour1.Hour] * 60)
-                                {
-                                    if (currentHour == TimeEnd)
-                                    {
-                                        if (currentHour1.Hour != TimeEnd.Hour)
-                                        {
-                                            TotalTimeNow = TotalTimeNow - Config.TimeRest2Ca12_6h[currentHour1.Hour] * 60;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (currentHour.Date == TimeStartShift.Date)
-                                        {
-                                            if (currentHour.Hour > currentHour1.Hour)
-                                            {
-                                                TotalTimeNow = TotalTimeNow - Config.TimeRest2Ca12_6h[currentHour1.Hour] * 60;
-                                            }
-                                            else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute < Config.TimeRest2Ca12_6h[currentHour1.Hour])
-                                            {
-                                                TotalTimeNow = TotalTimeNow - currentHour.Minute * 60;
-                                            }
-                                            else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute >= Config.TimeRest2Ca12_6h[currentHour1.Hour])
-                                            {
-                                                TotalTimeNow = TotalTimeNow - Config.TimeRest2Ca12_6h[currentHour1.Hour] * 60;
-                                            }
-                                            else
-                                            {
-                                                break;
-                                            }
-                                        }
-                                        else
-                                        {
-                                            if (currentHour1.Date == TimeStartShift.Date)
-                                            {
-                                                TotalTimeNow = TotalTimeNow - Config.TimeRest2Ca12_6h[currentHour1.Hour] * 60;
-                                            }
-                                            else
-                                            {
-                                                if (currentHour.Hour > currentHour1.Hour)
-                                                {
-                                                    TotalTimeNow = TotalTimeNow - Config.TimeRest2Ca12_6h[currentHour1.Hour] * 60;
-                                                }
-                                                else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute < Config.TimeRest2Ca12_6h[currentHour1.Hour])
-                                                {
-                                                    TotalTimeNow = TotalTimeNow - currentHour.Minute * 60;
-                                                }
-                                                else if (currentHour.Hour == currentHour1.Hour && currentHour.Minute >= Config.TimeRest2Ca12_6h[currentHour1.Hour])
-                                                {
-                                                    TotalTimeNow = TotalTimeNow - Config.TimeRest2Ca12_6h[currentHour1.Hour] * 60;
-                                                }
-                                                else
-                                                {
-                                                    break;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    TotalTimeNow = 0;
-                                }
-                            }
-                            else
-                            {
                                 if (TotalTimeNow >= Config.TimeRest[currentHour1.Hour] * 60)
                                 {
                                     if (currentHour == TimeEnd)
@@ -1039,13 +834,10 @@ namespace PAPVN.MethodLoadData
                                 {
                                     TotalTimeNow = 0;
                                 }
-                            }
-
-
-
                         }
                         listdataplan.Add(currentHour.ToString("yyyy-MM-dd HH:mm:ss"), (int)Math.Round(TotalTimeNow * quantityPerSec));
                         index++;
+                        labels.Add(currentHour.ToString("HH:mm"));
                     }
 
 
@@ -1096,6 +888,7 @@ namespace PAPVN.MethodLoadData
                     quantityPerTimechartCanvas.Actual = dataactual.LastOrDefault();
                     quantityPerTimechartCanvas.Diff = datadiff.LastOrDefault();
                     quantityPerTimechartCanvas.Remain = 0;
+                    quantityPerTimechartCanvas.labels = labels.ToArray();
                     if (dataactual.Count() > 0  )
                     {
                         quantityPerTimechartCanvas.Remain = TotalPlan - dataactual.LastOrDefault();
@@ -1117,6 +910,7 @@ namespace PAPVN.MethodLoadData
                     quantityPerTimechartCanvas.Actual = 0;
                     quantityPerTimechartCanvas.Diff = 0;
                     quantityPerTimechartCanvas.Remain = 0;
+                    quantityPerTimechartCanvas.labels = labels.ToArray();
                     return quantityPerTimechartCanvas;
                 }
             }
@@ -1134,6 +928,7 @@ namespace PAPVN.MethodLoadData
                 quantityPerTimechartCanvas.Actual = 0;
                 quantityPerTimechartCanvas.Diff = 0;
                 quantityPerTimechartCanvas.Remain = 0;
+                quantityPerTimechartCanvas.labels = labels.ToArray();
                 return quantityPerTimechartCanvas;
             }
         }
@@ -1815,6 +1610,7 @@ namespace PAPVN.MethodLoadData
 
         public static QuantityPerHour LineChartQuantityPerHour(string ModelName, string SelectedShift, string storeprocedure)
         {
+            List<string> labels = new List<string>();
 
             if (storeprocedure == "Test")
             {
@@ -1896,6 +1692,7 @@ namespace PAPVN.MethodLoadData
                         quantityPerTimechartCanvas.datadiff = new[] { 0 };
                         quantityPerTimechartCanvas.shift = 0;
                         quantityPerTimechartCanvas.datadifftotal = new[] { 0 };
+                        quantityPerTimechartCanvas.labels = labels.ToArray();
 
                         return quantityPerTimechartCanvas;
                     }
@@ -1923,7 +1720,7 @@ namespace PAPVN.MethodLoadData
                     {
                         int TotalTimeNow =  3600 - Config.TimeRest[currentHour.Hour]*60;
                         listdataplan.Add(currentHour.ToString("yyyy-MM-dd HH:mm:ss"), (int)Math.Round(TotalTimeNow * quantityPerSec));
-                       
+                        labels.Add(currentHour.ToString("HH"));
                     }
 
                     for (DateTime currentHour = TimeStartShift; currentHour <= DateTime.Now; currentHour = currentHour.AddHours(1))
@@ -1970,6 +1767,7 @@ namespace PAPVN.MethodLoadData
                     quantityPerTimechartCanvas.datadifftotal = datadiffall;
                     quantityPerTimechartCanvas.shift = selectshift;
                     quantityPerTimechartCanvas.typeplan = typeplan;
+                    quantityPerTimechartCanvas.labels = labels.ToArray();
 
 
 
@@ -1984,6 +1782,7 @@ namespace PAPVN.MethodLoadData
                     quantityPerTimechartCanvas.datadiff = new[] { 0 };
                     quantityPerTimechartCanvas.shift = 0;
                     quantityPerTimechartCanvas.datadifftotal = new[] { 0 };
+                    quantityPerTimechartCanvas.labels = labels.ToArray();
 
                     return quantityPerTimechartCanvas;
                 }
@@ -1998,6 +1797,7 @@ namespace PAPVN.MethodLoadData
                 quantityPerTimechartCanvas.datadiff = new[] { 0 };
                 quantityPerTimechartCanvas.shift = 0;
                 quantityPerTimechartCanvas.datadifftotal = new[] { 0 };
+                quantityPerTimechartCanvas.labels = labels.ToArray();
 
                 return quantityPerTimechartCanvas;
             }
