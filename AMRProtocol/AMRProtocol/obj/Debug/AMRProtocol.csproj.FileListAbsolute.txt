@@ -1,0 +1,11 @@
+D:\AMR\AMRProtocol\AMRProtocol\bin\Debug\AMRProtocol.exe.config
+D:\AMR\AMRProtocol\AMRProtocol\bin\Debug\AMRProtocol.exe
+D:\AMR\AMRProtocol\AMRProtocol\bin\Debug\AMRProtocol.pdb
+D:\AMR\AMRProtocol\AMRProtocol\obj\Debug\AMRProtocol.csproj.AssemblyReference.cache
+D:\AMR\AMRProtocol\AMRProtocol\obj\Debug\AMRProtocol.Form1.resources
+D:\AMR\AMRProtocol\AMRProtocol\obj\Debug\AMRProtocol.Properties.Resources.resources
+D:\AMR\AMRProtocol\AMRProtocol\obj\Debug\AMRProtocol.csproj.GenerateResource.cache
+D:\AMR\AMRProtocol\AMRProtocol\obj\Debug\AMRProtocol.csproj.CoreCompileInputs.cache
+D:\AMR\AMRProtocol\AMRProtocol\obj\Debug\AMRProtocol.exe
+D:\AMR\AMRProtocol\AMRProtocol\obj\Debug\AMRProtocol.pdb
+D:\AMR\AMRProtocol\AMRProtocol\obj\Debug\AMRProtocol.exe.config

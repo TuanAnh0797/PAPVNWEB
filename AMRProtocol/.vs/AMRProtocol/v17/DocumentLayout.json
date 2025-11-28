@@ -1,0 +1,120 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\AMR\\AMRProtocol\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{51DFB9A3-CACF-45FA-89E2-416A6D163DCB}|AMRProtocol\\AMRProtocol.csproj|d:\\amr\\amrprotocol\\amrprotocol\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{51DFB9A3-CACF-45FA-89E2-416A6D163DCB}|AMRProtocol\\AMRProtocol.csproj|solutionrelative:amrprotocol\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51DFB9A3-CACF-45FA-89E2-416A6D163DCB}|AMRProtocol\\AMRProtocol.csproj|d:\\amr\\amrprotocol\\amrprotocol\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{51DFB9A3-CACF-45FA-89E2-416A6D163DCB}|AMRProtocol\\AMRProtocol.csproj|solutionrelative:amrprotocol\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51DFB9A3-CACF-45FA-89E2-416A6D163DCB}|AMRProtocol\\AMRProtocol.csproj|d:\\amr\\amrprotocol\\amrprotocol\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{51DFB9A3-CACF-45FA-89E2-416A6D163DCB}|AMRProtocol\\AMRProtocol.csproj|solutionrelative:amrprotocol\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51DFB9A3-CACF-45FA-89E2-416A6D163DCB}|AMRProtocol\\AMRProtocol.csproj|d:\\amr\\amrprotocol\\amrprotocol\\form1.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
+      "RelativeMoniker": "D:0:0:{51DFB9A3-CACF-45FA-89E2-416A6D163DCB}|AMRProtocol\\AMRProtocol.csproj|solutionrelative:amrprotocol\\form1.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51DFB9A3-CACF-45FA-89E2-416A6D163DCB}|AMRProtocol\\AMRProtocol.csproj|d:\\amr\\amrprotocol\\amrprotocol\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{51DFB9A3-CACF-45FA-89E2-416A6D163DCB}|AMRProtocol\\AMRProtocol.csproj|solutionrelative:amrprotocol\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51DFB9A3-CACF-45FA-89E2-416A6D163DCB}|AMRProtocol\\AMRProtocol.csproj|d:\\amr\\amrprotocol\\amrprotocol\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{51DFB9A3-CACF-45FA-89E2-416A6D163DCB}|AMRProtocol\\AMRProtocol.csproj|solutionrelative:amrprotocol\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Form1.resx",
+              "DocumentMoniker": "D:\\AMR\\AMRProtocol\\AMRProtocol\\Form1.resx",
+              "RelativeDocumentMoniker": "AMRProtocol\\Form1.resx",
+              "ToolTip": "D:\\AMR\\AMRProtocol\\AMRProtocol\\Form1.resx",
+              "RelativeToolTip": "AMRProtocol\\Form1.resx",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
+              "WhenOpened": "2025-11-27T16:05:15.492Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Form1.Designer.cs",
+              "DocumentMoniker": "D:\\AMR\\AMRProtocol\\AMRProtocol\\Form1.Designer.cs",
+              "RelativeDocumentMoniker": "AMRProtocol\\Form1.Designer.cs",
+              "ToolTip": "D:\\AMR\\AMRProtocol\\AMRProtocol\\Form1.Designer.cs",
+              "RelativeToolTip": "AMRProtocol\\Form1.Designer.cs",
+              "ViewState": "AgIAAIYAAAAAAAAAAAAWwJsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T15:36:48.335Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "D:\\AMR\\AMRProtocol\\AMRProtocol\\Form1.cs",
+              "RelativeDocumentMoniker": "AMRProtocol\\Form1.cs",
+              "ToolTip": "D:\\AMR\\AMRProtocol\\AMRProtocol\\Form1.cs",
+              "RelativeToolTip": "AMRProtocol\\Form1.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAwwDgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T15:36:13.545Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\AMR\\AMRProtocol\\AMRProtocol\\Program.cs",
+              "RelativeDocumentMoniker": "AMRProtocol\\Program.cs",
+              "ToolTip": "D:\\AMR\\AMRProtocol\\AMRProtocol\\Program.cs",
+              "RelativeToolTip": "AMRProtocol\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T15:23:48.566Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "App.config",
+              "DocumentMoniker": "D:\\AMR\\AMRProtocol\\AMRProtocol\\App.config",
+              "RelativeDocumentMoniker": "AMRProtocol\\App.config",
+              "ToolTip": "D:\\AMR\\AMRProtocol\\AMRProtocol\\App.config",
+              "RelativeToolTip": "AMRProtocol\\App.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-11-27T15:19:53.055Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "D:\\AMR\\AMRProtocol\\AMRProtocol\\Form1.cs",
+              "RelativeDocumentMoniker": "AMRProtocol\\Form1.cs",
+              "ToolTip": "D:\\AMR\\AMRProtocol\\AMRProtocol\\Form1.cs [Design]",
+              "RelativeToolTip": "AMRProtocol\\Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T15:17:19.871Z",
+              "EditorCaption": " [Design]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

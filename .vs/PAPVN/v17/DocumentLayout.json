@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "D:\\2025\\PAPVNWEB\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|D:\\2025\\PAPVNWEB\\papvn\\methodloaddata\\loaddatavisualize.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|solutionrelative:papvn\\methodloaddata\\loaddatavisualize.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|D:\\2025\\PAPVNWEB\\papvn\\model\\chartdata\\quantitybymodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|solutionrelative:papvn\\model\\chartdata\\quantitybymodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|D:\\2025\\PAPVNWEB\\papvn\\signalrhub\\urethanhub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|solutionrelative:papvn\\signalrhub\\urethanhub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|d:\\2025\\papvnweb\\papvn\\ui_urethan\\urethanrealtime.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "AbsoluteMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|D:\\2025\\PAPVNWEB\\papvn\\ui_urethan\\urethanrealtime.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|solutionrelative:papvn\\ui_urethan\\urethanrealtime.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|d:\\2025\\papvnweb\\papvn\\methodloaddata\\loaddatavisualize.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|solutionrelative:papvn\\methodloaddata\\loaddatavisualize.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|D:\\2025\\PAPVNWEB\\papvn\\model\\chartdata\\quantityperhour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -33,10 +37,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|D:\\2025\\PAPVNWEB\\papvn\\site.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}",
       "RelativeMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|solutionrelative:papvn\\site.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|D:\\2025\\PAPVNWEB\\papvn\\model\\chartdata\\quantitybymodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|solutionrelative:papvn\\model\\chartdata\\quantitybymodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{00254447-F235-48D6-88FD-512A90D388C2}|PAPVN\\PAPVN.csproj|D:\\2025\\PAPVNWEB\\papvn\\ui_gas\\plangas.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
@@ -302,7 +302,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Document",
@@ -310,8 +310,8 @@
               "Title": "UrethanRealTime.aspx",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\UI_Urethan\\UrethanRealTime.aspx",
               "RelativeDocumentMoniker": "PAPVN\\UI_Urethan\\UrethanRealTime.aspx",
-              "ToolTip": "D:\\2025\\PAPVNWEB\\PAPVN\\UI_Urethan\\UrethanRealTime.aspx",
-              "RelativeToolTip": "PAPVN\\UI_Urethan\\UrethanRealTime.aspx",
+              "ToolTip": "D:\\2025\\PAPVNWEB\\PAPVN\\UI_Urethan\\UrethanRealTime.aspx*",
+              "RelativeToolTip": "PAPVN\\UI_Urethan\\UrethanRealTime.aspx*",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
               "WhenOpened": "2025-11-09T10:46:44.55Z",
@@ -325,27 +325,27 @@
               "RelativeDocumentMoniker": "PAPVN\\SignalRHub\\UrethanHub.cs",
               "ToolTip": "D:\\2025\\PAPVNWEB\\PAPVN\\SignalRHub\\UrethanHub.cs",
               "RelativeToolTip": "PAPVN\\SignalRHub\\UrethanHub.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAAUwDwAAABpAAAAAAAAAA==",
+              "ViewState": "AgIAAEEAAAAAAAAAAAAiwFsAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-04T15:09:38.435Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "LoadDataVisualize.cs",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\MethodLoadData\\LoadDataVisualize.cs",
               "RelativeDocumentMoniker": "PAPVN\\MethodLoadData\\LoadDataVisualize.cs",
               "ToolTip": "D:\\2025\\PAPVNWEB\\PAPVN\\MethodLoadData\\LoadDataVisualize.cs",
               "RelativeToolTip": "PAPVN\\MethodLoadData\\LoadDataVisualize.cs",
-              "ViewState": "AgIAAKIGAAAAAAAAAAAowLsGAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAB0HAAAAAAAAAAAowLsGAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-20T07:34:42.981Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "QuantityPerTimechartCanvas.cs",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\Model\\ChartData\\QuantityPerTimechartCanvas.cs",
               "RelativeDocumentMoniker": "PAPVN\\Model\\ChartData\\QuantityPerTimechartCanvas.cs",
@@ -353,8 +353,7 @@
               "RelativeToolTip": "PAPVN\\Model\\ChartData\\QuantityPerTimechartCanvas.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-09T05:10:26.105Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-09T05:10:26.105Z"
             },
             {
               "$type": "Document",
@@ -370,7 +369,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "Site.Master",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\Site.Master",
               "RelativeDocumentMoniker": "PAPVN\\Site.Master",
@@ -383,7 +382,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "PCMHub.cs",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\SignalRHub\\PCMHub.cs",
               "RelativeDocumentMoniker": "PAPVN\\SignalRHub\\PCMHub.cs",
@@ -391,12 +390,11 @@
               "RelativeToolTip": "PAPVN\\SignalRHub\\PCMHub.cs",
               "ViewState": "AgIAAIkAAAAAAAAAAAAowHEAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-26T17:55:00.094Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-26T17:55:00.094Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "QuantityPerHour.cs",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\Model\\ChartData\\QuantityPerHour.cs",
               "RelativeDocumentMoniker": "PAPVN\\Model\\ChartData\\QuantityPerHour.cs",
@@ -404,20 +402,20 @@
               "RelativeToolTip": "PAPVN\\Model\\ChartData\\QuantityPerHour.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-09T09:44:20.22Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-09T09:44:20.22Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 0,
               "Title": "QuantityByModel.cs",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\Model\\ChartData\\QuantityByModel.cs",
               "RelativeDocumentMoniker": "PAPVN\\Model\\ChartData\\QuantityByModel.cs",
               "ToolTip": "D:\\2025\\PAPVNWEB\\PAPVN\\Model\\ChartData\\QuantityByModel.cs",
               "RelativeToolTip": "PAPVN\\Model\\ChartData\\QuantityByModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAoAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-09T05:15:54.777Z"
+              "WhenOpened": "2025-11-09T05:15:54.777Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -433,7 +431,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "PCM_RealTime.aspx",
               "DocumentMoniker": "D:\\2025\\PAPVNWEB\\PAPVN\\UI_PCM\\PCM_RealTime.aspx",
               "RelativeDocumentMoniker": "PAPVN\\UI_PCM\\PCM_RealTime.aspx",
@@ -441,8 +439,7 @@
               "RelativeToolTip": "PAPVN\\UI_PCM\\PCM_RealTime.aspx",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2025-06-15T17:50:54.393Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-15T17:50:54.393Z"
             },
             {
               "$type": "Document",
@@ -478,8 +475,7 @@
               "RelativeToolTip": "PAPVN\\ChatHub.cs",
               "ViewState": "AgIAAEMAAAAAAAAAAAA6wFUAAABIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-19T07:30:54.267Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-19T07:30:54.267Z"
             },
             {
               "$type": "Document",
