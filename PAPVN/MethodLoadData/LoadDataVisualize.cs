@@ -1,4 +1,5 @@
 ﻿using PAPVN.Model.ChartData;
+using PAPVN.WebFormSignalR;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -26,11 +27,27 @@ namespace PAPVN.MethodLoadData
 
 
         }
+
+        public static string GetDatePlan()
+        {
+            if (DateTime.Now.Hour < 6)
+            {
+                return DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd");
+            }
+            else
+            {
+                return DateTime.Now.ToString("yyyy-MM-dd");
+            }
+        }
+
         public static string LineChartQuantityPerTime(string ModelName, string SelectedShift, string storeprocedure)
         {
             string typeplan = "3_8";
             try
             {
+
+                 string dateplan = GetDatePlan();
+
                 DBConnect dBConnect = new DBConnect();
 
                 LoadRestTime(dBConnect);
@@ -57,29 +74,29 @@ namespace PAPVN.MethodLoadData
                 if (SelectedShift == "Ca 1")
                 {
                     selectshift = 1;
-                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "1");
-                    ds = dBConnect.StoreFillDS(storeprocedure, CommandType.StoredProcedure, parammysql, "1");
+                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan_new", CommandType.StoredProcedure, parammysql, "1", dateplan);
+                    ds = dBConnect.StoreFillDS(storeprocedure, CommandType.StoredProcedure, parammysql, "1", dateplan);
                     dt1 = ds.Tables[0];
                 }
                 else if (SelectedShift == "Ca 2")
                 {
                     selectshift = 2;
-                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "2");
-                    ds = dBConnect.StoreFillDS(storeprocedure, CommandType.StoredProcedure, parammysql, "2");
+                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan_new", CommandType.StoredProcedure, parammysql, "2", dateplan);
+                    ds = dBConnect.StoreFillDS(storeprocedure, CommandType.StoredProcedure, parammysql, "2", dateplan);
                     dt1 = ds.Tables[0];
                 }
                 else if (SelectedShift == "Ca 3")
                 {
                     selectshift = 3;
-                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "3");
-                    ds = dBConnect.StoreFillDS(storeprocedure, CommandType.StoredProcedure, parammysql, "3");
+                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan_new", CommandType.StoredProcedure, parammysql, "3", dateplan);
+                    ds = dBConnect.StoreFillDS(storeprocedure, CommandType.StoredProcedure, parammysql, "3", dateplan);
                     dt1 = ds.Tables[0];
                 }
                 else
                 {
                     selectshift = 0;
-                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "all");
-                    ds = dBConnect.StoreFillDS(storeprocedure, CommandType.StoredProcedure, parammysql, "all");
+                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan_new", CommandType.StoredProcedure, parammysql, "all", dateplan);
+                    ds = dBConnect.StoreFillDS(storeprocedure, CommandType.StoredProcedure, parammysql, "all", dateplan);
                     dt1 = ds.Tables[0];
                     //allday = true;
                 }
@@ -641,8 +658,16 @@ namespace PAPVN.MethodLoadData
         }
         //
 
-        public static QuantityPerTimechartCanvas LineChartQuantityPerTimeObject(string ModelName, string SelectedShift, string storeprocedure)
+        public static QuantityPerTimechartCanvas LineChartQuantityPerTimeObject(string ModelName, string SelectedShift, string storeprocedure, string date)
         {
+
+            string DatePlan = GetDatePlan();
+
+            if (date != "")
+            {
+                DatePlan = date;
+            }
+
             List<string> labels = new List<string>();
 
             if (storeprocedure == "Test")
@@ -692,29 +717,29 @@ namespace PAPVN.MethodLoadData
                 if (SelectedShift == "Ca 1")
                 {
                     selectshift = 1;
-                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "1");
-                    ds = dBConnect.StoreFillDS(storeprocedure, CommandType.StoredProcedure, parammysql, "1");
+                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan_new", CommandType.StoredProcedure, parammysql, "1", DatePlan);
+                    ds = dBConnect.StoreFillDS(storeprocedure, CommandType.StoredProcedure, parammysql, "1", DatePlan);
                     dt1 = ds.Tables[0];
                 }
                 else if (SelectedShift == "Ca 2")
                 {
                     selectshift = 2;
-                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "2");
-                    ds = dBConnect.StoreFillDS(storeprocedure, CommandType.StoredProcedure, parammysql, "2");
+                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan_new", CommandType.StoredProcedure, parammysql, "2", DatePlan);
+                    ds = dBConnect.StoreFillDS(storeprocedure, CommandType.StoredProcedure, parammysql, "2", DatePlan);
                     dt1 = ds.Tables[0];
                 }
                 else if (SelectedShift == "Ca 3")
                 {
                     selectshift = 3;
-                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "3");
-                    ds = dBConnect.StoreFillDS(storeprocedure, CommandType.StoredProcedure, parammysql, "3");
+                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan_new", CommandType.StoredProcedure, parammysql, "3", DatePlan);
+                    ds = dBConnect.StoreFillDS(storeprocedure, CommandType.StoredProcedure, parammysql, "3", DatePlan);
                     dt1 = ds.Tables[0];
                 }
                 else
                 {
                     selectshift = 0;
-                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "all");
-                    ds = dBConnect.StoreFillDS(storeprocedure, CommandType.StoredProcedure, parammysql, "all");
+                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan_new", CommandType.StoredProcedure, parammysql, "all", DatePlan);
+                    ds = dBConnect.StoreFillDS(storeprocedure, CommandType.StoredProcedure, parammysql, "all", DatePlan);
                     dt1 = ds.Tables[0];
                     //allday = true;
                 }
@@ -940,10 +965,17 @@ namespace PAPVN.MethodLoadData
         }
 
 
-        public static QuantityByModel QuantityByModel(string SelectedShift, string storeprocedure)
+        public static QuantityByModel QuantityByModel(string SelectedShift, string storeprocedure, string date)
         {
             try
             {
+               
+                string DatePlan = GetDatePlan();
+
+                if (date != "")
+                {
+                    DatePlan = date;
+                }
 
                 if (storeprocedure == "Test")
                 {
@@ -962,25 +994,25 @@ namespace PAPVN.MethodLoadData
                 if (SelectedShift == "Ca 1")
                 {
                     //dt = dBConnect.StoreFillDT("TA_sp_LoadDataForBarChartPlanGas", CommandType.StoredProcedure, "1");
-                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "1");
+                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "1", DatePlan);
 
                 }
                 else if (SelectedShift == "Ca 2")
                 {
                     //dt = dBConnect.StoreFillDT("TA_sp_LoadDataForBarChartPlanGas", CommandType.StoredProcedure, "2");
-                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "2");
+                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "2", DatePlan);
 
                 }
                 else if (SelectedShift == "Ca 3")
                 {
                     //dt = dBConnect.StoreFillDT("TA_sp_LoadDataForBarChartPlanGas", CommandType.StoredProcedure, "3");
-                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "3");
+                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "3", DatePlan);
 
                 }
                 else
                 {
                     //dt = dBConnect.StoreFillDT("TA_sp_LoadDataForBarChartPlanGas", CommandType.StoredProcedure, "all");
-                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "all");
+                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "all", DatePlan);
 
                 }
                 if (dt.Rows.Count > 0)
@@ -990,7 +1022,7 @@ namespace PAPVN.MethodLoadData
                     int[] dataactual = new int[dt.Rows.Count];
                     string[] labels = new string[dt.Rows.Count];
 
-                    DataTable dt2 = dBConnect.StoreFillDT("TA_sp_GetStartTime", CommandType.StoredProcedure);
+                    DataTable dt2 = dBConnect.StoreFillDT("TA_sp_GetStartTime_new", CommandType.StoredProcedure, DatePlan);
                     DateTime TimeStartPlan = DateTime.Parse(dt2.Rows[0]["TimeStart"].ToString());
                     DateTime TimeEndPlan = DateTime.Parse(dt2.Rows[0]["TimeEnd"].ToString());
 
@@ -1453,7 +1485,7 @@ namespace PAPVN.MethodLoadData
         }
 
 
-        public static QuantityPerHour LineChartQuantityPerHour(string ModelName, string SelectedShift, string storeprocedure)
+        public static QuantityPerHour LineChartQuantityPerHour(string ModelName, string SelectedShift, string storeprocedure, string date)
         {
             List<string> labels = new List<string>();
 
@@ -1470,6 +1502,14 @@ namespace PAPVN.MethodLoadData
             string typeplan = "3_8";
             try
             {
+                string DatePlan = GetDatePlan();
+
+                if (date != "")
+                {
+                    DatePlan = date;
+                }
+
+
                 DBConnect dBConnect = new DBConnect();
                 LoadRestTime(dBConnect);
                 string parammysql;
@@ -1495,29 +1535,29 @@ namespace PAPVN.MethodLoadData
                 if (SelectedShift == "Ca 1")
                 {
                     selectshift = 1;
-                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "1");
-                    ds = dBConnect.StoreFillDS(storeprocedure, CommandType.StoredProcedure, parammysql, "1");
+                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan_new", CommandType.StoredProcedure, parammysql, "1", DatePlan);
+                    ds = dBConnect.StoreFillDS(storeprocedure, CommandType.StoredProcedure, parammysql, "1", DatePlan);
                     dt1 = ds.Tables[0];
                 }
                 else if (SelectedShift == "Ca 2")
                 {
                     selectshift = 2;
-                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "2");
-                    ds = dBConnect.StoreFillDS(storeprocedure, CommandType.StoredProcedure, parammysql, "2");
+                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan_new", CommandType.StoredProcedure, parammysql, "2", DatePlan);
+                    ds = dBConnect.StoreFillDS(storeprocedure, CommandType.StoredProcedure, parammysql, "2", DatePlan);
                     dt1 = ds.Tables[0];
                 }
                 else if (SelectedShift == "Ca 3")
                 {
                     selectshift = 3;
-                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "3");
-                    ds = dBConnect.StoreFillDS(storeprocedure, CommandType.StoredProcedure, parammysql, "3");
+                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan_new", CommandType.StoredProcedure, parammysql, "3", DatePlan);
+                    ds = dBConnect.StoreFillDS(storeprocedure, CommandType.StoredProcedure, parammysql, "3", DatePlan);
                     dt1 = ds.Tables[0];
                 }
                 else
                 {
                     selectshift = 0;
-                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan", CommandType.StoredProcedure, parammysql, "all");
-                    ds = dBConnect.StoreFillDS(storeprocedure, CommandType.StoredProcedure, parammysql, "all");
+                    ds1 = dBConnect.StoreFillDS("TA_sp_LoadQuantityPlan_new", CommandType.StoredProcedure, parammysql, "all", DatePlan);
+                    ds = dBConnect.StoreFillDS(storeprocedure, CommandType.StoredProcedure, parammysql, "all", DatePlan);
                     dt1 = ds.Tables[0];
                     //allday = true;
                 }
@@ -1649,11 +1689,16 @@ namespace PAPVN.MethodLoadData
         }
 
 
-        public static QuantityByModel QuantityByGroupModel(string SelectedShift, string storeprocedure)
+        public static QuantityByModel QuantityByGroupModel(string SelectedShift, string storeprocedure, string date)
         {
             try
             {
+                 string DatePlan = GetDatePlan();
 
+                if (date != "")
+                {
+                    DatePlan = date;
+                }
                 if (storeprocedure == "Test")
                 {
                     QuantityByModel quantityByModel = new QuantityByModel();
@@ -1671,25 +1716,25 @@ namespace PAPVN.MethodLoadData
                 if (SelectedShift == "Ca 1")
                 {
                     //dt = dBConnect.StoreFillDT("TA_sp_LoadDataForBarChartPlanGas", CommandType.StoredProcedure, "1");
-                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "1");
+                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "1", DatePlan);
 
                 }
                 else if (SelectedShift == "Ca 2")
                 {
                     //dt = dBConnect.StoreFillDT("TA_sp_LoadDataForBarChartPlanGas", CommandType.StoredProcedure, "2");
-                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "2");
+                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "2", DatePlan);
 
                 }
                 else if (SelectedShift == "Ca 3")
                 {
                     //dt = dBConnect.StoreFillDT("TA_sp_LoadDataForBarChartPlanGas", CommandType.StoredProcedure, "3");
-                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "3");
+                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "3", DatePlan);
 
                 }
                 else
                 {
                     //dt = dBConnect.StoreFillDT("TA_sp_LoadDataForBarChartPlanGas", CommandType.StoredProcedure, "all");
-                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "all");
+                    dt = dBConnect.StoreFillDT(storeprocedure, CommandType.StoredProcedure, "all", DatePlan);
 
                 }
                 if (dt.Rows.Count > 0)
@@ -1699,7 +1744,7 @@ namespace PAPVN.MethodLoadData
                     int[] dataactual = new int[dt.Rows.Count];
                     string[] labels = new string[dt.Rows.Count];
 
-                    DataTable dt2 = dBConnect.StoreFillDT("TA_sp_GetStartTime", CommandType.StoredProcedure);
+                    DataTable dt2 = dBConnect.StoreFillDT("TA_sp_GetStartTime_new", CommandType.StoredProcedure, DatePlan);
                     DateTime TimeStartPlan = DateTime.Parse(dt2.Rows[0]["TimeStart"].ToString());
 
 

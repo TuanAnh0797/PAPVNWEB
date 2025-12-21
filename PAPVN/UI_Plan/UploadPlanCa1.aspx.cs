@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PAPVN.MethodLoadData;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -28,9 +29,10 @@ namespace PAPVN
         }
         private void loaddataplan()
         {
+            string dateplan = LoadDataVisualize.GetDatePlan();
             string HTML = "";
             DBConnect dBConnect = new DBConnect();
-            DataTable dt = dBConnect.StoreFillDT("TA_sp_LoadDataPlanCa1", CommandType.StoredProcedure);
+            DataTable dt = dBConnect.StoreFillDT("TA_sp_LoadDataPlanCa1", CommandType.StoredProcedure, dateplan);
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 if (dt.Rows[i]["Model"].ToString() != "Total")

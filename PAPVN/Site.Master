@@ -233,7 +233,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item ml-2">
-                                    <a class="nav-link" href="#" onclick="showpopupfuture()">
+                                    <a class="nav-link" href="/UI_Pan/PanRealTime">
                                         <i class="fas fa-box nav-icon"></i>
                                         <p style="font-size: 18px; font-weight: 600">PAN</p>
                                     </a>

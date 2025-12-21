@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using PAPVN.MethodLoadData;
-using PAPVN.Model.ChartData;
-using PAPVN.Model.Common;
-using PAPVN.Service;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -14,13 +11,13 @@ using System.Web;
 
 namespace PAPVN.SignalRHub
 {
-    [HubName("UrethanHub")]
-    public class UrethanHub : Hub
+    [HubName("PanHub")]
+    public class PanHub:Hub
     {
         private static readonly ConcurrentDictionary<string, string> ClientOptions = new ConcurrentDictionary<string, string>();
         private static readonly Timer Timer_Urethan = new Timer(5000);
 
-        static UrethanHub()
+        static PanHub()
         {
             Timer_Urethan.Elapsed += async (sender, e) => await UpdateData();
             Timer_Urethan.AutoReset = true;
@@ -55,15 +52,16 @@ namespace PAPVN.SignalRHub
             try
             {
                 string[] optionParts = Optiontable.Split(';');
-                string date = optionParts[0].Length < 8 ? "" : optionParts[0];
+                string date = optionParts[0].Length < 8? "": optionParts[0];
                 string shift = optionParts.Length > 1 ? optionParts[1] : "All";
-                string model = optionParts.Length > 1 ? optionParts[2] : "All Model";
+                string model = optionParts.Length > 2 ? optionParts[2] : "All Model";
+
                 DataRealTime dataUrethan = new DataRealTime();
-                dataUrethan.QuantityPerTimechartCanvas = LoadDataVisualize.LineChartQuantityPerTimeObject(model, shift, "TA_sp_LoadDataForLineChartPlanUrethanByTime_new", date);
-                dataUrethan.quantityByModel = LoadDataVisualize.QuantityByModel(shift, "TA_sp_LoadDataForBarChartPlanurethan_unique_new", date);
+                dataUrethan.QuantityPerTimechartCanvas = LoadDataVisualize.LineChartQuantityPerTimeObject(model, shift, "TA_sp_LoadDataForLineChartPlanPanByTime_new", date);
+                dataUrethan.quantityByModel = LoadDataVisualize.QuantityByModel(shift, "TA_sp_LoadDataForBarChartPlanpan_unique_new", date);
                 //dataUrethan.quantityByModelMonitor = LoadDataVisualize.QuantityByModelMonitor("All", "TA_sp_LoadDataForBarChartPlanurethan_uniqueMonitor");
-                dataUrethan.quantityByModelgroup = LoadDataVisualize.QuantityByGroupModel(shift, "TA_sp_LoadDataForBarChartPlanurethan_unique_new", date);
-                dataUrethan.quantityPerHour = LoadDataVisualize.LineChartQuantityPerHour(model, shift, "TA_sp_LoadDataForLineChartPlanUrethanByHour_new", date);
+                dataUrethan.quantityByModelgroup = LoadDataVisualize.QuantityByGroupModel(shift, "TA_sp_LoadDataForBarChartPlanpan_unique_new", date);
+                dataUrethan.quantityPerHour = LoadDataVisualize.LineChartQuantityPerHour(model, shift, "TA_sp_LoadDataForLineChartPlanPanByHour_new", date);
                 // dataUrethan.QuantityPerTimechartCanvas = LoadDataVisualize.LineChartQuantityPerTimeObject(Optiontable, "All", "Test");
                 //dataUrethan.quantityByModel = LoadDataVisualize.QuantityByModel("All", "Test");
                 //dataUrethan.quantityByModelMonitor = LoadDataVisualize.QuantityByModelMonitor("All", "Test");
@@ -85,16 +83,5 @@ namespace PAPVN.SignalRHub
                 ClientOptions[Context.ConnectionId] = date + ";" + shift + ";" + model;
             }
         }
-
     }
-    class DataRealTime
-    {
-        public QuantityPerTimechartCanvas QuantityPerTimechartCanvas = new QuantityPerTimechartCanvas();
-        public QuantityByModel quantityByModel = new QuantityByModel();
-        public QuantityByModel quantityByModelMonitor = new QuantityByModel();
-        public QuantityPerHour quantityPerHour = new QuantityPerHour();
-        public QuantityByModel quantityByModelgroup = new QuantityByModel();
-
-    }
-
 }

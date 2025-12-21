@@ -83,7 +83,7 @@ namespace PAPVN
             public static void SendDataToClient(string connectionId,string Optiontable)
             {
                 //
-                string DataLineChartQuantityPerTime = LoadDataVisualize.LineChartQuantityPerTime("All Model", "All", "TA_sp_LoadDataForLineChartPlanPanByTime");
+                string DataLineChartQuantityPerTime = LoadDataVisualize.LineChartQuantityPerTime("All Model", "All", "TA_sp_LoadDataForLineChartPlanPanByTime_new");
                 //
                 string DatabarchartOKNGPENDING = LoadDataVisualize.barchartOKNGPENDING();
                 //

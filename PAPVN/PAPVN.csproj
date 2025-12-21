@@ -275,6 +275,7 @@
     <Content Include="Management\Management_logerror.aspx" />
     <Content Include="Management\Management_BreakTime.aspx" />
     <Content Include="UI_inner\Inner_RealTime.aspx" />
+    <Content Include="UI_Pan\PanRealTime.aspx" />
     <Content Include="UI_Urethan\UrethanRealTime.aspx" />
     <Content Include="z_demo\OEEDemo.html" />
     <Content Include="PartCard.html" />
@@ -2413,7 +2414,9 @@
     <Compile Include="Model\Common\StatusMachine.cs" />
     <Compile Include="Model\Common\StatusMachineDetail.cs" />
     <Compile Include="Service\PCM_DashBoard_Service.cs" />
+    <Compile Include="SignalRHub\GasHub.cs" />
     <Compile Include="SignalRHub\InnerLinerHub.cs" />
+    <Compile Include="SignalRHub\PanHub.cs" />
     <Compile Include="SignalRHub\PCMHub.cs" />
     <Compile Include="SignalRHub\UrethanHub.cs" />
     <Compile Include="Startup.cs" />
@@ -2423,6 +2426,13 @@
     </Compile>
     <Compile Include="UI_inner\Inner_RealTime.aspx.designer.cs">
       <DependentUpon>Inner_RealTime.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI_Pan\PanRealTime.aspx.cs">
+      <DependentUpon>PanRealTime.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI_Pan\PanRealTime.aspx.designer.cs">
+      <DependentUpon>PanRealTime.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI_PCM\PCM_RealTime.aspx.cs">
       <DependentUpon>PCM_RealTime.aspx</DependentUpon>

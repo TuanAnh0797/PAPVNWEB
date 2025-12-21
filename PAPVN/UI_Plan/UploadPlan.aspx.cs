@@ -1,17 +1,18 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using MySqlConnector;
+using MySqlX.XDevAPI.Relational;
+using PAPVN.MethodLoadData;
+using System;
 using System.Collections.Generic;
-using System.Data.OleDb;
 using System.Data;
+using System.Data.OleDb;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using MySqlX.XDevAPI.Relational;
-using MySql.Data.MySqlClient;
 using static Org.BouncyCastle.Math.EC.ECCurve;
-using System.Data.SqlClient;
-using MySqlConnector;
 namespace PAPVN
 {
     public partial class UploadPlan : System.Web.UI.Page
@@ -58,6 +59,8 @@ namespace PAPVN
         {
             try
             {
+                DBConnect dBConnect = new DBConnect();
+                LoadDataVisualize.LoadRestTime(dBConnect);
                 string connectionString = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={filePath};Extended Properties=\"Excel 12.0 Xml;HDR=YES;IMEX=1;\"";
                 using (OleDbConnection connection = new OleDbConnection(connectionString))
                 {
@@ -71,7 +74,13 @@ namespace PAPVN
                         {
                             DataTable dt = new DataTable();
                             adapter.Fill(dt);
-                            GetDataPlan(dt);
+
+                            for (int i = 0; i < 2; i++)
+                            {
+                                GetDataPlan(dt, i);
+                            }
+
+
                         }
                         //}
                     }
@@ -85,11 +94,15 @@ namespace PAPVN
                 }
             }
         }
-        private void GetDataPlan(DataTable dt)
+        private void GetDataPlan(DataTable dt, int indexday)
         {
+
+
+            DateTime datetimeplan = DateTime.Now.AddDays(indexday);
+
             string TimeStartall;
             string TimeEndall;
-            int indexcolumn = (DateTime.Now.Day - 1) * 5 + 18;
+            int indexcolumn = (datetimeplan.Day - 1) * 5 + 18;
             var datarow = from row in dt.AsEnumerable()
                           where row.Table.Rows.IndexOf(row) > 10 && row[indexcolumn].ToString() != "" && !row[indexcolumn].ToString().Contains("-") && row[indexcolumn].ToString() != "0" && Int32.TryParse(row[indexcolumn].ToString(), out int rs) && row[0].ToString().Contains("NR-") && row[11].ToString().Contains("Plan")
                           select new
@@ -127,19 +140,19 @@ namespace PAPVN
             {
                 if (QuantityTotal2 > 0)
                 {
-                    TimeStartall = DateTime.Now.ToString("yyyy-MM-dd") + " 12:00:00";
+                    TimeStartall = datetimeplan.ToString("yyyy-MM-dd") + " 12:00:00";
                 }
                 else
                 {
-                    TimeStartall = DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00";
+                    TimeStartall = datetimeplan.ToString("yyyy-MM-dd") + " 22:00:00";
                 }
                 if (QuantityTotal3 > 0)
                 {
-                    TimeEndall = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 08:00:00";
+                    TimeEndall = datetimeplan.AddDays(1).ToString("yyyy-MM-dd") + " 08:00:00";
                 }
                 else
                 {
-                    TimeEndall = DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00";
+                    TimeEndall = datetimeplan.ToString("yyyy-MM-dd") + " 22:00:00";
                 }
             }
             // 2 ca 12 tiếng bắt đầu từ 10h
@@ -147,38 +160,38 @@ namespace PAPVN
             {
                 if (QuantityTotal2 > 0)
                 {
-                    TimeStartall = DateTime.Now.ToString("yyyy-MM-dd") + " 10:00:00";
+                    TimeStartall = datetimeplan.ToString("yyyy-MM-dd") + " 10:00:00";
                 }
                 else
                 {
-                    TimeStartall = DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00";
+                    TimeStartall = datetimeplan.ToString("yyyy-MM-dd") + " 22:00:00";
                 }
                 if (QuantityTotal3 > 0)
                 {
-                    TimeEndall = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 10:00:00";
+                    TimeEndall = datetimeplan.AddDays(1).ToString("yyyy-MM-dd") + " 10:00:00";
                 }
                 else
                 {
-                    TimeEndall = DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00";
+                    TimeEndall = datetimeplan.ToString("yyyy-MM-dd") + " 22:00:00";
                 }
             }
             else if (cmb_TypePlan.Value == "Kế hoạch 2 ca 12 giờ(bắt đầu từ 6h)")
             {
                 if (QuantityTotal2 > 0)
                 {
-                    TimeStartall = DateTime.Now.ToString("yyyy-MM-dd") + " 06:00:00";
+                    TimeStartall = datetimeplan.ToString("yyyy-MM-dd") + " 06:00:00";
                 }
                 else
                 {
-                    TimeStartall = DateTime.Now.ToString("yyyy-MM-dd") + " 18:00:00";
+                    TimeStartall = datetimeplan.ToString("yyyy-MM-dd") + " 18:00:00";
                 }
                 if (QuantityTotal3 > 0)
                 {
-                    TimeEndall = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 06:00:00";
+                    TimeEndall = datetimeplan.AddDays(1).ToString("yyyy-MM-dd") + " 06:00:00";
                 }
                 else
                 {
-                    TimeEndall = DateTime.Now.ToString("yyyy-MM-dd") + " 18:00:00";
+                    TimeEndall = datetimeplan.ToString("yyyy-MM-dd") + " 18:00:00";
                 }
             }
             // 3 ca 8 tiếng
@@ -186,27 +199,27 @@ namespace PAPVN
             {
                 if (QuantityTotal1 > 0)
                 {
-                    TimeStartall = DateTime.Now.ToString("yyyy-MM-dd") + " 06:00:00";
+                    TimeStartall = datetimeplan.ToString("yyyy-MM-dd") + " 06:00:00";
                 }
                 else if (QuantityTotal2 > 0)
                 {
-                    TimeStartall = DateTime.Now.ToString("yyyy-MM-dd") + " 14:00:00";
+                    TimeStartall = datetimeplan.ToString("yyyy-MM-dd") + " 14:00:00";
                 }
                 else
                 {
-                    TimeStartall = DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00";
+                    TimeStartall = datetimeplan.ToString("yyyy-MM-dd") + " 22:00:00";
                 }
                 if (QuantityTotal3 > 0)
                 {
-                    TimeEndall = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 06:00:00";
+                    TimeEndall = datetimeplan.AddDays(1).ToString("yyyy-MM-dd") + " 06:00:00";
                 }
                 else if (QuantityTotal2 > 0)
                 {
-                    TimeEndall = DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00";
+                    TimeEndall = datetimeplan.ToString("yyyy-MM-dd") + " 22:00:00";
                 }
                 else
                 {
-                    TimeEndall = DateTime.Now.ToString("yyyy-MM-dd") + " 14:00:00";
+                    TimeEndall = datetimeplan.ToString("yyyy-MM-dd") + " 14:00:00";
                 }
             }
 
@@ -217,34 +230,34 @@ namespace PAPVN
             double secworkall = subtimeall.TotalSeconds;
             // Trừ thời gian nghỉ và không làm
             // 2 ca
-            if (cmb_TypePlan.Value == "Kế hoạch 2 ca 10 giờ")
+            //if (cmb_TypePlan.Value == "Kế hoạch 2 ca 10 giờ")
+            //{
+            //    for (DateTime currentHour = DateTime.Parse(TimeStartall); currentHour < DateTime.Parse(TimeEndall); currentHour = currentHour.AddHours(1))
+            //    {
+            //        secworkall = secworkall - Config.TimeRest2Ca[currentHour.Hour] * 60;
+            //    }
+            //}
+            //else if (cmb_TypePlan.Value == "Kế hoạch 2 ca 12 giờ(bắt đầu từ 10h)")
+            //{
+            //    for (DateTime currentHour = DateTime.Parse(TimeStartall); currentHour < DateTime.Parse(TimeEndall); currentHour = currentHour.AddHours(1))
+            //    {
+            //        secworkall = secworkall - Config.TimeRest2Ca12[currentHour.Hour] * 60;
+            //    }
+            //}
+            //else if (cmb_TypePlan.Value == "Kế hoạch 2 ca 12 giờ(bắt đầu từ 6h)")
+            //{
+            //    for (DateTime currentHour = DateTime.Parse(TimeStartall); currentHour < DateTime.Parse(TimeEndall); currentHour = currentHour.AddHours(1))
+            //    {
+            //        secworkall = secworkall - Config.TimeRest2Ca12_6h[currentHour.Hour] * 60;
+            //    }
+            //}
+            //else
+            //{
+            for (DateTime currentHour = DateTime.Parse(TimeStartall); currentHour < DateTime.Parse(TimeEndall); currentHour = currentHour.AddHours(1))
             {
-                for (DateTime currentHour = DateTime.Parse(TimeStartall); currentHour < DateTime.Parse(TimeEndall); currentHour = currentHour.AddHours(1))
-                {
-                    secworkall = secworkall - Config.TimeRest2Ca[currentHour.Hour] * 60;
-                }
+                secworkall = secworkall - Config.TimeRest[currentHour.Hour] * 60;
             }
-            else if (cmb_TypePlan.Value == "Kế hoạch 2 ca 12 giờ(bắt đầu từ 10h)")
-            {
-                for (DateTime currentHour = DateTime.Parse(TimeStartall); currentHour < DateTime.Parse(TimeEndall); currentHour = currentHour.AddHours(1))
-                {
-                    secworkall = secworkall - Config.TimeRest2Ca12[currentHour.Hour] * 60;
-                }
-            }
-            else if (cmb_TypePlan.Value == "Kế hoạch 2 ca 12 giờ(bắt đầu từ 6h)")
-            {
-                for (DateTime currentHour = DateTime.Parse(TimeStartall); currentHour < DateTime.Parse(TimeEndall); currentHour = currentHour.AddHours(1))
-                {
-                    secworkall = secworkall - Config.TimeRest2Ca12_6h[currentHour.Hour] * 60;
-                }
-            }
-            else
-            {
-                for (DateTime currentHour = DateTime.Parse(TimeStartall); currentHour < DateTime.Parse(TimeEndall); currentHour = currentHour.AddHours(1))
-                {
-                    secworkall = secworkall - Config.TimeRest[currentHour.Hour] * 60;
-                }
-            }
+            // }
 
             // Cấu hình Cột DataPlan All Day
             DataTable datahavequantity = new DataTable();
@@ -297,7 +310,7 @@ namespace PAPVN
                 {
 
                     // Thêm dữ liệu vào bảng kế hoạch cả ngày
-                    datahavequantity.Rows.Add(item.Model, item.Quantity2 + item.Quantity3, item.QuantityDay / secworkall, (item.Quantity2 > 0) ? item.Quantity2 : 0, (item.Quantity3 > 0) ? item.Quantity3 : 0, 0, secworkall, TimeStartall, TimeEndall,"2_10");
+                    datahavequantity.Rows.Add(item.Model, item.Quantity2 + item.Quantity3, item.QuantityDay / secworkall, (item.Quantity2 > 0) ? item.Quantity2 : 0, (item.Quantity3 > 0) ? item.Quantity3 : 0, 0, secworkall, TimeStartall, TimeEndall, "2_10");
                     // Thêm dữ liệu vào bảng kế hoạch ca 1
                     datahavequantityca1.Rows.Add(item.Model, (item.Quantity2 > 0) ? item.Quantity2 : 0, (item.Quantity2 > 0) ? item.Quantity2 / 32400.0 : 0, 32400, DateTime.Now.ToString("yyyy-MM-dd") + " 12:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 22:00:00", "2_10");
                     // Thêm dữ liệu vào bảng kế hoạch ca 2
@@ -360,7 +373,7 @@ namespace PAPVN
                 foreach (var item in datarow)
                 {
                     // Thêm dữ liệu vào bảng kế hoạch cả ngày
-                    datahavequantity.Rows.Add(item.Model, item.QuantityDay, item.QuantityDay / secworkall, (item.Quantity1 > 0) ? item.Quantity1 : 0, (item.Quantity2 > 0) ? item.Quantity2 : 0, (item.Quantity3 > 0) ? item.Quantity3 : 0, secworkall, TimeStartall, TimeEndall,"3_8");
+                    datahavequantity.Rows.Add(item.Model, item.QuantityDay, item.QuantityDay / secworkall, (item.Quantity1 > 0) ? item.Quantity1 : 0, (item.Quantity2 > 0) ? item.Quantity2 : 0, (item.Quantity3 > 0) ? item.Quantity3 : 0, secworkall, TimeStartall, TimeEndall, "3_8");
                     // Thêm dữ liệu vào bảng kế hoạch ca 1
                     datahavequantityca1.Rows.Add(item.Model, (item.Quantity1 > 0) ? item.Quantity1 : 0, (item.Quantity1 > 0) ? item.Quantity1 / 25500.0 : 0, 25500, DateTime.Now.ToString("yyyy-MM-dd") + " 06:00:00", DateTime.Now.ToString("yyyy-MM-dd") + " 14:00:00", "3_8");
                     // Thêm dữ liệu vào bảng kế hoạch ca 2
@@ -380,7 +393,7 @@ namespace PAPVN
             // Đẩy dữ liệu lên server
             DBConnect dBConnect = new DBConnect();
             // Xóa kế hoạch cũ
-            dBConnect.exnonquery("TA_sp_ClearAllPlan", CommandType.StoredProcedure);
+            dBConnect.exnonquery("TA_sp_ClearAllPlan_new", CommandType.StoredProcedure, datetimeplan.ToString("yyyy-MM-dd"));
             // Đẩy kế hoạch mới
             SaveMySql(datahavequantity, datahavequantityca1, datahavequantityca2, datahavequantityca3);
             // tải lại kế hoạch mới
@@ -413,9 +426,10 @@ namespace PAPVN
         }
         private void loaddataplan()
         {
+            string dateplan =  LoadDataVisualize.GetDatePlan();
             string HTML = "";
             DBConnect dBConnect = new DBConnect();
-            DataTable dt = dBConnect.StoreFillDT("TA_sp_LoadDataPlan", CommandType.StoredProcedure);
+            DataTable dt = dBConnect.StoreFillDT("TA_sp_LoadDataPlan_new", CommandType.StoredProcedure, dateplan);
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 if (dt.Rows[i]["Model"].ToString() != "Total")
