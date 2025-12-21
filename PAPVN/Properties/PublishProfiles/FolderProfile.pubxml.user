@@ -21,16 +21,16 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/07/2025 13:58:31</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>11/21/2025 22:58:21</publishTime>
+      <publishTime>12/22/2025 01:49:54</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>11/21/2025 22:58:18</publishTime>
+      <publishTime>12/22/2025 01:49:51</publishTime>
     </File>
     <File Include="bin/App_GlobalResources.compiled">
-      <publishTime>11/21/2025 22:58:21</publishTime>
+      <publishTime>12/22/2025 01:49:54</publishTime>
     </File>
     <File Include="bin/App_GlobalResources.dll">
-      <publishTime>11/21/2025 22:58:18</publishTime>
+      <publishTime>12/22/2025 01:49:51</publishTime>
     </File>
     <File Include="bin/AspNet.ScriptManager.jQuery.dll">
       <publishTime>11/07/2025 13:58:31</publishTime>
@@ -111,10 +111,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/07/2025 13:58:32</publishTime>
     </File>
     <File Include="bin/PAPVN.dll">
-      <publishTime>11/21/2025 22:58:12</publishTime>
+      <publishTime>12/22/2025 01:49:45</publishTime>
     </File>
     <File Include="bin/PAPVN.pdb">
-      <publishTime>11/21/2025 22:58:12</publishTime>
+      <publishTime>12/22/2025 01:49:45</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>11/07/2025 13:58:31</publishTime>
@@ -291,7 +291,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/07/2025 13:58:31</publishTime>
     </File>
     <File Include="bin/vi-vn/App_GlobalResources.resources.dll">
-      <publishTime>11/21/2025 22:58:17</publishTime>
+      <publishTime>12/22/2025 01:49:50</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>11/07/2025 13:58:32</publishTime>
@@ -681,10 +681,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/07/2025 13:58:28</publishTime>
     </File>
     <File Include="Management/Management_BreakTime.aspx">
-      <publishTime>11/21/2025 22:58:21</publishTime>
+      <publishTime>12/22/2025 01:49:54</publishTime>
     </File>
     <File Include="Management/Management_logerror.aspx">
-      <publishTime>11/21/2025 22:58:21</publishTime>
+      <publishTime>12/22/2025 01:49:54</publishTime>
     </File>
     <File Include="Mycss/iconio.css">
       <publishTime>11/07/2025 13:58:28</publishTime>
@@ -6669,7 +6669,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/07/2025 13:58:30</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>11/21/2025 22:58:14</publishTime>
+      <publishTime>12/22/2025 01:49:47</publishTime>
     </File>
     <File Include="Scripts/bootstrap.bundle.js">
       <publishTime>11/07/2025 13:58:28</publishTime>
@@ -6798,43 +6798,46 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/07/2025 13:58:28</publishTime>
     </File>
     <File Include="Site.Master">
-      <publishTime>11/21/2025 22:58:21</publishTime>
+      <publishTime>12/22/2025 01:49:54</publishTime>
     </File>
     <File Include="Site.Mobile.Master">
-      <publishTime>11/21/2025 22:58:21</publishTime>
+      <publishTime>12/22/2025 01:49:54</publishTime>
     </File>
     <File Include="UI_FinalCheck/AgingHistory.aspx">
-      <publishTime>11/21/2025 22:58:21</publishTime>
+      <publishTime>12/22/2025 01:49:54</publishTime>
     </File>
     <File Include="UI_FinalCheck/AgingRealTime.aspx">
-      <publishTime>11/21/2025 22:58:21</publishTime>
+      <publishTime>12/22/2025 01:49:54</publishTime>
     </File>
     <File Include="UI_GAS/PlanGAS.aspx">
-      <publishTime>11/21/2025 22:58:21</publishTime>
+      <publishTime>12/22/2025 01:49:54</publishTime>
     </File>
     <File Include="UI_inner/Inner_RealTime.aspx">
-      <publishTime>11/21/2025 22:58:21</publishTime>
+      <publishTime>12/22/2025 01:49:54</publishTime>
+    </File>
+    <File Include="UI_Pan/PanRealTime.aspx">
+      <publishTime>12/22/2025 01:49:54</publishTime>
     </File>
     <File Include="UI_PCM/CuttingRealTimeMachine.aspx">
       <publishTime>05/19/2025 23:38:09</publishTime>
     </File>
     <File Include="UI_PCM/PCM_RealTime.aspx">
-      <publishTime>11/21/2025 22:58:21</publishTime>
+      <publishTime>12/22/2025 01:49:54</publishTime>
     </File>
     <File Include="UI_Plan/UploadPlan.aspx">
-      <publishTime>11/21/2025 22:58:21</publishTime>
+      <publishTime>12/22/2025 01:49:54</publishTime>
     </File>
     <File Include="UI_Plan/UploadPlanCa1.aspx">
-      <publishTime>11/21/2025 22:58:21</publishTime>
+      <publishTime>12/22/2025 01:49:54</publishTime>
     </File>
     <File Include="UI_Plan/UploadPlanCa2.aspx">
-      <publishTime>11/21/2025 22:58:21</publishTime>
+      <publishTime>12/22/2025 01:49:54</publishTime>
     </File>
     <File Include="UI_Plan/UploadPlanCa3.aspx">
-      <publishTime>11/21/2025 22:58:21</publishTime>
+      <publishTime>12/22/2025 01:49:54</publishTime>
     </File>
     <File Include="UI_Urethan/UrethanRealTime.aspx">
-      <publishTime>11/21/2025 22:58:21</publishTime>
+      <publishTime>12/22/2025 01:49:54</publishTime>
     </File>
     <File Include="UploadPlan.aspx">
       <publishTime>01/02/2024 09:01:48</publishTime>

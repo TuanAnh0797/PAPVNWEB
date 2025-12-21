@@ -2,10 +2,12 @@ mysqldump -u root -p --all-databases > D:\Backup\backup.sql
 
 mysqldump -u root -p --all-databases --routines --events > D:\Backup\backup.sql (cả store)
 
-mysqldump -u root -p --all-databases --routines --events --triggers --all-databases > D:\Backup\backup.sql
+mysqldump -u root -p --all-databases --routines --events --triggers > D:\Backup\backup.sql
 
 
 mysql -u root -p < backup.sql (dựng lại db)
 
 
 SHOW CREATE TRIGGER after_pan_insert;
+
+mysqldump -u root -p --all-databases --no-data --routines --events --triggers > D:\Backup\backup.sql
