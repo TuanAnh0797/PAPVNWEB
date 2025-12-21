@@ -14,19 +14,19 @@ namespace PAPVN.SignalRHub
     [HubName("GasHub")]
     public class GasHub:Hub
     {
-        private static readonly ConcurrentDictionary<string, string> ClientOptions = new ConcurrentDictionary<string, string>();
-        private static readonly Timer Timer_Urethan = new Timer(5000);
+        private static readonly ConcurrentDictionary<string, string> ClientOptionsGas = new ConcurrentDictionary<string, string>();
+        private static readonly Timer Timer_Gas = new Timer(5000);
 
         static GasHub()
         {
-            Timer_Urethan.Elapsed += async (sender, e) => await UpdateData();
-            Timer_Urethan.AutoReset = true;
-            Timer_Urethan.Start();
+            Timer_Gas.Elapsed += async (sender, e) => await UpdateData();
+            Timer_Gas.AutoReset = true;
+            Timer_Gas.Start();
         }
         // Hàm gửi dữ liệu định kỳ
         private static async Task UpdateData()
         {
-            foreach (var client in ClientOptions)
+            foreach (var client in ClientOptionsGas)
             {
                 string connectionId = client.Key;
                 string option = client.Value;
@@ -35,7 +35,7 @@ namespace PAPVN.SignalRHub
         }
         public override Task OnConnected()
         {
-            ClientOptions.TryAdd(Context.ConnectionId, "ALL");
+            ClientOptionsGas.TryAdd(Context.ConnectionId, "ALL");
             // Gửi dữ liệu ban đầu ngay khi kết nối
             SendDataToClient(Context.ConnectionId, "ALL");
             return base.OnConnected();
@@ -43,7 +43,7 @@ namespace PAPVN.SignalRHub
         public override Task OnDisconnected(bool stopCalled)
         {
             // Xóa option khi client ngắt kết nối
-            ClientOptions.TryRemove(Context.ConnectionId, out _);
+            ClientOptionsGas.TryRemove(Context.ConnectionId, out _);
             return base.OnDisconnected(stopCalled);
         }
 
@@ -55,19 +55,19 @@ namespace PAPVN.SignalRHub
                 string date = optionParts[0].Length < 8 ? "" : optionParts[0];
                 string shift = optionParts.Length > 1 ? optionParts[1] : "All";
                 string model = optionParts.Length > 1 ? optionParts[2] : "All Model";
-                DataRealTime dataUrethan = new DataRealTime();
-                dataUrethan.QuantityPerTimechartCanvas = LoadDataVisualize.LineChartQuantityPerTimeObject(model, shift, "TA_sp_LoadDataForLineChartPlanGasByTime_new",date);
-                dataUrethan.quantityByModel = LoadDataVisualize.QuantityByModel(shift, "TA_sp_LoadDataForBarChartPlangas_unique_new", date);
+                DataRealTime dataGas = new DataRealTime();
+                dataGas.QuantityPerTimechartCanvas = LoadDataVisualize.LineChartQuantityPerTimeObject(model, shift, "TA_sp_LoadDataForLineChartPlanGasByTime_new",date);
+                dataGas.quantityByModel = LoadDataVisualize.QuantityByModel(shift, "TA_sp_LoadDataForBarChartPlangas_unique_new", date);
                 //dataUrethan.quantityByModelMonitor = LoadDataVisualize.QuantityByModelMonitor("All", "TA_sp_LoadDataForBarChartPlanurethan_uniqueMonitor");
-                dataUrethan.quantityByModelgroup = LoadDataVisualize.QuantityByGroupModel(shift, "TA_sp_LoadDataForBarChartPlangas_unique_new", date);
-                dataUrethan.quantityPerHour = LoadDataVisualize.LineChartQuantityPerHour(model, shift, "TA_sp_LoadDataForLineChartPlanGasByHour_new", date);
+                dataGas.quantityByModelgroup = LoadDataVisualize.QuantityByGroupModel(shift, "TA_sp_LoadDataForBarChartPlangas_unique_new", date);
+                dataGas.quantityPerHour = LoadDataVisualize.LineChartQuantityPerHour(model, shift, "TA_sp_LoadDataForLineChartPlanGasByHour_new", date);
                 // dataUrethan.QuantityPerTimechartCanvas = LoadDataVisualize.LineChartQuantityPerTimeObject(Optiontable, "All", "Test");
                 //dataUrethan.quantityByModel = LoadDataVisualize.QuantityByModel("All", "Test");
                 //dataUrethan.quantityByModelMonitor = LoadDataVisualize.QuantityByModelMonitor("All", "Test");
                 // dataUrethan.quantityByModelgroup = LoadDataVisualize.QuantityByGroupModel("All", "Test");
                 //dataUrethan.quantityPerHour = LoadDataVisualize.LineChartQuantityPerHour(Optiontable, "All", "Test");
-                var hub = GlobalHost.ConnectionManager.GetHubContext<UrethanHub>();
-                hub.Clients.Client(connectionId).updateData(dataUrethan);
+                var hub = GlobalHost.ConnectionManager.GetHubContext<GasHub>();
+                hub.Clients.Client(connectionId).updateData(dataGas);
             }
             catch (Exception ex)
             {
@@ -77,9 +77,9 @@ namespace PAPVN.SignalRHub
 
         public void UpdateFilter(string date, string model, string shift)
         {
-            if (ClientOptions.ContainsKey(Context.ConnectionId))
+            if (ClientOptionsGas.ContainsKey(Context.ConnectionId))
             {
-                ClientOptions[Context.ConnectionId] = date + ";" + shift + ";" + model;
+                ClientOptionsGas[Context.ConnectionId] = date + ";" + shift + ";" + model;
             }
         }
     }

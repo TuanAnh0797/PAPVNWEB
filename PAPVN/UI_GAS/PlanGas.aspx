@@ -954,7 +954,7 @@
          var initmodel = false;
 
          // Xử lý khi nhận dữ liệu mới
-         hub.client.updateData = function (data) {
+         hub.client.UpdateData = function (data) {
              if (!isUpdating) return;
 
              UpdateDashboard(data.QuantityPerTimechartCanvas);

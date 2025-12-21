@@ -14,19 +14,19 @@ namespace PAPVN.SignalRHub
     [HubName("PanHub")]
     public class PanHub:Hub
     {
-        private static readonly ConcurrentDictionary<string, string> ClientOptions = new ConcurrentDictionary<string, string>();
-        private static readonly Timer Timer_Urethan = new Timer(5000);
+        private static readonly ConcurrentDictionary<string, string> ClientOptionsPan = new ConcurrentDictionary<string, string>();
+        private static readonly Timer Timer_Pan = new Timer(5000);
 
         static PanHub()
         {
-            Timer_Urethan.Elapsed += async (sender, e) => await UpdateData();
-            Timer_Urethan.AutoReset = true;
-            Timer_Urethan.Start();
+            Timer_Pan.Elapsed += async (sender, e) => await UpdateData();
+            Timer_Pan.AutoReset = true;
+            Timer_Pan.Start();
         }
         // Hàm gửi dữ liệu định kỳ
         private static async Task UpdateData()
         {
-            foreach (var client in ClientOptions)
+            foreach (var client in ClientOptionsPan)
             {
                 string connectionId = client.Key;
                 string option = client.Value;
@@ -35,7 +35,7 @@ namespace PAPVN.SignalRHub
         }
         public override Task OnConnected()
         {
-            ClientOptions.TryAdd(Context.ConnectionId, "ALL");
+            ClientOptionsPan.TryAdd(Context.ConnectionId, "ALL");
             // Gửi dữ liệu ban đầu ngay khi kết nối
             SendDataToClient(Context.ConnectionId, "ALL");
             return base.OnConnected();
@@ -43,7 +43,7 @@ namespace PAPVN.SignalRHub
         public override Task OnDisconnected(bool stopCalled)
         {
             // Xóa option khi client ngắt kết nối
-            ClientOptions.TryRemove(Context.ConnectionId, out _);
+            ClientOptionsPan.TryRemove(Context.ConnectionId, out _);
             return base.OnDisconnected(stopCalled);
         }
 
@@ -67,7 +67,7 @@ namespace PAPVN.SignalRHub
                 //dataUrethan.quantityByModelMonitor = LoadDataVisualize.QuantityByModelMonitor("All", "Test");
                 // dataUrethan.quantityByModelgroup = LoadDataVisualize.QuantityByGroupModel("All", "Test");
                 //dataUrethan.quantityPerHour = LoadDataVisualize.LineChartQuantityPerHour(Optiontable, "All", "Test");
-                var hub = GlobalHost.ConnectionManager.GetHubContext<UrethanHub>();
+                var hub = GlobalHost.ConnectionManager.GetHubContext<PanHub>();
                 hub.Clients.Client(connectionId).updateData(dataUrethan);
             }
             catch (Exception ex)
@@ -78,9 +78,9 @@ namespace PAPVN.SignalRHub
 
         public void UpdateFilter(string date, string model, string shift)
         {
-            if (ClientOptions.ContainsKey(Context.ConnectionId))
+            if (ClientOptionsPan.ContainsKey(Context.ConnectionId))
             {
-                ClientOptions[Context.ConnectionId] = date + ";" + shift + ";" + model;
+                ClientOptionsPan[Context.ConnectionId] = date + ";" + shift + ";" + model;
             }
         }
     }
