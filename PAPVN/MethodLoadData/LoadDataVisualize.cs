@@ -496,8 +496,9 @@ namespace PAPVN.MethodLoadData
         {
             try
             {
+                string dateplan = GetDatePlan();
                 DBConnect dBConnect = new DBConnect();
-                DataTable dt = dBConnect.StoreFillDT("LoadDataForChartFinalCheck", CommandType.StoredProcedure, 2);
+                DataTable dt = dBConnect.StoreFillDT("LoadDataForChartFinalCheck", CommandType.StoredProcedure, 2, dateplan);
                 if (dt.Rows[0]["VPOK"].ToString() != "")
                 {
                     var data = new
@@ -653,7 +654,10 @@ namespace PAPVN.MethodLoadData
         public static DataSet LoadDataForTableHistory(string mode)
         {
             DBConnect dBConnect = new DBConnect();
-            DataSet dt = dBConnect.StoreFillDS("LoadDataForTableHistoryFinalCheckNew", CommandType.StoredProcedure, mode);
+
+            string dateplan = GetDatePlan();
+
+            DataSet dt = dBConnect.StoreFillDS("LoadDataForTableHistoryFinalCheckNew", CommandType.StoredProcedure, mode, dateplan);
             return dt;
         }
         //
@@ -748,7 +752,10 @@ namespace PAPVN.MethodLoadData
                     TotalPlan = Int32.Parse(ds1.Tables[0].Rows[0]["QuantityDay"].ToString());
                     TimeStartShift = DateTime.Parse(ds.Tables[1].Rows[0]["TimeStart"].ToString());
                     DateTime TimeEndShift = DateTime.Parse(ds1.Tables[1].Rows[0]["TimeEnd"].ToString());
-                    if (TimeEndShift < DateTime.Now)
+
+                    
+
+                    if (TimeEndShift < DateTime.Now && date == "")
                     {
                         int TotalPlan1 = 0;
                         var data = new
@@ -1026,7 +1033,7 @@ namespace PAPVN.MethodLoadData
                     DateTime TimeStartPlan = DateTime.Parse(dt2.Rows[0]["TimeStart"].ToString());
                     DateTime TimeEndPlan = DateTime.Parse(dt2.Rows[0]["TimeEnd"].ToString());
 
-                    if (TimeEndPlan < datetimenow)
+                    if (TimeEndPlan < datetimenow && date == "")
                     {
 
                         QuantityByModel quantityByModel = new QuantityByModel();
@@ -1047,6 +1054,11 @@ namespace PAPVN.MethodLoadData
                             DateTime TimeStart = DateTime.Parse(dt.Rows[i]["TimeStart"].ToString());
                             DateTime TimeEnd = DateTime.Parse(dt.Rows[i]["TimeEnd"].ToString());
                             TimeSpan subtimenow = datetimenow - TimeStart;
+                            if (datetimenow > TimeEnd)
+                            {
+                                subtimenow = TimeEnd - TimeStart;
+                            }
+
                             TimeSpan subtimemaster = TimeEnd - TimeStart;
                             if (subtimenow.TotalSeconds <= 0)
                             {
@@ -1566,7 +1578,7 @@ namespace PAPVN.MethodLoadData
                     TotalPlan = Int32.Parse(ds1.Tables[0].Rows[0]["QuantityDay"].ToString());
                     TimeStartShift = DateTime.Parse(ds.Tables[1].Rows[0]["TimeStart"].ToString());
                     DateTime TimeEndShift = DateTime.Parse(ds1.Tables[1].Rows[0]["TimeEnd"].ToString());
-                    if (TimeEndShift < DateTime.Now)
+                    if (TimeEndShift < DateTime.Now && date == "")
                     {
                         int TotalPlan1 = 0;
 
@@ -1750,7 +1762,7 @@ namespace PAPVN.MethodLoadData
 
                     DateTime TimeEndPlan = DateTime.Parse(dt2.Rows[0]["TimeEnd"].ToString());
 
-                    if (TimeEndPlan < datetimenow)
+                    if (TimeEndPlan < datetimenow && date == "")
                     {
 
                         QuantityByModel quantityByModel = new QuantityByModel();
@@ -1771,6 +1783,10 @@ namespace PAPVN.MethodLoadData
                             DateTime TimeStart = DateTime.Parse(dt.Rows[i]["TimeStart"].ToString());
                             DateTime TimeEnd = DateTime.Parse(dt.Rows[i]["TimeEnd"].ToString());
                             TimeSpan subtimenow = datetimenow - TimeStart;
+                            if (datetimenow > TimeEnd)
+                            {
+                                subtimenow = TimeEnd - TimeStart;
+                            }
                             TimeSpan subtimemaster = TimeEnd - TimeStart;
                             if (subtimenow.TotalSeconds <= 0)
                             {

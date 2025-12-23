@@ -790,7 +790,7 @@
          if (maxdiff > 50) {
              maxy1 = maxdiff;
          }
-         if (miny1 < -150) {
+         if (mindiff < -150) {
              miny1 = mindiff;
          }
 
@@ -869,6 +869,8 @@
 
          var mindiff = Math.min(...data.datadiff);
 
+         //debugger;
+
          var maxy1 = 50;
          var miny1 = -150;
 
@@ -876,7 +878,7 @@
          if (maxdiff > 50) {
              maxy1 = maxdiff;
          }
-         if (miny1 < -150) {
+         if (mindiff < -150) {
              miny1 = mindiff;
          }
 
@@ -937,7 +939,7 @@
 
          //Date picker
          $('#dateselect').datetimepicker({
-             format: 'DD-MM-YYYY'
+             format: 'YYYY-MM-DD'
          });
 
          // Kiểm tra SignalR

@@ -790,7 +790,7 @@
             if (maxdiff > 50) {
                 maxy1 = maxdiff;
             }
-            if (miny1 < -150) {
+            if (mindiff < -150) {
                 miny1 = mindiff;
             }
 
@@ -937,7 +937,7 @@
 
             //Date picker
             $('#dateselect').datetimepicker({
-                format: 'DD-MM-YYYY'
+                format: 'YYYY-MM-DD'
             });
 
             // Kiểm tra SignalR
