@@ -1,7 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Inner_RealTime.aspx.cs" Inherits="PAPVN.UI_inner.Inner_RealTime" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="BanDayRealTIme.aspx.cs" Inherits="PAPVN.UI_BanDay.BanDayRealTIme" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
     <style>
         .oee-card {
             text-align: center;
@@ -11,6 +9,7 @@
             font-weight: bold;
             transition: transform 0.3s ease;
         }
+
             .oee-card:hover {
                 transform: scale(1.05);
             }
@@ -31,16 +30,16 @@
 
         <div class="form-group row mb-0 justify-content-end align-items-center">
             <h1 class="text-right mr-4"
-                style=" font-weight: 700; color: #0d47a1; text-transform: uppercase; letter-spacing: 2px; text-shadow: 1px 1px 3px rgba(0,0,0,0.1);">DASHBOARD SẢN LƯỢNG CÔNG ĐOẠN Linner
+                style="font-weight: 700; color: #0d47a1; text-transform: uppercase; letter-spacing: 2px; text-shadow: 1px 1px 3px rgba(0,0,0,0.1);">DASHBOARD SẢN LƯỢNG CÔNG ĐOẠN Bắn Dây
             </h1>
-            <div class="input-group date col-1" id="dateselect" data-target-input="nearest"  style="height:39px">
+            <div class="input-group date col-1" id="dateselect" data-target-input="nearest" style="height: 39px">
                 <input type="text" class="form-control datetimepicker-input" data-target="#dateselect" />
                 <div class="input-group-append" data-target="#dateselect" data-toggle="datetimepicker">
-                    <div class="input-group-text m-0 p-1 justify-content-center" style="height:38px; width:40px"><i class="fa fa-calendar"></i></div>
+                    <div class="input-group-text m-0 p-1 justify-content-center" style="height: 38px; width: 40px"><i class="fa fa-calendar"></i></div>
                 </div>
             </div>
             <select id="cb_shift" class="form-control col-1 mr-2">
-                <option value ="" >---Ca---</option>
+                <option value="">---Ca---</option>
                 <option value="Ca 1">Ca 1</option>
                 <option value="Ca 2">Ca 2</option>
                 <option value="Ca 3">Ca 3</option>
@@ -105,13 +104,13 @@
             </div>
 
             <%-- <div class="card m-0 mb-2 col-sm-4 p-0 mr-2" style="background-color: white">
-                <h4 class="card-header bg-secondary text-black text-center p-0" style="font-weight: 600">
-                    <asp:Literal runat="server" Text="Model theo dõi đặc biệt" />
-                </h4>
-                <div class="chart-container">
-                    <canvas id="quantitybymodelmonitor" style="min-height: 250px; height: 100%"></canvas>
-                </div>
-            </div>--%>
+            <h4 class="card-header bg-secondary text-black text-center p-0" style="font-weight: 600">
+                <asp:Literal runat="server" Text="Model theo dõi đặc biệt" />
+            </h4>
+            <div class="chart-container">
+                <canvas id="quantitybymodelmonitor" style="min-height: 250px; height: 100%"></canvas>
+            </div>
+        </div>--%>
         </div>
         <div class="row">
 
@@ -947,7 +946,7 @@
             }
             // Kết nối tới SignalR Hub
             //$.connection.hub.qs = { page: "Urethan" };
-            var hub = $.connection.InnerLinerHub;
+            var hub = $.connection.BanDayHub;
             var isUpdating = true;
             var interactionTimeout;
             var isConnected = false;     // <--- thêm biến này
@@ -1018,3 +1017,4 @@
 
     </script>
 </asp:Content>
+

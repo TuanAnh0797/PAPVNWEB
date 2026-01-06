@@ -1,5 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Inner_RealTime.aspx.cs" Inherits="PAPVN.UI_inner.Inner_RealTime" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="MainLineRealTime.aspx.cs" Inherits="PAPVN.UI_MainLine.MainLineRealTime" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <style>
@@ -947,7 +946,7 @@
             }
             // Kết nối tới SignalR Hub
             //$.connection.hub.qs = { page: "Urethan" };
-            var hub = $.connection.InnerLinerHub;
+            var hub = $.connection.MainLineHub;
             var isUpdating = true;
             var interactionTimeout;
             var isConnected = false;     // <--- thêm biến này

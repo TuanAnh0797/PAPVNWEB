@@ -274,7 +274,9 @@
     <Content Include="Image\wire-connection.png" />
     <Content Include="Management\Management_logerror.aspx" />
     <Content Include="Management\Management_BreakTime.aspx" />
+    <Content Include="UI_BanDay\BanDayRealTIme.aspx" />
     <Content Include="UI_inner\Inner_RealTime.aspx" />
+    <Content Include="UI_MainLine\MainLineRealTime.aspx" />
     <Content Include="UI_Pan\PanRealTime.aspx" />
     <Content Include="UI_Urethan\UrethanRealTime.aspx" />
     <Content Include="z_demo\OEEDemo.html" />
@@ -2414,18 +2416,34 @@
     <Compile Include="Model\Common\StatusMachine.cs" />
     <Compile Include="Model\Common\StatusMachineDetail.cs" />
     <Compile Include="Service\PCM_DashBoard_Service.cs" />
+    <Compile Include="SignalRHub\BanDayHub.cs" />
     <Compile Include="SignalRHub\GasHub.cs" />
     <Compile Include="SignalRHub\InnerLinerHub.cs" />
+    <Compile Include="SignalRHub\MainLineHub.cs" />
     <Compile Include="SignalRHub\PanHub.cs" />
     <Compile Include="SignalRHub\PCMHub.cs" />
     <Compile Include="SignalRHub\UrethanHub.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="UI_BanDay\BanDayRealTIme.aspx.cs">
+      <DependentUpon>BanDayRealTIme.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI_BanDay\BanDayRealTIme.aspx.designer.cs">
+      <DependentUpon>BanDayRealTIme.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UI_inner\Inner_RealTime.aspx.cs">
       <DependentUpon>Inner_RealTime.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UI_inner\Inner_RealTime.aspx.designer.cs">
       <DependentUpon>Inner_RealTime.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI_MainLine\MainLineRealTime.aspx.cs">
+      <DependentUpon>MainLineRealTime.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI_MainLine\MainLineRealTime.aspx.designer.cs">
+      <DependentUpon>MainLineRealTime.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI_Pan\PanRealTime.aspx.cs">
       <DependentUpon>PanRealTime.aspx</DependentUpon>

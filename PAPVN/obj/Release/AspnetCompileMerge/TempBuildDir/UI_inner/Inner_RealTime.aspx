@@ -1,16 +1,16 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Inner_RealTime.aspx.cs" Inherits="PAPVN.UI_inner.Inner_RealTime" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
     <style>
         .oee-card {
             text-align: center;
-            padding: 20px;
+            padding: 10px;
             border-radius: 10px;
             color: white;
             font-weight: bold;
             transition: transform 0.3s ease;
         }
-
             .oee-card:hover {
                 transform: scale(1.05);
             }
@@ -25,658 +25,996 @@
                 font-size: 2rem;
                 font-weight: bold;
             }
-        /**/
-
-
-        .status-badge {
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .status-active {
-            background-color: #d4edda;
-            color: #155724;
-        }
-
-        .status-completed {
-            background-color: #cce5ff;
-            color: #004085;
-        }
-
-        .status-delayed {
-            background-color: #f8d7da;
-            color: #721c24;
-        }
-
-
-
-        .station-card {
-            background: white;
-            border-radius: 15px;
-            padding: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border-left: 5px solid #667eea;
-            margin-bottom: 5px;
-        }
-
-            .station-card:hover {
-                transform: translateY(-3px);
-                box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
-            }
-
-            .station-card.active {
-                border-left-color: #28a745;
-                background: linear-gradient(135deg, #d4edda 0%, #ffffff 100%);
-            }
-
-            .station-card.idle {
-                border-left-color: #ffc107;
-                background: linear-gradient(135deg, #fff3cd 0%, #ffffff 100%);
-            }
-
-            .station-card.maintenance {
-                border-left-color: #dc3545;
-                background: linear-gradient(135deg, #f8d7da 0%, #ffffff 100%);
-            }
-
-        .station-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .station-status {
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .station-info {
-            margin-top: 15px;
-        }
-
-        .station-metric {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 2px 0;
-            border-bottom: 1px solid #eee;
-        }
-
-            .station-metric:last-child {
-                border-bottom: none;
-            }
-
-        .metric-label {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .metric-value {
-            font-weight: bold;
-            color: #333;
-        }
-
-        .current-task {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 10px;
-            margin-top: 5px;
-        }
-
-        .task-serial {
-            font-family: 'Courier New', monospace;
-            background: #e9ecef;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-        }
-
-        .filter-section {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-
-        .worker-avatar {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 0.8rem;
-            margin-right: 5px;
-        }
     </style>
+    <div class="m-2">
 
 
-    <%-- Row 1 --%>
-    <div class="ml-1 mr-1 bg-info">
-        <h1 class="mb-0 ml-4" style="font-weight: 600; color: white">Inner & Linner DASH BOARD</h1>
-    </div>
-    <%-- Row 2 --%>
-    <div class=" row p-0 ml-2 mr-2">
-        <div class="oee-card bg-blue col m-2">
-            <h2 style="font-weight: 600">Plan Quantity</h2>
-            <div class="value" id="PlanQuantity"></div>
-            <%-- <small>Thời gian hoạt động</small>--%>
-        </div>
-        <div class="oee-card bg-success col m-2">
-            <h2 style="font-weight: 600">OK Quantity</h2>
-            <div class="value" id="OkQuantity"></div>
-            <%-- <small>Hiệu suất sản xuất</small>--%>
-        </div>
-        <div class="oee-card bg-danger col m-2">
-            <h2 style="font-weight: 600">NG Quantity</h2>
-            <div class="value" id="NgQuantity"></div>
-            <%-- <small>Chất lượng sản phẩm</small>--%>
-        </div>
-        <div class="oee-card bg-warning col m-2">
-            <h2 style="font-weight: 600; color: white">Remaining Quantity</h2>
-            <div style="color: white" class="value" id="RemainQuantity"></div>
-            <%-- <small>Hiệu quả tổng thể</small>--%>
-        </div>
-    </div>
-    <!-- Station Cards -->
-
-    <div class="row m-2">
-        <div class="col card shadow p-0 mr-2 mb-0">
-            <div id="stationCards" class=" row p-2">
-            </div>
-        </div>
-
-
-        <div class="col card shadow p-0 m-0">
-            <div class="card-header p-2 bg-gradient-gray text-center">
-                <h5 class="m-0">Output graph over time</h5>
-            </div>
-            <div class="card-body p-2">
-                <div class="chart-container">
-                    <canvas id="chart_quantitybytime" style="min-height: 500px; height: 100%; max-height:1000px ";></canvas>
+        <div class="form-group row mb-0 justify-content-end align-items-center">
+            <h1 class="text-right mr-4"
+                style=" font-weight: 700; color: #0d47a1; text-transform: uppercase; letter-spacing: 2px; text-shadow: 1px 1px 3px rgba(0,0,0,0.1);">DASHBOARD SẢN LƯỢNG CÔNG ĐOẠN Linner
+            </h1>
+            <div class="input-group date col-1" id="dateselect" data-target-input="nearest"  style="height:39px">
+                <input type="text" class="form-control datetimepicker-input" data-target="#dateselect" />
+                <div class="input-group-append" data-target="#dateselect" data-toggle="datetimepicker">
+                    <div class="input-group-text m-0 p-1 justify-content-center" style="height:38px; width:40px"><i class="fa fa-calendar"></i></div>
                 </div>
+            </div>
+            <select id="cb_shift" class="form-control col-1 mr-2">
+                <option value ="" >---Ca---</option>
+                <option value="Ca 1">Ca 1</option>
+                <option value="Ca 2">Ca 2</option>
+                <option value="Ca 3">Ca 3</option>
+            </select>
+            <select id="cb_model" class="form-control col-1">
+                <option value="All Model">---Model---</option>
+            </select>
 
+        </div>
+        <div class=" row p-0 ml-2 mr-2">
+
+            <div class="oee-card bg-blue col m-2">
+                <h3 class="mb-0" style="font-weight: 600">Plan</h3>
+                <div class="value" id="plan">0</div>
+                <%-- <small>Thời gian hoạt động</small>--%>
+            </div>
+            <div class="oee-card bg-info col m-2">
+                <h3 class="mb-0" style="font-weight: 600">Plan time</h3>
+                <div class="value" id="plantime">0</div>
+                <%-- <small>Hiệu suất sản xuất</small>--%>
+            </div>
+            <div class="oee-card bg-success col m-2">
+                <h3 class="mb-0" style="font-weight: 600">Actual</h3>
+                <div class="value" id="actual">0</div>
+                <%-- <small>Chất lượng sản phẩm</small>--%>
+            </div>
+            <div class="oee-card bg-danger col m-2" id="diff_bag">
+                <h3 class="mb-0" style="font-weight: 600; color: white">Diff</h3>
+                <div style="color: white" class="value" id="diff">0</div>
+                <%-- <small>Hiệu quả tổng thể</small>--%>
+            </div>
+            <div class="oee-card bg-warning col m-2">
+                <h3 class="mb-0" style="font-weight: 600; color: white">Remain</h3>
+                <div style="color: white" class="value" id="remain">0</div>
+                <%-- <small>Hiệu quả tổng thể</small>--%>
             </div>
         </div>
-    </div>
-    <div class="card shadow p-0 mr-2 ml-2">
-        <div class="card-header p-2 bg-gradient-gray text-center">
-            <h5 class="m-0">Evaluation table</h5>
+
+
+
+
+        <div class="row">
+
+
+
+            <div class="card ml-2 mr-2 mb-2 col p-0" style="background-color: white">
+                <h4 class="card-header bg-secondary text-black text-center p-0" style="font-weight: 600">
+                    <asp:Literal runat="server" Text="Sản lượng theo phút" />
+                </h4>
+                <div class="chart-container">
+                    <canvas id="QuantityPerTimechart" style="min-height: 400px; height: 100%; max-height: 500px"></canvas>
+                </div>
+            </div>
+
+            <div class="card m-0 mb-2 col p-0 mr-2" style="background-color: white">
+                <h4 class="card-header bg-secondary text-black text-center p-0" style="font-weight: 600">
+                    <asp:Literal runat="server" Text="Sản lượng theo giờ" />
+                </h4>
+                <div class="chart-container">
+                    <canvas id="QuantityPerHourchart" style="min-height: 400px; height: 100%; max-height: 500px"></canvas>
+                </div>
+            </div>
+
+            <%-- <div class="card m-0 mb-2 col-sm-4 p-0 mr-2" style="background-color: white">
+                <h4 class="card-header bg-secondary text-black text-center p-0" style="font-weight: 600">
+                    <asp:Literal runat="server" Text="Model theo dõi đặc biệt" />
+                </h4>
+                <div class="chart-container">
+                    <canvas id="quantitybymodelmonitor" style="min-height: 250px; height: 100%"></canvas>
+                </div>
+            </div>--%>
         </div>
-        <div class="card-body p-1">
-            <table style="padding-left: 5px; padding-right: 5px; padding-bottom: 10px; padding-top: 10px" id="dataTable" class="table table-striped table-bordered text-center">
-                <thead style="background-color: #b2bac2; color: black">
-                    <tr class="p-0">
-                        <th class="p-1">Name </th>
-                        <th class="p-1">EmpID</th>
-                        <th class="p-1">Dep.</th>
-                        <th class="p-1">Main Skill</th>
-                        <th class="p-1">Score</th>
-                        <th class="p-1">Skill 1</th>
-                        <th class="p-1">Score 1</th>
-                        <th class="p-1">Skill 2</th>
-                        <th class="p-1">Score 2</th>
-                        <th class="p-1">Skill 3</th>
-                        <th class="p-1">Score 3</th>
-                        <th class="p-1">Total Score</th>
-                        <th class="p-1">Evaluate</th>
-                        <th class="p-1">Evaluate</th>
-                        <th class="p-1">Need Traning</th>
+        <div class="row">
 
-                    </tr>
-                </thead>
-                <tbody id="tableBody" class="p-0" style="font-size: 14px">
-                    <tr class="p-0 bg-danger">
-                        <td class="p-1">Nguyen Van A</td>
-                        <td class="p-1">E001</td>
-                        <td class="p-1">Assembly</td>
-                        <td class="p-1">Lắp ráp linner C33</td>
-                        <td class="p-1">2</td>
-                        <td class="p-1">Lắp ráp linner GARD</td>
-                        <td class="p-1">1</td>
-                        <td class="p-1">Lắp ráp linner BV</td>
-                        <td class="p-1">3</td>
-                        <td class="p-1">Lắp ráp linner BL</td>
-                        <td class="p-1">2</td>
-                        <td class="p-1">8</td>
-                        <td class="p-1">Below Average</td>
-                        <td class="p-1">Needs Improvement</td>
-                        <td class="p-1">YES</td>
-                    </tr>
+            <div class="card m-0 mb-2 col p-0 mr-2 ml-2" style="background-color: white">
+                <h4 class="card-header bg-secondary text-black text-center p-0" style="font-weight: 600">
+                    <asp:Literal runat="server" Text="Sản lượng theo Model" />
+                </h4>
+                <div class="chart-container">
+                    <canvas id="quantitybymodel" style="min-height: 400px; height: 100%; max-height: 500px"></canvas>
+                </div>
+            </div>
 
-                    <tr class="p-0 ">
-                        <td class="p-1">Tran Thi B</td>
-                        <td class="p-1">E002</td>
-                        <td class="p-1">Assembly</td>
-                        <td class="p-1">Lắp ráp linner GARD</td>
-                        <td class="p-1">4</td>
-                        <td class="p-1">Lắp ráp linner BL</td>
-                        <td class="p-1">3</td>
-                        <td class="p-1">Lắp ráp linner C37</td>
-                        <td class="p-1">2</td>
-                        <td class="p-1">Lắp ráp linner C33</td>
-                        <td class="p-1">3</td>
-                        <td class="p-1">12</td>
-                        <td class="p-1">Good</td>
-                        <td class="p-1">Satisfactory</td>
-                        <td class="p-1">NO</td>
-                    </tr>
-
-                    <tr class="p-0  bg-danger">
-                        <td class="p-1">Le Van C</td>
-                        <td class="p-1">E003</td>
-                        <td class="p-1">Assembly</td>
-                        <td class="p-1">Lắp ráp linner BV</td>
-                        <td class="p-1">1</td>
-                        <td class="p-1">Lắp ráp linner GARD</td>
-                        <td class="p-1">2</td>
-                        <td class="p-1">Lắp ráp linner C37</td>
-                        <td class="p-1">2</td>
-                        <td class="p-1">Lắp ráp linner BL</td>
-                        <td class="p-1">1</td>
-                        <td class="p-1">6</td>
-                        <td class="p-1">Poor</td>
-                        <td class="p-1">Needs Training</td>
-                        <td class="p-1">YES</td>
-                    </tr>
-
-                    <tr class="p-0">
-                        <td class="p-1">Pham Thi D</td>
-                        <td class="p-1">E004</td>
-                        <td class="p-1">Assembly</td>
-                        <td class="p-1">Lắp ráp linner BL</td>
-                        <td class="p-1">5</td>
-                        <td class="p-1">Lắp ráp linner C37</td>
-                        <td class="p-1">4</td>
-                        <td class="p-1">Lắp ráp linner BV</td>
-                        <td class="p-1">3</td>
-                        <td class="p-1">Lắp ráp linner C33</td>
-                        <td class="p-1">5</td>
-                        <td class="p-1">17</td>
-                        <td class="p-1">Excellent</td>
-                        <td class="p-1">Outstanding</td>
-                        <td class="p-1">NO</td>
-                    </tr>
-
-                    <tr class="p-0">
-                        <td class="p-1">Do Van E</td>
-                        <td class="p-1">E005</td>
-                        <td class="p-1">Assembly</td>
-                        <td class="p-1">Lắp ráp linner C37</td>
-                        <td class="p-1">3</td>
-                        <td class="p-1">Lắp ráp linner C33</td>
-                        <td class="p-1">2</td>
-                        <td class="p-1">Lắp ráp linner GARD</td>
-                        <td class="p-1">3</td>
-                        <td class="p-1">Lắp ráp linner BV</td>
-                        <td class="p-1">2</td>
-                        <td class="p-1">10</td>
-                        <td class="p-1">Average</td>
-                        <td class="p-1">Acceptable</td>
-                        <td class="p-1">NO</td>
-                    </tr>
-
-                </tbody>
-            </table>
+            <div class="card m-0 mb-2 col p-0 mr-2" style="background-color: white">
+                <h4 class="card-header bg-secondary text-black text-center p-0" style="font-weight: 600">
+                    <asp:Literal runat="server" Text="Sản lượng theo nhóm Model" />
+                </h4>
+                <div class="chart-container">
+                    <canvas id="quantitybygroupmodel" style="min-height: 400px; height: 100%; max-height: 500px"></canvas>
+                </div>
+            </div>
 
         </div>
-    </div>
 
+    </div>
     <script>
-        // Sample data - replace with your actual data source
-        const productionData = [
-            {
-                id: 1,
-                time: '2024-06-15 08:30:00',
-                station: 'A1',
-                model: 'Model-X1',
-                serial: 'SN001234',
-                operationTime: 245,
-                worker1: 'Nguyễn Văn A',
-                worker2: 'Trần Thị B',
-                status: 'completed'
+
+
+
+
+        //
+        var DataQuantityPerTimechart = {
+            labels: [],
+            datasets: [
+                {
+                    type: 'line',
+                    yAxisID: 'y-axis-1',
+                    label: 'Plan',
+                    borderColor: 'rgb(75, 192, 192)',
+                    data: [],
+                    fill: false,
+                    //tension: 0, // làm line đỡ mượt
+                    borderWidth: 1,
+                    pointRadius: 1, //
+                },
+                {
+                    type: 'line',
+                    yAxisID: 'y-axis-1',
+                    label: 'Actual',
+                    borderColor: '#b38600',
+                    data: [],
+                    fill: false,
+                    //tension: 0, // làm line đỡ mượt
+                    borderWidth: 1,
+                    pointRadius: 1, //
+                },
+                {
+                    type: 'bar',
+                    label: 'Diff',
+                    backgroundColor: function (context) {
+                        var value = context.dataset.data[context.dataIndex];
+                        return value < 0 ? 'red' : 'green';
+                    },
+                    yAxisID: 'y-axis-2',
+                    order: 1,
+                    data: []
+                },
+            ]
+        };
+        var QuantityPerTimeChartOption =
+        {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                //xAxes: [{
+                //    type: 'linear',
+                //}],
+                x: {
+                    ticks: {
+                        fontSize: 15,
+                        fontColor: 'black',
+                        fontStyle: 'bold',
+                    },
+                    type: 'linear', // Sử dụng linear scale cho trục x
+                    position: 'bottom',
+                },
+                yAxes: [{
+                    beginAtZero: true,
+                    id: 'y-axis-1', // ID của trục y thứ nhất
+                    type: 'linear',
+                    position: 'left', // Vị trí của trục y thứ nhất
+                    ticks: {
+                        fontSize: 15,
+                        beginAtZero: true,
+                        fontColor: 'black',
+                        fontStyle: 'bold',
+                        //max: 3000, // Đặt giá trị tối đa của trục y là 100
+                        //min: 0,   // (Tùy chọn) Đặt giá trị tối thiểu nếu cần
+                        //stepSize: 300 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
+                    },
+                },
+                {
+                    id: 'y-axis-2', // ID của trục y thứ hai
+                    type: 'linear',
+                    position: 'right', // Vị trí của trục y thứ hai
+                    ticks: {
+                        fontSize: 15,
+                        beginAtZero: true,
+                        fontColor: 'black',
+                        fontStyle: 'bold',
+                        //max: 300, // Đặt giá trị tối đa của trục y là 100
+                        // min: -300,   // (Tùy chọn) Đặt giá trị tối thiểu nếu cần
+                        //stepSize: 300 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
+                    },
+                    gridLines: {
+                        display: false
+                    },
+                }]
             },
-            {
-                id: 2,
-                time: '2024-06-15 09:15:00',
-                station: 'A2',
-                model: 'Model-X2',
-                serial: 'SN001235',
-                operationTime: 320,
-                worker1: 'Lê Văn C',
-                worker2: 'Phạm Thị D',
-                status: 'active'
+            legend: {
+                position: 'bottom',
+                labels: {
+                    fontSize: 15,
+                    fontColor: 'black',
+                    fontStyle: 'bold',
+                },
             },
-            {
-                id: 3,
-                time: '2024-06-15 10:00:00',
-                station: 'B1',
-                model: 'Model-Y1',
-                serial: 'SN001236',
-                operationTime: 180,
-                worker1: 'Hoàng Văn E',
-                worker2: 'Nguyễn Thị F',
-                status: 'completed'
+
+        };
+        var QuantityPerTimechart = $('#QuantityPerTimechart').get(0).getContext('2d')
+        var QuantityPerTimechartCanvas = new Chart(QuantityPerTimechart, {
+            type: 'line',
+            data: DataQuantityPerTimechart,
+            options: QuantityPerTimeChartOption
+        })
+        //
+        //
+        var QuantityByModelChartCanvas = $('#quantitybymodel').get(0).getContext('2d')
+        var dataquantitybymodel = {
+            labels: [],
+            datasets: [
+                {
+                    type: 'bar',
+                    label: 'Plan',
+                    backgroundColor: '#1a53ff',
+                    order: 2,
+                    data: []
+                },
+                {
+                    type: 'bar',
+                    label: 'Plan/Time',
+                    backgroundColor: '#f5e10c',
+                    categoryPercentage: 0.6,
+                    order: 1,
+                    data: []
+                },
+                {
+                    type: 'bar',
+                    label: 'Actual',
+                    //backgroundColor: '#248f24',
+                    order: 0,
+                    categoryPercentage: 0.35,
+                    data: []
+                },
+            ]
+        }
+        var QuantityByModelChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            datasetFill: false,
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        padding: 15
+                    },
+                    gridLines: {
+                        display: false
+                    },
+                    stacked: true,
+                }],
+                yAxes: [{
+                    ticks: {
+                        fontSize: 15,
+                        beginAtZero: true,
+                        fontColor: 'black',
+                        fontStyle: 'bold',
+                        //max: 3000, // Đặt giá trị tối đa của trục y là 100
+                        //min: 0,   // (Tùy chọn) Đặt giá trị tối thiểu nếu cần
+                        //stepSize: 300 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
+                    },
+                }],
             },
-            {
-                id: 4,
-                time: '2024-06-15 10:45:00',
-                station: 'B2',
-                model: 'Model-X1',
-                serial: 'SN001237',
-                operationTime: 420,
-                worker1: 'Đỗ Văn G',
-                worker2: 'Lý Thị H',
-                status: 'delayed'
+            legend: {
+                position: 'bottom',
+                labels: {
+                    fontSize: 15,
+                    fontColor: 'black',
+                    fontStyle: 'bold',
+                },
             },
-            {
-                id: 5,
-                time: '2024-06-15 11:30:00',
-                station: 'A1',
-                model: 'Model-Y1',
-                serial: 'SN001238',
-                operationTime: 195,
-                worker1: 'Nguyễn Văn A',
-                worker2: 'Trần Thị B',
-                status: 'active'
+            animation: {
+                duration: 1,
+                onComplete: function () {
+                    var chartInstance = this.chart,
+                        ctx = chartInstance.ctx;
+
+                    ctx.font = "500 18px Arial";
+                    ctx.fillStyle = '#000000';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'bottom';
+
+                    // 🟦 PHẦN 1: Vẽ giá trị trên đầu mỗi cột
+                    this.data.datasets.forEach(function (dataset, i) {
+                        var meta = chartInstance.controller.getDatasetMeta(i);
+                        meta.data.forEach(function (bar, index) {
+                            var data = dataset.data[index];
+                            ctx.fillText(data, bar._model.x, bar._model.y);
+                        });
+                    });
+
+                    // 🟥 PHẦN 2: Vẽ độ lệch (diff) dưới chân cột
+                    var datasets = this.data.datasets;
+
+                    // Giả sử dataset[1] = Plan, dataset[2] = Actual
+                    var planData = datasets[1].data;
+                    var actualData = datasets[2].data;
+                    var metaActual = chartInstance.getDatasetMeta(2); // ⚠️ bạn nên lấy meta của "Actual" (index = 2)
+
+                    metaActual.data.forEach(function (bar, index) {
+                        var diff = actualData[index] - planData[index];
+                        var baseY = bar._model.base;
+                        var x = bar._model.x;
+                        var y = baseY + 5; // dịch xuống 15px để không chồng chữ
+
+                        ctx.fillStyle = diff >= 0 ? 'green' : 'red';
+                        ctx.textBaseline = 'top'; // 🟩 vẽ dưới chân thì nên để “top”
+                        ctx.fillText(diff, x, y);
+                    });
+                }
             }
-        ];
-        let filteredData = [...productionData];
 
-        // Initialize dashboard
+
+        }
+        var QuantityByModelChart = new Chart(QuantityByModelChartCanvas, {
+            type: 'bar',
+            data: dataquantitybymodel,
+            options: QuantityByModelChartOptions
+        })
+        //
+        //
+        //var QuantityByModelMonitorChartCanvas = $('#quantitybymodelmonitor').get(0).getContext('2d')
+        //var dataquantitybymodelmonitor = {
+        //    labels: [],
+        //    datasets: [
+        //        {
+        //            type: 'bar',
+        //            label: 'Plan',
+        //            backgroundColor: '#1a53ff',
+        //            order: 2,
+        //            data: []
+        //        },
+        //        {
+        //            type: 'bar',
+        //            label: 'Plan/Time',
+        //            backgroundColor: '#f5e10c',
+        //            categoryPercentage: 0.6,
+        //            order: 1,
+        //            data: []
+        //        },
+        //        {
+        //            type: 'bar',
+        //            label: 'Actual',
+        //            //backgroundColor: '#248f24',
+        //            order: 0,
+        //            categoryPercentage: 0.35,
+        //            data: []
+        //        },
+        //    ]
+        //}
+        //var QuantityByModelMonitorChartOptions = {
+        //    responsive: true,
+        //    maintainAspectRatio: false,
+        //    datasetFill: false,
+        //    scales: {
+        //        xAxes: [{
+        //            ticks: {
+        //                padding: 15,
+        //            },
+        //            gridLines: {
+        //                display: false
+        //            },
+        //            stacked: true,
+        //        }],
+        //        yAxes: [{
+        //            ticks: {
+        //                fontSize: 15,
+        //                beginAtZero: true,
+        //                fontColor: 'black',
+        //                fontStyle: 'bold',
+        //                //max: 3000, // Đặt giá trị tối đa của trục y là 100
+        //                //min: 0,   // (Tùy chọn) Đặt giá trị tối thiểu nếu cần
+        //                //stepSize: 300 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
+        //            },
+        //        }],
+        //    },
+        //    legend: {
+        //        position: 'bottom',
+        //        labels: {
+        //            fontSize: 15,
+        //            fontColor: 'black',
+        //            fontStyle: 'bold',
+        //        },
+        //    },
+        //    animation: {
+        //        duration: 1,
+        //        onComplete: function () {
+        //            var chartInstance = this.chart,
+        //                ctx = chartInstance.ctx;
+
+        //            ctx.font = "500 18px Arial";
+        //            ctx.fillStyle = '#000000';
+        //            ctx.textAlign = 'center';
+        //            ctx.textBaseline = 'bottom';
+
+        //            // 🟦 PHẦN 1: Vẽ giá trị trên đầu mỗi cột
+        //            this.data.datasets.forEach(function (dataset, i) {
+        //                var meta = chartInstance.controller.getDatasetMeta(i);
+        //                meta.data.forEach(function (bar, index) {
+        //                    var data = dataset.data[index];
+        //                    ctx.fillText(data, bar._model.x, bar._model.y);
+        //                });
+        //            });
+
+        //            // 🟥 PHẦN 2: Vẽ độ lệch (diff) dưới chân cột
+        //            var datasets = this.data.datasets;
+
+        //            // Giả sử dataset[1] = Plan, dataset[2] = Actual
+        //            var planData = datasets[1].data;
+        //            var actualData = datasets[2].data;
+        //            var metaActual = chartInstance.getDatasetMeta(2); // ⚠️ bạn nên lấy meta của "Actual" (index = 2)
+
+        //            metaActual.data.forEach(function (bar, index) {
+        //                var diff = actualData[index] - planData[index];
+        //                var baseY = bar._model.base;
+        //                var x = bar._model.x;
+        //                var y = baseY + 5; // dịch xuống 15px để không chồng chữ
+
+        //                ctx.fillStyle = diff >= 0 ? 'green' : 'red';
+        //                ctx.textBaseline = 'top'; // 🟩 vẽ dưới chân thì nên để “top”
+        //                ctx.fillText(diff, x, y);
+        //            });
+        //        }
+
+        //    }
+
+
+        //}
+        //var QuantityByModelChartMonitor = new Chart(QuantityByModelMonitorChartCanvas, {
+        //    type: 'bar',
+        //    data: dataquantitybymodelmonitor,
+        //    options: QuantityByModelMonitorChartOptions
+        //})
+        //
+        //
+        var QuantityByGroupModelChartCanvas = $('#quantitybygroupmodel').get(0).getContext('2d')
+        var dataquantitybygroupmodel = {
+            labels: [],
+            datasets: [
+                {
+                    type: 'bar',
+                    label: 'Plan',
+                    backgroundColor: '#1a53ff',
+                    order: 2,
+                    data: []
+                },
+                {
+                    type: 'bar',
+                    label: 'Plan/Time',
+                    backgroundColor: '#f5e10c',
+                    categoryPercentage: 0.6,
+                    order: 1,
+                    data: []
+                },
+                {
+                    type: 'bar',
+                    label: 'Actual',
+                    //backgroundColor: '#248f24',
+                    order: 0,
+                    categoryPercentage: 0.35,
+                    data: []
+                },
+            ]
+        }
+        var QuantityByModelGroupChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            datasetFill: false,
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        padding: 15,
+                    },
+                    gridLines: {
+                        display: false
+                    },
+                    stacked: true,
+                }],
+                yAxes: [{
+                    ticks: {
+                        fontSize: 15,
+                        beginAtZero: true,
+                        fontColor: 'black',
+                        fontStyle: 'bold',
+                        //max: 3000, // Đặt giá trị tối đa của trục y là 100
+                        //min: 0,   // (Tùy chọn) Đặt giá trị tối thiểu nếu cần
+                        //stepSize: 300 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
+                    },
+                }],
+            },
+            legend: {
+                position: 'bottom',
+                labels: {
+                    fontSize: 15,
+                    fontColor: 'black',
+                    fontStyle: 'bold',
+                },
+            },
+            animation: {
+                duration: 1,
+                onComplete: function () {
+                    var chartInstance = this.chart,
+                        ctx = chartInstance.ctx;
+
+                    ctx.font = "500 18px Arial";
+                    ctx.fillStyle = '#000000';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'bottom';
+
+                    // 🟦 PHẦN 1: Vẽ giá trị trên đầu mỗi cột
+                    this.data.datasets.forEach(function (dataset, i) {
+                        var meta = chartInstance.controller.getDatasetMeta(i);
+                        meta.data.forEach(function (bar, index) {
+                            var data = dataset.data[index];
+                            ctx.fillText(data, bar._model.x, bar._model.y);
+                        });
+                    });
+
+                    // 🟥 PHẦN 2: Vẽ độ lệch (diff) dưới chân cột
+                    var datasets = this.data.datasets;
+
+                    // Giả sử dataset[1] = Plan, dataset[2] = Actual
+                    var planData = datasets[1].data;
+                    var actualData = datasets[2].data;
+                    var metaActual = chartInstance.getDatasetMeta(2); // ⚠️ bạn nên lấy meta của "Actual" (index = 2)
+
+                    metaActual.data.forEach(function (bar, index) {
+                        var diff = actualData[index] - planData[index];
+                        var baseY = bar._model.base;
+                        var x = bar._model.x;
+                        var y = baseY + 5; // dịch xuống 15px để không chồng chữ
+
+                        ctx.fillStyle = diff >= 0 ? 'green' : 'red';
+                        ctx.textBaseline = 'top'; // 🟩 vẽ dưới chân thì nên để “top”
+                        ctx.fillText(diff, x, y);
+                    });
+                }
+            }
+
+
+        }
+        var QuantityByGroupModelChart = new Chart(QuantityByGroupModelChartCanvas, {
+            type: 'bar',
+            data: dataquantitybygroupmodel,
+            options: QuantityByModelGroupChartOptions
+        })
+        //
+        //
+        var DataQuantityPerHourchart = {
+            labels: [],
+            datasets: [
+
+                {
+                    type: 'bar',
+                    yAxisID: 'y-axis-1',
+                    label: 'Plan',
+                    backgroundColor: 'Blue',
+                    data: [],
+                    order: 3,
+                },
+                {
+                    type: 'bar',
+                    yAxisID: 'y-axis-1',
+                    label: 'Actual',
+                    /* backgroundColor: 'orange',*/
+                    data: [],
+
+
+                    order: 4,
+                },
+                {
+                    type: 'line',
+                    label: 'Diff',
+                    fill: false,
+                    borderColor: 'red',
+                    backgroundColor: 'transparent',
+                    yAxisID: 'y-axis-2',
+                    order: 2,
+                    tension: 0, // làm line đỡ mượt
+                    borderWidth: 2,
+                    pointRadius: 2, //
+                    data: []
+                },
+                //{
+                //    borderColor: 'orange',
+                //    type: 'line',
+                //    label: 'DiffAll',
+                //    fill: false,
+                //    //borderColor: function (context) {
+                //    //    var value = context.dataset.data[context.dataIndex];
+                //    //    return value < 0 ? 'red' : 'green';
+                //    //},
+                //    backgroundColor: 'transparent',
+                //    yAxisID: 'y-axis-2',
+                //    order: 1,
+                //    borderWidth: 2,
+                //    pointRadius: 2, //
+                //    data: []
+                //},
+
+            ]
+        };
+        var QuantityPerHourChartOption =
+        {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                //xAxes: [{
+                //    type: 'linear',
+                //}],
+                xAxes: [{
+                    ticks: {
+
+
+
+                        padding: 15
+                    },
+
+                }],
+
+                yAxes: [{
+                    beginAtZero: true,
+                    id: 'y-axis-1', // ID của trục y thứ nhất
+                    type: 'linear',
+                    position: 'left', // Vị trí của trục y thứ nhất
+                    ticks: {
+                        fontSize: 15,
+                        beginAtZero: true,
+                        fontColor: 'black',
+                        fontStyle: 'bold',
+                        //max: 3000, // Đặt giá trị tối đa của trục y là 100
+                        //min: 0,   // (Tùy chọn) Đặt giá trị tối thiểu nếu cần
+                        //stepSize: 300 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
+                    },
+                },
+                {
+                    id: 'y-axis-2', // ID của trục y thứ hai
+                    type: 'linear',
+                    position: 'right', // Vị trí của trục y thứ hai
+                    ticks: {
+                        fontSize: 15,
+                        beginAtZero: true,
+                        fontColor: 'black',
+                        fontStyle: 'bold',
+                        //max: 300, // Đặt giá trị tối đa của trục y là 100
+                        // min: -300,   // (Tùy chọn) Đặt giá trị tối thiểu nếu cần
+                        //stepSize: 300 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
+                    },
+                    gridLines: {
+                        display: false
+                    },
+                }]
+            },
+            legend: {
+                position: 'bottom',
+                labels: {
+                    fontSize: 15,
+                    fontColor: 'black',
+                    fontStyle: 'bold',
+                },
+            },
+            animation: {
+                duration: 1,
+                onComplete: function () {
+                    var chartInstance = this.chart,
+                        ctx = chartInstance.ctx;
+
+                    ctx.font = "500 18px Arial";
+                    ctx.fillStyle = '#000000';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'bottom';
+
+                    // 🟦 PHẦN 1: Vẽ giá trị trên đầu mỗi cột
+                    this.data.datasets.forEach(function (dataset, i) {
+                        if (i < 2) {
+                            var meta = chartInstance.controller.getDatasetMeta(i);
+                            meta.data.forEach(function (bar, index) {
+                                var data = dataset.data[index];
+                                ctx.fillText(data, bar._model.x, bar._model.y);
+                            });
+                        }
+
+
+                    });
+
+                    // 🟥 PHẦN 2: Vẽ độ lệch (diff) dưới chân cột
+                    var datasets = this.data.datasets;
+
+                    // Giả sử dataset[1] = Plan, dataset[2] = Actual
+                    var planData = datasets[0].data;
+                    var actualData = datasets[1].data;
+                    var metaActual = chartInstance.getDatasetMeta(1); // ⚠️ bạn nên lấy meta của "Actual" (index = 2)
+
+                    metaActual.data.forEach(function (bar, index) {
+                        var diff = actualData[index] - planData[index];
+                        var baseY = bar._model.base;
+                        var x = bar._model.x;
+                        var y = baseY + 5; // dịch xuống 15px để không chồng chữ
+
+                        ctx.fillStyle = diff >= 0 ? 'green' : 'red';
+                        ctx.textBaseline = 'top'; // 🟩 vẽ dưới chân thì nên để “top”
+                        ctx.fillText(diff, x, y);
+                    });
+                }
+            }
+
+        };
+        var QuantityPerHourchart = $('#QuantityPerHourchart').get(0).getContext('2d')
+        var QuantityPerHourchartCanvas = new Chart(QuantityPerHourchart, {
+            type: 'bar',
+            data: DataQuantityPerHourchart,
+            options: QuantityPerHourChartOption
+        })
+        //
+        function UpdateDashboard(data) {
+            $('#plan').html(data.TotalPlan);
+            $('#plantime').html(data.TimePlan);
+            $('#actual').html(data.Actual);
+            $('#diff').html(data.Diff);
+            $('#remain').html(data.Remain);
+
+            if (data.Diff > 0) {
+                $('#diff_bag').removeClass('bg-danger');
+                $('#diff_bag').addClass('bg-success');
+            }
+            else {
+                $('#diff_bag').removeClass('bg-success');
+                $('#diff_bag').addClass('bg-danger');
+            }
+
+        }
+        function UpdateChartQuantityPerTime(data) {
+            DataQuantityPerTimechart.datasets[0].data = data.dataplan;
+            DataQuantityPerTimechart.datasets[1].data = data.dataactual;
+            DataQuantityPerTimechart.datasets[2].data = data.datadiff;
+            DataQuantityPerTimechart.labels = data.labels;
+
+
+
+            var maxdiff = Math.max(...data.datadiff);
+
+            var mindiff = Math.min(...data.datadiff);
+
+            var maxy1 = 50;
+            var miny1 = -150;
+
+
+            if (maxdiff > 50) {
+                maxy1 = maxdiff;
+            }
+            if (mindiff < -150) {
+                miny1 = mindiff;
+            }
+
+
+            QuantityPerTimechartCanvas.options.scales.yAxes[1].ticks.max = maxy1;
+
+            QuantityPerTimechartCanvas.options.scales.yAxes[1].ticks.min = miny1;
+
+
+
+            QuantityPerTimechartCanvas.update();
+        }
+        function UpdateChartQuantityByModel(data) {
+            dataquantitybymodel.datasets[0].data = data.dataplan;
+            dataquantitybymodel.datasets[1].data = data.dataplanpertime;
+            dataquantitybymodel.datasets[2].data = data.dataactual;
+            dataquantitybymodel.labels = data.labels;
+            var max = Math.max(...data.dataplan);
+
+
+
+            QuantityByModelChart.options.scales.yAxes[0].ticks.max = max + Math.ceil(max / 4);
+            //barchartplan.options = barChartOptions;
+            var data1 = data.dataactual;
+            var data2 = data.dataplanpertime;
+            var bgr = [];
+            data1.forEach(function (value1, index) {
+                var value2 = data2[index];
+                if (value1 < value2) {
+                    bgr.push('red')
+                }
+                else {
+                    bgr.push('green')
+                }
+            });
+            dataquantitybymodel.datasets[2].backgroundColor = bgr;
+            QuantityByModelChart.update();
+        }
+        //function UpdateChartQuantityByModelMonitor(data) {
+        //    dataquantitybymodelmonitor.datasets[0].data = data.dataplan;
+        //    dataquantitybymodelmonitor.datasets[1].data = data.dataplanpertime;
+        //    dataquantitybymodelmonitor.datasets[2].data = data.dataactual;
+        //    dataquantitybymodelmonitor.labels = data.labels;
+        //    var max = Math.max(...data.dataplan);
+
+
+
+        //    QuantityByModelChartMonitor.options.scales.yAxes[0].ticks.max = max + Math.ceil(max / 4);
+        //    //barchartplan.options = barChartOptions;
+        //    var data1 = data.dataactual;
+        //    var data2 = data.dataplanpertime;
+        //    var bgr = [];
+        //    data1.forEach(function (value1, index) {
+        //        var value2 = data2[index];
+        //        if (value1 < value2) {
+        //            bgr.push('red')
+        //        }
+        //        else {
+        //            bgr.push('green')
+        //        }
+        //    });
+        //    dataquantitybymodelmonitor.datasets[2].backgroundColor = bgr;
+        //    QuantityByModelChartMonitor.update();
+        //}
+        function UpdateChartQuantityPerHour(data) {
+            DataQuantityPerHourchart.datasets[0].data = data.dataplan;
+            DataQuantityPerHourchart.datasets[1].data = data.dataactual;
+            DataQuantityPerHourchart.datasets[2].data = data.datadiff;
+            //DataQuantityPerHourchart.datasets[3].data = data.datadifftotal;
+
+            DataQuantityPerHourchart.labels = data.labels;
+
+            var max = Math.max(...data.dataplan);
+
+            var maxdiff = Math.max(...data.datadiff);
+
+            var mindiff = Math.min(...data.datadiff);
+
+            var maxy1 = 50;
+            var miny1 = -150;
+
+
+            if (maxdiff > 50) {
+                maxy1 = maxdiff;
+            }
+            if (miny1 < -150) {
+                miny1 = mindiff;
+            }
+
+            QuantityPerHourchartCanvas.options.scales.yAxes[0].ticks.max = max + Math.ceil(max / 4);
+
+            QuantityPerHourchartCanvas.options.scales.yAxes[1].ticks.max = maxy1;
+
+            QuantityPerHourchartCanvas.options.scales.yAxes[1].ticks.min = miny1;
+
+
+            var actualcolor = [];
+            data.dataactual.forEach(function (value, index) {
+                if (value < data.dataplan[index]) {
+                    actualcolor.push('red');
+                }
+                else {
+                    actualcolor.push('green');
+                }
+            });
+            QuantityPerHourchartCanvas.data.datasets[1].backgroundColor = actualcolor;
+
+
+
+
+
+            QuantityPerHourchartCanvas.update();
+        }
+        function UpdateChartQuantityByModelGroup(data) {
+            dataquantitybygroupmodel.datasets[0].data = data.dataplan;
+            dataquantitybygroupmodel.datasets[1].data = data.dataplanpertime;
+            dataquantitybygroupmodel.datasets[2].data = data.dataactual;
+            dataquantitybygroupmodel.labels = data.labels;
+
+            var max = Math.max(...data.dataplan);
+            QuantityByGroupModelChart.options.scales.yAxes[0].ticks.max = max + Math.ceil(max / 4);
+
+
+
+
+            //barchartplan.options = barChartOptions;
+            var data1 = data.dataactual;
+            var data2 = data.dataplanpertime;
+            var bgr = [];
+            data1.forEach(function (value1, index) {
+                var value2 = data2[index];
+                if (value1 < value2) {
+                    bgr.push('red')
+                }
+                else {
+                    bgr.push('green')
+                }
+            });
+            dataquantitybygroupmodel.datasets[2].backgroundColor = bgr;
+            QuantityByGroupModelChart.update();
+        }
         $(document).ready(function () {
-            renderStationCards();
-            // Khởi tạo DataTable
-            var table = $('#dataTable').DataTable({
-                pageLength: 10,
-                lengthChange: false,
-                paging: true,
-                searching: false,
-                ordering: false,
-                info: false,
 
 
+            //Date picker
+            $('#dateselect').datetimepicker({
+                format: 'YYYY-MM-DD'
             });
 
-            // Chart
-            var DataLineChart = {
-                labels: ['06:00', '06:05', '06:10', '06:15', '06:20', '06:25', '06:30', '06:35', '06:40', '06:45', '06:50', '06:55', '07:00', '07:05', '07:10', '07:15', '07:20', '07:25', '07:30', '07:35', '07:40', '07:45', '07:50', '07:55', '08:00', '08:05', '08:10', '08:15', '08:20', '08:25', '08:30', '08:35', '08:40', '08:45', '08:50', '08:55', '09:00', '09:05', '09:10', '09:15', '09:20', '09:25', '09:30', '09:35', '09:40', '09:45', '09:50', '09:55', '10:00', '10:05', '10:10', '10:15', '10:20', '10:25', '10:30', '10:35', '10:40', '10:45', '10:50', '10:55', '11:00', '11:05', '11:10', '11:15', '11:20', '11:25', '11:30', '11:35', '11:40', '11:45', '11:50', '11:55', '12:00', '12:05', '12:10', '12:15', '12:20', '12:25', '12:30', '12:35', '12:40', '12:45', '12:50', '12:55', '13:00', '13:05', '13:10', '13:15', '13:20', '13:25', '13:30', '13:35', '13:40', '13:45', '13:50', '13:55', '14:00', '14:05', '14:10', '14:15', '14:20', '14:25', '14:30', '14:35', '14:40', '14:45', '14:50', '14:55', '15:00', '15:05', '15:10', '15:15', '15:20', '15:25', '15:30', '15:35', '15:40', '15:45', '15:50', '15:55', '16:00', '16:05', '16:10', '16:15', '16:20', '16:25', '16:30', '16:35', '16:40', '16:45', '16:50', '16:55', '17:00', '17:05', '17:10', '17:15', '17:20', '17:25', '17:30', '17:35', '17:40', '17:45', '17:50', '17:55', '18:00', '18:05', '18:10', '18:15', '18:20', '18:25', '18:30', '18:35', '18:40', '18:45', '18:50', '18:55', '19:00', '19:05', '19:10', '19:15', '19:20', '19:25', '19:30', '19:35', '19:40', '19:45', '19:50', '19:55', '20:00', '20:05', '20:10', '20:15', '20:20', '20:25', '20:30', '20:35', '20:40', '20:45', '20:50', '20:55', '21:00', '21:05', '21:10', '21:15', '21:20', '21:25', '21:30', '21:35', '21:40', '21:45', '21:50', '21:55', '22:00', '22:05', '22:10', '22:15', '22:20', '22:25', '22:30', '22:35', '22:40', '22:45', '22:50', '22:55', '23:00', '23:05', '23:10', '23:15', '23:20', '23:25', '23:30', '23:35', '23:40', '23:45', '23:50', '23:55', '00:00', '00:05', '00:10', '00:15', '00:20', '00:25', '00:30', '00:35', '00:40', '00:45', '00:50', '00:55', '01:00', '01:05', '01:10', '01:15', '01:20', '01:25', '01:30', '01:35', '01:40', '01:45', '01:50', '01:55', '02:00', '02:05', '02:10', '02:15', '02:20', '02:25', '02:30', '02:35', '02:40', '02:45', '02:50', '02:55', '03:00', '03:05', '03:10', '03:15', '03:20', '03:25', '03:30', '03:35', '03:40', '03:45', '03:50', '03:55', '04:00', '04:05', '04:10', '04:15', '04:20', '04:25', '04:30', '04:35', '04:40', '04:45', '04:50', '04:55', '05:00', '05:05', '05:10', '05:15', '05:20', '05:25', '05:30', '05:35', '05:40', '05:45', '05:50', '05:55', '06:00'],
-                datasets: [
-                    {
-                        type: 'line',
-                        yAxisID: 'y', // Thay đổi từ 'y-axis-1' thành 'y'
-                        label: 'Plan',
-                        borderColor: 'rgb(75, 192, 192)',
-                        //data: [0, 10, 20, 30, 40, 40, 40, 60, 80, 90, 100, 110],
-                        fill: false,
-                        //tension: 0, // làm line đỡ mượt
-                        borderWidth: 2,
-                        pointRadius: 2,
-
-                    },
-                    {
-                        type: 'line',
-                        yAxisID: 'y', // Thay đổi từ 'y-axis-1' thành 'y'
-                        label: 'Actual',
-                        borderColor: '#b38600',
-                        //data: [0, 10, 20, 30, 40, 40, 40, 60, 80, 85, 101, 120],
-                        fill: false,
-                        //tension: 0, // làm line đỡ mượt
-                        borderWidth: 2,
-                        pointRadius: 2,
-
-                    },
-                    {
-                        type: 'bar',
-                        label: 'Diff',
-                        backgroundColor: function (context) {
-                            var value = context.dataset.data[context.dataIndex];
-                            return value < 0 ? 'red' : 'green';
-                        },
-                        yAxisID: 'y1', // Thay đổi từ 'y-axis-2' thành 'y1'
-                        order: 1,
-                        //data: [0, 0, 0, 0, 0, 0, 0, 0, 0, -5, 1, 10],
-
-                    }
-                ]
-            };
-            var LineChartOption = {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    x: {
-                        ticks: {
-                            font: {
-                                size: 15,
-                                weight: 'bold'
-                            },
-                            color: 'black'
-                        },
-                        type: 'category', // Sử dụng linear scale cho trục x
-                        position: 'bottom'
-                    },
-                    y: {
-                        beginAtZero: true,
-                        type: 'linear',
-                        position: 'left', // Vị trí của trục y thứ nhất
-                        ticks: {
-                            font: {
-                                size: 15,
-                                weight: 'bold'
-                            },
-                            color: 'black',
-                            beginAtZero: true
-                            //max: 3000, // Đặt giá trị tối đa của trục y là 100
-                            //min: 0,   // (Tùy chọn) Đặt giá trị tối thiểu nếu cần
-                            //stepSize: 300 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
-                        }
-                    },
-                    y1: { // Trục y thứ hai
-                        type: 'linear',
-                        position: 'right', // Vị trí của trục y thứ hai
-                        ticks: {
-                            font: {
-                                size: 15,
-                                weight: 'bold'
-                            },
-                            color: 'black',
-                            beginAtZero: true
-                            //max: 300, // Đặt giá trị tối đa của trục y là 100
-                            //min: -300,   // (Tùy chọn) Đặt giá trị tối thiểu nếu cần
-                            //stepSize: 300 // (Tùy chọn) Đặt khoảng cách giữa các giá trị trên trục y
-                        },
-                        grid: {
-                            display: false
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            font: {
-                                size: 15,
-                                weight: 'bold'
-                            },
-                            color: 'black'
-                        }
-                    }
-                }
-            };
-            var lineChartCanvas = $('#chart_quantitybytime').get(0).getContext('2d');
-
-            ///
-            var linechart = new Chart(lineChartCanvas, {
-                type: 'line',
-                data: DataLineChart,
-                options: LineChartOption
-            })
             // Kiểm tra SignalR
             if (typeof $.connection === 'undefined') {
                 console.error("SignalR not loaded. Check jQuery and signalr/hubs scripts.");
                 return;
             }
             // Kết nối tới SignalR Hub
-            var proxy = $.connection.InnerLinerHub;
+            //$.connection.hub.qs = { page: "Urethan" };
+            var hub = $.connection.InnerLinerHub;
             var isUpdating = true;
             var interactionTimeout;
-            
+            var isConnected = false;     // <--- thêm biến này
+            var initmodel = false;
 
             // Xử lý khi nhận dữ liệu mới
-            proxy.client.updateData = function (data) {
+            hub.client.updateData = function (data) {
                 if (!isUpdating) return;
 
-                /*Row1*/
-                var data_quantityPCM = data.quantityPCM;
-                $('#PlanQuantity').html(data_quantityPCM.PlanQuantity);
-                $('#OkQuantity').html(data_quantityPCM.OkQuantity);
-                $('#NgQuantity').html(data_quantityPCM.NgQuantity);
-                $('#RemainQuantity').html(data_quantityPCM.RemainQuantity);
-                /*Row2*/
-                var data_DataLineChartQuantityPerTime = JSON.parse(data.DataLineChartQuantityPerTime);
-                DataLineChart.datasets[0].data = data_DataLineChartQuantityPerTime.dataplan;
-                DataLineChart.datasets[1].data = data_DataLineChartQuantityPerTime.dataactual;
-                DataLineChart.datasets[2].data = data_DataLineChartQuantityPerTime.datadiff;
-                linechart.update();
-            };
+                UpdateDashboard(data.QuantityPerTimechartCanvas);
+                UpdateChartQuantityPerTime(data.QuantityPerTimechartCanvas);
+                UpdateChartQuantityByModel(data.quantityByModel);
+                /* UpdateChartQuantityByModelMonitor(data.quantityByModelMonitor)*/
+                UpdateChartQuantityPerHour(data.quantityPerHour);
+                UpdateChartQuantityByModelGroup(data.quantityByModelgroup)
+                if (!initmodel) {
+                    var $select = $("#cb_model");
+                    $select.empty(); // xóa các option cũ
+                    $select.append($('<option>', {
+                        value: 'All Model',
+                        text: '--- Model-- -'
+                    }));
+                    data.quantityByModel.labels.forEach(function (item) {
+                        $select.append($('<option>', {
+                            value: item,
+                            text: item
+                        }));
+                    });
+                    initmodel = true;
+                }
 
+            };
             // Bắt đầu kết nối SignalR
             $.connection.hub.start().done(function () {
                 console.log("SignalR connected");
-                proxy.server.getInitialData();
+                isConnected = true;   // <--- kết nối xong thì cho phép gửi
             }).fail(function (error) {
                 console.error("SignalR connection failed: ", error);
             });
-            // Hàm xử lý tương tác chuột
-            function handleMouseInteraction() {
-                isUpdating = false;
-                clearTimeout(interactionTimeout);
+            // Khi 1 trong 3 thay đổi -> gửi lên Hub
+            $('#dateselect').on('change.datetimepicker', function (e) {
+                sendToHub();
+            });
 
+            $("#cb_model").change(sendToHub);
+
+            $("#cb_shift").change(sendToHub);
+
+            function sendToHub() {
+                if (!isConnected) {
+                    console.warn("SignalR chưa sẵn sàng, không gửi filter.");
+                    return;
+                }
+                clearTimeout(interactionTimeout);
                 interactionTimeout = setTimeout(function () {
-                    isUpdating = true;
-                    //proxy.server.getInitialData();
-                }, 5000);
+                    var date = $("#dateselect input").val();
+                    var model = $("#cb_model").val();
+                    var shift = $("#cb_shift").val();
+
+                    hub.server.updateFilter(date, model, shift);
+                }, 400);
             }
-            // Gắn sự kiện chuột trên table
-            $('#dataTable').on('mousemove click', handleMouseInteraction);
+
 
 
         });
 
 
-
-
-
-        function renderStationCards() {
-            const stations = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2'];
-            const workers = ['Nguyễn Văn A', 'Trần Thị B', 'Lê Văn C', 'Phạm Thị D', 'Hoàng Văn E', 'Đỗ Văn G', 'Lý Thị H', 'Nguyễn Thị F'];
-            const stationContainer = $('#stationCards');
-            stationContainer.empty();
-
-            stations.forEach(stationName => {
-                const stationTasks = productionData.filter(item => item.station === stationName);
-                const currentTask = stationTasks.find(task => task.status === 'active');
-                const completedToday = stationTasks.filter(task => task.status === 'completed').length;
-                const totalTime = stationTasks.reduce((sum, task) => sum + task.operationTime, 0);
-                const avgTime = stationTasks.length > 0 ? Math.round(totalTime / stationTasks.length) : 0;
-                const worker = currentTask ? currentTask.worker : workers[Math.floor(Math.random() * workers.length)];
-
-
-                let stationStatus = 'maintenance';
-                let statusText = 'Stop';
-                let statusIcon = 'fas fa-exclamation-triangle';
-
-                if (currentTask) {
-                    if (currentTask.operationTime > 300) {
-                        stationStatus = 'maintenance';
-                        statusText = 'Stop';
-                        statusIcon = 'fas fa-exclamation-triangle';
-                    } else {
-                        stationStatus = 'active';
-                        statusText = 'Run';
-                        statusIcon = 'fas fa-play-circle';
-                    }
-                }
-                const cardHtml = `
-                    <div class="col-3 mb-2">
-                        <div class="station-card ${stationStatus}" onclick="filterByStation('${stationName}')">
-                            <div class="d-flex justify-content-between align-items-start mb-2">
-                                <div class="station-title">
-                                    <i class="fas fa-desktop me-2"></i>${stationName}
-                                </div>
-                                <span class="station-status status-${stationStatus}">
-                                    <i class="${statusIcon}"></i> ${statusText}
-                                </span>
-                            </div>
-                            <div class="d-flex align-items-center mb-2">
-                               
-                                <span class="worker-name">${worker}</span>
-                                </div>
-                            <div class="station-info">
-                                <div class="station-metric">
-                                    <span class="metric-label">Average time:</span>
-                                    <span class="metric-value">${avgTime}s</span>
-                                </div>
-                            </div>
-                             <div class="station-info">
-     <div class="station-metric">
-         <span class="metric-label">Number of cycle time passes:</span>
-         <span class="metric-value">${avgTime}s</span>
-     </div>
- </div>
-  <div class="station-info">
-     <div class="station-metric">
-         <span class="metric-label">Number of cycle time failures:</span>
-         <span class="metric-value">${avgTime}s</span>
-     </div>
- </div>
-                            ${currentTask ? `
-                                <div class="current-task">
-                                   
-                                    <div class="d-flex justify-content-between align-items-center mt-1">
-                                        <small class="text-muted">Model:</small>
-                                        <strong>${currentTask.model}</strong>
-                                    </div>
-                                    <div class="d-flex justify-content-between align-items-center mt-1">
-                                        <small class="text-muted">Cycle Time:</small>
-                                        <strong>${currentTask.operationTime}s</strong>
-                                    </div>
-                                </div>
-                            ` : `<div class="current-task">
-   
-    <div class="d-flex justify-content-between align-items-center mt-1">
-        <small class="text-muted">Model:</small>
-       
-    </div>
-    <div class="d-flex justify-content-between align-items-center mt-1">
-        <small class="text-muted">Thời gian:</small>
-        
-    </div>
-</div>`}
-                        </div>
-                    </div>
-                `;
-
-                stationContainer.append(cardHtml);
-            });
-        }
-
-
-
-
     </script>
-
 </asp:Content>

@@ -94,7 +94,6 @@ namespace PAPVN.SignalRHub
         public QuantityByModel quantityByModelMonitor = new QuantityByModel();
         public QuantityPerHour quantityPerHour = new QuantityPerHour();
         public QuantityByModel quantityByModelgroup = new QuantityByModel();
-
     }
 
 }
