@@ -46,7 +46,7 @@ namespace PAPVN.MethodLoadData
             try
             {
 
-                 string dateplan = GetDatePlan();
+                string dateplan = GetDatePlan();
 
                 DBConnect dBConnect = new DBConnect();
 
@@ -753,7 +753,7 @@ namespace PAPVN.MethodLoadData
                     TimeStartShift = DateTime.Parse(ds.Tables[1].Rows[0]["TimeStart"].ToString());
                     DateTime TimeEndShift = DateTime.Parse(ds1.Tables[1].Rows[0]["TimeEnd"].ToString());
 
-                    
+
 
                     if (TimeEndShift < DateTime.Now && date == "")
                     {
@@ -976,7 +976,7 @@ namespace PAPVN.MethodLoadData
         {
             try
             {
-               
+
                 string DatePlan = GetDatePlan();
 
                 if (date != "")
@@ -1705,7 +1705,7 @@ namespace PAPVN.MethodLoadData
         {
             try
             {
-                 string DatePlan = GetDatePlan();
+                string DatePlan = GetDatePlan();
 
                 if (date != "")
                 {
@@ -1865,7 +1865,7 @@ namespace PAPVN.MethodLoadData
 
 
 
-                        DataTable groupmodel = dBConnect.StoreFillDT("GetGroupModel", CommandType.StoredProcedure);
+                        DataTable groupmodel = dBConnect.StoreFillDT("GetGroupModel", CommandType.StoredProcedure, DatePlan);
                         var groupname = groupmodel.AsEnumerable().Select(row => row.Field<string>("Type1")).Distinct().ToList();
                         string[] labelstemp = groupname.ToArray();
                         int[] dataplantemp = new int[labelstemp.Length];
@@ -1886,7 +1886,15 @@ namespace PAPVN.MethodLoadData
 
                                 for (int j = 0; j < labels.Length; j++)
                                 {
-                                    if (model[i] == labels[j])
+
+                                    if (model[i].Length == 11)
+                                    {
+                                        string a = "";
+                                    }
+
+                                    //if (model[i] == labels[j] )
+
+                                    if (model[i] == labels[j] || (model[i].Length == 11 & labels[j].Contains(model[i])))
                                     {
                                         plan += dataplan[j];
                                         planpertime += dataplanpertime[j];

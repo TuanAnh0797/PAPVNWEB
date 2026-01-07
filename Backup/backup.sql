@@ -766,6 +766,82 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/ `dataplc` /*!40100 DEFAULT CHARACTER SE
 USE `dataplc`;
 
 --
+-- Table structure for table `banday`
+--
+
+DROP TABLE IF EXISTS `banday`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `banday` (
+  `TimePLC` datetime DEFAULT NULL,
+  `MachineName` varchar(45) DEFAULT NULL,
+  `CodeBack` varchar(45) DEFAULT NULL,
+  `CodeModel` varchar(45) DEFAULT NULL,
+  `CodeSerial` varchar(45) DEFAULT NULL,
+  `Judge` varchar(45) DEFAULT NULL,
+  `TimeInsert` datetime DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`TA`@`%`*/ /*!50003 TRIGGER `trg_banday_after_insert` AFTER INSERT ON `banday` FOR EACH ROW BEGIN
+    IF NEW.Judge = 'OK' THEN
+        IF NOT EXISTS (
+            SELECT 1 
+            FROM dataplc.banday_unique 
+            WHERE CodeBack = NEW.CodeBack
+        ) THEN
+            INSERT INTO dataplc.banday_unique
+            (
+                TimePLC,
+                CodeBack,
+                CodeModel,
+                CodeSerial,
+                Judge
+            )
+            VALUES
+            (
+                NEW.TimePLC,
+                NEW.CodeBack,
+                NEW.CodeModel,
+                NEW.CodeSerial,
+                NEW.Judge
+            );
+        END IF;
+    END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Table structure for table `banday_unique`
+--
+
+DROP TABLE IF EXISTS `banday_unique`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `banday_unique` (
+  `TimePLC` datetime DEFAULT NULL,
+  `MachineName` varchar(45) DEFAULT NULL,
+  `CodeBack` varchar(45) DEFAULT NULL,
+  `CodeModel` varchar(45) DEFAULT NULL,
+  `CodeSerial` varchar(45) DEFAULT NULL,
+  `Judge` varchar(45) DEFAULT NULL,
+  `TimeInsert` datetime DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `breaktime`
 --
 
@@ -1125,7 +1201,7 @@ CREATE TABLE `groupmodel` (
   `CodeModel` varchar(45) DEFAULT NULL,
   `TimeInsert` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=264 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=267 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1177,6 +1253,82 @@ CREATE TABLE `ip` (
   KEY `ip_CodeBack_Index` (`CodeBack`),
   KEY `ip_CodeModel_Index` (`CodeModel`) /*!80000 INVISIBLE */,
   KEY `ip_TimeInsert_Index` (`TimeInsert`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `linner`
+--
+
+DROP TABLE IF EXISTS `linner`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `linner` (
+  `TimePLC` datetime DEFAULT NULL,
+  `MachineName` varchar(45) DEFAULT NULL,
+  `CodeBack` varchar(45) DEFAULT NULL,
+  `CodeModel` varchar(45) DEFAULT NULL,
+  `CodeSerial` varchar(45) DEFAULT NULL,
+  `Judge` varchar(45) DEFAULT NULL,
+  `TimeInsert` datetime DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`TA`@`%`*/ /*!50003 TRIGGER `trg_linner_after_insert` AFTER INSERT ON `linner` FOR EACH ROW BEGIN
+    IF NEW.Judge = 'OK' THEN
+        IF NOT EXISTS (
+            SELECT 1 
+            FROM dataplc.linner_unique 
+            WHERE CodeBack = NEW.CodeBack
+        ) THEN
+            INSERT INTO dataplc.linner_unique
+            (
+                TimePLC,
+                CodeBack,
+                CodeModel,
+                CodeSerial,
+                Judge
+            )
+            VALUES
+            (
+                NEW.TimePLC,
+                NEW.CodeBack,
+                NEW.CodeModel,
+                NEW.CodeSerial,
+                NEW.Judge
+            );
+        END IF;
+    END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Table structure for table `linner_unique`
+--
+
+DROP TABLE IF EXISTS `linner_unique`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `linner_unique` (
+  `TimePLC` datetime DEFAULT NULL,
+  `MachineName` varchar(45) DEFAULT NULL,
+  `CodeBack` varchar(45) DEFAULT NULL,
+  `CodeModel` varchar(45) DEFAULT NULL,
+  `CodeSerial` varchar(45) DEFAULT NULL,
+  `Judge` varchar(45) DEFAULT NULL,
+  `TimeInsert` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1754,6 +1906,88 @@ DELIMITER ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
+-- Table structure for table `urethan_door`
+--
+
+DROP TABLE IF EXISTS `urethan_door`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `urethan_door` (
+  `TimePLC` datetime DEFAULT NULL,
+  `MachineName` varchar(45) DEFAULT NULL,
+  `CodeBack` varchar(100) DEFAULT NULL,
+  `CodeModel` varchar(100) DEFAULT NULL,
+  `CodeSerial` varchar(100) DEFAULT NULL,
+  `Program` varchar(100) DEFAULT NULL,
+  `JigCode` varchar(100) DEFAULT NULL,
+  `Jig Pos` varchar(100) DEFAULT NULL,
+  `Judge` varchar(10) DEFAULT NULL,
+  `TimeInsert` datetime DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`TA`@`%`*/ /*!50003 TRIGGER `trg_urethan_door_after_insert` AFTER INSERT ON `urethan_door` FOR EACH ROW BEGIN
+    IF NEW.Judge = 'OK' THEN
+        IF NOT EXISTS (
+            SELECT 1 
+            FROM dataplc.urethan_door_unique 
+            WHERE CodeBack = NEW.CodeBack
+        ) THEN
+            INSERT INTO dataplc.urethan_door_unique
+            (
+                TimePLC,
+                CodeBack,
+                CodeModel,
+                CodeSerial,
+                Judge
+            )
+            VALUES
+            (
+                NEW.TimePLC,
+                NEW.CodeBack,
+                NEW.CodeModel,
+                NEW.CodeSerial,
+                NEW.Judge
+            );
+        END IF;
+    END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Table structure for table `urethan_door_unique`
+--
+
+DROP TABLE IF EXISTS `urethan_door_unique`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `urethan_door_unique` (
+  `TimePLC` datetime DEFAULT NULL,
+  `MachineName` varchar(45) DEFAULT NULL,
+  `CodeBack` varchar(100) DEFAULT NULL,
+  `CodeModel` varchar(100) DEFAULT NULL,
+  `CodeSerial` varchar(100) DEFAULT NULL,
+  `Program` varchar(100) DEFAULT NULL,
+  `JigCode` varchar(100) DEFAULT NULL,
+  `Jig Pos` varchar(100) DEFAULT NULL,
+  `Judge` varchar(10) DEFAULT NULL,
+  `TimeInsert` datetime DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `urethan_unique`
 --
 
@@ -1769,6 +2003,84 @@ CREATE TABLE `urethan_unique` (
   `Judge` varchar(45) DEFAULT NULL,
   `Jig` varchar(45) DEFAULT NULL,
   `JigPos` varchar(45) DEFAULT NULL,
+  `TimeInsert` datetime DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `vf`
+--
+
+DROP TABLE IF EXISTS `vf`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `vf` (
+  `TimePLC` datetime DEFAULT NULL,
+  `MachineName` varchar(45) DEFAULT NULL,
+  `CodeBack` varchar(100) DEFAULT NULL,
+  `CodeModel` varchar(100) DEFAULT NULL,
+  `CodeSerial` varchar(100) DEFAULT NULL,
+  `JigCode` varchar(100) DEFAULT NULL,
+  `Judge` varchar(10) DEFAULT NULL,
+  `TimeInsert` datetime DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`TA`@`%`*/ /*!50003 TRIGGER `trg_vf_after_insert` AFTER INSERT ON `vf` FOR EACH ROW BEGIN
+    IF NEW.Judge = 'OK' THEN
+        IF NOT EXISTS (
+            SELECT 1 
+            FROM dataplc.vf_unique 
+            WHERE CodeBack = NEW.CodeBack
+        ) THEN
+            INSERT INTO dataplc.vf_unique
+            (
+                TimePLC,
+                CodeBack,
+                CodeModel,
+                CodeSerial,
+                Judge
+            )
+            VALUES
+            (
+                NEW.TimePLC,
+                NEW.CodeBack,
+                NEW.CodeModel,
+                NEW.CodeSerial,
+                NEW.Judge
+            );
+        END IF;
+    END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Table structure for table `vf_unique`
+--
+
+DROP TABLE IF EXISTS `vf_unique`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `vf_unique` (
+  `TimePLC` datetime DEFAULT NULL,
+  `MachineName` varchar(45) DEFAULT NULL,
+  `CodeBack` varchar(100) DEFAULT NULL,
+  `CodeModel` varchar(100) DEFAULT NULL,
+  `CodeSerial` varchar(100) DEFAULT NULL,
+  `JigCode` varchar(100) DEFAULT NULL,
+  `Judge` varchar(10) DEFAULT NULL,
   `TimeInsert` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2255,9 +2567,9 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`TA`@`%` PROCEDURE `GetGroupModel`()
+CREATE DEFINER=`TA`@`%` PROCEDURE `GetGroupModel`(IN _TimeStart varchar(20))
 BEGIN
-    SELECT * FROM dataplc.groupmodel where CodeModel in (select model from  ta_tbl_dataplan);
+    SELECT * FROM dataplc.groupmodel where CodeModel in (select model from  ta_tbl_dataplan where DATE(TimeStart) = _TimeStart);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -3237,13 +3549,13 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`TA`@`%` PROCEDURE `LoadDataForChartFinalCheck`(IN p_selectionItem VARCHAR(3))
+CREATE DEFINER=`TA`@`%` PROCEDURE `LoadDataForChartFinalCheck`(IN p_selectionItem VARCHAR(3),IN _TimeStart varchar(20))
 BEGIN
 
     Declare _StartDate datetime;
 	Declare _EndDate datetime;
    
-		SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplan where Model = 'Total';
+		SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplan where Model = 'Total' and DATE(TimeStart) = _TimeStart;
 		SELECT
         SUM(CASE WHEN Judge_VP = 'OK' THEN 1 ELSE 0 END) as VPOK,
         SUM(CASE WHEN Judge_GAS = 'OK' THEN 1 ELSE 0 END) as GASOILOK,
@@ -3583,14 +3895,14 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`TA`@`%` PROCEDURE `LoadDataForTableHistoryFinalCheck`()
+CREATE DEFINER=`TA`@`%` PROCEDURE `LoadDataForTableHistoryFinalCheck`( IN _TimeStart varchar(20))
 BEGIN
 	Declare _StartDate datetime;
 	Declare _EndDate datetime;
 	SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
     
    
-		SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplan where Model = 'Total';
+		SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplan where Model = 'Total' and DATE(TimeStart) = _TimeStart;
     SELECT CodeBack, Judge_Total, TimeUpdate
     FROM DataCheckFinal
 	WHERE  TimeUpdate BETWEEN _StartDate AND _EndDate 
@@ -3612,7 +3924,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`TA`@`%` PROCEDURE `LoadDataForTableHistoryFinalCheckNew`(IN _mode nvarchar(10))
+CREATE DEFINER=`TA`@`%` PROCEDURE `LoadDataForTableHistoryFinalCheckNew`(IN _mode nvarchar(10), IN _TimeStart varchar(20))
 BEGIN
 	Declare _StartDate datetime;
 	Declare _EndDate datetime;
@@ -3620,7 +3932,7 @@ BEGIN
     
     if(_mode = 'NG') then
    
-	SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplan where Model = 'Total';
+	SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplan where Model = 'Total' and DATE(TimeStart) = _TimeStart;
     SELECT CodeBack, Judge_Total, TimeUpdate,ReasonError,PersonConfirm
     FROM DataCheckFinal
 	WHERE  Judge_Total = 'NG'
@@ -3639,7 +3951,7 @@ BEGIN
     
     SELECT * FROM dataplc.datacheckfinal  ORDER BY TimeUpdate DESC LIMIT 1;
     else
-    SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplan where Model = 'Total';
+    SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplan where Model = 'Total' and DATE(TimeStart) = _TimeStart;
     SELECT CodeBack, Judge_Total, TimeUpdate,ReasonError,PersonConfirm
     FROM DataCheckFinal
 	WHERE  TimeUpdate BETWEEN _StartDate AND _EndDate 
@@ -11365,6 +11677,159 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `TA_sp_LoadDataForBarChartPlanBanDay_unique_new` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_sp_LoadDataForBarChartPlanBanDay_unique_new`(IN _Shift varchar(5), IN _TimeStart varchar(20))
+BEGIN
+	Declare _StartDate datetime;
+    Declare _EndDate datetime;
+	IF(_Shift = '1') Then
+    SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca1 where Model = 'Total'and DATE(TimeStart) = _TimeStart;
+	
+SELECT 
+    ta_tbl_dataplanca1.Model,
+    COALESCE(c.QuantityActual, 0) AS QuantityActual,
+    ta_tbl_dataplanca1.QuantityDay,
+    ta_tbl_dataplanca1.QuantityPerSec,
+    ta_tbl_dataplanca1.TimeStart,
+    ta_tbl_dataplanca1.TimeEnd,
+    ta_tbl_dataplanca1.TotalTime,
+    ta_tbl_dataplanca1.TypePlan
+FROM
+    ta_tbl_dataplanca1
+        LEFT JOIN
+    (SELECT 
+        Model, COUNT(DISTINCT CodeBack) AS QuantityActual
+    FROM
+        ta_tbl_dataplanca1
+    LEFT JOIN (SELECT 
+        *
+    FROM
+        banday_unique
+    WHERE
+        Judge = 'OK' and length(CodeModel) > 10
+            AND TimePLC BETWEEN _StartDate AND _EndDate) AS b ON ta_tbl_dataplanca1.Model =  REPLACE(b.CodeModel,'_','')  or ta_tbl_dataplanca1.Model =   SUBSTRING(REPLACE(b.CodeModel,'_',''), 1, length(REPLACE(b.CodeModel,'_','')) - 1) 
+    WHERE
+        ta_tbl_dataplanca1.Model <> 'ToTal' and DATE(TimeStart) = _TimeStart
+            
+    GROUP BY ta_tbl_dataplanca1.Model) AS c ON ta_tbl_dataplanca1.Model = c.Model or ta_tbl_dataplanca1.Model =   SUBSTRING(REPLACE(c.Model,'_',''), 1, length(REPLACE(c.Model,'_','')) - 1) 
+WHERE
+    ta_tbl_dataplanca1.Model <> 'ToTal' and DATE(TimeStart) = _TimeStart;
+   
+	ELSEIF(_Shift = '2') Then
+    SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca2 where Model = 'Total' and DATE(TimeStart) = _TimeStart;
+SELECT 
+    ta_tbl_dataplanca2.Model,
+    COALESCE(c.QuantityActual, 0) AS QuantityActual,
+    ta_tbl_dataplanca2.QuantityDay,
+    ta_tbl_dataplanca2.QuantityPerSec,
+    ta_tbl_dataplanca2.TimeStart,
+    ta_tbl_dataplanca2.TimeEnd,
+    ta_tbl_dataplanca2.TotalTime,
+    ta_tbl_dataplanca2.TypePlan
+FROM
+    ta_tbl_dataplanca2
+        LEFT JOIN
+    (SELECT 
+        Model, COUNT(DISTINCT CodeBack) AS QuantityActual
+    FROM
+        ta_tbl_dataplanca2
+    LEFT JOIN (SELECT 
+        *
+    FROM
+        banday_unique
+    WHERE
+        Judge = 'OK' and length(CodeModel) > 10
+            AND TimePLC BETWEEN _StartDate AND _EndDate) AS b ON ta_tbl_dataplanca2.Model = REPLACE(b.CodeModel,'_','') or ta_tbl_dataplanca2.Model =   SUBSTRING(REPLACE(b.CodeModel,'_',''), 1, length(REPLACE(b.CodeModel,'_','')) - 1) 
+    WHERE
+        ta_tbl_dataplanca2.Model <> 'ToTal' and DATE(TimeStart) = _TimeStart
+            
+    GROUP BY ta_tbl_dataplanca2.Model) AS c ON ta_tbl_dataplanca2.Model = c.Model or ta_tbl_dataplanca2.Model =   SUBSTRING(REPLACE(c.Model,'_',''), 1, length(REPLACE(c.Model,'_','')) - 1) 
+WHERE
+    ta_tbl_dataplanca2.Model <> 'ToTal' and DATE(TimeStart) = _TimeStart;
+    
+	ELSEIF(_Shift = '3') Then
+    SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca3 where Model = 'Total' and DATE(TimeStart) = _TimeStart;
+    
+SELECT 
+    ta_tbl_dataplanca3.Model,
+    COALESCE(c.QuantityActual, 0) AS QuantityActual,
+    ta_tbl_dataplanca3.QuantityDay,
+    ta_tbl_dataplanca3.QuantityPerSec,
+    ta_tbl_dataplanca3.TimeStart,
+    ta_tbl_dataplanca3.TimeEnd,
+    ta_tbl_dataplanca3.TotalTime,
+    ta_tbl_dataplanca3.TypePlan
+FROM
+    ta_tbl_dataplanca3
+        LEFT JOIN
+    (SELECT 
+        Model, COUNT(DISTINCT CodeBack) AS QuantityActual
+    FROM
+        ta_tbl_dataplanca3
+    LEFT JOIN (SELECT 
+        *
+    FROM
+        banday_unique
+    WHERE
+        Judge = 'OK' and length(CodeModel) > 10
+            AND TimePLC BETWEEN _StartDate AND _EndDate) AS b ON ta_tbl_dataplanca3.Model = REPLACE(b.CodeModel,'_','') or ta_tbl_dataplanca3.Model =   SUBSTRING(REPLACE(b.CodeModel,'_',''), 1, length(REPLACE(b.CodeModel,'_','')) - 1) 
+    WHERE
+        ta_tbl_dataplanca3.Model <> 'ToTal' and DATE(TimeStart) = _TimeStart
+            
+    GROUP BY ta_tbl_dataplanca3.Model) AS c ON ta_tbl_dataplanca3.Model = c.Model or ta_tbl_dataplanca3.Model =   SUBSTRING(REPLACE(c.Model,'_',''), 1, length(REPLACE(c.Model,'_','')) - 1) 
+WHERE
+    ta_tbl_dataplanca3.Model <> 'ToTal' and DATE(TimeStart) = _TimeStart;
+
+	ELSE
+    SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplan where Model = 'Total' and DATE(TimeStart) = _TimeStart;
+    
+	
+SELECT 
+    ta_tbl_dataplan.Model,
+    COALESCE(c.QuantityActual, 0) AS QuantityActual,
+    ta_tbl_dataplan.QuantityDay,
+    ta_tbl_dataplan.QuantityPerSec,
+    ta_tbl_dataplan.TimeStart,
+    ta_tbl_dataplan.TimeEnd,
+    ta_tbl_dataplan.TotalTime,
+    ta_tbl_dataplan.TypePlan
+FROM
+    ta_tbl_dataplan
+        LEFT JOIN
+    (SELECT 
+        Model, COUNT(DISTINCT CodeBack) AS QuantityActual
+    FROM
+        ta_tbl_dataplan
+    LEFT JOIN (SELECT 
+        *
+    FROM
+        banday_unique
+    WHERE
+        Judge = 'OK' and length(CodeModel) > 10
+            AND TimePLC BETWEEN _StartDate AND _EndDate) AS b ON ta_tbl_dataplan.Model = REPLACE(b.CodeModel,'_','') or ta_tbl_dataplan.Model =   SUBSTRING(REPLACE(b.CodeModel,'_',''), 1, length(REPLACE(b.CodeModel,'_','')) - 1) 
+    WHERE
+        ta_tbl_dataplan.Model <> 'ToTal' and DATE(TimeStart) = _TimeStart 
+            
+    GROUP BY ta_tbl_dataplan.Model) AS c ON ta_tbl_dataplan.Model = c.Model or ta_tbl_dataplan.Model =   SUBSTRING(REPLACE(c.Model,'_',''), 1, length(REPLACE(c.Model,'_','')) - 1) 
+WHERE
+    ta_tbl_dataplan.Model <> 'ToTal' and DATE(TimeStart) = _TimeStart;
+    
+	end if;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `TA_sp_LoadDataForBarChartPlanGas` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -11817,6 +12282,311 @@ FROM
             
     GROUP BY ta_tbl_dataplan.Model) AS c ON ta_tbl_dataplan.Model = c.Model
 WHERE
+    ta_tbl_dataplan.Model <> 'ToTal' and DATE(TimeStart) = _TimeStart;
+    
+	end if;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `TA_sp_LoadDataForBarChartPlanLinner_unique_new` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_sp_LoadDataForBarChartPlanLinner_unique_new`(IN _Shift varchar(5), IN _TimeStart varchar(20))
+BEGIN
+	Declare _StartDate datetime;
+    Declare _EndDate datetime;
+	IF(_Shift = '1') Then
+    SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca1 where Model = 'Total'and DATE(TimeStart) = _TimeStart;
+	
+SELECT 
+    ta_tbl_dataplanca1.Model,
+    COALESCE(c.QuantityActual, 0) AS QuantityActual,
+    ta_tbl_dataplanca1.QuantityDay,
+    ta_tbl_dataplanca1.QuantityPerSec,
+    ta_tbl_dataplanca1.TimeStart,
+    ta_tbl_dataplanca1.TimeEnd,
+    ta_tbl_dataplanca1.TotalTime,
+    ta_tbl_dataplanca1.TypePlan
+FROM
+    ta_tbl_dataplanca1
+        LEFT JOIN
+    (SELECT 
+        Model, COUNT(DISTINCT CodeBack) AS QuantityActual
+    FROM
+        ta_tbl_dataplanca1
+    LEFT JOIN (SELECT 
+        *
+    FROM
+        linner_unique
+    WHERE
+        Judge = 'OK'
+            AND TimePLC BETWEEN _StartDate AND _EndDate) AS b ON ta_tbl_dataplanca1.Model =  REPLACE(b.CodeModel,'_','')  
+    WHERE
+        ta_tbl_dataplanca1.Model <> 'ToTal' and DATE(TimeStart) = _TimeStart
+            
+    GROUP BY ta_tbl_dataplanca1.Model) AS c ON ta_tbl_dataplanca1.Model = c.Model
+WHERE
+    ta_tbl_dataplanca1.Model <> 'ToTal' and DATE(TimeStart) = _TimeStart;
+   
+	ELSEIF(_Shift = '2') Then
+    SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca2 where Model = 'Total' and DATE(TimeStart) = _TimeStart;
+SELECT 
+    ta_tbl_dataplanca2.Model,
+    COALESCE(c.QuantityActual, 0) AS QuantityActual,
+    ta_tbl_dataplanca2.QuantityDay,
+    ta_tbl_dataplanca2.QuantityPerSec,
+    ta_tbl_dataplanca2.TimeStart,
+    ta_tbl_dataplanca2.TimeEnd,
+    ta_tbl_dataplanca2.TotalTime,
+    ta_tbl_dataplanca2.TypePlan
+FROM
+    ta_tbl_dataplanca2
+        LEFT JOIN
+    (SELECT 
+        Model, COUNT(DISTINCT CodeBack) AS QuantityActual
+    FROM
+        ta_tbl_dataplanca2
+    LEFT JOIN (SELECT 
+        *
+    FROM
+        linner_unique
+    WHERE
+        Judge = 'OK'
+            AND TimePLC BETWEEN _StartDate AND _EndDate) AS b ON ta_tbl_dataplanca2.Model = REPLACE(b.CodeModel,'_','')
+    WHERE
+        ta_tbl_dataplanca2.Model <> 'ToTal' and DATE(TimeStart) = _TimeStart
+            
+    GROUP BY ta_tbl_dataplanca2.Model) AS c ON ta_tbl_dataplanca2.Model = c.Model
+WHERE
+    ta_tbl_dataplanca2.Model <> 'ToTal' and DATE(TimeStart) = _TimeStart;
+    
+	ELSEIF(_Shift = '3') Then
+    SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca3 where Model = 'Total' and DATE(TimeStart) = _TimeStart;
+    
+SELECT 
+    ta_tbl_dataplanca3.Model,
+    COALESCE(c.QuantityActual, 0) AS QuantityActual,
+    ta_tbl_dataplanca3.QuantityDay,
+    ta_tbl_dataplanca3.QuantityPerSec,
+    ta_tbl_dataplanca3.TimeStart,
+    ta_tbl_dataplanca3.TimeEnd,
+    ta_tbl_dataplanca3.TotalTime,
+    ta_tbl_dataplanca3.TypePlan
+FROM
+    ta_tbl_dataplanca3
+        LEFT JOIN
+    (SELECT 
+        Model, COUNT(DISTINCT CodeBack) AS QuantityActual
+    FROM
+        ta_tbl_dataplanca3
+    LEFT JOIN (SELECT 
+        *
+    FROM
+        linner_unique
+    WHERE
+        Judge = 'OK'
+            AND TimePLC BETWEEN _StartDate AND _EndDate) AS b ON ta_tbl_dataplanca3.Model = REPLACE(b.CodeModel,'_','')
+    WHERE
+        ta_tbl_dataplanca3.Model <> 'ToTal' and DATE(TimeStart) = _TimeStart
+            
+    GROUP BY ta_tbl_dataplanca3.Model) AS c ON ta_tbl_dataplanca3.Model = c.Model
+WHERE
+    ta_tbl_dataplanca3.Model <> 'ToTal' and DATE(TimeStart) = _TimeStart;
+
+	ELSE
+    SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplan where Model = 'Total' and DATE(TimeStart) = _TimeStart;
+    
+	
+SELECT 
+    ta_tbl_dataplan.Model,
+    COALESCE(c.QuantityActual, 0) AS QuantityActual,
+    ta_tbl_dataplan.QuantityDay,
+    ta_tbl_dataplan.QuantityPerSec,
+    ta_tbl_dataplan.TimeStart,
+    ta_tbl_dataplan.TimeEnd,
+    ta_tbl_dataplan.TotalTime,
+    ta_tbl_dataplan.TypePlan
+FROM
+    ta_tbl_dataplan
+        LEFT JOIN
+    (SELECT 
+        Model, COUNT(DISTINCT CodeBack) AS QuantityActual
+    FROM
+        ta_tbl_dataplan
+    LEFT JOIN (SELECT 
+        *
+    FROM
+        linner_unique
+    WHERE
+        Judge = 'OK'
+            AND TimePLC BETWEEN _StartDate AND _EndDate) AS b ON ta_tbl_dataplan.Model = REPLACE(b.CodeModel,'_','')
+    WHERE
+        ta_tbl_dataplan.Model <> 'ToTal' and DATE(TimeStart) = _TimeStart
+            
+    GROUP BY ta_tbl_dataplan.Model) AS c ON ta_tbl_dataplan.Model = c.Model
+WHERE
+    ta_tbl_dataplan.Model <> 'ToTal' and DATE(TimeStart) = _TimeStart;
+    
+	end if;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `TA_sp_LoadDataForBarChartPlanMainLine_unique_new` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_sp_LoadDataForBarChartPlanMainLine_unique_new`(IN _Shift varchar(5), IN _TimeStart varchar(20))
+BEGIN
+	Declare _StartDate datetime;
+    Declare _EndDate datetime;
+	IF(_Shift = '1') Then
+    SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca1 where Model = 'Total'and DATE(TimeStart) = _TimeStart;
+	
+SELECT 
+    ta_tbl_dataplanca1.Model,
+    COALESCE(c.QuantityActual, 0) AS QuantityActual,
+    ta_tbl_dataplanca1.QuantityDay,
+    ta_tbl_dataplanca1.QuantityPerSec,
+    ta_tbl_dataplanca1.TimeStart,
+    ta_tbl_dataplanca1.TimeEnd,
+    ta_tbl_dataplanca1.TotalTime,
+    ta_tbl_dataplanca1.TypePlan
+FROM
+    ta_tbl_dataplanca1
+        LEFT JOIN
+    (SELECT 
+        Model, COUNT(DISTINCT CodeBack) AS QuantityActual
+    FROM
+        ta_tbl_dataplanca1
+    LEFT JOIN (SELECT 
+        *
+    FROM
+        banday_unique
+    WHERE
+        Judge = 'OK' and length(CodeModel) > 10
+            AND TimePLC BETWEEN _StartDate AND _EndDate) AS b ON ta_tbl_dataplanca1.Model =  REPLACE(b.CodeModel,'_','')  or ta_tbl_dataplanca1.Model =   SUBSTRING(REPLACE(b.CodeModel,'_',''), 1, length(REPLACE(b.CodeModel,'_','')) - 1) 
+    WHERE
+        ta_tbl_dataplanca1.Model <> 'ToTal' and DATE(TimeStart) = _TimeStart
+            
+    GROUP BY ta_tbl_dataplanca1.Model) AS c ON ta_tbl_dataplanca1.Model = c.Model or ta_tbl_dataplanca1.Model =   SUBSTRING(REPLACE(c.Model,'_',''), 1, length(REPLACE(c.Model,'_','')) - 1) 
+WHERE
+    ta_tbl_dataplanca1.Model <> 'ToTal' and DATE(TimeStart) = _TimeStart;
+   
+	ELSEIF(_Shift = '2') Then
+    SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca2 where Model = 'Total' and DATE(TimeStart) = _TimeStart;
+SELECT 
+    ta_tbl_dataplanca2.Model,
+    COALESCE(c.QuantityActual, 0) AS QuantityActual,
+    ta_tbl_dataplanca2.QuantityDay,
+    ta_tbl_dataplanca2.QuantityPerSec,
+    ta_tbl_dataplanca2.TimeStart,
+    ta_tbl_dataplanca2.TimeEnd,
+    ta_tbl_dataplanca2.TotalTime,
+    ta_tbl_dataplanca2.TypePlan
+FROM
+    ta_tbl_dataplanca2
+        LEFT JOIN
+    (SELECT 
+        Model, COUNT(DISTINCT CodeBack) AS QuantityActual
+    FROM
+        ta_tbl_dataplanca2
+    LEFT JOIN (SELECT 
+        *
+    FROM
+        banday_unique
+    WHERE
+        Judge = 'OK' and length(CodeModel) > 10
+            AND TimePLC BETWEEN _StartDate AND _EndDate) AS b ON ta_tbl_dataplanca2.Model = REPLACE(b.CodeModel,'_','') or ta_tbl_dataplanca2.Model =   SUBSTRING(REPLACE(b.CodeModel,'_',''), 1, length(REPLACE(b.CodeModel,'_','')) - 1) 
+    WHERE
+        ta_tbl_dataplanca2.Model <> 'ToTal' and DATE(TimeStart) = _TimeStart
+            
+    GROUP BY ta_tbl_dataplanca2.Model) AS c ON ta_tbl_dataplanca2.Model = c.Model or ta_tbl_dataplanca2.Model =   SUBSTRING(REPLACE(c.Model,'_',''), 1, length(REPLACE(c.Model,'_','')) - 1) 
+WHERE
+    ta_tbl_dataplanca2.Model <> 'ToTal' and DATE(TimeStart) = _TimeStart;
+    
+	ELSEIF(_Shift = '3') Then
+    SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca3 where Model = 'Total' and DATE(TimeStart) = _TimeStart;
+    
+SELECT 
+    ta_tbl_dataplanca3.Model,
+    COALESCE(c.QuantityActual, 0) AS QuantityActual,
+    ta_tbl_dataplanca3.QuantityDay,
+    ta_tbl_dataplanca3.QuantityPerSec,
+    ta_tbl_dataplanca3.TimeStart,
+    ta_tbl_dataplanca3.TimeEnd,
+    ta_tbl_dataplanca3.TotalTime,
+    ta_tbl_dataplanca3.TypePlan
+FROM
+    ta_tbl_dataplanca3
+        LEFT JOIN
+    (SELECT 
+        Model, COUNT(DISTINCT CodeBack) AS QuantityActual
+    FROM
+        ta_tbl_dataplanca3
+    LEFT JOIN (SELECT 
+        *
+    FROM
+        banday_unique
+    WHERE
+        Judge = 'OK' and length(CodeModel) > 10
+            AND TimePLC BETWEEN _StartDate AND _EndDate) AS b ON ta_tbl_dataplanca3.Model = REPLACE(b.CodeModel,'_','') or ta_tbl_dataplanca3.Model =   SUBSTRING(REPLACE(b.CodeModel,'_',''), 1, length(REPLACE(b.CodeModel,'_','')) - 1) 
+    WHERE
+        ta_tbl_dataplanca3.Model <> 'ToTal' and DATE(TimeStart) = _TimeStart
+            
+    GROUP BY ta_tbl_dataplanca3.Model) AS c ON ta_tbl_dataplanca3.Model = c.Model or ta_tbl_dataplanca3.Model =   SUBSTRING(REPLACE(c.Model,'_',''), 1, length(REPLACE(c.Model,'_','')) - 1) 
+WHERE
+    ta_tbl_dataplanca3.Model <> 'ToTal' and DATE(TimeStart) = _TimeStart;
+
+	ELSE
+    SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplan where Model = 'Total' and DATE(TimeStart) = _TimeStart;
+    
+	
+SELECT 
+    ta_tbl_dataplan.Model,
+    COALESCE(c.QuantityActual, 0) AS QuantityActual,
+    ta_tbl_dataplan.QuantityDay,
+    ta_tbl_dataplan.QuantityPerSec,
+    ta_tbl_dataplan.TimeStart,
+    ta_tbl_dataplan.TimeEnd,
+    ta_tbl_dataplan.TotalTime,
+    ta_tbl_dataplan.TypePlan
+FROM
+    ta_tbl_dataplan
+        LEFT JOIN
+    (SELECT 
+        Model, COUNT(DISTINCT CodeBack) AS QuantityActual
+    FROM
+        ta_tbl_dataplan
+    LEFT JOIN (SELECT 
+        *
+    FROM
+        banday_unique
+    WHERE
+        Judge = 'OK' and length(CodeModel) > 10
+            AND TimePLC BETWEEN _StartDate AND _EndDate) AS b ON ta_tbl_dataplan.Model = REPLACE(b.CodeModel,'_','') or ta_tbl_dataplan.Model =   SUBSTRING(REPLACE(b.CodeModel,'_',''), 1, length(REPLACE(b.CodeModel,'_','')) - 1) 
+    WHERE
+        ta_tbl_dataplan.Model <> 'ToTal' and DATE(TimeStart) = _TimeStart
+            
+ GROUP BY ta_tbl_dataplan.Model) AS c ON ta_tbl_dataplan.Model = c.Model or ta_tbl_dataplan.Model =   SUBSTRING(REPLACE(c.Model,'_',''), 1, length(REPLACE(c.Model,'_','')) - 1) WHERE
     ta_tbl_dataplan.Model <> 'ToTal' and DATE(TimeStart) = _TimeStart;
     
 	end if;
@@ -12434,6 +13204,336 @@ WHERE
     ta_tbl_dataplan.Model <> 'ToTal' and DATE(TimeStart) = _TimeStart;
     
 	end if;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `TA_sp_LoadDataForLineChartPlanBanDayByHour_new` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_sp_LoadDataForLineChartPlanBanDayByHour_new`(IN _ModelName nvarchar(30),IN _Shift varchar(5),IN _TimeStart varchar(20))
+BEGIN	
+   Declare _StartDate datetime;
+   Declare _EndDate datetime;
+if(_Shift = '1') then
+	 SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca1 where Model = 'Total' and DATE(TimeStart) = _TimeStart;
+	if (_ModelName = 'all') then
+SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    banday_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+GROUP BY TimeDataActual order by TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca1
+WHERE
+    Model = 'Total' and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+   else
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600 ) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    banday_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+        AND REPLACE(CodeModel,'_','') = _ModelName
+GROUP BY TimeDataActual order by TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca1
+WHERE
+    REPLACE(Model,'_','') = _ModelName and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+  END IF;
+elseif(_Shift = '2') then
+		 SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca2 where Model = 'Total'and DATE(TimeStart) = _TimeStart;
+	if (_ModelName = 'all') then
+SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600 ) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    banday_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+GROUP BY TimeDataActual order by TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca2
+WHERE
+    Model = 'Total' and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+   else
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600 ) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    banday_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+        AND REPLACE(CodeModel,'_','') = _ModelName
+GROUP BY TimeDataActual order by TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca2
+WHERE
+    REPLACE(Model,'_','') = _ModelName and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+  END IF;
+elseif(_Shift = '3') then
+		 SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca3 where Model = 'Total'and DATE(TimeStart) = _TimeStart;
+	if (_ModelName = 'all') then
+SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    banday_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+GROUP BY TimeDataActual order by TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca3
+WHERE
+    Model = 'Total' and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+   else
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600 ) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    banday_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+        AND REPLACE(CodeModel,'_','') = _ModelName
+GROUP BY TimeDataActual order by TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca3
+WHERE
+    REPLACE(Model,'_','') = _ModelName and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+  END IF;
+else
+		 SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplan where Model = 'Total'and DATE(TimeStart) = _TimeStart;
+	if (_ModelName = 'all') then
+SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    banday_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate and Judge = 'OK'
+GROUP BY TimeDataActual order by TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplan
+WHERE
+    Model = 'Total' and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+   else
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600 ) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    banday_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+        AND REPLACE(CodeModel,'_','') = _ModelName
+GROUP BY TimeDataActual order by TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplan
+WHERE
+    REPLACE(Model,'_','') = _ModelName and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+  END IF;
+  END IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `TA_sp_LoadDataForLineChartPlanBanDayByTime_new` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_sp_LoadDataForLineChartPlanBanDayByTime_new`(IN _ModelName nvarchar(30),IN _Shift varchar(5),IN _TimeStart varchar(20))
+BEGIN	
+   Declare _StartDate datetime;
+   Declare _EndDate datetime;
+if(_Shift = '1') then
+	 SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca1 where Model = 'Total' and DATE(TimeStart) = _TimeStart;
+	if (_ModelName = 'all') then
+SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    banday_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca1
+WHERE
+    Model = 'Total' and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+   else
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    banday_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+        AND REPLACE(Model,'_','') = _ModelName
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca1
+WHERE
+    REPLACE(Model,'_','') = _ModelName and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+  END IF;
+elseif(_Shift = '2') then
+		 SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca2 where Model = 'Total' and DATE(TimeStart) = _TimeStart;
+	if (_ModelName = 'all') then
+SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    banday_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca2
+WHERE
+    Model = 'Total' and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+   else
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    banday_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+        AND REPLACE(Model,'_','') = _ModelName
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca2
+WHERE
+    REPLACE(Model,'_','') = _ModelName and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+  END IF;
+elseif(_Shift = '3') then
+		 SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca3 where Model = 'Total' and DATE(TimeStart) = _TimeStart;
+	if (_ModelName = 'all') then
+SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    banday_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca3
+WHERE
+    Model = 'Total' and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+   else
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    banday_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+        AND REPLACE(Model,'_','') = _ModelName
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca3
+WHERE
+    REPLACE(Model,'_','') = _ModelName and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+  END IF;
+else
+		 SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplan where Model = 'Total' and DATE(TimeStart) = _TimeStart;
+	if (_ModelName = 'all') then
+SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    banday_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate and Judge = 'OK'
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplan
+WHERE
+    Model = 'Total' and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+   else
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    banday_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+        AND REPLACE(Model,'_','') = _ModelName
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplan
+WHERE
+    REPLACE(Model,'_','') = _ModelName and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+  END IF;
+  END IF;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -13100,6 +14200,666 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `TA_sp_LoadDataForLineChartPlanLinnerByHour_new` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_sp_LoadDataForLineChartPlanLinnerByHour_new`(IN _ModelName nvarchar(30),IN _Shift varchar(5),IN _TimeStart varchar(20))
+BEGIN	
+   Declare _StartDate datetime;
+   Declare _EndDate datetime;
+if(_Shift = '1') then
+	 SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca1 where Model = 'Total' and DATE(TimeStart) = _TimeStart;
+	if (_ModelName = 'all') then
+SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    linner_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+GROUP BY TimeDataActual order by TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca1
+WHERE
+    Model = 'Total' and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+   else
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600 ) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    linner_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+        AND REPLACE(CodeModel,'_','') = _ModelName
+GROUP BY TimeDataActual order by TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca1
+WHERE
+    REPLACE(Model,'_','') = _ModelName and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+  END IF;
+elseif(_Shift = '2') then
+		 SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca2 where Model = 'Total'and DATE(TimeStart) = _TimeStart;
+	if (_ModelName = 'all') then
+SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600 ) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    linner_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+GROUP BY TimeDataActual order by TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca2
+WHERE
+    Model = 'Total' and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+   else
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600 ) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    linner_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+        AND REPLACE(CodeModel,'_','') = _ModelName
+GROUP BY TimeDataActual order by TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca2
+WHERE
+    REPLACE(Model,'_','') = _ModelName and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+  END IF;
+elseif(_Shift = '3') then
+		 SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca3 where Model = 'Total'and DATE(TimeStart) = _TimeStart;
+	if (_ModelName = 'all') then
+SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    linner_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+GROUP BY TimeDataActual order by TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca3
+WHERE
+    Model = 'Total' and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+   else
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600 ) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    linner_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+        AND REPLACE(CodeModel,'_','') = _ModelName
+GROUP BY TimeDataActual order by TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca3
+WHERE
+    REPLACE(Model,'_','') = _ModelName and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+  END IF;
+else
+		 SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplan where Model = 'Total'and DATE(TimeStart) = _TimeStart;
+	if (_ModelName = 'all') then
+SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    linner_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate and Judge = 'OK'
+GROUP BY TimeDataActual order by TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplan
+WHERE
+    Model = 'Total' and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+   else
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600 ) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    linner_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+        AND REPLACE(CodeModel,'_','') = _ModelName
+GROUP BY TimeDataActual order by TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplan
+WHERE
+    REPLACE(Model,'_','') = _ModelName and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+  END IF;
+  END IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `TA_sp_LoadDataForLineChartPlanLinnerByTime_new` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_sp_LoadDataForLineChartPlanLinnerByTime_new`(IN _ModelName nvarchar(30),IN _Shift varchar(5),IN _TimeStart varchar(20))
+BEGIN	
+   Declare _StartDate datetime;
+   Declare _EndDate datetime;
+if(_Shift = '1') then
+	 SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca1 where Model = 'Total' and DATE(TimeStart) = _TimeStart;
+	if (_ModelName = 'all') then
+SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    linner_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca1
+WHERE
+    Model = 'Total' and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+   else
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    linner_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+        AND REPLACE(Model,'_','') = _ModelName
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca1
+WHERE
+    REPLACE(Model,'_','') = _ModelName and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+  END IF;
+elseif(_Shift = '2') then
+		 SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca2 where Model = 'Total' and DATE(TimeStart) = _TimeStart;
+	if (_ModelName = 'all') then
+SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    linner_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca2
+WHERE
+    Model = 'Total' and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+   else
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    linner_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+        AND REPLACE(Model,'_','') = _ModelName
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca2
+WHERE
+    REPLACE(Model,'_','') = _ModelName and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+  END IF;
+elseif(_Shift = '3') then
+		 SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca3 where Model = 'Total' and DATE(TimeStart) = _TimeStart;
+	if (_ModelName = 'all') then
+SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    linner_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca3
+WHERE
+    Model = 'Total' and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+   else
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    linner_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+        AND REPLACE(Model,'_','') = _ModelName
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca3
+WHERE
+    REPLACE(Model,'_','') = _ModelName and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+  END IF;
+else
+		 SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplan where Model = 'Total' and DATE(TimeStart) = _TimeStart;
+	if (_ModelName = 'all') then
+SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    linner_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate and Judge = 'OK'
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplan
+WHERE
+    Model = 'Total' and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+   else
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    linner_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+        AND REPLACE(Model,'_','') = _ModelName
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplan
+WHERE
+    REPLACE(Model,'_','') = _ModelName and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+  END IF;
+  END IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `TA_sp_LoadDataForLineChartPlanMainLineByHour_new` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_sp_LoadDataForLineChartPlanMainLineByHour_new`(IN _ModelName nvarchar(30),IN _Shift varchar(5),IN _TimeStart varchar(20))
+BEGIN	
+   Declare _StartDate datetime;
+   Declare _EndDate datetime;
+if(_Shift = '1') then
+	 SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca1 where Model = 'Total' and DATE(TimeStart) = _TimeStart;
+	if (_ModelName = 'all') then
+SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    banday_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+GROUP BY TimeDataActual order by TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca1
+WHERE
+    Model = 'Total' and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+   else
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600 ) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    banday_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+        AND REPLACE(CodeModel,'_','') = _ModelName
+GROUP BY TimeDataActual order by TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca1
+WHERE
+    REPLACE(Model,'_','') = _ModelName and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+  END IF;
+elseif(_Shift = '2') then
+		 SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca2 where Model = 'Total'and DATE(TimeStart) = _TimeStart;
+	if (_ModelName = 'all') then
+SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600 ) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    banday_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+GROUP BY TimeDataActual order by TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca2
+WHERE
+    Model = 'Total' and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+   else
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600 ) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    banday_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+        AND REPLACE(CodeModel,'_','') = _ModelName
+GROUP BY TimeDataActual order by TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca2
+WHERE
+    REPLACE(Model,'_','') = _ModelName and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+  END IF;
+elseif(_Shift = '3') then
+		 SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca3 where Model = 'Total'and DATE(TimeStart) = _TimeStart;
+	if (_ModelName = 'all') then
+SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    banday_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+GROUP BY TimeDataActual order by TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca3
+WHERE
+    Model = 'Total' and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+   else
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600 ) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    banday_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+        AND REPLACE(CodeModel,'_','') = _ModelName
+GROUP BY TimeDataActual order by TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca3
+WHERE
+    REPLACE(Model,'_','') = _ModelName and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+  END IF;
+else
+		 SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplan where Model = 'Total'and DATE(TimeStart) = _TimeStart;
+	if (_ModelName = 'all') then
+SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    banday_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate and Judge = 'OK'
+GROUP BY TimeDataActual order by TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplan
+WHERE
+    Model = 'Total' and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+   else
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600 ) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    banday_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+        AND REPLACE(CodeModel,'_','') = _ModelName
+GROUP BY TimeDataActual order by TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplan
+WHERE
+    REPLACE(Model,'_','') = _ModelName and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+  END IF;
+  END IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `TA_sp_LoadDataForLineChartPlanMainLineByTime_new` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`TA`@`localhost` PROCEDURE `TA_sp_LoadDataForLineChartPlanMainLineByTime_new`(IN _ModelName nvarchar(30),IN _Shift varchar(5),IN _TimeStart varchar(20))
+BEGIN	
+   Declare _StartDate datetime;
+   Declare _EndDate datetime;
+if(_Shift = '1') then
+	 SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca1 where Model = 'Total' and DATE(TimeStart) = _TimeStart;
+	if (_ModelName = 'all') then
+SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    setsupply_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca1
+WHERE
+    Model = 'Total' and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+   else
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    setsupply_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+        AND REPLACE(Model,'_','') = _ModelName
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca1
+WHERE
+    REPLACE(Model,'_','') = _ModelName and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+  END IF;
+elseif(_Shift = '2') then
+		 SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca2 where Model = 'Total' and DATE(TimeStart) = _TimeStart;
+	if (_ModelName = 'all') then
+SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    setsupply_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca2
+WHERE
+    Model = 'Total' and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+   else
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    setsupply_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+        AND REPLACE(Model,'_','') = _ModelName
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca2
+WHERE
+    REPLACE(Model,'_','') = _ModelName and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+  END IF;
+elseif(_Shift = '3') then
+		 SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplanca3 where Model = 'Total' and DATE(TimeStart) = _TimeStart;
+	if (_ModelName = 'all') then
+SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    setsupply_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca3
+WHERE
+    Model = 'Total' and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+   else
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    setsupply_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+        AND REPLACE(Model,'_','') = _ModelName
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplanca3
+WHERE
+    REPLACE(Model,'_','') = _ModelName and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+  END IF;
+else
+		 SELECT TimeStart,TimeEnd into _StartDate, _EndDate FROM dataplc.ta_tbl_dataplan where Model = 'Total' and DATE(TimeStart) = _TimeStart;
+	if (_ModelName = 'all') then
+SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    setsupply_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate and Judge = 'OK'
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplan
+WHERE
+    Model = 'Total' and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+   else
+		SELECT 
+    FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 300) * 300 + 300) AS TimeDataActual,
+    COUNT(DISTINCT ta.CodeBack) AS mycount
+FROM
+    setsupply_unique AS ta
+WHERE
+    ta.TimePLC BETWEEN _StartDate AND _EndDate
+        AND REPLACE(Model,'_','') = _ModelName
+GROUP BY TimeDataActual;
+SELECT 
+    TimeStart, TimeEnd, QuantityDay, QuantityPerSec, TotalTime,TypePlan
+FROM
+    ta_tbl_dataplan
+WHERE
+    REPLACE(Model,'_','') = _ModelName and DATE(TimeStart) = _TimeStart
+LIMIT 1;
+  END IF;
+  END IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `TA_sp_LoadDataForLineChartPlanPanByHour` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -13286,7 +15046,7 @@ SELECT
     FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600) AS TimeDataActual,
     COUNT(DISTINCT ta.CodeBack) AS mycount
 FROM
-    gas_ok AS ta
+    pan_indentity AS ta
 WHERE
     ta.TimePLC BETWEEN _StartDate AND _EndDate
 GROUP BY TimeDataActual order by TimeDataActual;
@@ -13302,7 +15062,7 @@ LIMIT 1;
     FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600 ) AS TimeDataActual,
     COUNT(DISTINCT ta.CodeBack) AS mycount
 FROM
-    gas_ok AS ta
+    pan_indentity AS ta
 WHERE
     ta.TimePLC BETWEEN _StartDate AND _EndDate
         AND REPLACE(CodeModel,'_','') = _ModelName
@@ -13322,7 +15082,7 @@ SELECT
     FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600 ) AS TimeDataActual,
     COUNT(DISTINCT ta.CodeBack) AS mycount
 FROM
-    gas_ok AS ta
+    pan_indentity AS ta
 WHERE
     ta.TimePLC BETWEEN _StartDate AND _EndDate
 GROUP BY TimeDataActual order by TimeDataActual;
@@ -13338,7 +15098,7 @@ LIMIT 1;
     FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600 ) AS TimeDataActual,
     COUNT(DISTINCT ta.CodeBack) AS mycount
 FROM
-    gas_ok AS ta
+    pan_indentity AS ta
 WHERE
     ta.TimePLC BETWEEN _StartDate AND _EndDate
         AND REPLACE(CodeModel,'_','') = _ModelName
@@ -13358,7 +15118,7 @@ SELECT
     FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600) AS TimeDataActual,
     COUNT(DISTINCT ta.CodeBack) AS mycount
 FROM
-    gas_ok AS ta
+    pan_indentity AS ta
 WHERE
     ta.TimePLC BETWEEN _StartDate AND _EndDate
 GROUP BY TimeDataActual order by TimeDataActual;
@@ -13374,7 +15134,7 @@ LIMIT 1;
     FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600 ) AS TimeDataActual,
     COUNT(DISTINCT ta.CodeBack) AS mycount
 FROM
-    gas_ok AS ta
+    pan_indentity AS ta
 WHERE
     ta.TimePLC BETWEEN _StartDate AND _EndDate
         AND REPLACE(CodeModel,'_','') = _ModelName
@@ -13394,7 +15154,7 @@ SELECT
     FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600) AS TimeDataActual,
     COUNT(DISTINCT ta.CodeBack) AS mycount
 FROM
-    gas_ok AS ta
+    pan_indentity AS ta
 WHERE
     ta.TimePLC BETWEEN _StartDate AND _EndDate and Judge = 'OK'
 GROUP BY TimeDataActual order by TimeDataActual;
@@ -13410,7 +15170,7 @@ LIMIT 1;
     FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(`TimePLC`) / 3600) * 3600 ) AS TimeDataActual,
     COUNT(DISTINCT ta.CodeBack) AS mycount
 FROM
-    gas_ok AS ta
+    pan_indentity AS ta
 WHERE
     ta.TimePLC BETWEEN _StartDate AND _EndDate
         AND REPLACE(CodeModel,'_','') = _ModelName
@@ -16339,4 +18099,4 @@ USE `world`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-12-22  2:12:31
+-- Dump completed on 2026-01-07 22:53:17

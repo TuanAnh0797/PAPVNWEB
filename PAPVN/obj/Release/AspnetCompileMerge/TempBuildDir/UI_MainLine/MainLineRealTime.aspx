@@ -30,7 +30,7 @@
 
         <div class="form-group row mb-0 justify-content-end align-items-center">
             <h1 class="text-right mr-4"
-                style=" font-weight: 700; color: #0d47a1; text-transform: uppercase; letter-spacing: 2px; text-shadow: 1px 1px 3px rgba(0,0,0,0.1);">DASHBOARD SẢN LƯỢNG CÔNG ĐOẠN Linner
+                style=" font-weight: 700; color: #0d47a1; text-transform: uppercase; letter-spacing: 2px; text-shadow: 1px 1px 3px rgba(0,0,0,0.1);">DASHBOARD SẢN LƯỢNG CÔNG ĐOẠN MainLine
             </h1>
             <div class="input-group date col-1" id="dateselect" data-target-input="nearest"  style="height:39px">
                 <input type="text" class="form-control datetimepicker-input" data-target="#dateselect" />
