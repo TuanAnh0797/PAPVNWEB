@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PlanGAS.aspx.cs" Inherits="PAPVN.PlanGAS" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
    <style>
      .oee-card {

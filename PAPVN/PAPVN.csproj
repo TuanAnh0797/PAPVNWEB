@@ -252,6 +252,7 @@
     <Content Include="Global.asax" />
     <Content Include="Image\camera %281%29.png" />
     <Content Include="Image\camera.png" />
+    <Content Include="Image\categories.png" />
     <Content Include="Image\checkmark.png" />
     <Content Include="Image\conveyor.png" />
     <Content Include="Image\electrical-energy.png" />
@@ -278,6 +279,7 @@
     <Content Include="UI_inner\Inner_RealTime.aspx" />
     <Content Include="UI_MainLine\MainLineRealTime.aspx" />
     <Content Include="UI_Pan\PanRealTime.aspx" />
+    <Content Include="UI_Plan\UploadGroup.aspx" />
     <Content Include="UI_Urethan\UrethanRealTime.aspx" />
     <Content Include="z_demo\OEEDemo.html" />
     <Content Include="PartCard.html" />
@@ -2458,6 +2460,13 @@
     </Compile>
     <Compile Include="UI_PCM\PCM_RealTime.aspx.designer.cs">
       <DependentUpon>PCM_RealTime.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI_Plan\UploadGroup.aspx.cs">
+      <DependentUpon>UploadGroup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI_Plan\UploadGroup.aspx.designer.cs">
+      <DependentUpon>UploadGroup.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI_Urethan\UrethanRealTime.aspx.cs">
       <DependentUpon>UrethanRealTime.aspx</DependentUpon>

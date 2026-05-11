@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Management_BreakTime.aspx.cs" Inherits="PAPVN.Management.Management__BreakTime" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-     <div class="m-2">
+ <div class="m-2">
      <div class="row" style="background-color: #fffefe; border-radius: 8px;">
          <div class="col" style="margin-top: 5px; margin-bottom: 5px">
              <asp:FileUpload ID="FileUpload1" runat="server" Font-Size="20px" />
