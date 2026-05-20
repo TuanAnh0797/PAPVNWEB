@@ -67,7 +67,7 @@ namespace PAPVN.UI_Plan
                     DataTable dtSheet = connection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
                     if (dtSheet != null)
                     {
-                        string query = $"SELECT  * FROM [GroupModel]";
+                        string query = $"SELECT  * FROM [GroupModel$]";
                         using (OleDbDataAdapter adapter = new OleDbDataAdapter(query, connection))
                         {
                             DataTable dt = new DataTable();

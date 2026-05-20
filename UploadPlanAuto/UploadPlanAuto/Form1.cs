@@ -63,6 +63,18 @@ namespace UploadPlanAuto
         {
             try
             {
+
+                DBConnect dBConnect = new DBConnect();
+
+                DataTable dtrest = dBConnect.StoreFillDT("TA_sp_LoadDataRestTime", CommandType.StoredProcedure);
+                if (dtrest.Rows.Count == 24)
+                {
+                    for (int i = 0; i < 24; i++)
+                    {
+                        config.TimeRest[i] = (int)dtrest.Rows[i]["time"];
+                    }
+                }
+
                 string connectionString = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={filePath};Extended Properties=\"Excel 12.0 Xml;HDR=YES;IMEX=1;\"";
                 using (OleDbConnection connection = new OleDbConnection(connectionString))
                 {
@@ -76,7 +88,10 @@ namespace UploadPlanAuto
                         {
                             DataTable dt = new DataTable();
                             adapter.Fill(dt);
-                            GetDataPlan(dt);
+                            for (int i = 0; i < 2; i++)
+                            {
+                                GetDataPlan(dt, i);
+                            }
                         }
                         //}
                     }
@@ -88,8 +103,11 @@ namespace UploadPlanAuto
                 SaveLogError(DateTime.Now.ToString("HH:mm:ss dd/MM/yyyy") + ": " + ex.Message);
             }
         }
-        private void GetDataPlan(DataTable dt)
+        private void GetDataPlan(DataTable dt,int indexday)
         {
+
+            DateTime datetimeplan = DateTime.Now.AddDays(indexday);
+
             string TimeStartall;
             string TimeEndall;
             int indexcolumn = (DateTime.Now.Day - 1) * 5 + 18;
@@ -225,7 +243,7 @@ namespace UploadPlanAuto
             // Đẩy dữ liệu lên server
             DBConnect dBConnect = new DBConnect();
             // Xóa kế hoạch cũ
-            dBConnect.exnonquery("TA_sp_ClearAllPlan", CommandType.StoredProcedure);
+            dBConnect.exnonquery("TA_sp_ClearAllPlan_new", CommandType.StoredProcedure, datetimeplan);
             // Đẩy kế hoạch mới
             SaveMySql(datahavequantity, datahavequantityca1, datahavequantityca2, datahavequantityca3);
             // tải lại kế hoạch mới
